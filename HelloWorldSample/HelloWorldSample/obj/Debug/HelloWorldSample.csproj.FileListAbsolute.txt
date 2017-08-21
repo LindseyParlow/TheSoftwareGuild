@@ -1,0 +1,7 @@
+C:\Repos\bitbucket\lindsey-parlow-individual-work\HelloWorldSample\HelloWorldSample\bin\Debug\HelloWorldSample.exe.config
+C:\Repos\bitbucket\lindsey-parlow-individual-work\HelloWorldSample\HelloWorldSample\bin\Debug\HelloWorldSample.exe
+C:\Repos\bitbucket\lindsey-parlow-individual-work\HelloWorldSample\HelloWorldSample\bin\Debug\HelloWorldSample.pdb
+C:\Repos\bitbucket\lindsey-parlow-individual-work\HelloWorldSample\HelloWorldSample\obj\Debug\HelloWorldSample.csprojResolveAssemblyReference.cache
+C:\Repos\bitbucket\lindsey-parlow-individual-work\HelloWorldSample\HelloWorldSample\obj\Debug\HelloWorldSample.csproj.CoreCompileInputs.cache
+C:\Repos\bitbucket\lindsey-parlow-individual-work\HelloWorldSample\HelloWorldSample\obj\Debug\HelloWorldSample.exe
+C:\Repos\bitbucket\lindsey-parlow-individual-work\HelloWorldSample\HelloWorldSample\obj\Debug\HelloWorldSample.pdb
