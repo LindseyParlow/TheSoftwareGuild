@@ -1,4 +1,4 @@
-﻿using System; 
+﻿using System;
 
 namespace Warmups.BLL
 {
@@ -6,57 +6,127 @@ namespace Warmups.BLL
     {
         public bool AreWeInTrouble(bool aSmile, bool bSmile)
         {
-            throw new NotImplementedException();
+            bool inTrouble = false;
+            if (aSmile && bSmile || !aSmile && !bSmile)
+            {
+                inTrouble = true;
+            }
+            return inTrouble;
         }
 
         public bool CanSleepIn(bool isWeekday, bool isVacation)
         {
-            throw new NotImplementedException();
+            bool sleepIn = false;
+            if (!isWeekday || isVacation)
+            {
+                sleepIn = true;
+            }
+            return sleepIn;
         }
 
         public int SumDouble(int a, int b)
         {
-            throw new NotImplementedException();
+            int sum = (a + b);
+            if (a == b)
+            {
+                return sum * 2;
+            }
+            else
+            {
+                return sum;
+            }
         }
-        
+
         public int Diff21(int n)
         {
-            throw new NotImplementedException();
+            int absolute = Math.Abs(n - 21);
+            if (n > 21)
+            {
+                return (absolute * 2);
+            }
+            return absolute;
         }
-        
+
         public bool ParrotTrouble(bool isTalking, int hour)
         {
-            throw new NotImplementedException();
+            bool inTrouble = false;
+            if (isTalking && (hour < 7 || hour > 20))
+            {
+                inTrouble = true;
+            }
+            return inTrouble;
         }
-        
+
         public bool Makes10(int a, int b)
         {
-            throw new NotImplementedException();
+            bool takeTen = false;
+            if ((a == 10 || b == 10) || (a + b == 10))
+            {
+                takeTen = true;
+            }
+            return takeTen;
         }
-        
+
         public bool NearHundred(int n)
         {
-            throw new NotImplementedException();
+            bool withinTen = false;
+            if ((90 <= n && n <= 110) || (190 <= n && n <= 210))
+            {
+                withinTen = true;
+            }
+            return withinTen;
         }
-        
+
         public bool PosNeg(int a, int b, bool negative)
         {
-            throw new NotImplementedException();
+            bool oneNeg = false;
+            if (negative == true && a < 0 && b < 0)
+            {
+                oneNeg = true;
+            }
+            else if ((a > 0 && b < 0) || (a < 0 && b > 0))
+            {
+                oneNeg = true;
+            }
+            return oneNeg;
         }
-        
+
+
+
         public string NotString(string s)
         {
-            throw new NotImplementedException();
+            if (s.Length < 3 || s.Substring(0, 2) != "not")
+            {
+                return "not " + s;
+            }
+            else
+            {
+                return s;
+            }
         }
+        
         
         public string MissingChar(string str, int n)
         {
-            throw new NotImplementedException();
+            string newString = str.Remove(n, 1);
+            return newString;
         }
-        
+
         public string FrontBack(string str)
         {
-            throw new NotImplementedException();
+            string switchThem = str;
+            var a = str[0];
+            var b = str[str.Length - 1];
+
+            if (str.Length < 2)
+            {
+                return str;
+            }
+            else
+            {
+                switchThem = b + str.Substring(1, str.Length - 2) + a;
+            }
+            return switchThem;
         }
         
         public string Front3(string str)
@@ -71,7 +141,12 @@ namespace Warmups.BLL
         
         public bool Multiple3or5(int number)
         {
-            throw new NotImplementedException();
+            bool isMultiple = false;
+            if (number % 3 ==0 || number % 5 == 0)
+            {
+                isMultiple = true;
+            }
+            return isMultiple;
         }
         
         public bool StartHi(string str)
@@ -81,22 +156,42 @@ namespace Warmups.BLL
         
         public bool IcyHot(int temp1, int temp2)
         {
-            throw new NotImplementedException();
+            bool coldHot = false;
+            if((temp1 < 0 && temp2 >100) || (temp2 < 0 && temp1 > 100))
+            {
+                coldHot = true;
+            }
+            return coldHot;
         }
         
         public bool Between10and20(int a, int b)
         {
-            throw new NotImplementedException();
+            bool isBetween = false;
+            if((a >= 10 && a <= 20) || (b >= 10 && b <= 20))
+            {
+                isBetween = true;
+            }
+            return isBetween;
         }
         
         public bool HasTeen(int a, int b, int c)
         {
-            throw new NotImplementedException();
+            bool isTeen = false;
+            if ((13<=a && a<=19) || (13 <= b && b <= 19) || (13 <= c && c <= 19))
+            {
+                isTeen = true;
+            }
+            return isTeen;
         }
         
         public bool SoAlone(int a, int b)
         {
-            throw new NotImplementedException();
+            bool oneTeen = false;
+            if (((13<= a && a<=19) && (b<13 || b>19)) || ((13 <= b && b <= 19) && (a < 13 || a > 19)))
+            {
+                oneTeen = true;
+            }
+            return oneTeen;
         }
         
         public string RemoveDel(string str)
@@ -116,12 +211,38 @@ namespace Warmups.BLL
         
         public int Max(int a, int b, int c)
         {
-            throw new NotImplementedException();
+            int isLargest = 0;
+            if (a > b && a > c)
+            {
+                isLargest = a;
+            }
+            else if (b > a && b > c)
+            {
+                isLargest = b;
+            }
+            else if (c > a && c > b) 
+            {
+                isLargest = c;
+            }
+            return isLargest;
         }
         
         public int Closer(int a, int b)
         {
-            throw new NotImplementedException();
+            int isCloser = 0;
+            if (Math.Abs(10 - a) < Math.Abs(10 - b))
+            {
+                isCloser = a;
+            }
+            else if (Math.Abs(10 - b) < Math.Abs(10 - a))
+            {
+                isCloser = b;
+            }
+            else if (Math.Abs(10 - a) == Math.Abs(10 - b))
+            {
+                isCloser = 0;
+            }
+            return isCloser;
         }
         
         public bool GotE(string str)

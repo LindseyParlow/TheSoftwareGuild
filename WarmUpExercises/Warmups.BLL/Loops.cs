@@ -7,17 +7,42 @@ namespace Warmups.BLL
 
         public string StringTimes(string str, int n)
         {
-            throw new NotImplementedException();
+            string multipyString = str;
+            for (int i=0; i <n-1; i++)
+            {
+                multipyString += str;
+            }
+            return multipyString;
         }
 
         public string FrontTimes(string str, int n)
         {
-            throw new NotImplementedException();
+            string repeatString = str.Substring(0,3);
+            for (int i = 0; i < n-1; i++)
+            if (str.Length < 2)
+            {
+                repeatString += str;
+            }
+            else
+            {
+                repeatString += str.Substring(0, 3);
+            }
+            return repeatString;
         }
 
         public int CountXX(string str)
         {
-            throw new NotImplementedException();
+            int doubleX = 0;
+            for (int i = 0; i <str.Length-1; i++)
+                if(str[i]==str[i+1])
+                {
+                    doubleX += 1;
+                }
+                else
+                {
+                    continue;
+                }
+            return doubleX;
         }
 
         public bool DoubleX(string str)
@@ -27,7 +52,10 @@ namespace Warmups.BLL
 
         public string EveryOther(string str)
         {
-            throw new NotImplementedException();
+            string newHello = str;
+            for (int i = 0; i < str.Length; i += 2)
+                newHello = str.Replace("a","o);
+            return newHello;
         }
 
         public string StringSplosion(string str)
