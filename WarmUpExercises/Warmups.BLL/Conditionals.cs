@@ -131,12 +131,31 @@ namespace Warmups.BLL
         
         public string Front3(string str)
         {
-            throw new NotImplementedException();
+            string newStr = str;
+            if ( str.Length < 3)
+            {
+                newStr = str + str + str;
+            }
+            else
+            {
+                newStr = str.Substring(0, 3) + str.Substring(0, 3) + str.Substring(0, 3);
+            }
+            return newStr;
         }
         
         public string BackAround(string str)
         {
-            throw new NotImplementedException();
+            string newStr = str;
+            var b = str[str.Length - 1];
+            if (str.Length <1)
+            {
+                return str;
+            }
+            else
+            {
+                newStr = b + str + b;
+            }
+            return newStr;
         }
         
         public bool Multiple3or5(int number)
@@ -196,17 +215,64 @@ namespace Warmups.BLL
         
         public string RemoveDel(string str)
         {
-            throw new NotImplementedException();
+            string newStr = str;
+            if (str.Length < 3)
+            {
+                newStr = str;
+            }
+            else if (str.Substring(1,3)==("del"))
+            {
+                newStr = str.Remove(1, 3);
+            }
+            else if (str.Substring(1,3)!=("del"))
+            {
+                newStr = str;
+            }
+            return newStr;
         }
         
         public bool IxStart(string str)
         {
-            throw new NotImplementedException();
+            bool startsWithIx = false;
+            if (str.Length < 2)
+            {
+                startsWithIx = false;
+            }
+            if (str.Substring(1,2) == "ix")
+            {
+                startsWithIx = true;
+            }
+            else
+            {
+                startsWithIx = false;
+            }
+            return startsWithIx;
         }
         
         public string StartOz(string str)
         {
-            throw new NotImplementedException();
+            string newStr = str;
+            if (str.Length < 1 && (str.Substring(0, 1) == "o"))
+            {
+                newStr = str.Substring(0, 1);
+            }
+            if (str.Substring(0,2)=="oz")
+            {
+                newStr = str.Substring(0, 2);
+            }
+            else if (str.Substring(0,1)=="o")
+            {
+                newStr = str.Substring(0,1);
+            }
+            else if (str.Substring(1,1)=="z")
+            {
+                newStr = str.Substring(1,1);
+            }
+            else
+            {
+                newStr = "";
+            }
+            return newStr;
         }
         
         public int Max(int a, int b, int c)
@@ -247,16 +313,50 @@ namespace Warmups.BLL
         
         public bool GotE(string str)
         {
-            throw new NotImplementedException();
+            bool hasE = false;
+            int eCount = 0;
+            for (int i=0; i< str.Length; i++)
+            if (str.Contains("e")==false)
+            {
+                hasE = false;
+            }
+            if (str.Contains("e")==true)
+            {
+                eCount += 1;
+            }
+            if (eCount >= 1 && eCount <=3)
+            {
+                hasE = true;
+            }
+            return hasE;   
         }
         
         public string EndUp(string str)
         {
-            throw new NotImplementedException();
+            string newStr = str;
+            string endThree = str;
+            string startString = str;
+            if (str.Length < 3)
+            {
+                newStr = str.ToUpper();
+            }
+            else
+            {
+                endThree = str.Substring(str.Length - 3, 3);
+                startString = str.Substring(0, str.Length - 3);
+                newStr = startString + endThree.ToUpper();
+            }
+            return newStr;
         }
         
         public string EveryNth(string str, int n)
         {
+            //string newStr = str;
+            //for (int i=0; i<str.Length; i+=n)
+
+            //  newStr += str.Substring(i, 1);
+
+            // return newStr;
             throw new NotImplementedException();
         }
     }

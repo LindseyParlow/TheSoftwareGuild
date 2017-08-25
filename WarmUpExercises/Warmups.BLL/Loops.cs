@@ -52,10 +52,13 @@ namespace Warmups.BLL
 
         public string EveryOther(string str)
         {
-            string newHello = str;
-            for (int i = 0; i < str.Length; i += 2)
-                newHello = str.Replace("a","o);
-            return newHello;
+            //string newHello = str;
+            //for (int i = 0; i < str.Length; i += 2)
+            //{
+
+            // }
+            // return newHello(i);
+            throw new NotImplementedException();
         }
 
         public string StringSplosion(string str)
