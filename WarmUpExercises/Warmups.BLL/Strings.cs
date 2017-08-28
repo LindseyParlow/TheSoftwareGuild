@@ -119,22 +119,23 @@ namespace Warmups.BLL
 
         public string FrontAndBack(string str, int n)
         {
-            throw new NotImplementedException();
+            string newStr = str.Substring(0,n) + str.Substring(str.Length-n,n);
+            return newStr;
         }
 
         public string TakeTwoFromPosition(string str, int n)
         {
-            //string tookTwo;
-            //if (str.Length <= n)
-            //{
-            //    tookTwo = str;
-            //}
-            //else
-            // {
-            //     tookTwo = str.Substring(n, 2);
-            // }
-            // return tookTwo;
-            throw new NotImplementedException();
+
+            string justTwo = str;
+            if (str.Length - n < 2)
+            {
+                justTwo = str.Substring(0, 2);
+            }
+            else
+            {
+                justTwo = str.Substring(n, 2);
+            }
+            return justTwo;
         }
 
         public bool HasBad(string str)
@@ -177,37 +178,161 @@ namespace Warmups.BLL
 
         public string LastChars(string a, string b)
         {
-            throw new NotImplementedException();
+            string comboAB;
+            if (a.Length==0 && b.Length==0)
+            {
+                comboAB = "@@";
+            }
+            else if (a.Length>0 && b.Length==0)
+            {
+                comboAB = a.Substring(0, 1) + "@";
+            }
+            else if (a.Length == 0 && b.Length>0)
+            {
+                comboAB = "@" + b.Substring(b.Length-1, 1);
+            }
+            else
+            {
+                comboAB = a.Substring(0, 1) + b.Substring(b.Length-1, 1);
+            }
+            return comboAB;
         }
 
         public string ConCat(string a, string b)
         {
-            throw new NotImplementedException();
+            string thisIsTheConCat;
+            if (a.Length<1 && b.Length<1)
+            {
+                thisIsTheConCat = "";
+            }
+            else if (a.Length < 1 && b.Length >= 1)
+            {
+                thisIsTheConCat = b;
+            }
+            else if (a.Length >= 1 && b.Length < 1)
+            {
+                thisIsTheConCat = a;
+            }
+            else if (a.Substring(a.Length-1,1)==b.Substring(0,1))
+            {
+                thisIsTheConCat = string.Concat(a, b.Substring(1));
+            }
+            else
+            {
+                thisIsTheConCat = string.Concat(a, b);
+            }
+            return thisIsTheConCat;
         }
 
         public string SwapLast(string str)
         {
-            throw new NotImplementedException();
+            string swapIt = str;
+            if (str.Length < 2)
+            {
+                swapIt = str;
+            }
+            else if (str.Length == 2)
+            {
+                swapIt = str.Substring(str.Length - 1, 1) + str.Substring(str.Length - 2, 1);
+            }
+            else if (str.Length > 2)
+            {
+                swapIt = str.Substring(0, str.Length - 2) + str.Substring(str.Length - 1, 1) + str.Substring(str.Length - 2, 1);
+            }
+            return swapIt;
         }
 
         public bool FrontAgain(string str)
         {
-            throw new NotImplementedException();
+            bool atFrontAndBack = false;
+            if (str.Substring(0,2) == str.Substring(str.Length-2,2))
+            {
+                atFrontAndBack = true;
+            }
+            else
+            {
+                atFrontAndBack = false;
+            }
+            return atFrontAndBack;
         }
 
         public string MinCat(string a, string b)
         {
-            throw new NotImplementedException();
+            string ammendMinCat;
+            if (a.Length == b.Length)
+            {
+                ammendMinCat = string.Concat(a, b);
+            }
+            else if (a.Length>b.Length)
+            {
+                ammendMinCat = string.Concat(a.Substring(a.Length - b.Length, b.Length), b);
+            }
+            else
+            {
+                ammendMinCat = string.Concat(a, b.Substring(b.Length - a.Length, a.Length));
+            }
+            return ammendMinCat;
         }
 
         public string TweakFront(string str)
         {
-            throw new NotImplementedException();
+            string alterFront;
+            if (str.Length < 1) 
+            {
+                alterFront = "";
+            }
+            else if (str.Length<3)
+            {
+                alterFront = str;
+            }
+            else if (str.Substring(0,1)=="a" && str.Substring(1,1)=="b")
+            {
+                alterFront = str;
+            }
+            else if (str.Substring(0, 1) == "a" && str.Substring(1,1)!="b")
+            {
+                alterFront = str.Substring(0, 1) + str.Substring(2);
+            }
+            else if (str.Substring(0, 1) != "a" && str.Substring(1, 1) == "b")
+            {
+                alterFront = str.Substring(1);
+            }
+            else
+            {
+                alterFront = str.Substring(2);
+            }
+            return alterFront;
         }
+        
 
         public string StripX(string str)
         {
-            throw new NotImplementedException();
+            string noFirstOrLastX = str;
+            if (str.Length < 1)
+            {
+                noFirstOrLastX = "";
+            }
+            else if (str.Length == 1 && str=="x")
+            {
+                noFirstOrLastX = "";
+            }
+            else if (str.Substring(0,1)=="x" && str.Substring(str.Length-1,1)=="x")
+            {
+                noFirstOrLastX = str.Substring(1, str.Length - 2);
+            }
+            else if (str.Substring(0, 1) == "x" && str.Substring(str.Length - 1, 1) != "x")
+            {
+                noFirstOrLastX = str.Substring(1);
+            }
+            else if (str.Substring(0, 1) != "x" && str.Substring(str.Length - 1, 1) == "x")
+            {
+                noFirstOrLastX = str.Substring(0, str.Length - 1);
+            }
+            else
+            {
+                noFirstOrLastX = str;
+            }
+            return noFirstOrLastX;
         }
     }
 }

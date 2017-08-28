@@ -170,7 +170,25 @@ namespace Warmups.BLL
         
         public bool StartHi(string str)
         {
-            throw new NotImplementedException();
+            bool hiStart = false;
+            
+            if (str.Length < 2)
+            {
+                hiStart = false;
+            }
+            else if (str.Length == 2 && str.Substring(0, 2) == "hi")
+            {
+                hiStart = true;
+            }
+            else if (str.Substring(0, 3) == "hi " || str.Substring(0, 3) == "hi" + ",")
+            {
+                hiStart = true;
+            }
+            else
+            {
+                hiStart = false;
+            }
+            return hiStart;
         }
         
         public bool IcyHot(int temp1, int temp2)
@@ -252,11 +270,15 @@ namespace Warmups.BLL
         public string StartOz(string str)
         {
             string newStr = str;
-            if (str.Length < 1 && (str.Substring(0, 1) == "o"))
+            if (str.Length ==1 && (str.Substring(0, 1) == "o"))
             {
                 newStr = str.Substring(0, 1);
             }
-            if (str.Substring(0,2)=="oz")
+            else if (str.Length ==1 )
+            {
+                newStr = "";
+            } 
+            else if (str.Substring(0,2)=="oz")
             {
                 newStr = str.Substring(0, 2);
             }
@@ -315,20 +337,26 @@ namespace Warmups.BLL
         {
             bool hasE = false;
             int eCount = 0;
-            for (int i=0; i< str.Length; i++)
-            if (str.Contains("e")==false)
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str.Substring(i,1)=="e")
+                {
+                    eCount++;
+                }
+            }
+            if (eCount == 0)
             {
                 hasE = false;
             }
-            if (str.Contains("e")==true)
-            {
-                eCount += 1;
-            }
-            if (eCount >= 1 && eCount <=3)
+            if (eCount >=1 && eCount <=3)
             {
                 hasE = true;
             }
-            return hasE;   
+            else
+            {
+                hasE = false;
+            }
+            return hasE;
         }
         
         public string EndUp(string str)
@@ -351,13 +379,12 @@ namespace Warmups.BLL
         
         public string EveryNth(string str, int n)
         {
-            //string newStr = str;
-            //for (int i=0; i<str.Length; i+=n)
-
-            //  newStr += str.Substring(i, 1);
-
-            // return newStr;
-            throw new NotImplementedException();
+            string newString="";
+            for (int i = 0; i < str.Length; i += n)
+            {
+                newString += str[i];
+            }
+            return newString;
         }
     }
 }

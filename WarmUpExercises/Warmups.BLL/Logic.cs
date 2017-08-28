@@ -103,7 +103,24 @@ namespace Warmups.BLL
         
         public string AlarmClock(int day, bool vacation)
         {
-            throw new NotImplementedException();
+            var timeToWakeUp = "";
+            if (day >= 1 && day <= 5 && vacation == false)
+            {
+                timeToWakeUp =  "7:00";
+            }
+            else if (day >= 1 && day <= 5 && vacation == true)
+            {
+                timeToWakeUp = "10:00";
+            }
+            else if (day < 1 || day > 5 && vacation == false)
+            {
+                timeToWakeUp = "10:00";
+            }
+            else if (day < 1 || day > 5 && vacation == true)
+            {
+                timeToWakeUp = "off";
+            }
+            return timeToWakeUp;
         }
         
         public bool LoveSix(int a, int b)
@@ -197,7 +214,11 @@ namespace Warmups.BLL
             {
                 sumOfTwo = true;
             }
-            return true;
+            else
+            {
+                sumOfTwo = false;
+            }
+            return sumOfTwo;
         }
         
         public bool AreInOrder(int a, int b, int c, bool bOk)
@@ -252,7 +273,24 @@ namespace Warmups.BLL
         
         public int RollDice(int die1, int die2, bool noDoubles)
         {
-            throw new NotImplementedException();
+            int sumOfDice = 0;
+            if (noDoubles==true && die1==die2 && die1==6)
+            {
+                sumOfDice = die1 + (die2 -5);
+            }
+            if (noDoubles == true && die1 == die2)
+            {
+                sumOfDice = die1 + (die2 + 1);
+            }
+            else if (noDoubles == true && die1 != die2)
+            {
+                sumOfDice = die1 + die2;
+            }
+            else if (noDoubles == false)
+            {
+                sumOfDice = die1 + die2;
+            }
+            return sumOfDice;
         }
 
     }
