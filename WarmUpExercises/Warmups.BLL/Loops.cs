@@ -34,13 +34,9 @@ namespace Warmups.BLL
         {
             int doubleX = 0;
             for (int i = 0; i <str.Length-1; i++)
-                if(str[i]==str[i+1])
+                if(str[i]== "x" && str[i+1] =="x")
                 {
                     doubleX += 1;
-                }
-                else
-                {
-                    continue;
                 }
             return doubleX;
         }
@@ -217,7 +213,7 @@ namespace Warmups.BLL
         {
             int sixSixCount = 0;
             for (int i = 0; i < numbers.Length - 1; i ++)
-                if ((numbers[i]==6 && numbers[i+1]==6) || (numbers[i] == 6 && numbers[i + 1] == 7))
+                if ((numbers[i]==6 && (numbers[i+1]==6) || numbers[i + 1] == 7)))
                 {
                     sixSixCount++;    
                 }

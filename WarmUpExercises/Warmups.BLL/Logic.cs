@@ -136,7 +136,7 @@ namespace Warmups.BLL
         public bool InRange(int n, bool outsideMode)
         {
             bool isRangey = false;
-            if (outsideMode == true && (n <= 1 || n >= 10))
+            if (outsideMode && (n <= 1 || n >= 10))
             {
                 isRangey = true;
             }
