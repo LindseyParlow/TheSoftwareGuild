@@ -35,54 +35,30 @@ namespace BattleShip.UI
                      case ShotStatus.HitAndSunk:
                         Console.WriteLine("Hit and sunk!");
                         state.IsPlayerOneTurn = !state.IsPlayerOneTurn;
+                        ConsoleOutput.NextPlayerTurn();
                         break;
                     case ShotStatus.Hit:
                         Console.WriteLine("Hit!");
                         state.IsPlayerOneTurn = !state.IsPlayerOneTurn;
+                        ConsoleOutput.NextPlayerTurn();
                         break;
                    case ShotStatus.Miss:
                         Console.WriteLine("Miss!");
                         state.IsPlayerOneTurn = !state.IsPlayerOneTurn;
+                        ConsoleOutput.NextPlayerTurn();
                         break;
                     default:
                         break;
                 }
-                ConsoleOutput.NextPlayerTurn();
+               
                 Console.ReadKey();
+                Console.Clear();
             }
+
             ConsoleOutput.VictoryMessage();
-
-
-
+            
             Console.ReadLine();
-            
-
-
-
-            //ShotStatus lastShot = new ShotStatus();
-            // while (lastShot != ShotStatus.Victory)
-           //{
-                //FireShot( isp1Turn, gameboard);
-               // isPlayerAsTurn = !isPlayerAsTurn;
-           // }
-            
-           
-
-
-
-           //store all of this in game state
-           //playerfirst fires at playerseconds board
-           //check to make sure shot was valid
-           //reveal if shot is hit, miss, hit and sunk, victory, etc.
-           //update board to store shot placement
-           //switch turns
-           //continue until game is over
-           //when game is over, prompt if they want to quit or play again.
-           //still need to fix if they put in b5 versus B5
-           
-        }
-
-           
+        }  
     }
 }
 

@@ -13,8 +13,6 @@ namespace BattleShip.BLL
         {
             return _generator.NextDouble();
         }
-
-
     }
 }
 

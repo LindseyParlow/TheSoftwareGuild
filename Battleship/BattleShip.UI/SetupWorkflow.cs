@@ -36,9 +36,6 @@ namespace BattleShip.UI
 
             GameState state = new GameState(player1, player2, isP1First);
             return state;
-
-
-
         }
 
         public Board CreateBoard(string name)
@@ -74,12 +71,5 @@ namespace BattleShip.UI
             Console.Clear();
             return board;
         }
-
-        
-
-        
-
-
-
     }
 }
