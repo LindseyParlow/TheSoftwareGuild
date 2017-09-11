@@ -26,7 +26,6 @@ namespace BattleShip.UI
             int b = -1;
             bool isInputCorrect = false;
             char yPart = 'A';
-
             
             
             while (!isInputCorrect)
@@ -34,22 +33,28 @@ namespace BattleShip.UI
                 Console.WriteLine($"{name}, please enter coordinate for {s} (example: B5): ");
 
                 string coordinateInput = Console.ReadLine();
-
-
-                yPart = coordinateInput[0];
-                string xPart = coordinateInput.Substring(1);
-
-
-                if ((yPart >= 'A' && yPart <= 'J'))
+                if(coordinateInput.Length<2)
                 {
-                    if (int.TryParse(xPart, out b))
+                    isInputCorrect = false;
+                }
+                else
+                {
+                    yPart = coordinateInput[0];
+                    string xPart = coordinateInput.Substring(1);
+
+
+                    if ((yPart >= 'A' && yPart <= 'J'))
                     {
-                        if (b >= 1 && b <= 10)
+                        if (int.TryParse(xPart, out b))
                         {
-                            isInputCorrect = true;
+                            if (b >= 1 && b <= 10)
+                            {
+                                isInputCorrect = true;
+                            }
                         }
                     }
                 }
+               
 
             }
 
@@ -61,11 +66,10 @@ namespace BattleShip.UI
         
         internal static Coordinate GetCoordinateFireShot(GameState state)
         {
-            int b = -1;
-            bool isInputCorrect = false;
-            char yPart = 'A';
-
             
+            bool isInputCorrect = false;
+            Coordinate fireShotCoordinate = null;
+
             while (!isInputCorrect)
             {
                 string activePlayer = "";
@@ -82,27 +86,34 @@ namespace BattleShip.UI
 
                 string coordinateInput = Console.ReadLine();
 
-
-                yPart = coordinateInput[0];
-
-                string xPart = coordinateInput.Substring(1);
-
-
-                if ((yPart >= 'A' && yPart <= 'J'))
-                {
-                    if (int.TryParse(xPart, out b))
-                    {
-                        if (b >= 1 && b <= 10)
-                        {
-                            isInputCorrect = true;
-                        }
-                    }
-                }
+                isInputCorrect = TryParseCoordinate(coordinateInput, out fireShotCoordinate);
+                //if (coordinateInput.Length < 2)
+                //{
+                //    isInputCorrect = false;
+                //    Console.WriteLine("Please enter a valid coordinate");
+                //}
+                //else
+                //{
+                //    yPart = coordinateInput[0];
+                //
+                //    string xPart = coordinateInput.Substring(1);
+                //
+                //
+                //    if ((yPart >= 'A' && yPart <= 'J'))
+                //    {
+                //        if (int.TryParse(xPart, out b))
+                //        {
+                //            if (b >= 1 && b <= 10)
+                //            {
+                //                isInputCorrect = true;
+                //            }
+                //        }
+                //    }
+                //}
+                
 
             }
-
-            int a = (yPart - 'A' + 1);
-            Coordinate fireShotCoordinate = new Coordinate(a, b);
+            
             return fireShotCoordinate;
         }
 
@@ -139,8 +150,39 @@ namespace BattleShip.UI
             }
             return successDirection;
         }
-        
+
+        public static bool TryParseCoordinate(string userInput, out Coordinate coordToReturn)
+        {
+            coordToReturn = null;
+            int b = -1;
+            char yPart = 'A';
 
 
+            if (userInput.Length < 2)
+            {
+                return false;
+            }
+
+           
+
+            else
+            {
+                string xPart = userInput.Substring(1);
+                yPart = userInput[0]; 
+                if ((yPart >= 'A' && yPart <= 'J'))
+                {
+                    if (int.TryParse(xPart, out b))
+                        {
+                            if (b >= 1 && b <= 10)
+                            {
+                                int a = (yPart - 'A' + 1);
+                                coordToReturn = new Coordinate(a, b);
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
     }
 }

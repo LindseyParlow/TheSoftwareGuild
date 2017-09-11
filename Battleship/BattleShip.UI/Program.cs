@@ -14,28 +14,26 @@ namespace BattleShip.UI
             bool wantsToPlayAgain = true;
             while (wantsToPlayAgain)
             {
-
-            SetupWorkflow setup = new SetupWorkflow();
-            var state = setup.SetUpGame();
+                SetupWorkflow setup = new SetupWorkflow();
+                var state = setup.SetUpGame();
             
 
-            GameWorkflow game = new GameWorkflow(state);
-            game.PlayGame(state);
+                GameWorkflow game = new GameWorkflow(state);
+                game.PlayGame(state);
 
 
                 Console.WriteLine("Would you like to play again? (Y/N)");
-            var input = Console.ReadLine();
-            if (input == "Y" || input == "y")
-            {
-                wantsToPlayAgain = true;
-            }
-            else if (input == "N" || input == "n")
-            {
-                Console.WriteLine("Press any key to quit....");
-                Console.ReadKey();
-                wantsToPlayAgain = false;
+                string input = Console.ReadLine();
+                if (input == "Y" || input == "y")
+                {
+                    wantsToPlayAgain = true;
                 }
-           
+                else if (input == "N" || input == "n")
+                {
+                    Console.WriteLine("Press any key to quit....");
+                    Console.ReadKey();
+                    wantsToPlayAgain = false;
+                }
             }
         }
     }
