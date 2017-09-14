@@ -21,9 +21,15 @@ namespace Battleship.Tests
         {
             string coordinateInput = userInput;
             Coordinate coordinate = new Coordinate(x,y);
-            bool isValid = ConsoleInput.TryParseCoordinate(userInput, out coordinate);
+            Coordinate anotherCoordinate;
+
+            bool isValid = ConsoleInput.TryParseCoordinate(userInput, out anotherCoordinate);
 
             Assert.AreEqual(expected, isValid);
+            if(isValid)
+            {
+                Assert.AreEqual(coordinate, anotherCoordinate);
+            }
         }
     }
 }

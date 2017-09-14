@@ -9,7 +9,7 @@ namespace LINQ
     {
         static void Main()
         {
-            Exercise31();
+            Exercise30();
             //PrintAllProducts();
             //PrintAllCustomers();
             Console.WriteLine();
