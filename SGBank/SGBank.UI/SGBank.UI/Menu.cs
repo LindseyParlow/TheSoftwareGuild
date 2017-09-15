@@ -1,6 +1,7 @@
 ﻿using SGBank.UI.Workflows;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ namespace SGBank.UI
     {
         public static void Start()
         {
-            while(true)
+            
+            while (true)
             {
                 Console.Clear();
                 Console.WriteLine("SG Bank Application");
@@ -22,10 +24,26 @@ namespace SGBank.UI
 
                 Console.WriteLine("\nQ to quit");
                 Console.Write("\nEnter selection: ");
-
+                
                 string userinput = Console.ReadLine();
 
-                switch(userinput)
+                string file = @"C:\Repos\bitbucket\dotnet-lindsey-parlow\SGBankAccounts\Accounts.txt";
+                string[] text;
+
+                try
+                {
+                    text = File.ReadAllLines(file);
+                }
+                catch
+                {
+                    Console.WriteLine($"The file: {file} was not found.");
+                    Console.Write("Press any key to exit...");
+                    Console.ReadKey();
+                    return;
+                }
+                
+
+                switch (userinput)
                 {
                     case "1":
                         AccountLookupWorkflow lookupWorkflow = new AccountLookupWorkflow();

@@ -18,6 +18,7 @@ namespace SGBank.Data
         public FileAccountRepository(string filePath)
         {
             _filePath = filePath;
+
             List();
         }
 
