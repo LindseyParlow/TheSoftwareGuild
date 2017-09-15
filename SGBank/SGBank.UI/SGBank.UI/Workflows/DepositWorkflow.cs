@@ -19,9 +19,21 @@ namespace SGBank.UI.Workflows
             string accountNumber = Console.ReadLine();
 
             Console.Write("Enter a deposit amount: ");
-            decimal amount = decimal.Parse(Console.ReadLine());
 
-            AccountDepositResponse response = accountManager.Deposit(accountNumber, amount);
+            AccountDepositResponse response;
+            decimal amount;
+
+            if(decimal.TryParse(Console.ReadLine(), out amount))
+            {
+                response = accountManager.Deposit(accountNumber, amount);
+            }
+            else
+            {
+                response = new AccountDepositResponse();
+                response.Message = "Deposit amount was invalid!";
+                response.Success = false;
+            }
+           
 
             if(response.Success)
             {

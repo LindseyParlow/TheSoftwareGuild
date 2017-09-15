@@ -22,6 +22,8 @@ namespace SGBank.BLL
                     return new AccountManager(new BasicAccountTestRepository());
                 case "PremiumTest":
                     return new AccountManager(new PremiumAccountTestReposiory());
+                case "FileTest":
+                    return new AccountManager(new FileAccountRepository(@"C:\Repos\bitbucket\dotnet-lindsey-parlow\SGBankAccounts\Accounts.txt"));
                 default:
                     throw new Exception("Mode value in app config is not vald");
             }
