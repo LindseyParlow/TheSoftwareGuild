@@ -1,0 +1,119 @@
+Flooring Ordering System
+
+Files
+File 1: Order File
+	-name : Orders_MMDDYYYY.txt (current date)	<-----------	Name of the sample file for this is "Orders_06012013"
+	-data:
+		*header row
+		*OrderNumber		(int)
+		*CustomerName		(string)
+		*State			(string)
+		*TaxRate			(decimal)
+		*ProductType		(string)
+		*Area			(decimal)
+		*CostPerSquareFoot 	(decimal)
+		*LaborCostPerSquareFoot	(decimal)		= Area * LaborCostPerSquareFoot
+		*MaterialCost		(decimal)		= Area * CostPerSquareFoot
+		*LaborCost		(decimal)
+		*Tax			(decimal)		= (MaterialCost + LaborCost) * (TaxRate/100)	<--- stored as whole numbers
+		*Total			(decimal)		= MaterialCost + LaborCost + Tax
+File 2: Tax File
+	-name: taxes.txt
+	-data:
+		*StateAbbreviation		(string)
+		*StateName		(string)
+		*TaxRate			(decimal)
+File 3: Products File
+	-name: Products.txt
+	-data:
+		*ProductType		(string)
+		*CostPerSquareFoot	(decimal)
+		*LaborCostPerSquareFoot	(decimal)
+
+App.Config
+Mode 1: Test
+	-sample data & not saved in between runs of the application
+Mode 2: Prod
+	-file information & should save in between runs of the application
+
+Interfaces
+Interface 1: User Interface
+	-should create a menu to prompt the user for what they would like to do:
+		*Flooring Program
+		
+		*1. Display Orders
+			-will query the user for date 
+			-if date doesn't exist, will display error message and return user to main menu
+			-if date exists, will load the orders.txt file for that date  
+			-if date exists, print all order information in following format (data fields are in square brackets):
+				*[OrderNumber] | [Order Date]
+				*[Customer Name]
+				*[State]
+				*Product: [ProductType]
+				*Material: [MaterialCost]
+				*Labor: [LaborCost]
+				*Tax: [Tax]
+				*Total: [Total]
+		*2. Add an Order
+			-will query the user for following order data:
+				*Order Date		= must be in the future
+				*Customer Name		= can't be blank
+							= can contain [a-z] and [0-9] and periods and commas
+				*State			= entered state has to exist in tax file or we can't sell there
+							= if a state is added to taxt file, should be allowed without changing application code
+				*Product Type		= show a list of available products and pricing info to choose from
+							= if product added to the file, should show up in the application without a code change 
+				*Area			= area must be a positive decimal
+							= minimum order size is 100 sq ft
+			-show a summary of the order once all calculations are completed
+			-prompt user if they want to place the order (y/n)
+				*Yes: 	
+					-data wil be written to the orders file with the appropriate date
+					-will create a new file if it is first order on the date
+				*No:
+					-return to main menu
+		*3. Edit an Order
+			-will query the user for date and order number
+				*if order exists:
+					-in file for that date, it will query the user for each piece of order data but display the exisiting data
+					-if user enters something new, it will replace the data
+					-if user hits enter without entering data, it will leave the existing data in place
+					-display ssummary of new order information
+					-prompt whether data should be saved
+						*yes: replace data in the file and return to main menu
+						*no: don't save and return to main menu
+			-can only change certain data:
+				*CustomerName
+				*State
+				*ProductType
+				*Area
+			-if state, product type, or area is changed
+				*must recalculate the order
+		*4. Remove an Order
+			-will query for user for date and order number
+				*if order exists:
+					-display order info and prompt user if they are sure
+						*yes: remove order from file
+						*no: return to main menu
+		*5. Quit
+	
+Additional Guidance:
+-anytime user enters invalid data, system should ask them again until they enter calid data 		=user shouldn't be able to crash application with invalid data)
+-use layered architecture for this project							=code must be organized into reasonable classes
+											=code must be split up into UI, Data, Models, and BLL projects
+-must also submit project plan								=flowcharts, outlines, pseudocode, etc
+-must unit test BLL and Data layers
+
+Tips:
+-ask if you need clarification
+-work on pieces of functionality in isolation and test them before moving on
+-plan then code
+-use prior code samples as inspiration
+
+
+
+
+
+
+
+
