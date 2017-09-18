@@ -24,24 +24,8 @@ namespace SGBank.UI
 
                 Console.WriteLine("\nQ to quit");
                 Console.Write("\nEnter selection: ");
-                
+
                 string userinput = Console.ReadLine();
-
-                string file = @"C:\Repos\bitbucket\dotnet-lindsey-parlow\SGBankAccounts\Accounts.txt";
-                string[] text;
-
-                try
-                {
-                    text = File.ReadAllLines(file);
-                }
-                catch
-                {
-                    Console.WriteLine($"The file: {file} was not found.");
-                    Console.Write("Press any key to exit...");
-                    Console.ReadKey();
-                    return;
-                }
-                
 
                 switch (userinput)
                 {

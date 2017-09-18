@@ -10,6 +10,7 @@ namespace FlooringOrderingSystem.UI
     {
         static void Main(string[] args)
         {
+            Menu.Start();
         }
     }
 }

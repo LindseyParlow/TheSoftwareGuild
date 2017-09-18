@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlooringOrderingSystem.Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlooringOrderingSystem.BLL", "FlooringOrderingSystem.BLL\FlooringOrderingSystem.BLL.csproj", "{50EBCBBE-C7A5-4B22-AF11-3212AC30F981}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlooringOrderingSystem.Tests", "FlooringOrderingSystem.Tests\FlooringOrderingSystem.Tests.csproj", "{EFA0F181-0A51-4FFE-95F0-5296B2430051}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{50EBCBBE-C7A5-4B22-AF11-3212AC30F981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50EBCBBE-C7A5-4B22-AF11-3212AC30F981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50EBCBBE-C7A5-4B22-AF11-3212AC30F981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFA0F181-0A51-4FFE-95F0-5296B2430051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA0F181-0A51-4FFE-95F0-5296B2430051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA0F181-0A51-4FFE-95F0-5296B2430051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA0F181-0A51-4FFE-95F0-5296B2430051}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

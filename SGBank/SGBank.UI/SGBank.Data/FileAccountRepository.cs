@@ -18,6 +18,21 @@ namespace SGBank.Data
         public FileAccountRepository(string filePath)
         {
             _filePath = filePath;
+            string[] text;
+
+            try
+            {
+                text = File.ReadAllLines(_filePath);
+            }
+            catch
+            {
+                Console.WriteLine($"The file: {_filePath} was not found.");
+                Console.Write("Press any key to continue...");
+                Console.ReadKey();
+                return;
+            }
+
+            
 
             List();
         }

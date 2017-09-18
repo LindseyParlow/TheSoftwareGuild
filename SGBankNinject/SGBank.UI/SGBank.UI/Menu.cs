@@ -27,7 +27,7 @@ namespace SGBank.UI
                 
                 string userinput = Console.ReadLine();
 
-                string file = @"C:\Repos\bitbucket\dotnet-lindsey-parlow\SGBankAccountsNinject\Accounts.txt";
+                string file = @"C:\Repos\bitbucket\dotnet-lindsey-parlow\SGBankAccounts\Accounts.txt";
                 string[] text;
 
                 try
@@ -60,10 +60,7 @@ namespace SGBank.UI
                     case "Q":
                         return;
                 }
-
-
             }
-
         }
     }
 }
