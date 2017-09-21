@@ -4,20 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using FlooringOrderingSystem.Models.Interfaces;
 using FlooringOrderingSystem.Data;
 
 namespace FlooringOrderingSystem.BLL
 {
-    public static class OrderManagerFactory
-    { 
-        public static OrderManager Create()
+    public class OrderRepositoryFactory
+    {
+        public static IOrderRepository Create()
         {
             string mode = ConfigurationManager.AppSettings["Mode"].ToString();
 
-            switch(mode)
+            switch (mode)
             {
                 case "Test":
-                    return new OrderManager(new TestDataRepository());
+                    return new OrderTestRepository();
+                case "Prod":
+                    return new OrderProdRepository();
                 default:
                     throw new Exception("Mode value in app config is not valid.");
             }

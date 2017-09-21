@@ -1,0 +1,78 @@
+(UI) Display Menu
+(UI) Prompt user for choice of display order, add order, edit order, remove order, or quit
+
+option 1: if user chooses to display order
+	a. prompt for date
+	b. if orders exist for date:
+		1. display order details
+			(order number, order date, customer name, state, product type, material cost, labor cost, tax, total)
+		2. prompt user to return to main menu
+	c: if orders dn't exist for date:
+		1. display error message
+		2. return to main menu
+	
+
+option 2: if user chooses to add order 
+	a. prompt user for information
+		1. order date (in future)
+		2. customer name (can't be blank, letters/numbers/periods/commas)
+		3. state (verify that state exists in tax file)
+		4. product type (verify that is a correct product type)
+		5. area (must be a positive decimal and minimum 100 sq ft
+	b. calculate other fields
+		1. material cost per square foot  (pull data from product info)
+		2. labor cost per square foot (pull data from product info
+		3.  overall material cost (material cost per square foot * area)
+		4. overall labor cost (labor cost per square foot * area)
+		5. tax rate (pull data from tax file for state)
+		6. tax ((overall material cost + overall labor cost) * (tax rate/100))
+		7. total (overall materal cost + overall labor cost + overall tax)
+	c. display summary
+	d. do you want to add this order
+		1. if yes:
+			a. and is first order of the day, create new file and write it to that
+			b: and not first order of the day write to file for that date
+		2. if no, do not save and return to main menu
+	e. prompt user to return to main menu
+		
+
+option 3: if user chooses to edit order
+	a. prompt user for order date and order number
+	b. check to see if order exists (use dictionary to find date and within the date, that order number)
+		1. if order exists:
+			a. give summary of order as it is now
+			b. prompt user for changeable fields
+				1. would you like to change name? Y/N
+					a. if yes: 
+						1. prompt user for new name
+						2. as them if it is correct
+						3. save new name/write over old name
+					b. if no: leave data as is and continue
+				2. would you like to change state? (follow same steps as name)
+				3. would you like to change product type? (follow same steps as name)
+				4. would you like to change area? (follow same steps as name)
+			c. if anything was changed, recalculate other fields
+			d. display a new summary
+			e. prompt if they would like to save their changes
+				1. if yes: overwrite the previous order data and save
+				2. if no: stick with original data
+			f. display message whether edit was saved or discarded
+			g. return to main menu
+		2. if order doesn't exists:
+			a. display error message that order wasn't found
+			b. return to main menu
+
+option 4: if user chooses to remove order
+	a. prompt user for order date and order number
+	b. check to see if order exists (use dictionary to find fate and within the dat, that order number)
+		1. if order exists:
+			a. display summary of order
+			b. prompt user if they'd like to delete order
+				1. if yes: delete order
+				2. if no: don't delete 
+			c. give message whether order was deleted or not
+			d. return to main menu
+		2. if order doesn't exist:
+
+option 5: if user chooses to quit
+	a. quit

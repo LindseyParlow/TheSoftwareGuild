@@ -40,8 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderProdRepository.cs" />
+    <Compile Include="ProductProdRepository.cs" />
+    <Compile Include="ProductTestRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestDataRepository.cs" />
+    <Compile Include="OrderTestRepository.cs" />
+    <Compile Include="TaxProdRepository.cs" />
+    <Compile Include="TaxTestRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlooringOrderingSystem.Models\FlooringOrderingSystem.Models.csproj">

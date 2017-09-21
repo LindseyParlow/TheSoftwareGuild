@@ -16,9 +16,9 @@ namespace FlooringOrderingSystem.Tests
         [Test]
         public void CanLoadTestData()
         {
-            OrderManager manager = OrderManagerFactory.Create();
+            SystemManager manager = OrderManagerFactory.Create();
 
-            OrderDisplayResponse response = manager.DisplayOrder("");
+            DisplayOrderResponse response = manager.DisplayOrder("");
 
             Assert.IsNotNull(response.Order);
             Assert.IsTrue(response.Success);

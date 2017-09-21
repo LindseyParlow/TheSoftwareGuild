@@ -1,4 +1,5 @@
-﻿using FlooringOrderingSystem.UI.Workflows;
+﻿using FlooringOrderingSystem.BLL;
+using FlooringOrderingSystem.UI.Workflows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace FlooringOrderingSystem.UI
     {
         public static void Start()
         {
+            SystemManager manager = new SystemManager();
+
             while(true)
             {
                 Console.Clear();
@@ -21,7 +24,7 @@ namespace FlooringOrderingSystem.UI
                 Console.WriteLine("3. Edit an Order");
                 Console.WriteLine("4. Remove an Order");
                 Console.WriteLine("5. Quit");
-                Console.WriteLine();
+                Console.WriteLine("-----------------------------------");
                 Console.Write("Enter selection: ");
 
                 string userInput = Console.ReadLine();
@@ -29,14 +32,20 @@ namespace FlooringOrderingSystem.UI
                 switch (userInput)
                 {
                     case "1":
-                        OrderDisplayWorkflow displayWorkflow = new OrderDisplayWorkflow();
+                        DisplayOrderWorkflow displayWorkflow = new DisplayOrderWorkflow(manager);
                         displayWorkflow.Execute();
                         break;
                     case "2":
+                        AddOrderWorkflow addWorkflow = new AddOrderWorkflow(manager);
+                        addWorkflow.Execute();
                         break;
                     case "3":
+                        EditOrderWorkflow editWorkflow = new EditOrderWorkflow(manager);
+                        editWorkflow.Execute();
                         break;
                     case "4":
+                        RemoveOrderWorkflow removeWorkflow = new RemoveOrderWorkflow(manager);
+                        removeWorkflow.Execute();
                         break;
                     case "5":
                         return;

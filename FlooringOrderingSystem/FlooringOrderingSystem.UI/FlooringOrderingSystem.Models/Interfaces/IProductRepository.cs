@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace FlooringOrderingSystem.Models.Interfaces
 {
-    interface IProductRepository
+    public interface IProductRepository
     {
+        void LoadProducts();
+        ProductPricePairs GetProductPricePair(string productName);
+        Dictionary<string, ProductPricePairs> ProductPriceDictionary { get; }
     }
 }

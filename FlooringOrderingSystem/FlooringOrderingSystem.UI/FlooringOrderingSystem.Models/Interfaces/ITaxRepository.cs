@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlooringOrderingSystem.Models.Interfaces
 {
-    interface ITaxRepository
+    public interface ITaxRepository
     {
     }
 }

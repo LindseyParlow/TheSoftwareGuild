@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace FlooringOrderingSystem.Models.Responses
 {
-    public abstract class Response
+    public class DisplayOrderResponse : Response
     {
-        public bool Success { get; set; }
-        public string Message { get; set; }
+        public Order Order { get; set; }
     }
 }

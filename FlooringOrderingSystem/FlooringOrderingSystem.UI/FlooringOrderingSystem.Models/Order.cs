@@ -16,10 +16,22 @@ namespace FlooringOrderingSystem.Models
         public decimal Area { get; set; }
         public decimal CostPerSquareFoot { get; set; }
         public decimal LaborCostPerSquareFoot { get; set; }
-        public decimal MaterialCost { get; set; }
-        public decimal LaborCost { get; set; }
-        public decimal Tax { get; set; }
-        public decimal Total { get; set; }
-        public string OrderDate { get; set; }
+        public decimal MaterialCost
+        {
+            get { return (CostPerSquareFoot * Area); }
+        }
+        public decimal LaborCost
+        {
+            get { return (LaborCostPerSquareFoot * Area); }
+        }
+        public decimal Tax
+        {
+            get { return ((MaterialCost + LaborCost) * (TaxRate/100)); }
+        }
+        public decimal Total
+        {
+            get { return (MaterialCost + LaborCost + Tax); }
+        }
+        public DateTime OrderDate { get; set; }
     }
 }

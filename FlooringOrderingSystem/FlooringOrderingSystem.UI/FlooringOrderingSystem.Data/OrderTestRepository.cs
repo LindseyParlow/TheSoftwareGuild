@@ -8,7 +8,7 @@ using FlooringOrderingSystem.Models;
 
 namespace FlooringOrderingSystem.Data
 {
-    public class TestDataRepository : IOrderRepository
+    public class OrderTestRepository : IOrderRepository
     {
         private static Order _order = new Order
         {
@@ -20,11 +20,7 @@ namespace FlooringOrderingSystem.Data
             Area = 100.00M,
             CostPerSquareFoot = 5.15M,
             LaborCostPerSquareFoot = 4.75M,
-            MaterialCost = 515.00M,
-            LaborCost = 475.00M,
-            Tax = 61.88M,
-            Total = 1051.88M,
-            OrderDate = "06012013"
+            OrderDate = new DateTime(2013, 06, 01)
         };
         
         public Order LoadOrder(string OrderDate)

@@ -8,20 +8,25 @@ using System.Threading.Tasks;
 
 namespace FlooringOrderingSystem.UI.Workflows
 {
-    public class OrderDisplayWorkflow
+    public class DisplayOrderWorkflow
     {
+        private SystemManager manager;
+
+        public DisplayOrderWorkflow(SystemManager manager)
+        {
+            this.manager = manager;
+        }
+
         public void Execute()
         {
-            OrderManager manager = OrderManagerFactory.Create();
-
             Console.Clear();
             Console.WriteLine("Diplay Orders");
-            Console.WriteLine("-------------------------");
+            Console.WriteLine("-----------------------------------------------");
             Console.Write("Enter date of the order to look up: ");
             string orderDate = Console.ReadLine();
 
-            //Need to figure out Displaying all orders based on the date of an order. Not based on the Order number.
-            OrderDisplayResponse response = manager.DisplayOrder(orderDate);
+            //Need to figure out Displaying all orders based on the date of an order..
+            DisplayOrderResponse response = manager.DisplayOrder(orderDate);
 
             if(response.Success)
             {
@@ -29,10 +34,10 @@ namespace FlooringOrderingSystem.UI.Workflows
             }
             else
             {
-                Console.WriteLine("An error occurred:");
                 Console.WriteLine(response.Message);
             }
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine();
+            Console.WriteLine("Press any key to return to Main Menu");
             Console.ReadKey();
         }
     }

@@ -16,10 +16,10 @@ namespace FlooringOrderingSystem.UI
             Console.WriteLine($"Customer Name: {order.CustomerName}");
             Console.WriteLine($"State: {order.State}");
             Console.WriteLine($"Product: {order.ProductType}");
-            Console.WriteLine($"Materials: {order.MaterialCost}");
-            Console.WriteLine($"Labor: {order.LaborCost}");
-            Console.WriteLine($"Tax: {order.Tax}");
-            Console.WriteLine($"Total: {order.Total}");
+            Console.WriteLine($"Materials: {order.MaterialCost:c}");
+            Console.WriteLine($"Labor: {order.LaborCost:c}");
+            Console.WriteLine($"Tax: {order.Tax:c}");
+            Console.WriteLine($"Total: {order.Total:c}");
         }
     }
 }
