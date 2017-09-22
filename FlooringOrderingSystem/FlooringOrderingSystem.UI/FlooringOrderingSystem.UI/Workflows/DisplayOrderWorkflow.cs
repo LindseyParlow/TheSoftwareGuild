@@ -22,15 +22,31 @@ namespace FlooringOrderingSystem.UI.Workflows
             Console.Clear();
             Console.WriteLine("Diplay Orders");
             Console.WriteLine("-----------------------------------------------");
-            Console.Write("Enter date of the order to look up: ");
-            string orderDate = Console.ReadLine();
+            
+            DateTime date = DateTime.MinValue;
+            bool isValid = false;
+
+            while (!isValid)
+            {
+                Console.Write("Enter date of the order to look up: ");
+                string input = Console.ReadLine();
+
+                if (DateTime.TryParse(input, out date))
+                {
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid date entered...");
+                }
+            }
 
             //Need to figure out Displaying all orders based on the date of an order..
-            DisplayOrderResponse response = manager.DisplayOrder(orderDate);
+            DisplayOrderResponse response = manager.DisplayOrder(date);
 
             if(response.Success)
             {
-                ConsoleIO.DisplayOrderDetails(response.Order);
+                ConsoleIO.DisplayOrderDetails(response.Orders);
             }
             else
             {

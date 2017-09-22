@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FlooringOrderingSystem.UI.Workflows
@@ -27,7 +28,7 @@ namespace FlooringOrderingSystem.UI.Workflows
             Console.WriteLine("Please enter the following information:");
 
             GetOrderInformation();
-            AddOrderSummary();
+            ConsoleIO.ShowAddOrderSummary(newOrder);
             AddOrderConfirmation();
             //make sure to tell customer their order number
             return;
@@ -52,7 +53,7 @@ namespace FlooringOrderingSystem.UI.Workflows
 
             while (!isValid)
             {
-                Console.Write("Enter an Order Date: ");
+                Console.Write("Order Date: ");
                 string input = Console.ReadLine();
 
                 if (DateTime.TryParse(input, out date))
@@ -76,36 +77,55 @@ namespace FlooringOrderingSystem.UI.Workflows
 
         public void GetCustomerNameFromUser()
         {
-            Console.Write("Customer Name: ");
-            newOrder.CustomerName = Console.ReadLine();
+            bool isValid = false;
+            
+            while(!isValid)
+            {
+                Console.Write("Customer Name: ");
+                string userInput = Console.ReadLine();
+                bool result = userInput.All(c => Char.IsLetterOrDigit(c) || c == '.' || c == ',' || c == ' ');
 
-            //hey do something with RegEx to make this work
-            //if input is blank, error message and reprompt for name
-            //if input is not a-z/0-9/periods/commas, error message and reprompt for name
-
-            //if meets requirements, continue to next field
+                if (!result)
+                {
+                    Console.WriteLine("Invalid customer name entered. May only use A-Z, 0-9, and periods/commas.");
+                }
+                else
+                {
+                    newOrder.CustomerName = userInput;
+                    isValid = true;
+                }
+            }
         }
 
         public void GetStateFromUser()
         {
-            Console.Write("State: ");
-            newOrder.State = Console.ReadLine();
+            bool isValid = false;
+            while (!isValid)
+            {
+                Console.Write("State: ");
+                string userInput = Console.ReadLine();
 
-
-            //if input doens't match a state we sell to, error message and reprompt for state
-
-            //if meets requirements, continue to next field
+                if (manager.ValidateStateName(userInput))
+                {
+                    newOrder.State = userInput;
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid state entered!");
+                }
+            }
         }
 
         public void GetProductTypeFromUser()
         {
             bool isValid = false;
-            while(!isValid)
+            while (!isValid)
             {
                 Console.Write("Product Type: ");
                 string userInput = Console.ReadLine();
 
-                if(manager.ValidateProductName(userInput))
+                if (manager.ValidateProductName(userInput))
                 {
                     newOrder.ProductType = userInput;
                     isValid = true;
@@ -150,7 +170,7 @@ namespace FlooringOrderingSystem.UI.Workflows
 
         private void GetMaterialAndLaborCosts()
         {
-            var pricePairs = manager.GetProductPricePairs(newOrder.ProductType);
+            ProductPricePairs pricePairs = manager.GetProductPricePairs(newOrder.ProductType);
             newOrder.CostPerSquareFoot = pricePairs.MaterialCost;
             newOrder.LaborCostPerSquareFoot = pricePairs.LaborCost;
         }
@@ -159,28 +179,10 @@ namespace FlooringOrderingSystem.UI.Workflows
 
         private void GetTaxRateFromTaxFile()
         {
-            throw new NotImplementedException();
+            StateNamePairs statepairs = manager.GetStateNamePairs(newOrder.State);
+            newOrder.TaxRate = statepairs.TaxRate;
         }
-
-        public void AddOrderSummary()
-        {
-            //should I use something like the DiplayOrderDetails or do I need to create an AddOrderDetails and feed it this info?
-            //should I really inclue the per sq ft fields or just the totals?
-
-            //newOrder.OrderDate
-            //newOrder.CustomerName;
-            //newOrder.State;
-            //newOrder.ProductType;
-            //newOrder.Area;
-            //newOrder.CostPerSquareFoot;
-            //newOrder.LaborCostPerSquareFoot;
-            //newOrder.MaterialCost;
-            //newOrder.LaborCost;
-            //newOrder.TaxRate;
-            //newOrder.Tax;
-            //newOrder.Total;
-        }
-
+        
         private void AddOrderConfirmation()
         {
             bool isValid = false;
@@ -197,8 +199,6 @@ namespace FlooringOrderingSystem.UI.Workflows
                 }
                 else if (userInput == "n")
                 {
-                    //maybe do an "are you sure"
-                    //make sure order didn't get saved
                     Console.WriteLine();
                     Console.WriteLine("Order was not added. Press any key to return to Main Menu...");
                     Console.ReadKey();
@@ -214,6 +214,16 @@ namespace FlooringOrderingSystem.UI.Workflows
                     isValid = true;
                 }
             }
+        }
+
+        public void SaveNewOrder()
+        {
+            //if(is the first one of the day!)
+
+            //else because it isn't the firs order of the day!
+
+            
+
         }
     }
 }

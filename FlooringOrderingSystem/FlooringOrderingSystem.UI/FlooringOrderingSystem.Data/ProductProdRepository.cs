@@ -11,21 +11,22 @@ namespace FlooringOrderingSystem.Data
 {
     public class ProductProdRepository : IProductRepository
     {
-        private string productFilePath;
+        private static List<ProductPricePairs> ProductList;
 
+        private string productFilePath;
+        
         public ProductProdRepository()
         {
             productFilePath = @"C:\Repos\bitbucket\dotnet-lindsey-parlow\FlooringOrderingSystem\FlooringOrderingSystemFiles\Products.txt";
-
-            ProductPriceDictionary = new Dictionary<string, ProductPricePairs>();
-
+            
             LoadProducts();
         }
 
-        public Dictionary<string, ProductPricePairs> ProductPriceDictionary { get; private set; }
 
-        public void LoadProducts()
+        private void LoadProducts()
         {
+            ProductList = new List<ProductPricePairs>();
+
             using (StreamReader sr = new StreamReader(productFilePath))
             {
                 sr.ReadLine();
@@ -35,23 +36,19 @@ namespace FlooringOrderingSystem.Data
                 {
                     string[] columns = line.Split(',');
 
-                    var product = columns[0];
-                    var material = decimal.Parse(columns[1]);
-                    var labor = decimal.Parse(columns[2]);
-                    var pricePair = new ProductPricePairs(material, labor);
+                    string product = columns[0];
+                    decimal material = decimal.Parse(columns[1]);
+                    decimal labor = decimal.Parse(columns[2]);
+                    ProductPricePairs pricePair = new ProductPricePairs(product, material, labor);
 
-                    ProductPriceDictionary.Add(product, pricePair);
-
-                    //use this later to call a particular product from the dictionary
-                    //var carpetPrices = ProductPriceDictionary["Carpet"];
-                    //decimal carpetLaborCost = carpetPrices.LaborCost;
+                    ProductList.Add(pricePair);
                 }
             }
         }
 
-        public ProductPricePairs GetProductPricePair(string productName)
+        public ProductPricePairs GetOne(string productName)
         {
-            return ProductPriceDictionary[productName];
+            return ProductList.FirstOrDefault(p => p.ProductType == productName);
         }
     }
 }

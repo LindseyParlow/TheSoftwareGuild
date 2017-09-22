@@ -8,6 +8,6 @@ namespace FlooringOrderingSystem.Models.Responses
 {
     public class DisplayOrderResponse : Response
     {
-        public Order Order { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

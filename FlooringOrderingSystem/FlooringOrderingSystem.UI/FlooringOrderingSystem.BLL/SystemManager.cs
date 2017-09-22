@@ -22,13 +22,15 @@ namespace FlooringOrderingSystem.BLL
             _taxRepository = TaxRepositoryFactory.Create();
         }
 
-        public DisplayOrderResponse DisplayOrder(string orderDate)
+        public DisplayOrderResponse DisplayOrder(DateTime orderDate)
         {
             DisplayOrderResponse response = new DisplayOrderResponse();
 
-            response.Order = _orderRepository.LoadOrder(orderDate);
+            var ordersFromDate = _orderRepository.LoadOrders(orderDate);
 
-            if (response.Order == null)
+            response.Orders = ordersFromDate;
+
+            if (response.Orders.Count == 0)
             {
                 response.Success = false;
                 response.Message = $"{orderDate} did not return any valid Orders.";
@@ -42,12 +44,22 @@ namespace FlooringOrderingSystem.BLL
 
         public bool ValidateProductName(string userInput)
         {
-            return _productRepository.ProductPriceDictionary.Keys.Contains(userInput);
+            return _productRepository.GetOne(userInput) != null;
         }
 
         public ProductPricePairs GetProductPricePairs(string productType)
         {
-            return _productRepository.GetProductPricePair(productType);
+            return _productRepository.GetOne(productType);
+        }
+
+        public bool ValidateStateName(string userInput)
+        {
+            return _taxRepository.GetOne(userInput) != null;
+        }
+
+        public StateNamePairs GetStateNamePairs(string stateName)
+        {
+            return _taxRepository.GetOne(stateName);
         }
     }
 }

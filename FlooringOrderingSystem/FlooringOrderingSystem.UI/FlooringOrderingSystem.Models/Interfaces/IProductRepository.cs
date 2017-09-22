@@ -8,8 +8,7 @@ namespace FlooringOrderingSystem.Models.Interfaces
 {
     public interface IProductRepository
     {
-        void LoadProducts();
-        ProductPricePairs GetProductPricePair(string productName);
-        Dictionary<string, ProductPricePairs> ProductPriceDictionary { get; }
+        
+        ProductPricePairs GetOne(string productName);
     }
 }

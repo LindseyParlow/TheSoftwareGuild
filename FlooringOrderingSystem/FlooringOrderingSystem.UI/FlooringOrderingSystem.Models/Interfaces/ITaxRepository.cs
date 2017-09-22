@@ -8,5 +8,6 @@ namespace FlooringOrderingSystem.Models.Interfaces
 {
     public interface ITaxRepository
     {
+        StateNamePairs GetOne(string stateName);
     }
 }

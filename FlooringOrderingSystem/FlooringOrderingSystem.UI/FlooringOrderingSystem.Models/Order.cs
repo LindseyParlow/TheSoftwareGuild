@@ -8,7 +8,7 @@ namespace FlooringOrderingSystem.Models
 {
     public class Order
     {
-        public string OrderNumber { get; set; }
+        public int OrderNumber { get; set; }
         public string CustomerName { get; set; }
         public string State { get; set; }
         public decimal TaxRate { get; set; }
