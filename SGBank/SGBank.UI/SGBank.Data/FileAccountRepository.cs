@@ -24,9 +24,9 @@ namespace SGBank.Data
             {
                 text = File.ReadAllLines(_filePath);
             }
-            catch
+            catch(Exception ex)
             {
-                Console.WriteLine($"The file: {_filePath} was not found.");
+                Console.WriteLine($"An error occurred reading the file: {ex.Message}");
                 Console.Write("Press any key to continue...");
                 Console.ReadKey();
                 return;
@@ -39,38 +39,49 @@ namespace SGBank.Data
 
         public void List()
         {
-            using (StreamReader sr = new StreamReader(_filePath))
+            try
             {
-                sr.ReadLine();
-                string line;
-
-                while ((line = sr.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader(_filePath))
                 {
-                    Account newAccount = new Account();
+                    sr.ReadLine();
+                    string line;
 
-                    string[] columns = line.Split(',');
-
-
-                    newAccount.AccountNumber = columns[0];
-                    newAccount.Name = columns[1];
-                    newAccount.Balance = decimal.Parse(columns[2]);
-
-                    if (columns[3] == "F")
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        newAccount.Type = AccountType.Free;
-                    }
-                    else if (columns[3] == "B")
-                    {
-                        newAccount.Type = AccountType.Basic;
-                    }
-                    else if (columns[3] == "P")
-                    {
-                        newAccount.Type = AccountType.Premium;
+                        Account newAccount = new Account();
 
-                    }
+                        string[] columns = line.Split(',');
+
+
+                        newAccount.AccountNumber = columns[0];
+                        newAccount.Name = columns[1];
+                        newAccount.Balance = decimal.Parse(columns[2]);
+
+                        if (columns[3] == "F")
+                        {
+                            newAccount.Type = AccountType.Free;
+                        }
+                        else if (columns[3] == "B")
+                        {
+                            newAccount.Type = AccountType.Basic;
+                        }
+                        else if (columns[3] == "P")
+                        {
+                            newAccount.Type = AccountType.Premium;
+
+                        }
                         _allAccounts.Add(newAccount);
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"An error occurred reading the file: {ex.Message}");
+                Console.WriteLine($"The error happened at: {ex.StackTrace}");
+                Console.Write("Press any key to continue...");
+                Console.ReadKey();
+            }
+            
         }
 
         Account _account = new Account();
@@ -78,7 +89,7 @@ namespace SGBank.Data
         public Account LoadAccount(string AccountNumber)
         {
             var Accounts = _allAccounts.SingleOrDefault(a => a.AccountNumber == AccountNumber);
-            _account = Accounts;
+            //_account = Accounts;
 
             return Accounts;
         }

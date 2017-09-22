@@ -15,10 +15,10 @@ namespace SGBank.Tests
     [TestFixture]
     public class BasicAccountTests
     {
-        [TestCase("33333", "Basic Account", 100, AccountType.Free, 250, false)]
-        [TestCase("33333", "Basic Account", 100, AccountType.Basic, -100, false)]
-        [TestCase("33333", "Basic Account", 100, AccountType.Basic, 250, true)]
-        public void BasicAccountDepositRuleTests(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount, bool expectedResult)
+        [TestCase("33333", "Basic Account", 100, AccountType.Free, 250, 100, false)]
+        [TestCase("33333", "Basic Account", 100, AccountType.Basic, -100, 100, false)]
+        [TestCase("33333", "Basic Account", 100, AccountType.Basic, 250, 350, true)]
+        public void BasicAccountDepositRuleTests(string accountNumber, string name, decimal balance, AccountType accountType, decimal amount, decimal newBalance, bool expectedResult)
         {
             IDeposit deposit = new NoLimitDepositRule();
 
@@ -32,6 +32,15 @@ namespace SGBank.Tests
             AccountDepositResponse response = deposit.Deposit(account, amount);
 
             Assert.AreEqual(expectedResult, response.Success);
+
+            if (response.Success == true)
+            {
+                Assert.AreEqual(newBalance, response.Account.Balance);
+            }
+            else
+            {
+                Assert.AreEqual(newBalance, account.Balance);
+            }
         }
 
         [TestCase("33333","Basic Account",1500,AccountType.Basic,-1000,1500,false)]
@@ -51,13 +60,18 @@ namespace SGBank.Tests
             account.Type = accountType;
 
             AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
-
             Assert.AreEqual(expectedResult, response.Success);
 
             if(response.Success == true)
             {
                 Assert.AreEqual(newBalance, response.Account.Balance);
             }
+            else
+            {
+                Assert.AreEqual(newBalance, account.Balance);
+            }
+
+
         }
     }
 }
