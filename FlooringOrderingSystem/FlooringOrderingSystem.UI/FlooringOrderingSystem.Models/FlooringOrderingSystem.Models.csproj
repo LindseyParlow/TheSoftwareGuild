@@ -47,7 +47,6 @@
     <Compile Include="Order.cs" />
     <Compile Include="ProductPricePairs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Responses\AddOrderResponse.cs" />
     <Compile Include="Responses\DisplayOrderResponse.cs" />
     <Compile Include="Responses\Response.cs" />
     <Compile Include="StateNamePairs.cs" />

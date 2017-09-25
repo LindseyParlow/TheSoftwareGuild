@@ -8,9 +8,9 @@ namespace FlooringOrderingSystem.Models.Interfaces
 {
     public interface IOrderRepository
     {
-        void UpdateOrder(Order newOrder, DateTime orderDate);
+        void UpdateOrder(Order order);
 
-        void RemoveOrder(int orderNumber, DateTime orderDate);
+        void RemoveOrder(Order order);
 
         void CreateOrder(Order order);
 

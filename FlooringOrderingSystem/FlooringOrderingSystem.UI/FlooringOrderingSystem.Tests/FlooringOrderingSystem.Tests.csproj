@@ -43,8 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProdModeTests\OrderProdRepositoryTests.cs" />
+    <Compile Include="ProdModeTests\ProductProdRepositoryTests.cs" />
+    <Compile Include="ProdModeTests\TaxProdRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDataTests.cs" />
+    <Compile Include="TestModeTests\OrderTestRepositoryTests.cs" />
+    <Compile Include="TestModeTests\ProductTestRepositoryTests.cs" />
+    <Compile Include="TestModeTests\TaxTestRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlooringOrderingSystem.BLL\FlooringOrderingSystem.BLL.csproj">

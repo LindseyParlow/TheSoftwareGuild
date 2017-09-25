@@ -30,6 +30,7 @@ namespace FlooringOrderingSystem.UI.Workflows
             {
                 Console.Write("Enter date of the order to look up: ");
                 string input = Console.ReadLine();
+                Console.WriteLine();
 
                 if (DateTime.TryParse(input, out date))
                 {

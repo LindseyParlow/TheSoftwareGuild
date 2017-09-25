@@ -1,5 +1,6 @@
 ﻿using FlooringOrderingSystem.BLL;
 using FlooringOrderingSystem.Models;
+using FlooringOrderingSystem.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,10 +27,17 @@ namespace FlooringOrderingSystem.UI.Workflows
             Console.WriteLine("Add Order");
             Console.WriteLine("-------------------------------------------");
             Console.WriteLine("Please enter the following information:");
-
+            
             GetOrderInformation();
-            ConsoleIO.ShowAddOrderSummary(newOrder);
+            Console.WriteLine();
+            Console.WriteLine("Summary:");
+
+            ConsoleIO.ShowOrderSummary(newOrder);
+            Console.WriteLine();
             AddOrderConfirmation();
+
+            
+            //need to save/write order still if they say yes, they want to add it
             //make sure to tell customer their order number
             return;
         }
@@ -85,7 +93,11 @@ namespace FlooringOrderingSystem.UI.Workflows
                 string userInput = Console.ReadLine();
                 bool result = userInput.All(c => Char.IsLetterOrDigit(c) || c == '.' || c == ',' || c == ' ');
 
-                if (!result)
+                if(userInput == "")
+                {
+                    Console.WriteLine("Customer Name is a required field!");
+                }
+                else if (!result)
                 {
                     Console.WriteLine("Invalid customer name entered. May only use A-Z, 0-9, and periods/commas.");
                 }
@@ -102,7 +114,7 @@ namespace FlooringOrderingSystem.UI.Workflows
             bool isValid = false;
             while (!isValid)
             {
-                Console.Write("State: ");
+                Console.Write("State Name/Abbreviation: ");
                 string userInput = Console.ReadLine();
 
                 if (manager.ValidateStateName(userInput))
@@ -206,10 +218,13 @@ namespace FlooringOrderingSystem.UI.Workflows
                 }
                 else
                 {
+                    manager.GetCreateOrder(newOrder);
                     //save order: if first for day, create new file and write order into that file. make sure file gets proper name and is order #1
                     //if not first order for day, write order into proper file and make sure it is order #(last order number + 1)
                     Console.WriteLine();
-                    Console.WriteLine("Order has been added. Press any key to return to main menu.");
+                    Console.WriteLine("Order has been successfully added!");
+                    Console.WriteLine($"Your order number is {newOrder.OrderNumber}.");
+                    Console.WriteLine("Press any key to return to Main Menu...");
                     Console.ReadKey();
                     isValid = true;
                 }

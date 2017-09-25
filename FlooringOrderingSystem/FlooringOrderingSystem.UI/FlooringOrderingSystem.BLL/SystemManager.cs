@@ -30,7 +30,7 @@ namespace FlooringOrderingSystem.BLL
 
             response.Orders = ordersFromDate;
 
-            if (response.Orders.Count == 0)
+            if (response.Orders == null)
             {
                 response.Success = false;
                 response.Message = $"{orderDate} did not return any valid Orders.";
@@ -47,6 +47,11 @@ namespace FlooringOrderingSystem.BLL
             return _productRepository.GetOne(userInput) != null;
         }
 
+        public void GetUpdateOrder(Order order)
+        {
+            _orderRepository.UpdateOrder(order);
+        }
+
         public ProductPricePairs GetProductPricePairs(string productType)
         {
             return _productRepository.GetOne(productType);
@@ -60,6 +65,42 @@ namespace FlooringOrderingSystem.BLL
         public StateNamePairs GetStateNamePairs(string stateName)
         {
             return _taxRepository.GetOne(stateName);
+        }
+
+        public void GetCreateOrder(Order newOrder)
+        {
+            _orderRepository.CreateOrder(newOrder);
+        }
+
+        public Order GetSpecificOrder(DateTime userOrderDate, int userorderNumber)
+        {
+            List<Order> ordersFromDate = _orderRepository.LoadOrders(userOrderDate);
+
+            if(ordersFromDate == null)
+            {
+                return null;
+            }
+            else
+            {
+                var orderFromFile = ordersFromDate.FirstOrDefault(o => o.OrderNumber == userorderNumber);
+                var specificOrder = new Order();
+
+                specificOrder.Area = orderFromFile.Area;
+                specificOrder.CostPerSquareFoot = orderFromFile.CostPerSquareFoot;
+                specificOrder.CustomerName = orderFromFile.CustomerName;
+                specificOrder.LaborCostPerSquareFoot = orderFromFile.LaborCostPerSquareFoot;
+                specificOrder.OrderDate = orderFromFile.OrderDate;
+                specificOrder.OrderNumber = orderFromFile.OrderNumber;
+                specificOrder.ProductType = orderFromFile.ProductType;
+                specificOrder.State = orderFromFile.State;
+                specificOrder.TaxRate = orderFromFile.TaxRate;
+
+                return specificOrder;
+            }
+        }
+        public void ConfirmRemoveOrder(Order order)
+        {
+            _orderRepository.RemoveOrder(order);
         }
     }
 }

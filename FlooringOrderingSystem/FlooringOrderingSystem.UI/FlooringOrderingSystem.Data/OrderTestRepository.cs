@@ -81,24 +81,30 @@ namespace FlooringOrderingSystem.Data
         public List<Order> LoadOrders(DateTime orderDate)
         {
             MockOrderFile MockFile = MockFiles.FirstOrDefault(f => f.fileName.Contains(String.Format("{0:MMddyyyy}", orderDate)));
+
+            if(MockFile == null)
+            {
+                return null;
+            }
+
             return MockFile.Orders;
         }
 
-        public void UpdateOrder(Order newOrder, DateTime orderDate)
+        public void UpdateOrder(Order order)
         {
-            MockOrderFile MockFile = MockFiles.FirstOrDefault(f => f.fileName.Contains(String.Format("{0:MMddyyyy}", orderDate)));
-            Order orderToFind = MockFile.Orders.FirstOrDefault(o => o.OrderNumber == newOrder.OrderNumber);
+            MockOrderFile MockFile = MockFiles.FirstOrDefault(f => f.fileName.Contains(String.Format("{0:MMddyyyy}", order.OrderDate)));
+            Order orderToFind = MockFile.Orders.FirstOrDefault(o => o.OrderNumber == order.OrderNumber);
 
-            orderToFind.CustomerName = newOrder.CustomerName;
-            orderToFind.State = newOrder.State;
-            orderToFind.ProductType = newOrder.ProductType;
-            orderToFind.Area = newOrder.Area;
+            orderToFind.CustomerName = order.CustomerName;
+            orderToFind.State = order.State;
+            orderToFind.ProductType = order.ProductType;
+            orderToFind.Area = order.Area;
         }
 
-        public void RemoveOrder(int orderNumber, DateTime orderDate)
+        public void RemoveOrder(Order order)
         {
-            MockOrderFile MockFile = MockFiles.FirstOrDefault(f => f.fileName.Contains(String.Format("{0:MMddyyyy}", orderDate)));
-            Order orderToFind = MockFile.Orders.FirstOrDefault(o => o.OrderNumber == orderNumber);
+            MockOrderFile MockFile = MockFiles.FirstOrDefault(f => f.fileName.Contains(String.Format("{0:MMddyyyy}", order.OrderDate)));
+            Order orderToFind = MockFile.Orders.FirstOrDefault(o => o.OrderNumber == order.OrderNumber);
             MockFile.Orders.Remove(orderToFind);
 
             if(MockFile.Orders.Count == 0)
@@ -126,7 +132,6 @@ namespace FlooringOrderingSystem.Data
             }
 
             MockFile.Orders.Add(order);
-
             
         }
     }

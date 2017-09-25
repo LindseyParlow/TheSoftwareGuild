@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FlooringOrderingSystem.BLL;
+using FlooringOrderingSystem.Models.Responses;
+using FlooringOrderingSystem.Models;
 
 namespace FlooringOrderingSystem.UI.Workflows
 {
@@ -22,39 +24,80 @@ namespace FlooringOrderingSystem.UI.Workflows
             Console.WriteLine("Remove Order");
             Console.WriteLine("-------------------------------------------");
 
-            FindOrderToRemove();
+            DisplayOrderResponse response = FindOrderToRemove();
+            if (response.Success)
+            {
+                Order order = response.Orders.First();
 
-            RemoveOrderConfirmation();
-
-           
+                RemoveOrderConfirmation(order);
+            }
+            
             return;
         }
 
         
 
-        public void FindOrderToRemove()
+        public DisplayOrderResponse FindOrderToRemove()
         {
-            Console.WriteLine("Enter Order Date of order to remove: ");
-            string userOrderDate = Console.ReadLine();
+            DateTime userOrderDate = DateTime.MinValue;
+            bool isValid = false;
 
-            Console.WriteLine("Enter Order Number of order to remove: ");
-            string userOrderNumber = Console.ReadLine();
+            while (!isValid)
+            {
+                Console.Write("Enter Order Date of order to edit: ");
+                string userInput = Console.ReadLine();
 
-            //use dictionary to find date and within the date, that order number using string userOrderDate and userOrderNumber
-            //still need to deal with dates being strings instead of DateTime variables
+                if (DateTime.TryParse(userInput, out userOrderDate))
+                {
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid date entered...");
+                }
+            }
 
-            // if(order is found) 
-            // {
-            //    display the order
-            // }
-            // else
-            // {
-            //    display message to user and press any key to return to main menu
+            isValid = false;
+            int userOrderNumber = 0;
+            while (!isValid)
+            {
+                Console.Write("Enter Order Number of order to edit: ");
+                string userInput = Console.ReadLine();
+
+                if (int.TryParse(userInput, out userOrderNumber))
+                {
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid order number entered...");
+                }
+            }
+
+            Order order = manager.GetSpecificOrder(userOrderDate, userOrderNumber);
+            DisplayOrderResponse response = new DisplayOrderResponse();
+
+            if (order == null)
+            {
+                Console.WriteLine("Order not found!");
+                response.Success = false;
+                return response;
+            }
+            else
+            {
+                Console.WriteLine();
+                ConsoleIO.ShowOrderSummary(order);
+                Console.WriteLine();
+                response.Success = true;
+                List<Order> SpecificOrderList = new List<Order>();
+                SpecificOrderList.Add(order);
+                response.Orders = SpecificOrderList;
+            }
+            return response;
         }
 
-        private void RemoveOrderConfirmation()
+        private void RemoveOrderConfirmation(Order order)
         {
-            //if order was found
             bool isValid = false;
             while (!isValid)
             {
@@ -69,8 +112,6 @@ namespace FlooringOrderingSystem.UI.Workflows
                 }
                 else if (userInput == "n")
                 {
-                    //maybe do an "are you sure"
-                    //make sure order didn't get removed
                     Console.WriteLine();
                     Console.WriteLine("Order not removed. Press any key to return to Main Menu...");
                     Console.ReadKey();
@@ -78,8 +119,7 @@ namespace FlooringOrderingSystem.UI.Workflows
                 }
                 else
                 {
-                    //remove order: if only order for the day, do we want to delete just the order or the whole file?
-                    //if not only order for day, remove just that order
+                    manager.ConfirmRemoveOrder(order);
                     Console.WriteLine();
                     Console.WriteLine("Order has been removed. Press any key to return to Main Menu.");
                     Console.ReadKey();

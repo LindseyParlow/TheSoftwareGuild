@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FlooringOrderingSystem.BLL;
+using FlooringOrderingSystem.Models;
+using FlooringOrderingSystem.Models.Responses;
 
 namespace FlooringOrderingSystem.UI.Workflows
 {
@@ -22,187 +24,207 @@ namespace FlooringOrderingSystem.UI.Workflows
             Console.WriteLine("Edit Order");
             Console.WriteLine("-------------------------------------------");
 
-            FindOrderToEdit();
+            DisplayOrderResponse response = FindOrderToEdit();
+            if (response.Success)
+            {
+                Order order = response.Orders.First();
 
-            ChangeableFieldsPrompts();
-            
-            EditOrderSummary();
+                ChangeableFieldsPrompts(order);
 
-            EditOrderConfirmation();
-            
-            
+                Console.WriteLine();
+                ConsoleIO.ShowOrderSummary(order);
+
+                EditOrderConfirmation(order);
+            }
             return;
-
-        }
-        
-        private void ChangeableFieldsPrompts()
-        {
-            ChangeNamePrompt();
-            ChangeStatePrompt();
-            ChangeProductTypePrompt();
-            ChangeAreaPrompt();
         }
 
-        public void FindOrderToEdit()
+        private void ChangeableFieldsPrompts(Order order)
         {
-            Console.WriteLine("Enter Order Date of order to edit: ");
-            string userOrderDate = Console.ReadLine();
-
-            Console.WriteLine("Enter Order Number of order to edit: ");
-            string userOrderNumber = Console.ReadLine();
-
-            //use dictionary to find date and within the date, that order number using string userOrderDate and userOrderNumber
-            //still need to deal with dates being strings instead of DateTime variables
-
-            //if order is found, display the order
-            //if order is not found, display message to user and press any key to return to main menu
+            Console.WriteLine("Enter data for field or bypass a field with Enter");
+            ChangeNamePrompt(order);
+            ChangeStatePrompt(order);
+            ChangeProductTypePrompt(order);
+            ChangeAreaPrompt(order);
         }
 
-        public void ChangeNamePrompt()
+        public DisplayOrderResponse FindOrderToEdit()
         {
+            DateTime userOrderDate = DateTime.MinValue;
             bool isValid = false;
 
-            while(!isValid)
+            while (!isValid)
             {
-                Console.WriteLine("Would you like to change the Customer Name? (Y/N): ");
-                string userInput = Console.ReadLine().ToLower();
+                Console.Write("Enter Order Date of order to edit: ");
+                string userInput = Console.ReadLine();
 
-                if (userInput != "y" && userInput != "n")
+                if (DateTime.TryParse(userInput, out userOrderDate))
                 {
-                    Console.WriteLine("Invalid response. Answer must be Y/N...");
-                    isValid = false;
-                }
-                else if (userInput == "n")
-                {
-                    //maybe give message that name was not changed
-                    //continue to next field
                     isValid = true;
                 }
                 else
                 {
-                    Console.WriteLine("Enter new Customer Name: ");
-                    //make it so this replaces the other name
-                    //continue to next field
-                    isValid = true;
+                    Console.WriteLine("Invalid date entered...");
                 }
             }
+
+            isValid = false;
+            int userOrderNumber = 0;
+            while (!isValid)
+            {
+                Console.Write("Enter Order Number of order to edit: ");
+                string userInput = Console.ReadLine();
+
+                if (int.TryParse(userInput, out userOrderNumber))
+                {
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid order number entered...");
+                }
+            }
+
+            Order order = manager.GetSpecificOrder(userOrderDate, userOrderNumber);
+            DisplayOrderResponse response = new DisplayOrderResponse();
+
+            if (order == null)
+            {
+                Console.WriteLine("Order not found!");
+                response.Success = false;
+                return response;
+            }
+            else
+            {
+                Console.WriteLine();
+                ConsoleIO.ShowOrderSummary(order);
+                Console.WriteLine();
+                response.Success = true;
+                List<Order> SpecificOrderList = new List<Order>();
+                SpecificOrderList.Add(order);
+                response.Orders = SpecificOrderList;
+            }
+            return response;
         }
 
-        public void ChangeStatePrompt()
+
+
+        public void ChangeNamePrompt(Order order)
         {
             bool isValid = false;
 
             while (!isValid)
             {
-                Console.WriteLine("Would you like to change the State? (Y/N): ");
-                string userInput = Console.ReadLine().ToLower();
+                Console.Write($"Customer Name ({order.CustomerName}): ");
+                string userInput = Console.ReadLine();
+                bool result = userInput.All(c => Char.IsLetterOrDigit(c) || c == '.' || c == ',' || c == ' ');
 
-                if (userInput != "y" && userInput != "n")
+                if (userInput == "")
                 {
-                    Console.WriteLine("Invalid response. Answer must be Y/N...");
-                    isValid = false;
-                }
-                else if (userInput == "n")
-                {
-                    //maybe give message that state was not changed
-                    //continue to next field
                     isValid = true;
+                }
+                else if (!result)
+                {
+                    Console.WriteLine("Invalid customer name entered. May only use A-Z, 0-9, and periods/commas.");
                 }
                 else
                 {
-                    Console.WriteLine("Enter new State: ");
-                    //make it so this replaces the other state
-                    //continue to next field
+                    order.CustomerName = userInput;
                     isValid = true;
                 }
             }
         }
 
-        public void ChangeProductTypePrompt()
+
+        public void ChangeStatePrompt(Order order)
         {
+            bool isValid = false;
+            while (!isValid)
+            {
+                Console.Write($"State Name/Abbreviation ({order.State}): ");
+                string userInput = Console.ReadLine();
+
+                if (userInput == "")
+                {
+                    isValid = true;
+                }
+                else if (manager.ValidateStateName(userInput))
+                {
+                    order.State = userInput;
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid state entered!");
+                }
+            }
+        }
+    
+
+        public void ChangeProductTypePrompt(Order order)
+        {
+            bool isValid = false;
+            while (!isValid)
+            {
+                Console.Write($"Product Type ({order.ProductType}): ");
+                string userInput = Console.ReadLine();
+
+                if (userInput == "")
+                {
+                    isValid = true;
+                }
+                else if (manager.ValidateProductName(userInput))
+                {
+                    order.ProductType = userInput;
+                    isValid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid product type entered!");
+                }
+            }
+        }
+
+        public void ChangeAreaPrompt(Order order)
+        {
+            decimal area;
             bool isValid = false;
 
             while (!isValid)
             {
-                Console.WriteLine("Would you like to change the Product Type? (Y/N): ");
-                string userInput = Console.ReadLine().ToLower();
+                Console.Write($"Area (100 sq. ft. minimum) ({order.Area}): ");
+                string input = Console.ReadLine();
 
-                if (userInput != "y" && userInput != "n")
+                if (decimal.TryParse(input, out area))
                 {
-                    Console.WriteLine("Invalid response. Answer must be Y/N...");
-                    isValid = false;
-                }
-                else if (userInput == "n")
-                {
-                    //maybe give message that product type was not changed
-                    //continue to next field
-                    isValid = true;
+                    if (area < 100)
+                    {
+                        Console.WriteLine("Area must be greater than 100 square feet!");
+                    }
+                    else
+                    {
+                        order.Area = area;
+                        isValid = true;
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Enter new Product Type: ");
-                    //make it so this replaces the other product type
-                    //continue to next field
-                    isValid = true;
+                    if (input == "")
+                    {
+                        isValid = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid area entered...");
+                    }
                 }
             }
         }
 
-        public void ChangeAreaPrompt()
+        private void EditOrderConfirmation(Order order)
         {
             bool isValid = false;
-
-            while (!isValid)
-            {
-                Console.WriteLine("Would you like to change the Area? (Y/N): ");
-                string userInput = Console.ReadLine().ToLower();
-
-                if (userInput != "y" && userInput != "n")
-                {
-                    Console.WriteLine("Invalid response. Answer must be Y/N...");
-                    isValid = false;
-                }
-                else if (userInput == "n")
-                {
-                    //maybe give message that area was not changed
-                    //continue to next field
-                    isValid = true;
-                }
-                else
-                {
-                    Console.WriteLine("Enter new Area: ");
-                    //make it so this replaces the other area
-                    //continue to next field
-                    isValid = true;
-                }
-            }
-        }
-
-        public void EditOrderSummary()
-        {
-            //should I use something like the DiplayOrderDetails or do I need to create an AddOrderDetails and feed it this info?
-            //should I really inclue the per sq ft fields or just the totals?
-            //remember, we are recalulating some of the fields based on new info
-
-            //newOrder.OrderDate
-            //newOrder.CustomerName;
-            //newOrder.State;
-            //newOrder.ProductType;
-            //newOrder.Area;
-            //newOrder.CostPerSquareFoot;
-            //newOrder.LaborCostPerSquareFoot;
-            //newOrder.MaterialCost;
-            //newOrder.LaborCost;
-            //newOrder.TaxRate;
-            //newOrder.Tax;
-            //newOrder.Total;
-        }
-
-        private void EditOrderConfirmation()
-        {
-            bool isValid = false;
-
-            //make an if/else statement... if there were changes made:
+            
             while (!isValid)
             {
                 Console.WriteLine("Would you like to save your changes? (Y/N): ");
@@ -216,8 +238,6 @@ namespace FlooringOrderingSystem.UI.Workflows
                 }
                 else if (userInput == "n")
                 {
-                    //maybe do an "are you sure"
-                    //make sure order stayed how it originally was
                     Console.WriteLine();
                     Console.WriteLine("Edits not saved. Press any key to return to Main Menu...");
                     Console.ReadKey();
@@ -225,14 +245,13 @@ namespace FlooringOrderingSystem.UI.Workflows
                 }
                 else
                 {
-                    //overwrite order edits
+                    manager.GetUpdateOrder(order);
                     Console.WriteLine();
                     Console.WriteLine("Order has been successfully edited. Press any key to return to main menu.");
                     Console.ReadKey();
                     isValid = true;
                 }
             }
-            //other part of if/else statement... else if no changes were made Console.WriteLine("No changes were made. Press any key to return to Main Menu...");
         }
     }
 }
