@@ -35,10 +35,7 @@ namespace FlooringOrderingSystem.UI.Workflows
             ConsoleIO.ShowOrderSummary(newOrder);
             Console.WriteLine();
             AddOrderConfirmation();
-
             
-            //need to save/write order still if they say yes, they want to add it
-            //make sure to tell customer their order number
             return;
         }
 
@@ -219,8 +216,6 @@ namespace FlooringOrderingSystem.UI.Workflows
                 else
                 {
                     manager.GetCreateOrder(newOrder);
-                    //save order: if first for day, create new file and write order into that file. make sure file gets proper name and is order #1
-                    //if not first order for day, write order into proper file and make sure it is order #(last order number + 1)
                     Console.WriteLine();
                     Console.WriteLine("Order has been successfully added!");
                     Console.WriteLine($"Your order number is {newOrder.OrderNumber}.");
@@ -229,16 +224,6 @@ namespace FlooringOrderingSystem.UI.Workflows
                     isValid = true;
                 }
             }
-        }
-
-        public void SaveNewOrder()
-        {
-            //if(is the first one of the day!)
-
-            //else because it isn't the firs order of the day!
-
-            
-
         }
     }
 }

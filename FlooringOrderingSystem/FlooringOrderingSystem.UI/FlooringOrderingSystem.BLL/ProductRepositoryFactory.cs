@@ -25,5 +25,18 @@ namespace FlooringOrderingSystem.BLL
                     throw new Exception("Mode value in app config is not valid.");
             }
         }
+
+        public static IProductRepository Create(string mode)
+        {
+            switch (mode)
+            {
+                case "Test":
+                    return new ProductTestRepository();
+                case "Prod":
+                    return new ProductProdRepository();
+                default:
+                    throw new Exception("Must choose either Test or Prod.");
+            }
+        }
     }
 }

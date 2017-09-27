@@ -41,8 +41,7 @@ namespace FlooringOrderingSystem.UI.Workflows
                     Console.WriteLine("Invalid date entered...");
                 }
             }
-
-            //Need to figure out Displaying all orders based on the date of an order..
+            
             DisplayOrderResponse response = manager.DisplayOrder(date);
 
             if(response.Success)

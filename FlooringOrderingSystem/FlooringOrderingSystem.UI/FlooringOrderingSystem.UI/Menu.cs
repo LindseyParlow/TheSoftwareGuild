@@ -12,7 +12,7 @@ namespace FlooringOrderingSystem.UI
     {
         public static void Start()
         {
-            SystemManager manager = new SystemManager();
+            SystemManager manager = new SystemManager(OrderRepositoryFactory.Create(),ProductRepositoryFactory.Create(),TaxRepositoryFactory.Create());
 
             while(true)
             {

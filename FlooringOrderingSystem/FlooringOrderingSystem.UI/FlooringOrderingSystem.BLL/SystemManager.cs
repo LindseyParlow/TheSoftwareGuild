@@ -15,11 +15,11 @@ namespace FlooringOrderingSystem.BLL
         private IProductRepository _productRepository;
         private ITaxRepository _taxRepository;
 
-        public SystemManager()
+        public SystemManager(IOrderRepository orderRepository, IProductRepository productRepository, ITaxRepository taxRepository)
         {
-            _orderRepository = OrderRepositoryFactory.Create();
-            _productRepository = ProductRepositoryFactory.Create();
-            _taxRepository = TaxRepositoryFactory.Create();
+            _orderRepository = orderRepository;
+            _productRepository = productRepository;
+            _taxRepository = taxRepository;
         }
 
         public DisplayOrderResponse DisplayOrder(DateTime orderDate)

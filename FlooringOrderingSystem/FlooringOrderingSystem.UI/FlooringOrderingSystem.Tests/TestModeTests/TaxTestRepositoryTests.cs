@@ -33,7 +33,7 @@ namespace FlooringOrderingSystem.Tests.TestModeTests
         [TestCase("OH","Ohio",6.25)]
         public void StateNamePairsTest(string stateAbbreviation, string stateName, decimal taxRate)
         {
-            SystemManager manager = new SystemManager();
+            SystemManager manager = new SystemManager(OrderRepositoryFactory.Create("Test"), ProductRepositoryFactory.Create("Test"), TaxRepositoryFactory.Create("Test"));
             var statePairInfo = manager.GetStateNamePairs("Ohio");
             
             Assert.AreEqual(statePairInfo.StateAbbreviation, stateAbbreviation);
