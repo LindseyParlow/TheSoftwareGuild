@@ -21,17 +21,28 @@
 			{
 				<div class="form-group">
 					@Html.LabelFor(m=>m.Total)
-					@Html.TextBoxFor(m=>m.Total, new { @class = "form-control" })
+					@Html.TextBoxFor(m=>m.Total, new { @class = "form-control"})
 				</div>
 				<div class="form-group">
 					@Html.LabelFor(m=>m.Percent)
-					@Html.TextBoxFor(m => m.Percent, new { @class = "form-control"})
+					@Html.TextBoxFor(m =>m.Percent, new { @class = "form-control"})
 				</div>
 				<div class="form-group">
-					@Html.LabelFor(m=>m.Tip)
-					@Html.TextBoxFor(m => m.Tip, new { @class = "form-control" })
+					<label>Number Of People</label>
+					@Html.TextBoxFor(m =>m.NumberOfPeople, new { @class = "form-control" })
 				</div>
 				<button class="btn btn-primary">Calculate</button>
+				<p>
+					<br />
+				</p>
+				<div class="form-group">
+					@Html.LabelFor(m => m.Tip)
+					@Html.TextBoxFor(m => m.Tip, new { @class = "form-control", Value = String.Format("{0:C}", Model.Tip) })
+				</div>
+				<div class="form-group">
+					<label>Total Bill Per Person</label>
+					@Html.TextBoxFor(m => m.TotalBillPerPerson, new { @class = "form-control", Value = String.Format("{0:C}", Model.TotalBillPerPerson) })
+				</div>
 			}
 		</div>
     </div>

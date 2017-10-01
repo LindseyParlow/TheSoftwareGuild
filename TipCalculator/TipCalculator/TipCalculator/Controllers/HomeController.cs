@@ -20,13 +20,7 @@ namespace TipCalculator.Controllers
 
         [HttpPost]
         public ActionResult Tip(TipData t)
-        {;
-
-            //validate
-
-            //save to database
-
-            //return a response
+        {
             return View(t);
         }
     }

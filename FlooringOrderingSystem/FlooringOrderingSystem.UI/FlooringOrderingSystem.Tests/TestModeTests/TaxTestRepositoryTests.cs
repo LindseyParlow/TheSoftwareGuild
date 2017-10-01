@@ -12,33 +12,56 @@ namespace FlooringOrderingSystem.Tests.TestModeTests
     [TestFixture]
     public class TaxTestRepositoryTests
     {
-        [TestCase("OH","Ohio",6.25)]
-        public void GetOneTest(string stateAbbreviation, string stateName, decimal taxRate)
+        [TestCase("Ohio")]
+        [TestCase("OH")]
+        [TestCase("Michigan")]
+        [TestCase("MI")]
+        [TestCase("Indiana")]
+        [TestCase("IN")]
+        public void ValidateValidStateNamesTest(string stateName)
         {
-            List<StateNamePairs> StateList = new List<StateNamePairs>() { new StateNamePairs("OH", "Ohio", 6.25M) };
+            SystemManager manager = new SystemManager(OrderRepositoryFactory.Create("Test"), ProductRepositoryFactory.Create("Test"), TaxRepositoryFactory.Create("Test"));
+            var isStateNameValid = manager.ValidateStateName(stateName);
 
-            var getOnePair = StateList.FirstOrDefault(s => s.StateAbbreviation == stateName || s.State == stateName);
+            Assert.IsTrue(isStateNameValid);
 
-            getOnePair.StateAbbreviation = stateAbbreviation;
-            getOnePair.State = stateName;
-            getOnePair.TaxRate = taxRate;
+        }
 
-            Assert.AreEqual(stateAbbreviation, getOnePair.StateAbbreviation);
-            Assert.AreEqual(stateName, getOnePair.State);
-            Assert.AreEqual(taxRate, getOnePair.TaxRate);
+        [TestCase("Minnesota")]
+        [TestCase("MN")]
+        [TestCase("Lindsey")]
+        [TestCase("55")]
+        [TestCase("")]
+        public void ValidateInValidStateNamesTest(string stateName)
+        {
+            SystemManager manager = new SystemManager(OrderRepositoryFactory.Create("Test"), ProductRepositoryFactory.Create("Test"), TaxRepositoryFactory.Create("Test"));
+            var isStateNameValid = manager.ValidateStateName(stateName);
+
+            Assert.IsFalse(isStateNameValid);
 
         }
 
 
         [TestCase("OH","Ohio",6.25)]
+        [TestCase("MI", "Michigan", 5.75)]
+        [TestCase("IN", "Indiana", 6.00)]
+        [TestCase("PA", "Pennsylvania", 6.75)]
         public void StateNamePairsTest(string stateAbbreviation, string stateName, decimal taxRate)
         {
             SystemManager manager = new SystemManager(OrderRepositoryFactory.Create("Test"), ProductRepositoryFactory.Create("Test"), TaxRepositoryFactory.Create("Test"));
-            var statePairInfo = manager.GetStateNamePairs("Ohio");
-            
-            Assert.AreEqual(statePairInfo.StateAbbreviation, stateAbbreviation);
-            Assert.AreEqual(statePairInfo.State, stateName);
-            Assert.AreEqual(statePairInfo.TaxRate, taxRate);
+            var stateNamePairInfo = manager.GetStateNamePairs(stateName);
+            var stateAbbreviationPairInfo = manager.GetStateNamePairs(stateAbbreviation);
+
+            Assert.IsNotNull(stateNamePairInfo);
+            Assert.IsNotNull(stateAbbreviationPairInfo);
+
+            Assert.AreEqual(stateAbbreviation, stateNamePairInfo.StateAbbreviation);
+            Assert.AreEqual(stateName, stateNamePairInfo.State);
+            Assert.AreEqual(taxRate, stateNamePairInfo.TaxRate);
+
+            Assert.AreEqual(stateAbbreviation, stateAbbreviationPairInfo.StateAbbreviation);
+            Assert.AreEqual(stateName, stateAbbreviationPairInfo.State);
+            Assert.AreEqual(taxRate, stateAbbreviationPairInfo.TaxRate);
         }
     }
 }

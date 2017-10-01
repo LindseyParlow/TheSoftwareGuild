@@ -1,0 +1,3 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1;Binzer is Awesome, Inc.;PA;6.75;Laminate;250;1.75;2.10;437.50;525.00;64.968750;1027.468750
+2;Jennie loves Halloween;IN;6.00;Tile;100;3.50;4.15;350.00;415.00;45.9000;810.9000

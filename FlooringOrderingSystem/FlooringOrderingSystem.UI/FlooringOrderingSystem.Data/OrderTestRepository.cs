@@ -11,59 +11,69 @@ namespace FlooringOrderingSystem.Data
 {
     public class OrderTestRepository : IOrderRepository
     {
-        private static List<MockOrderFile> MockFiles = new List<MockOrderFile>()
+        private List<MockOrderFile> MockFiles;
+
+        public OrderTestRepository()
         {
-            new MockOrderFile()
+            LoadMockFiles();
+        }
+
+        private void LoadMockFiles()
+        {
+            MockFiles = new List<MockOrderFile>()
             {
-                fileName = "Orders_06012013",
-                Orders = new List<Order>()
+                new MockOrderFile()
                 {
-                    new Order
+                    fileName = "Orders_06012013",
+                    Orders = new List<Order>()
                     {
-                        OrderNumber = 1,
-                        CustomerName = "Wise",
-                        State = "OH",
-                        TaxRate = 6.25M,
-                        ProductType = "Wood",
-                        Area = 100.00M,
-                        CostPerSquareFoot = 5.15M,
-                        LaborCostPerSquareFoot = 4.75M,
-                        OrderDate = new DateTime(2013, 06, 01)
+                        new Order
+                        {
+                            OrderNumber = 1,
+                            CustomerName = "Wise",
+                            State = "OH",
+                            TaxRate = 6.25M,
+                            ProductType = "Wood",
+                            Area = 100.00M,
+                            CostPerSquareFoot = 5.15M,
+                            LaborCostPerSquareFoot = 4.75M,
+                            OrderDate = new DateTime(2013, 06, 01)
+                        }
+                    }
+                },
+                new MockOrderFile()
+                {
+                    fileName = "Orders_11112017",
+                    Orders = new List<Order>()
+                    {
+                        new Order
+                        {
+                            OrderNumber = 1,
+                            CustomerName = "Parlow",
+                            State = "PA",
+                            TaxRate = 6.75M,
+                            ProductType = "Tile",
+                            Area = 300.00M,
+                            CostPerSquareFoot = 3.50M,
+                            LaborCostPerSquareFoot = 4.15M,
+                            OrderDate = new DateTime(2017, 11, 11)
+                        },
+                        new Order
+                        {
+                            OrderNumber = 2,
+                            CustomerName = "Angell",
+                            State = "IN",
+                            TaxRate = 6.00M,
+                            ProductType = "Carpet",
+                            Area = 200.00M,
+                            CostPerSquareFoot = 2.25M,
+                            LaborCostPerSquareFoot = 2.10M,
+                            OrderDate = new DateTime(2017, 11, 11)
+                        }
                     }
                 }
-            },
-            new MockOrderFile()
-            {
-                fileName = "Orders_11112017",
-                Orders = new List<Order>()
-                {
-                    new Order
-                    {
-                        OrderNumber = 1,
-                        CustomerName = "Parlow",
-                        State = "PA",
-                        TaxRate = 6.75M,
-                        ProductType = "Tile",
-                        Area = 300.00M,
-                        CostPerSquareFoot = 3.50M,
-                        LaborCostPerSquareFoot = 4.15M,
-                        OrderDate = new DateTime(2017, 11, 11)
-                    },
-                    new Order
-                    {
-                        OrderNumber = 2,
-                        CustomerName = "Angell",
-                        State = "IN",
-                        TaxRate = 6.00M,
-                        ProductType = "Carpet",
-                        Area = 200.00M,
-                        CostPerSquareFoot = 2.25M,
-                        LaborCostPerSquareFoot = 2.10M,
-                        OrderDate = new DateTime(2017, 11, 11)
-                    }
-                }
-            }
-        };
+            };
+        }
         
         private static Order _order = new Order
         {
@@ -132,7 +142,7 @@ namespace FlooringOrderingSystem.Data
             }
 
             MockFile.Orders.Add(order);
-            
+            MockFiles.Add(MockFile);
         }
     }
 }

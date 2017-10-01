@@ -11,7 +11,12 @@ namespace FlooringOrderingSystem.Data
 {
     public class OrderProdRepository : IOrderRepository
     {
-        private static string orderDirectoryPath = @"C:\Repos\bitbucket\dotnet-lindsey-parlow\FlooringOrderingSystem\ProdOrderFiles";
+        private static string orderDirectoryPath = string.Empty;
+
+        public OrderProdRepository(string prodFilesDirectoryPath)
+        {
+            orderDirectoryPath = prodFilesDirectoryPath;
+        }
 
         private void WriteOrders(string filePath, List<Order> ordersList)
         {

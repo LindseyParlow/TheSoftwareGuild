@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1;Lindsey, Inc.;PA;6.75;Laminate;175;1.75;2.1;306.25;367.5;45.478125;719.228125

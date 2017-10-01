@@ -15,12 +15,14 @@ namespace FlooringOrderingSystem.BLL
         {
             string mode = ConfigurationManager.AppSettings["Mode"].ToString();
 
+            string prodFilesDirectory = ConfigurationManager.AppSettings["ProdFilesDirectory"].ToString();
+
             switch (mode)
             {
                 case "Test":
                     return new OrderTestRepository();
                 case "Prod":
-                    return new OrderProdRepository();
+                    return new OrderProdRepository(prodFilesDirectory);
                 default:
                     throw new Exception("Mode value in app config is not valid.");
             }
@@ -28,12 +30,14 @@ namespace FlooringOrderingSystem.BLL
 
         public static IOrderRepository Create(string mode)
         {
+            string prodFilesDirectory = ConfigurationManager.AppSettings["ProdFilesDirectory"].ToString();
+
             switch (mode)
             {
                 case "Test":
                     return new OrderTestRepository();
                 case "Prod":
-                    return new OrderProdRepository();
+                    return new OrderProdRepository(prodFilesDirectory);
                 default:
                     throw new Exception("Must choose either Test or Prod.");
             }

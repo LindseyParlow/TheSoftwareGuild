@@ -1,0 +1,2 @@
+OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total
+1;FunkyTown, Inc.;OH;6.25;Wood;400;5.15;4.75;2060.00;1900.00;247.500000;4207.500000

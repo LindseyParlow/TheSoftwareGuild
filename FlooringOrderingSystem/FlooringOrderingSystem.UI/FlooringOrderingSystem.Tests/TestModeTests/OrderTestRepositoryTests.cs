@@ -14,11 +14,6 @@ namespace FlooringOrderingSystem.Tests.TestModeTests
     [TestFixture]
     public class OrderTestRepositoryTests
     {
-        //[SetUp]
-        //public void OnTestInit()
-        //{
-         
-        //}
 
         [TestCase(1,"Wise","OH",6.25,"Wood",100,5.15,4.75,"6/1/13")]
         public void LoadOrdersTest(int orderNumber, string customerName, string stateAbbreviation, decimal taxRate, string productType, decimal area, decimal costPerSquareFoot, decimal laborCostPerSquareFoot, string date)
@@ -42,7 +37,7 @@ namespace FlooringOrderingSystem.Tests.TestModeTests
 
 
         
-        [TestCase(1, "Johnson", "MI", 5.75, "Tile", 100, 5.15, 4.75, "6/1/13")]
+        [TestCase(1, "Johnson", "MI", 5.75, "Tile", 110, 5.15, 4.75, "6/1/13")]
         public void UpdateOrderTest(int orderNumber, string customerName, string stateAbbreviation, decimal taxRate, string productType, decimal area, decimal costPerSquareFoot, decimal laborCostPerSquareFoot, string date)
         {
             SystemManager manager = new SystemManager(OrderRepositoryFactory.Create("Test"), ProductRepositoryFactory.Create("Test"), TaxRepositoryFactory.Create("Test"));
@@ -101,36 +96,40 @@ namespace FlooringOrderingSystem.Tests.TestModeTests
         }
 
         
-        [TestCase(2, "Johnson", "OH", 6.25, "Wood", 200, 5.15, 4.75)]
-        public void CreateOrderTest(int orderNumber, string customerName, string stateAbbreviation, decimal taxRate, string productType, decimal area, decimal costPerSquareFoot, decimal laborCostPerSquareFoot)
+        [TestCase(1, "Parlow", "IN", 6.00, "Carpet", 150, 2.25, 2.10, "10/02/17")]
+        public void CreateOrderTest(int orderNumber, string customerName, string stateAbbreviation, decimal taxRate, string productType, decimal area, decimal costPerSquareFoot, decimal laborCostPerSquareFoot, string date)
         {
-            Order newOrder = new Order()
+            SystemManager manager = new SystemManager(OrderRepositoryFactory.Create("Test"), ProductRepositoryFactory.Create("Test"), TaxRepositoryFactory.Create("Test"));
+
+            Order order = new Order()
             {
-                OrderNumber = 2,
-                CustomerName = "Johnson",
-                State = "OH",
-                TaxRate = 6.25M,
-                ProductType = "Wood",
-                Area = 200.00M,
-                CostPerSquareFoot = 5.15M,
-                LaborCostPerSquareFoot = 4.75M,
-                OrderDate = new DateTime(2013, 06, 01)
+                OrderNumber = orderNumber,
+                CustomerName = customerName,
+                State = stateAbbreviation,
+                TaxRate = taxRate,
+                ProductType = productType,
+                Area = area,
+                CostPerSquareFoot = costPerSquareFoot,
+                LaborCostPerSquareFoot = laborCostPerSquareFoot,
+                OrderDate = DateTime.Parse(date)
             };
 
-            SystemManager manager = new SystemManager(OrderRepositoryFactory.Create("Test"), ProductRepositoryFactory.Create("Test"), TaxRepositoryFactory.Create("Test"));
-            manager.GetCreateOrder(newOrder);
-            
-            Assert.IsNotNull(newOrder);
-            
-            Assert.AreEqual(newOrder.OrderNumber, orderNumber);
-            Assert.AreEqual(newOrder.CustomerName, customerName);
-            Assert.AreEqual(newOrder.State, stateAbbreviation);
-            Assert.AreEqual(newOrder.TaxRate, taxRate);
-            Assert.AreEqual(newOrder.ProductType, productType);
-            Assert.AreEqual(newOrder.Area, area);
-            Assert.AreEqual(newOrder.CostPerSquareFoot, costPerSquareFoot);
-            Assert.AreEqual(newOrder.LaborCostPerSquareFoot, laborCostPerSquareFoot);
+            Order oldOrder = manager.GetSpecificOrder(order.OrderDate, order.OrderNumber);
+            Assert.IsNull(oldOrder);
 
+            manager.GetCreateOrder(order);
+            Order result = manager.GetSpecificOrder(order.OrderDate, order.OrderNumber);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(orderNumber, order.OrderNumber);
+            Assert.AreEqual(customerName, order.CustomerName);
+            Assert.AreEqual(stateAbbreviation, order.State);
+            Assert.AreEqual(taxRate, order.TaxRate);
+            Assert.AreEqual(productType, order.ProductType);
+            Assert.AreEqual(area, order.Area);
+            Assert.AreEqual(costPerSquareFoot, order.CostPerSquareFoot);
+            Assert.AreEqual(laborCostPerSquareFoot, order.LaborCostPerSquareFoot);
+            Assert.AreEqual(DateTime.Parse(date), order.OrderDate);
         }
     }
 }
