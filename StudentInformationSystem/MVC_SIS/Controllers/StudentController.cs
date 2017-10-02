@@ -49,29 +49,29 @@ namespace Exercises.Controllers
             return RedirectToAction("List");
         }
 
-        [HttpGet]
-        public ActionResult Edit()
-        {
-            var viewModel = new StudentVM();
-            viewModel.SetCourseItems(CourseRepository.GetAll());
-            viewModel.SetMajorItems(MajorRepository.GetAll());
-            return View(viewModel);
-        }
+        //[HttpGet]
+        //public ActionResult Edit()
+        //{
+        //    var viewModel = new StudentVM();
+        //    viewModel.SetCourseItems(CourseRepository.GetAll());
+        //    viewModel.SetMajorItems(MajorRepository.GetAll());
+        //    return View(viewModel);
+        //}
 
-        [HttpPost]
-        public ActionResult Edit(StudentVM studentVM)
-        {
-            studentVM.Student.Courses = new List<Course>();
+        //[HttpPost]
+        //public ActionResult Edit(StudentVM studentVM)
+        //{
+        //    studentVM.Student.Courses = new List<Course>();
 
-            foreach (var id in studentVM.SelectedCourseIds)
-                studentVM.Student.Courses.Add(CourseRepository.Get(id));
+        //    foreach (var id in studentVM.SelectedCourseIds)
+        //        studentVM.Student.Courses.Add(CourseRepository.Get(id));
 
-            studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
+        //    studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
 
-            StudentRepository.Edit(studentVM.Student);
+        //    StudentRepository.Edit(studentVM.Student);
 
-            return RedirectToAction("List");
-        }
+        //    return RedirectToAction("List");
+        //}
 
         
 

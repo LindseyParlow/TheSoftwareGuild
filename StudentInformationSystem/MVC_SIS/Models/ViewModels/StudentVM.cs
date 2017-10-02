@@ -15,6 +15,7 @@ namespace Exercises.Models.ViewModels
         public List<SelectListItem> MajorItems { get; set; }
         public List<SelectListItem> StateItems { get; set; }
         public List<int> SelectedCourseIds { get; set; }
+        //public bool IsChecked { get; set; }
 
         public StudentVM()
         {
