@@ -127,7 +127,10 @@ namespace Exercises.Controllers
             viewModel.SetCourseItems(CourseRepository.GetAll());
             viewModel.SetMajorItems(MajorRepository.GetAll());
 
-            viewModel.SelectedCourseIds = viewModel.Student.Courses.Select(c => c.CourseId).ToList();
+            if (viewModel.Student.Courses != null)
+            {
+                viewModel.SelectedCourseIds = viewModel.Student.Courses.Select(c => c.CourseId).ToList();
+            }
 
 
             return View(viewModel);
