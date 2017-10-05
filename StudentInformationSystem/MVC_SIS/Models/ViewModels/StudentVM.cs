@@ -15,7 +15,6 @@ namespace Exercises.Models.ViewModels
         public List<SelectListItem> MajorItems { get; set; }
         public List<SelectListItem> StateItems { get; set; }
         public List<int> SelectedCourseIds { get; set; }
-        //public bool IsChecked { get; set; }
 
         public StudentVM()
         {
@@ -25,6 +24,7 @@ namespace Exercises.Models.ViewModels
             SelectedCourseIds = new List<int>();
             Student = new Student();
         }
+        
 
         public void SetCourseItems(IEnumerable<Course> courses)
         {
@@ -33,7 +33,7 @@ namespace Exercises.Models.ViewModels
                 CourseItems.Add(new SelectListItem()
                 {
                     Value = course.CourseId.ToString(),
-                    Text = course.CourseName
+                    Text = course.CourseName,
                 });
             }
         }

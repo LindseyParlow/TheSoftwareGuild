@@ -78,9 +78,10 @@ namespace Exercises.Models.Repositories
             return _students.FirstOrDefault(s => s.StudentId == studentId);
         }
 
-        public static void Add(Student state)
+        public static void Add(Student student)
         {
-            _students.Add(state);
+            _students.Add(student);
+            student.StudentId = _students.Max(s => s.StudentId) + 1;
         }
 
         public static void Edit(Student student)
