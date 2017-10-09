@@ -1,0 +1,121 @@
+#projectTitle {
+    text-align: center;
+    color: black;
+    background-color: white;
+    border: 3px solid black;
+}
+
+#vendingChoices {
+    text-align: center;
+}
+
+.itemToGrab {
+    border: 2px solid black;
+    margin: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: white;
+}
+
+#totalInDiv {
+    text-align: center;
+    margin: 15px;
+}
+
+#totalIn {
+    margin: 2px;
+    width: 200px;
+    text-align: center;
+}
+
+#totalInLabel {
+    font-weight: bold;
+    background-color: white;
+    border: 1px solid black;
+    width: 100px;
+}
+
+#messagesLabel {
+    font-weight: bold;
+    background-color: white;
+    border: 1px solid black;
+    width: 100px;
+}
+
+#itemLabel {
+    font-weight: bold;
+    background-color: white;
+    border: 1px solid black;
+    width: 40px;
+}
+
+#changeLabel {
+    font-weight: bold;
+    background-color: white;
+    border: 1px solid black;
+    width: 100px;
+}
+
+#addDollar {
+    margin: 2px;
+    width: 100px;
+}  
+
+#addQuarter {
+    margin: 2px;
+    width: 100px;
+}  
+
+#addDime {
+    margin: 2px;
+    width: 100px;
+}  
+
+#addNickel {
+    margin: 2px;
+    width: 100px;
+}  
+
+#messagesDiv { 
+    text-align: center;
+    margin: 15px;
+}    
+
+#messages {
+    margin: 2px;
+    width: 200px;
+    text-align: center;
+}   
+
+#desiredItem {
+    margin: 2px;
+    width: 155px;
+    text-indent: 55px;
+}
+
+#makePurchase {
+    margin: 2px;
+    width: 200px;
+}
+ 
+#changeDiv {
+    text-align: center;
+    margin: 15px;
+}
+
+#change {
+    margin: 2px;
+    width: 200px;
+    text-align: center;
+}
+    
+#changeReturn {
+    margin: 2px;
+    width: 200px;
+}
+
+body {
+    background-image: url("http://media.istockphoto.com/photos/empty-white-shelves-of-standard-office-vending-machine-picture-id453037379?k=6&m=453037379&s=612x612&w=0&h=PsFsATanfbKANo2hBWCiDM8AlatJucoKtLnqfBJMCPU=");
+    background-size: 100%;
+    background-position: center;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vending Machine</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/home.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="projectTitle">Vending Machine</h1>
+        <hr/>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row" id="vendingChoices">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12" id="totalInDiv">
+                            <label id="totalInLabel">Total $ In: </label>
+                            <br/>
+                            <input id="totalIn"  value="0" readonly/>
+                            <button type="button" class="btn btn-primary" id="addDollar" value="1.00">Add Dollar</button>
+                            <button type="button" class="btn btn-primary" id="addQuarter" value=".25">Add Quarter</button>
+                            <button type="button" class="btn btn-primary" id="addDime" value=".10">Add Dime</button>
+                            <button type="button" class="btn btn-primary" id="addNickel" value=".05">Add Nickel</button>
+                            <hr/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12" id="messagesDiv">
+                            <label id="messagesLabel">Messages:</label>
+                            <br/>
+                            <input id="messages" readonly />
+
+                            <br/> 
+                            <label id="itemLabel">Item:</label>
+                            <input id="desiredItem" readonly/>
+                            <button type="button" class="btn btn-primary" id="makePurchase">Make Purchase</button>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12" id="changeDiv">
+                            <label id="changeLabel">Change:</label>
+                            <br/>
+                            <input type="text" id="change" readonly />
+                            <button type="button" class="btn btn-primary" id="changeReturn">Change Return</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/home.js"></script>
+</body>
+
+</html>
