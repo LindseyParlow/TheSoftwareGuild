@@ -74,8 +74,14 @@ function puchaseSelectedItem() {
                 $("#change").val(itemVendChange);
             },
             error: function (xhr) {
-                var error = xhr.responseJSON.message;
-
+                if(id<1){
+                    var error = "Please select an item!";
+                }
+                else{
+                    var error = xhr.responseJSON.message;
+                    
+                }
+                
                 $("#messages").val(error)
             }
         });
