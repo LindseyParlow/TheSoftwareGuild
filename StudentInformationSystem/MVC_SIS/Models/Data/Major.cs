@@ -10,6 +10,7 @@ namespace Exercises.Models.Data
     {
         [Required(ErrorMessage ="Must choose a major!")]
         public int MajorId { get; set; }
+        [Required(ErrorMessage ="Please enter a major!")]
         public string MajorName { get; set; }
     }
 }
