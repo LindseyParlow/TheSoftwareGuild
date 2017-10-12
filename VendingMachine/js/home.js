@@ -66,12 +66,16 @@ function puchaseSelectedItem() {
             type: "GET",
             url: "http://localhost:8080/money/" + amount + "/item/" + id,
             success: function(change) {;
+                
                 var itemVendResponse = "Thank you!!!" 
                 
                 var itemVendChange = change.quarters + " quarters, " + change.dimes + " dimes, " + change.nickels + " nickels";
                 
                 $("#messages").val(itemVendResponse);
                 $("#change").val(itemVendChange);
+                $("#totalIn").val("0");
+                $("#vendingChoices").empty();
+                loadItems();
             },
             error: function (xhr) {
                 if(id<1){

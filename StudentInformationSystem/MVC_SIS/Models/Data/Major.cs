@@ -8,9 +8,7 @@ namespace Exercises.Models.Data
 {
     public class Major
     {
-        [Required(ErrorMessage ="Must choose a major!")]
         public int MajorId { get; set; }
-        [Required(ErrorMessage ="Please enter a major!")]
         public string MajorName { get; set; }
     }
 }

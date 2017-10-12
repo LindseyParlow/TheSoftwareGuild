@@ -27,14 +27,15 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddMajor(Major major)
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrEmpty(major.MajorName))
             {
-                MajorRepository.Add(major.MajorName);
-                return RedirectToAction("Majors");
+                ModelState.AddModelError("MajorName", "Please enter a major");
+                return View(new Major());
             }
             else
             {
-                return View(new Major());
+                MajorRepository.Add(major.MajorName);
+                return RedirectToAction("Majors");
             }
         }
 
@@ -82,15 +83,27 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddState(State state)
         {
-            if (ModelState.IsValid)
+            if(string.IsNullOrEmpty(state.StateName) && string.IsNullOrEmpty(state.StateAbbreviation))
             {
-                StateRepository.Add(state);
-                return RedirectToAction("States");
+                ModelState.AddModelError("StateName", "Please enter a state");
+                ModelState.AddModelError("StateAbbreviation", "Please enter a state abbreviation");
+                return View(new State());
+            }
+            else if (string.IsNullOrEmpty(state.StateName))
+            {
+                ModelState.AddModelError("StateName", "Please enter a state");
+                return View(new State());
+            }
+            else if (string.IsNullOrEmpty(state.StateAbbreviation))
+            {
+                ModelState.AddModelError("StateAbbreviation", "Please enter a state abbreviation");
+                return View(new State());
             }
             else
             {
-                return View(new State());
-            }    
+                StateRepository.Add(state);
+                return RedirectToAction("States");
+            }  
         }
 
 
@@ -126,17 +139,16 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddCourse(Course course)
         {
-            if (ModelState.IsValid)
+            if(string.IsNullOrEmpty(course.CourseName))
+            {
+                ModelState.AddModelError("CourseName", "Please enter a course");
+                return View(new Course());
+            }
+            else
             {
                 CourseRepository.Add(course.CourseName);
                 return RedirectToAction("Courses");
             }
-            else
-            {
-                return View(new Course());
-            }   
-
-            
         }
 
         [HttpGet]

@@ -61,8 +61,6 @@ namespace Exercises.Controllers
 
             
         }
-        
-
 
         [HttpGet]
         public ActionResult Edit(int id)
