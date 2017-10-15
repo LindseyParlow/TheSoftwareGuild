@@ -73,7 +73,8 @@ function puchaseSelectedItem() {
                 
                 $("#messages").val(itemVendResponse);
                 $("#change").val(itemVendChange);
-                $("#totalIn").val("0");
+                $("#totalIn").val(0);
+                addMoneyToMachine();
                 $("#vendingChoices").empty();
                 loadItems();
             },
