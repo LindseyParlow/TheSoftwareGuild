@@ -3,7 +3,7 @@ $(document).ready(function () {
     addMoneyToMachine();
     selectItemFromMachine();
     puchaseSelectedItem();
-    returnChangeAndReload();
+    returnChangeAndReset();
 });
 
 function loadItems() {
@@ -93,9 +93,11 @@ function puchaseSelectedItem() {
     })
 }
 
-function returnChangeAndReload() {
+function returnChangeAndReset() {
     $("#changeReturn").on("click", function() {
-        location.reload(true);
+        $("#messages").val("");
+        $("#desiredItem").val("");
+        $("#change").val("");
     })
 }
 

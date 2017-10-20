@@ -28,22 +28,6 @@
 				<column name="BillingID" />
 			</index>
 		</table>
-		<table name="CustomerReservations" >
-			<column name="CustomerID" type="int" jt="4" />
-			<column name="ReservationID" type="int" jt="4" />
-			<index name="idx_CustomerReservationInformation" unique="UNIQUE" >
-				<column name="CustomerID" />
-			</index>
-			<index name="Pk_CustomerReservationInformation" unique="UNIQUE" >
-				<column name="ReservationID" />
-			</index>
-			<fk name="fk_customerreservationinformation" to_schema="HotelReservation" to_table="Customers" >
-				<fk_column name="CustomerID" pk="CustomerID" />
-			</fk>
-			<fk name="fk_customerreservationreservationinformation" to_schema="HotelReservation" to_table="Reservations" >
-				<fk_column name="ReservationID" pk="ReservationID" />
-			</fk>
-		</table>
 		<table name="Customers" >
 			<column name="CustomerID" type="int" jt="4" mandatory="y" autoincrement="y" />
 			<column name="FirstName" type="varchar" length="30" jt="12" mandatory="y" />
@@ -72,20 +56,14 @@
 		</table>
 		<table name="Details" >
 			<column name="DetailsID" type="int" jt="4" mandatory="y" autoincrement="y" />
-			<column name="RoomRateID" type="int" jt="4" />
 			<column name="BillingID" type="int" jt="4" />
+			<column name="Total" type="money" jt="3" mandatory="y" />
 			<index name="Pk_Details" unique="PRIMARY_KEY" >
 				<column name="DetailsID" />
-			</index>
-			<index name="idx_Details" unique="NORMAL" >
-				<column name="RoomRateID" />
 			</index>
 			<index name="idx_Details_0" unique="NORMAL" >
 				<column name="BillingID" />
 			</index>
-			<fk name="fk_details_roomrate" to_schema="HotelReservation" to_table="RoomRates" >
-				<fk_column name="RoomRateID" pk="RoomRateID" />
-			</fk>
 			<fk name="fk_details_billing" to_schema="HotelReservation" to_table="Billing" >
 				<fk_column name="BillingID" pk="BillingID" />
 			</fk>
@@ -133,17 +111,24 @@
 			<column name="EndDate" type="date" jt="91" mandatory="y" />
 			<column name="DiscountID" type="int" jt="4" />
 			<column name="BillingID" type="int" jt="4" />
+			<column name="CustomerID" type="int" jt="4" />
 			<index name="Pk_ReservationInformation" unique="PRIMARY_KEY" >
 				<column name="ReservationID" />
 			</index>
 			<index name="idx_Reservations" unique="NORMAL" >
 				<column name="BillingID" />
 			</index>
+			<index name="idx_Reservations_0" unique="NORMAL" >
+				<column name="CustomerID" />
+			</index>
 			<fk name="fk_reservationinformation" to_schema="HotelReservation" to_table="Discounts" >
 				<fk_column name="DiscountID" pk="DiscountID" />
 			</fk>
 			<fk name="fk_reservations_billing" to_schema="HotelReservation" to_table="Billing" >
 				<fk_column name="BillingID" pk="BillingID" />
+			</fk>
+			<fk name="fk_reservations_customers" to_schema="HotelReservation" to_table="Customers" >
+				<fk_column name="CustomerID" pk="CustomerID" />
 			</fk>
 		</table>
 		<table name="RoomAmenities" >
@@ -167,6 +152,7 @@
 			<column name="RoomTypeID" type="int" jt="4" mandatory="y" />
 			<column name="StartDate" type="date" jt="91" mandatory="y" />
 			<column name="EndDate" type="date" jt="91" mandatory="y" />
+			<column name="Price" type="money" jt="3" />
 			<index name="Pk_RoomRate_0" unique="PRIMARY_KEY" >
 				<column name="RoomRateID" />
 			</index>
@@ -200,23 +186,39 @@
 				<fk_column name="RoomTypeID" pk="RoomTypeID" />
 			</fk>
 		</table>
+		<table name="RoomsReservations" >
+			<column name="RoomID" type="int" jt="4" />
+			<column name="ReservationID" type="int" jt="4" />
+			<index name="idx_RoomsReservations" unique="NORMAL" >
+				<column name="RoomID" />
+			</index>
+			<index name="idx_RoomsReservations_0" unique="NORMAL" >
+				<column name="ReservationID" />
+			</index>
+			<fk name="fk_roomsreservations_rooms" to_schema="HotelReservation" to_table="Rooms" >
+				<fk_column name="RoomID" pk="RoomID" />
+			</fk>
+			<fk name="fk_roomsreservations" to_schema="HotelReservation" to_table="Reservations" >
+				<fk_column name="ReservationID" pk="ReservationID" />
+			</fk>
+		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout_3708603" show_relation="columns" >
 		<entity schema="HotelReservation" name="DetailAddOns" color="1f5182" x="555" y="495" />
-		<entity schema="HotelReservation" name="Details" color="1f5182" x="600" y="645" />
-		<entity schema="HotelReservation" name="RoomRates" color="1f5182" x="285" y="600" />
-		<entity schema="HotelReservation" name="ReservationGuests" color="1f5182" x="690" y="180" />
 		<entity schema="HotelReservation" name="RoomAmenities" color="1f5182" x="45" y="60" />
-		<entity schema="HotelReservation" name="Guests" color="1f5182" x="900" y="135" />
-		<entity schema="HotelReservation" name="Customers" color="1f5182" x="435" y="315" />
 		<entity schema="HotelReservation" name="Billing" color="1f5182" x="1005" y="615" />
-		<entity schema="HotelReservation" name="AddOns" color="1f5182" x="765" y="510" />
 		<entity schema="HotelReservation" name="Amenities" color="1f5182" x="60" y="195" />
 		<entity schema="HotelReservation" name="RoomTypes" color="1f5182" x="210" y="330" />
-		<entity schema="HotelReservation" name="Reservations" color="1f5182" x="945" y="330" />
 		<entity schema="HotelReservation" name="Rooms" color="1f5182" x="225" y="120" />
 		<entity schema="HotelReservation" name="Discounts" color="1f5182" x="1140" y="375" />
-		<entity schema="HotelReservation" name="CustomerReservations" color="1f5182" x="630" y="330" />
+		<entity schema="HotelReservation" name="Reservations" color="1f5182" x="945" y="330" />
+		<entity schema="HotelReservation" name="ReservationGuests" color="1f5182" x="1035" y="105" />
+		<entity schema="HotelReservation" name="Guests" color="1f5182" x="1170" y="210" />
+		<entity schema="HotelReservation" name="RoomsReservations" color="1f5182" x="615" y="150" />
+		<entity schema="HotelReservation" name="Details" color="1f5182" x="600" y="645" />
+		<entity schema="HotelReservation" name="AddOns" color="1f5182" x="765" y="495" />
+		<entity schema="HotelReservation" name="RoomRates" color="1f5182" x="210" y="480" />
+		<entity schema="HotelReservation" name="Customers" color="1f5182" x="720" y="300" />
 		<callout x="255" y="45" pointer="NO" >
 			<comment><![CDATA[This project is in offline mode.
 Design the schema and save the design to project file. Later create or upgrade the schema on any database.
