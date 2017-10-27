@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="CarDealership" id="Project_48e3603" template="Default" database="SqlServer" >
+	<schema name="CarDealership" schemaname="CarDealership" >
+		<table name="Addresses" >
+			<column name="AddressId" type="int" length="100" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Street1" type="varchar" length="50" jt="12" />
+			<column name="Street2" type="varchar" length="50" jt="12" />
+			<column name="City" type="varchar" length="50" jt="12" />
+			<column name="StateId" type="int" length="20" jt="4" />
+			<column name="ZipCode" type="varchar" length="20" jt="12" />
+			<index name="Pk_Addresses" unique="PRIMARY_KEY" >
+				<column name="AddressId" />
+			</index>
+			<index name="idx_Addresses" unique="NORMAL" >
+				<column name="StateId" />
+			</index>
+			<fk name="fk_addresses_states" to_schema="CarDealership" to_table="States" >
+				<fk_column name="StateId" pk="StateId" />
+			</fk>
+		</table>
+		<table name="CarMake" >
+			<column name="CarMakeId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="CakeMakeDescription" type="varchar" length="50" jt="12" />
+			<column name="UserId" type="int" jt="4" />
+			<column name="DateAdded" type="date" jt="91" />
+			<index name="Pk_CarMake" unique="PRIMARY_KEY" >
+				<column name="CarMakeId" />
+			</index>
+			<index name="idx_CarMake_0" unique="NORMAL" >
+				<column name="UserId" />
+			</index>
+			<fk name="fk_carmake_users" to_schema="CarDealership" to_table="Users" >
+				<fk_column name="UserId" pk="UserId" />
+			</fk>
+		</table>
+		<table name="CarModels" >
+			<column name="CarModelId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="CarModelDescription" type="varchar" length="50" jt="12" />
+			<column name="UserId" type="int" jt="4" />
+			<column name="DateAdded" type="date" jt="91" />
+			<column name="CarMakeId" type="int" jt="4" />
+			<index name="Pk_CarModels" unique="PRIMARY_KEY" >
+				<column name="CarModelId" />
+			</index>
+			<index name="idx_CarModels" unique="NORMAL" >
+				<column name="UserId" />
+			</index>
+			<index name="idx_CarModels_0" unique="NORMAL" >
+				<column name="CarMakeId" />
+			</index>
+			<fk name="fk_carmodels_users" to_schema="CarDealership" to_table="Users" >
+				<fk_column name="UserId" pk="UserId" />
+			</fk>
+			<fk name="fk_carmodels_carmake" to_schema="CarDealership" to_table="CarMake" >
+				<fk_column name="CarMakeId" pk="CarMakeId" />
+			</fk>
+		</table>
+		<table name="CarTypes" >
+			<column name="CarTypeId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="CarTypeDescription" type="varchar" length="30" jt="12" />
+			<index name="Pk_CarTypes" unique="PRIMARY_KEY" >
+				<column name="CarTypeId" />
+			</index>
+		</table>
+		<table name="ContactUsQueries" >
+			<column name="ContactUsQueryId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="FirstName" type="varchar" length="20" jt="12" />
+			<column name="LastName" type="varchar" length="20" jt="12" />
+			<column name="Email" type="nvarchar" length="50" jt="12" />
+			<column name="PhoneId" type="int" jt="4" />
+			<column name="Message" type="varchar(max)" jt="12" />
+			<column name="DateQueryToDealership" type="date" jt="91" />
+			<column name="DateQueryToCustomer" type="date" jt="91" />
+			<column name="CarId" type="int" jt="4" />
+			<index name="Pk_Contacts" unique="PRIMARY_KEY" >
+				<column name="ContactUsQueryId" />
+			</index>
+			<index name="idx_ContactUsResponses" unique="NORMAL" >
+				<column name="PhoneId" />
+			</index>
+			<index name="idx_ContactUsResponses_0" unique="NORMAL" >
+				<column name="CarId" />
+			</index>
+			<fk name="fk_contactusresponses" to_schema="CarDealership" to_table="Phones" >
+				<fk_column name="PhoneId" pk="PhoneId" />
+			</fk>
+			<fk name="fk_contactusresponses_cars" to_schema="CarDealership" to_table="Vehicles" >
+				<fk_column name="CarId" pk="VehicleId" />
+			</fk>
+		</table>
+		<table name="Customers" >
+			<column name="CustomerId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="FirstName" type="varchar" length="30" jt="12" />
+			<column name="LastName" type="varchar" length="30" jt="12" />
+			<column name="Email" type="nvarchar" length="50" jt="12" />
+			<column name="PhoneId" type="int" length="30" jt="4" />
+			<column name="CustomerMessage" type="varchar(max)" jt="12" />
+			<column name="AddressId" type="int" length="100" jt="4" />
+			<index name="Pk_Customers" unique="PRIMARY_KEY" >
+				<column name="CustomerId" />
+			</index>
+			<index name="idx_Customers" unique="NORMAL" >
+				<column name="PhoneId" />
+			</index>
+			<index name="idx_Customers_0" unique="NORMAL" >
+				<column name="AddressId" />
+			</index>
+			<fk name="fk_customers_phonenumbers" to_schema="CarDealership" to_table="Phones" >
+				<fk_column name="PhoneId" pk="PhoneId" />
+			</fk>
+			<fk name="fk_customers_addresses" to_schema="CarDealership" to_table="Addresses" >
+				<fk_column name="AddressId" pk="AddressId" />
+			</fk>
+		</table>
+		<table name="Dealership" >
+			<column name="DealershipId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="DealershipName" type="varchar" length="50" jt="12" />
+			<column name="AddressId" type="int" length="100" jt="4" />
+			<index name="Pk_Dealership" unique="PRIMARY_KEY" >
+				<column name="DealershipId" />
+			</index>
+			<index name="idx_Dealership" unique="NORMAL" >
+				<column name="AddressId" />
+			</index>
+			<fk name="fk_dealership_addresses" to_schema="CarDealership" to_table="Addresses" >
+				<fk_column name="AddressId" pk="AddressId" />
+			</fk>
+		</table>
+		<table name="DealershipPhoneNumbers" >
+			<column name="DealershipId" type="int" jt="4" />
+			<column name="PhoneId" type="int" jt="4" />
+			<index name="idx_DealershipPhoneNumbers" unique="NORMAL" >
+				<column name="DealershipId" />
+			</index>
+			<index name="idx_DealershipPhoneNumbers_0" unique="NORMAL" >
+				<column name="PhoneId" />
+			</index>
+			<fk name="fk_dealershipphonenumbers" to_schema="CarDealership" to_table="Dealership" >
+				<fk_column name="DealershipId" pk="DealershipId" />
+			</fk>
+			<fk name="fk_dealershipphonephonenumbers" to_schema="CarDealership" to_table="Phones" >
+				<fk_column name="PhoneId" pk="PhoneId" />
+			</fk>
+		</table>
+		<table name="Phones" >
+			<column name="PhoneId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="PhoneType" type="varchar" length="20" jt="12" />
+			<column name="PhoneNumber" type="varchar" length="30" jt="12" />
+			<index name="Pk_PhoneNumbers" unique="PRIMARY_KEY" >
+				<column name="PhoneId" />
+			</index>
+		</table>
+		<table name="PurchaseStatus" >
+			<column name="PurchaseStatusId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Description" type="varchar" length="30" jt="12" />
+			<index name="Pk_PurchaseStatus" unique="PRIMARY_KEY" >
+				<column name="PurchaseStatusId" />
+			</index>
+		</table>
+		<table name="PurchaseType" >
+			<column name="PurchaseTypeId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="PurchaseTypeDescription" type="varchar" length="30" jt="12" />
+			<index name="Pk_PurchaseType" unique="PRIMARY_KEY" >
+				<column name="PurchaseTypeId" />
+			</index>
+		</table>
+		<table name="Purchases" >
+			<column name="PurchasesId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="PurchasePrice" type="decimal" jt="3" />
+			<column name="PurchaseTypeId" type="int" jt="4" />
+			<column name="UserId" type="int" jt="4" />
+			<column name="CustomerId" type="int" jt="4" />
+			<column name="VehicleId" type="int" jt="4" />
+			<column name="DatePurchased" type="date" jt="91" />
+			<index name="Pk_Sales" unique="PRIMARY_KEY" >
+				<column name="PurchasesId" />
+			</index>
+			<index name="idx_Sales" unique="NORMAL" >
+				<column name="PurchaseTypeId" />
+			</index>
+			<index name="idx_Sales_0" unique="NORMAL" >
+				<column name="UserId" />
+			</index>
+			<index name="idx_Sales_1" unique="NORMAL" >
+				<column name="VehicleId" />
+			</index>
+			<index name="idx_Sales_2" unique="NORMAL" >
+				<column name="CustomerId" />
+			</index>
+			<fk name="fk_sales_purchasetype" to_schema="CarDealership" to_table="PurchaseType" >
+				<fk_column name="PurchaseTypeId" pk="PurchaseTypeId" />
+			</fk>
+			<fk name="fk_sales_users" to_schema="CarDealership" to_table="Users" >
+				<fk_column name="UserId" pk="UserId" />
+			</fk>
+			<fk name="fk_sales_cars" to_schema="CarDealership" to_table="Vehicles" >
+				<fk_column name="VehicleId" pk="VehicleId" />
+			</fk>
+			<fk name="fk_sales_customers" to_schema="CarDealership" to_table="Customers" >
+				<fk_column name="CustomerId" pk="CustomerId" />
+			</fk>
+		</table>
+		<table name="Specials" >
+			<column name="SpecialId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="SpecialTitle" type="varchar" length="30" jt="12" />
+			<column name="SpecialDescription" type="varchar(max)" jt="12" />
+			<column name="StartDate" type="date" jt="91" />
+			<column name="EndDate" type="date" jt="91" />
+			<column name="Value" type="decimal" jt="3" />
+			<index name="Pk_Specials" unique="PRIMARY_KEY" >
+				<column name="SpecialId" />
+			</index>
+		</table>
+		<table name="States" >
+			<column name="StateId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="StateName" type="varchar" length="20" jt="12" />
+			<index name="Pk_States" unique="PRIMARY_KEY" >
+				<column name="StateId" />
+			</index>
+		</table>
+		<table name="Transmissions" >
+			<column name="TransmissionId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="TransmissionType" type="varchar" length="30" jt="12" />
+			<index name="Pk_TransmissionTypes" unique="PRIMARY_KEY" >
+				<column name="TransmissionId" />
+			</index>
+		</table>
+		<table name="Users" >
+			<column name="UserId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="LastName" type="varchar" length="30" jt="12" />
+			<column name="FirstName" type="varchar" length="30" jt="12" />
+			<column name="Email" type="nvarchar" length="50" jt="12" />
+			<column name="Role" type="varchar" length="20" jt="12" />
+			<column name="Password" type="nvarchar" length="30" jt="12" />
+			<index name="Pk_Users" unique="PRIMARY_KEY" >
+				<column name="UserId" />
+			</index>
+		</table>
+		<table name="VehicleBody" >
+			<column name="VehicleBodyId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="VehicleBodyDescription" type="varchar" length="50" jt="12" />
+			<index name="Pk_BodyStyles" unique="PRIMARY_KEY" >
+				<column name="VehicleBodyId" />
+			</index>
+		</table>
+		<table name="Vehicles" >
+			<column name="VehicleId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="VehicleTypeId" type="int" jt="4" />
+			<column name="VehicleModelId" type="int" jt="4" />
+			<column name="TransmissionTypeId" type="int" jt="4" />
+			<column name="SalePrice" type="decimal" jt="3" />
+			<column name="MSRPPrice" type="decimal" jt="3" />
+			<column name="VehicleBodyId" type="int" jt="4" />
+			<column name="Year" type="date" jt="91" />
+			<column name="Color" type="varchar" length="30" jt="12" />
+			<column name="Interior" type="varchar(max)" jt="12" />
+			<column name="VIN#" type="varchar" length="30" jt="12" />
+			<column name="Mileage" type="int" jt="4" />
+			<column name="Description" type="varchar(max)" jt="12" />
+			<column name="Image" type="varchar(max)" jt="12" />
+			<column name="SpecialId" type="int" jt="4" />
+			<column name="DateAdded" type="date" jt="91" />
+			<column name="PurchaseStatusId" type="int" jt="4" />
+			<column name="IsFeatured" type="bit" jt="-7" />
+			<index name="Pk_Cars" unique="PRIMARY_KEY" >
+				<column name="VehicleId" />
+			</index>
+			<index name="idx_Cars" unique="NORMAL" >
+				<column name="VehicleTypeId" />
+			</index>
+			<index name="idx_Cars_1" unique="NORMAL" >
+				<column name="VehicleBodyId" />
+			</index>
+			<index name="idx_Cars_2" unique="NORMAL" >
+				<column name="VehicleModelId" />
+			</index>
+			<index name="idx_Cars_3" unique="NORMAL" >
+				<column name="TransmissionTypeId" />
+			</index>
+			<index name="idx_Cars_4" unique="NORMAL" >
+				<column name="SalePrice" />
+			</index>
+			<index name="idx_Cars_5" unique="NORMAL" >
+				<column name="SpecialId" />
+			</index>
+			<index name="idx_Cars_0" unique="NORMAL" >
+				<column name="PurchaseStatusId" />
+			</index>
+			<fk name="fk_cars_cartypes" to_schema="CarDealership" to_table="CarTypes" >
+				<fk_column name="VehicleTypeId" pk="CarTypeId" />
+			</fk>
+			<fk name="fk_cars_bodystyles" to_schema="CarDealership" to_table="VehicleBody" >
+				<fk_column name="VehicleBodyId" pk="VehicleBodyId" />
+			</fk>
+			<fk name="fk_cars_transmissiontypes" to_schema="CarDealership" to_table="Transmissions" >
+				<fk_column name="TransmissionTypeId" pk="TransmissionId" />
+			</fk>
+			<fk name="fk_cars_specials" to_schema="CarDealership" to_table="Specials" >
+				<fk_column name="SpecialId" pk="SpecialId" />
+			</fk>
+			<fk name="fk_cars_purchasestatus" to_schema="CarDealership" to_table="PurchaseStatus" >
+				<fk_column name="PurchaseStatusId" pk="PurchaseStatusId" />
+			</fk>
+			<fk name="fk_cars_carmodels" to_schema="CarDealership" to_table="CarModels" >
+				<fk_column name="VehicleModelId" pk="CarModelId" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout_4099e68" show_relation="columns" >
+		<entity schema="CarDealership" name="CarTypes" color="1f5182" x="870" y="75" />
+		<entity schema="CarDealership" name="Addresses" color="1f5182" x="405" y="540" />
+		<entity schema="CarDealership" name="States" color="1f5182" x="285" y="645" />
+		<entity schema="CarDealership" name="PurchaseType" color="1f5182" x="645" y="780" />
+		<entity schema="CarDealership" name="DealershipPhoneNumbers" color="1f5182" x="240" y="390" />
+		<entity schema="CarDealership" name="Specials" color="1f5182" x="855" y="420" />
+		<entity schema="CarDealership" name="PurchaseStatus" color="1f5182" x="645" y="45" />
+		<entity schema="CarDealership" name="CarModels" color="1f5182" x="1305" y="150" />
+		<entity schema="CarDealership" name="Users" color="1f5182" x="900" y="600" />
+		<entity schema="CarDealership" name="VehicleBody" color="1f5182" x="885" y="270" />
+		<entity schema="CarDealership" name="ContactUsQueries" color="1f5182" x="405" y="150" />
+		<entity schema="CarDealership" name="Dealership" color="1f5182" x="450" y="345" />
+		<entity schema="CarDealership" name="Customers" color="1f5182" x="435" y="750" />
+		<entity schema="CarDealership" name="Phones" color="1f5182" x="45" y="375" />
+		<entity schema="CarDealership" name="Transmissions" color="1f5182" x="1050" y="270" />
+		<entity schema="CarDealership" name="Vehicles" color="1f5182" x="630" y="165" />
+		<entity schema="CarDealership" name="Purchases" color="1f5182" x="645" y="555" />
+		<entity schema="CarDealership" name="CarMake" color="1f5182" x="1200" y="660" />
+	</layout>
+</project>

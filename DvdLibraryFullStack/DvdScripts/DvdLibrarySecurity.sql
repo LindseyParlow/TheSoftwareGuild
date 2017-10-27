@@ -2,7 +2,7 @@ use master
 go
 
 if exists (select * from sys.server_principals WHERE name = N'DvdLibraryApp')
-drop user DvdLibraryApp
+drop login DvdLibraryApp
 go
 
 create login DvdLibraryApp with password='testing123'
@@ -16,6 +16,8 @@ drop user DvdApp
 go
 
 create user DvdApp for login DvdLibraryApp
+go
+
 grant execute on DbReset to DvdApp
 grant execute on DvdAddNew to DvdApp
 grant execute on DvdDelete to DvdApp

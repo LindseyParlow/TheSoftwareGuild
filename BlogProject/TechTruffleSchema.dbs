@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="TechTruffleSchema" id="Project_20f29f1" template="Default" database="SqlServer" >
+	<schema name="TechTruffleSchema" schemaname="TechTruffleSchema" >
+		<table name="BlogCategories" >
+			<column name="CategoryId" type="int" jt="4" />
+			<column name="CategoryType" type="int" jt="4" />
+			<index name="Pk_BlogCategories" unique="UNIQUE" >
+				<column name="CategoryId" />
+			</index>
+		</table>
+		<table name="BlogStatus" >
+			<column name="BlogStatusId" type="int" jt="4" />
+			<column name="BlogStatusDescription" type="uniqueidentifier" jt="1" />
+			<index name="Pk_BlogStatus" unique="UNIQUE" >
+				<column name="BlogStatusId" />
+			</index>
+		</table>
+		<table name="Blogs" >
+			<column name="BlogId" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Title" type="varchar(max)" length="100" jt="12" />
+			<column name="UserId" type="varchar(max)" jt="12" />
+			<column name="Description" type="varchar(max)" jt="12" />
+			<column name="DateStart" type="date" jt="91" />
+			<column name="DateEnd" type="date" jt="91" />
+			<column name="CategoryId" type="date" jt="91" />
+			<column name="BlogStatusId" type="int" jt="4" />
+			<column name="IsFeatured" type="uniqueidentifier" jt="1" />
+			<column name="CompanyId" type="int" jt="4" />
+			<column name="IsStaticPage" type="int" jt="4" />
+			<index name="Pk_Blog" unique="PRIMARY_KEY" >
+				<column name="BlogId" />
+			</index>
+			<index name="idx_Blogs" unique="NORMAL" >
+				<column name="UserId" />
+			</index>
+			<index name="idx_Blogs_0" unique="NORMAL" >
+				<column name="CategoryId" />
+			</index>
+			<index name="idx_Blogs_1" unique="NORMAL" >
+				<column name="BlogStatusId" />
+			</index>
+			<index name="idx_Blogs_2" unique="NORMAL" >
+				<column name="CompanyId" />
+			</index>
+			<fk name="fk_blogs_blogcategories" to_schema="TechTruffleSchema" to_table="BlogCategories" >
+				<fk_column name="CategoryId" pk="CategoryId" />
+			</fk>
+			<fk name="fk_blogs_blogstatus" to_schema="TechTruffleSchema" to_table="BlogStatus" >
+				<fk_column name="BlogStatusId" pk="BlogStatusId" />
+			</fk>
+		</table>
+		<table name="BlogsHashtags" >
+			<column name="BlogId" type="int" jt="4" />
+			<column name="HashtagId" type="int" jt="4" />
+			<index name="idx_BlogsHashtags" unique="NORMAL" >
+				<column name="BlogId" />
+			</index>
+			<index name="idx_BlogsHashtags_0" unique="NORMAL" >
+				<column name="HashtagId" />
+			</index>
+			<fk name="fk_blogshashtags_blogs" to_schema="TechTruffleSchema" to_table="Blogs" >
+				<fk_column name="BlogId" pk="BlogId" />
+			</fk>
+			<fk name="fk_blogshashtags_hashtags" to_schema="TechTruffleSchema" to_table="Hashtags" >
+				<fk_column name="HashtagId" pk="HashtagId" />
+			</fk>
+		</table>
+		<table name="Hashtags" >
+			<column name="HashtagId" type="int" jt="4" />
+			<column name="HashtagName" type="varchar" length="100" jt="12" />
+			<index name="Pk_Hashtags" unique="UNIQUE" >
+				<column name="HashtagId" />
+			</index>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout_2ea1017" show_relation="columns" >
+		<entity schema="TechTruffleSchema" name="BlogCategories" color="1f5182" x="390" y="150" />
+		<entity schema="TechTruffleSchema" name="BlogStatus" color="1f5182" x="345" y="285" />
+		<entity schema="TechTruffleSchema" name="Blogs" color="1f5182" x="585" y="225" />
+		<entity schema="TechTruffleSchema" name="BlogsHashtags" color="1f5182" x="780" y="225" />
+		<entity schema="TechTruffleSchema" name="Hashtags" color="1f5182" x="930" y="225" />
+		<callout x="45" y="45" pointer="NO" >
+			<comment><![CDATA[This project is in offline mode.
+Design the schema and save the design to project file. Later create or upgrade the schema on any database.
+Right-click the layout to add new tables. Drop this callout from its right-click pop-up menu.]]></comment>
+		</callout>
+	</layout>
+</project>
