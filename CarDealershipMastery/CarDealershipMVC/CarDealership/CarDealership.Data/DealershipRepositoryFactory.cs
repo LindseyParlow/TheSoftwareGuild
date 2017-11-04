@@ -16,9 +16,9 @@ namespace CarDealership.Data
 
             switch (mode)
             {
-                case "QA":
+                case "Mock":
                     return new DealershipRepositoryMock();
-                case "ProdEF":
+                case "Prod":
                     return new DealershipRepositoryEF();
                 default:
                     throw new Exception("Mode value in app config is not valid.");

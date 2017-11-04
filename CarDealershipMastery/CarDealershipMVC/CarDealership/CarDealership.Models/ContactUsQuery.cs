@@ -12,13 +12,12 @@ namespace CarDealership.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public int PhoneId { get; set; }
+        public string Phone { get; set; }
         public string Message { get; set; }
         public DateTime DateQueryToDealership { get; set; }
         public DateTime? DateQueryToCustomer { get; set; }
         public int? VehicleId { get; set; }
-
-        public virtual Phone Phone { get; set; }
+        
         public virtual Vehicle Vehicle { get; set; }
     }
 }

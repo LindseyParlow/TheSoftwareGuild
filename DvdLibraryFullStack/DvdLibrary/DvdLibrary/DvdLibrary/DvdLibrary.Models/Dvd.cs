@@ -13,5 +13,6 @@ namespace DvdLibrary.Models
         public string Director { get; set; }
         public string Rating { get; set; }
         public int? ReleaseDate { get; set; }
+        public string Notes { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace DvdLibrary.Data.Repositories
             }
             else
             {
-                newDvd.DvdId = 0;
+                newDvd.DvdId = 1;
             }
 
             _dvds.Add(newDvd);

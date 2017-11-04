@@ -13,8 +13,7 @@ namespace CarDealership.Models
         public string SpecialDescription { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public string SpecialType { get; set; }
         public decimal SpecialValue { get; set; }
-
-        //make a property for special type so doing logic is easier when applying the discount.
     }
 }
