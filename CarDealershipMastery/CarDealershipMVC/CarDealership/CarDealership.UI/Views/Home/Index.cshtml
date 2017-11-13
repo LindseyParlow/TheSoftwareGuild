@@ -1,7 +1,51 @@
-﻿
+﻿@model IEnumerable<CarDealership.Models.Special>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@section FeaturedScripts {
+	<script src="~/Scripts/JS for Views/Home_Index.js"></script>
+}
+<div class="container">
+	
+	@*carousel attempt*@
+	<div class="row">
+		@*<div class="col-md-12 jumbotron">
+			<h1>BIG HUGE SALE!!!</h1>
+			<h6>Supporting text and disclaimers</h6>
+		</div>*@
+		@*carousel attempt*@
+		<div id="mycarousel" class="carousel slide" data-ride="carousel" align="center">
+			<ol class="carousel-indicators">
+				<li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+				@foreach (var special in Model)
+				{
+					<li data-target="#mycarousel" data-slide-to="@special.SpecialId"></li>
+				}
+			</ol>
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<h1>BIG HUGE SALE!!!</h1>
+					<p>Supporting text and disclaimers</p>
+				</div>
+				@foreach (var special in Model)
+				{
+					<div class="item">
+						<h1>@special.SpecialTitle</h1>
+						<p>@special.SpecialDescription</p>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<br />
+		<h2>Featured Vehicles</h2>
+		<br />
+	</div>
+	<div id="nonFilteredFeaturedVehicles">
+		@*all featured vehicles go here*@
+	</div>
+</div>
+
 

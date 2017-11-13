@@ -41,8 +41,6 @@ namespace CarDealership.Data.Migrations
                         Email = c.String(),
                         Phone = c.String(),
                         Message = c.String(),
-                        DateQueryToDealership = c.DateTime(nullable: false),
-                        DateQueryToCustomer = c.DateTime(),
                         VehicleId = c.Int(),
                     })
                 .PrimaryKey(t => t.ContactUsQueryId)
@@ -101,8 +99,7 @@ namespace CarDealership.Data.Migrations
                         SpecialId = c.Int(nullable: false, identity: true),
                         SpecialTitle = c.String(),
                         SpecialDescription = c.String(),
-                        StartDate = c.DateTime(nullable: false),
-                        EndDate = c.DateTime(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
                         SpecialType = c.String(),
                         SpecialValue = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
@@ -210,8 +207,11 @@ namespace CarDealership.Data.Migrations
                         PhoneId = c.Int(nullable: false, identity: true),
                         PhoneType = c.String(),
                         PhoneNumber = c.String(),
+                        Dealership_DealershipId = c.Int(),
                     })
-                .PrimaryKey(t => t.PhoneId);
+                .PrimaryKey(t => t.PhoneId)
+                .ForeignKey("dbo.Dealerships", t => t.Dealership_DealershipId)
+                .Index(t => t.Dealership_DealershipId);
             
             CreateTable(
                 "dbo.PurchaseTypes",
@@ -244,19 +244,6 @@ namespace CarDealership.Data.Migrations
                 .Index(t => t.CustomerId)
                 .Index(t => t.VehicleId);
             
-            CreateTable(
-                "dbo.PhoneDealerships",
-                c => new
-                    {
-                        Phone_PhoneId = c.Int(nullable: false),
-                        Dealership_DealershipId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Phone_PhoneId, t.Dealership_DealershipId })
-                .ForeignKey("dbo.Phones", t => t.Phone_PhoneId)
-                .ForeignKey("dbo.Dealerships", t => t.Dealership_DealershipId)
-                .Index(t => t.Phone_PhoneId)
-                .Index(t => t.Dealership_DealershipId);
-            
         }
         
         public override void Down()
@@ -265,8 +252,7 @@ namespace CarDealership.Data.Migrations
             DropForeignKey("dbo.Purchases", "PurchaseTypeId", "dbo.PurchaseTypes");
             DropForeignKey("dbo.Purchases", "EmployeeId", "dbo.Employees");
             DropForeignKey("dbo.Purchases", "CustomerId", "dbo.Customers");
-            DropForeignKey("dbo.PhoneDealerships", "Dealership_DealershipId", "dbo.Dealerships");
-            DropForeignKey("dbo.PhoneDealerships", "Phone_PhoneId", "dbo.Phones");
+            DropForeignKey("dbo.Phones", "Dealership_DealershipId", "dbo.Dealerships");
             DropForeignKey("dbo.Dealerships", "AddressId", "dbo.Addresses");
             DropForeignKey("dbo.Customers", "AddressId", "dbo.Addresses");
             DropForeignKey("dbo.ContactUsQueries", "VehicleId", "dbo.Vehicles");
@@ -280,12 +266,11 @@ namespace CarDealership.Data.Migrations
             DropForeignKey("dbo.Vehicles", "SpecialId", "dbo.Specials");
             DropForeignKey("dbo.Vehicles", "PurchaseStatusId", "dbo.PurchaseStatus");
             DropForeignKey("dbo.Addresses", "StateId", "dbo.States");
-            DropIndex("dbo.PhoneDealerships", new[] { "Dealership_DealershipId" });
-            DropIndex("dbo.PhoneDealerships", new[] { "Phone_PhoneId" });
             DropIndex("dbo.Purchases", new[] { "VehicleId" });
             DropIndex("dbo.Purchases", new[] { "CustomerId" });
             DropIndex("dbo.Purchases", new[] { "EmployeeId" });
             DropIndex("dbo.Purchases", new[] { "PurchaseTypeId" });
+            DropIndex("dbo.Phones", new[] { "Dealership_DealershipId" });
             DropIndex("dbo.Dealerships", new[] { "AddressId" });
             DropIndex("dbo.Customers", new[] { "AddressId" });
             DropIndex("dbo.VehicleMakes", new[] { "EmployeeId" });
@@ -299,7 +284,6 @@ namespace CarDealership.Data.Migrations
             DropIndex("dbo.Vehicles", new[] { "VehicleTypeId" });
             DropIndex("dbo.ContactUsQueries", new[] { "VehicleId" });
             DropIndex("dbo.Addresses", new[] { "StateId" });
-            DropTable("dbo.PhoneDealerships");
             DropTable("dbo.Purchases");
             DropTable("dbo.PurchaseTypes");
             DropTable("dbo.Phones");

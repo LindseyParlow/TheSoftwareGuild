@@ -14,7 +14,34 @@ namespace CarDealership.UI.Controllers
         {
             var repo = DealershipRepositoryFactory.Create();
 
-            var model = repo.GetAllFeaturedVehicles();
+            var model = repo.GetAllSpecials();
+
+            return View(model);
+        }
+        
+        public ActionResult Specials()
+        {
+            var repo = DealershipRepositoryFactory.Create();
+
+            var model = repo.GetAllSpecials();
+
+            return View(model);
+        }
+
+        public ActionResult Contact()
+        {
+            var repo = DealershipRepositoryFactory.Create();
+
+            var model = repo.GetAllCustomers();
+
+            return View();
+        }
+
+        public ActionResult Sales()
+        {
+            var repo = DealershipRepositoryFactory.Create();
+
+            var model = repo.GetAllVehicles();
 
             return View(model);
         }

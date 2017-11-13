@@ -53,9 +53,9 @@
     <Compile Include="DealershipRepositoryFactory.cs" />
     <Compile Include="DealershipRepositoryMock.cs" />
     <Compile Include="Interfaces\IDealershipRepository.cs" />
-    <Compile Include="Migrations\201710292236519_init.cs" />
-    <Compile Include="Migrations\201710292236519_init.Designer.cs">
-      <DependentUpon>201710292236519_init.cs</DependentUpon>
+    <Compile Include="Migrations\201711060416454_init.cs" />
+    <Compile Include="Migrations\201711060416454_init.Designer.cs">
+      <DependentUpon>201711060416454_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,8 +71,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710292236519_init.resx">
-      <DependentUpon>201710292236519_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711060416454_init.resx">
+      <DependentUpon>201711060416454_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

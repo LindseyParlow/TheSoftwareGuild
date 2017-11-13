@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CarDealership.Models.ContactUsQuery>
+
+@{
+	ViewBag.Title = "Contact";
+}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Contact Us</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-6">
+				@*Need to make a form for this!!!*@
+				<div>
+					<p>Name</p>
+					<input type="text" />
+					<br />
+				</div>
+				<br />
+				<div>
+					<p>Email</p>
+					<input type="text" />
+				</div>
+				<br />
+				<div>
+					<p>Phone</p>
+					<input type="text" />
+				</div>
+				<br />
+				<div>
+					<p>Message</p>
+					<input type="text" />
+				</div>
+				<br />
+				<p><button class="btn btn-primary" id="makeBtn">Submit</button></p>
+			</div>
+			<div class="col-md-6">
+				<p>Map Goes Here!!!!</p>
+				<address>
+					19371 Blackfoot St<br />
+					Oak Grove, MN, 55303<br />
+				</address>
+				<address>
+					Sales: 753-555-1457<br />
+					Service: 763-555-1458<br />
+				</address>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="~/Scripts/JS for Views/Home_Contact.js"></script>		
+
+		

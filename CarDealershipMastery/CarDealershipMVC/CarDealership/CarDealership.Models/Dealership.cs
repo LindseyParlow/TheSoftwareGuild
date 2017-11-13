@@ -11,9 +11,8 @@ namespace CarDealership.Models
         public int DealershipId { get; set; }
         public string DealerShipName { get; set; }
         public int AddressId { get; set; }
-        public ICollection<Phone> Phone { get; set; }
+        public ICollection<Phone> Phones { get; set; }
 
         public virtual Address Address { get; set; }
-
     }
 }

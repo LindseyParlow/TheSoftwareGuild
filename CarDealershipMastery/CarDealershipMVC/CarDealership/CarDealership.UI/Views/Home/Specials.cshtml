@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CarDealership.Models.Special>
+@{
+    ViewBag.Title = "Specials";
+}
+
+@section SpecialsScripts {
+	<script src="~/Scripts/JS for Views/Home_Specials.js"></script>
+}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Specials</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			@foreach (var special in Model)
+			{
+				<div class="col-md-2">
+					<div class="searchResultsNewVehicles">
+						<p>Dollar Sign Picture</p>
+					</div>
+				</div>
+				<div class="col-md-10">
+					<div class="searchResultsNewVehicles">
+						<p>@special.SpecialTitle</p>
+						<p>@special.SpecialDescription</p>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+

@@ -30,54 +30,6 @@ namespace CarDealership.Data
 
         static DealershipRepositoryMock()
         {
-            _addresses = new List<Address>()
-            {
-                new Address
-                {
-                    AddressId = 1,
-                    Street1 = "123 Apple St NW",
-                    Street2 = "Apt 100",
-                    City = "Alpaca",
-                    StateId = 3,
-                    ZipCode = 55111,
-
-                    State = _states[0]
-                },
-                new Address
-                {
-                    AddressId = 2,
-                    Street1 = "234 Banana St NW",
-                    Street2 = "Apt 200",
-                    City = "Bat",
-                    StateId = 6,
-                    ZipCode = 55222,
-
-                    State = _states[1]
-                },
-                new Address
-                {
-                    AddressId = 3,
-                    Street1 = "345 Cantalope St NW",
-                    Street2 = "Apt 300",
-                    City = "Catfish",
-                    StateId = 9,
-                    ZipCode = 55000,
-
-                    State = _states[2]
-                },
-                new Address
-                {
-                    AddressId = 4,
-                    Street1 = "456 Durian St NW",
-                    Street2 = "Apt 400",
-                    City = "Dog",
-                    StateId = 12,
-                    ZipCode = 55000,
-
-                    State = _states[3]
-                },
-            };
-
             _states = new List<State>()
             {
                 new State {StateId = 1, StateName = "Alabama"},
@@ -92,6 +44,54 @@ namespace CarDealership.Data
                 new State {StateId = 10, StateName = "Georgia"},
                 new State {StateId = 11, StateName = "Hawaii"},
                 new State {StateId = 12, StateName = "Idaho"},
+            };
+
+            _addresses = new List<Address>()
+            {
+                new Address
+                {
+                    AddressId = 1,
+                    Street1 = "123 Apple St NW",
+                    Street2 = "Apt 100",
+                    City = "Alpaca",
+                    StateId = 3,
+                    ZipCode = 55111,
+
+                    State = _states[2]
+                },
+                new Address
+                {
+                    AddressId = 2,
+                    Street1 = "234 Banana St NW",
+                    Street2 = "Apt 200",
+                    City = "Bat",
+                    StateId = 6,
+                    ZipCode = 55222,
+
+                    State = _states[5]
+                },
+                new Address
+                {
+                    AddressId = 3,
+                    Street1 = "345 Cantalope St NW",
+                    Street2 = "Apt 300",
+                    City = "Catfish",
+                    StateId = 9,
+                    ZipCode = 55333,
+
+                    State = _states[8]
+                },
+                new Address
+                {
+                    AddressId = 4,
+                    Street1 = "456 Durian St NW",
+                    Street2 = "Apt 400",
+                    City = "Dog",
+                    StateId = 12,
+                    ZipCode = 55444,
+
+                    State = _states[11]
+                },
             };
             
             _customers = new List<Customer>()
@@ -137,10 +137,10 @@ namespace CarDealership.Data
                 new Employee
                 {
                     EmployeeId = 1,
-                    LastName = "Rohode",
+                    LastName = "Rohde",
                     FirstName = "AJ",
-                    Email = "AJ.Rohode@gmail.com",
-                    Password = "ARhode123"
+                    Email = "AJ.Rohde@gmail.com",
+                    Password = "ARohde123"
                 },
                 new Employee
                 {
@@ -169,7 +169,7 @@ namespace CarDealership.Data
                 },
                 new PurchaseStatus
                 {
-                    PurchaseStatusId = 1,
+                    PurchaseStatusId = 2,
                     PurchaseStatusDescription = "Available"
                 },
             };
@@ -200,21 +200,55 @@ namespace CarDealership.Data
                     SpecialId = 1,
                     SpecialTitle = "Truck Month",
                     SpecialDescription = "Any truck purchase is an extra 10% off sale price!",
-                    StartDate = new DateTime(2017, 12, 01),
-                    EndDate = new DateTime(2017, 12, 31),
+                    IsActive = true,
                     SpecialType = "Percent Off",
                     SpecialValue = .10M
                 },
                 new Special
                 {
                     SpecialId = 2,
-                    SpecialTitle = "First Buyer Weekend",
-                    SpecialDescription = "If this is your first vehicle, get an extra $500 off your new vehicle purchase!",
-                    StartDate = new DateTime(2017, 10, 27),
-                    EndDate = new DateTime(2017, 10, 30),
+                    SpecialTitle = "New Vehicle Weekend",
+                    SpecialDescription = "Get an extra $500 off your new vehicle purchase!",
+                    IsActive = true,
                     SpecialType = "Dollar Off",
                     SpecialValue = 500M
                 },
+                new Special
+                {
+                    SpecialId = 3,
+                    SpecialTitle = "Oldy But A Good Extravaganza",
+                    SpecialDescription = "Purchase a vehicle over 15 years old and get a 15% discount!",
+                    IsActive = false,
+                    SpecialType = "Percent",
+                    SpecialValue = .15M
+                },
+                new Special
+                {
+                    SpecialId = 4,
+                    SpecialTitle = "Special 4",
+                    SpecialDescription = "This is special 4's description!",
+                    IsActive = false,
+                    SpecialType = "Dollar Off",
+                    SpecialValue = 100M
+                },
+                new Special
+                {
+                    SpecialId = 5,
+                    SpecialTitle = "Special 5",
+                    SpecialDescription = "This is special 5's description!",
+                    IsActive = false,
+                    SpecialType = "Dollar Off",
+                    SpecialValue = 100M
+                },
+                new Special
+                {
+                    SpecialId = 6,
+                    SpecialTitle = "Special 6",
+                    SpecialDescription = "This is special 6's description!",
+                    IsActive = false,
+                    SpecialType = "Dollar Off",
+                    SpecialValue = 100M
+                }
             };
             
             _transmissions = new List<Transmission>()
@@ -367,16 +401,16 @@ namespace CarDealership.Data
                     VehicleTypeId = 1,
                     VehicleModelId = 2,
                     TransmissionId = 2,
-                    SalePrice = 10000,
-                    MSRPPrice = 10000,
-                    VehicleBodyId = 3,
+                    SalePrice = 16500,
+                    MSRPPrice = 18750,
+                    VehicleBodyId = 1,
                     Year = 2017,
                     VehicleColor = "Red",
                     InteriorColor = "Gray",
                     VinNumber = "1NXBR32EX6Z624118",
                     Mileage = 500,
-                    VehicleDescription = "This new vehicle is super fast and super red!",
-                    SpecialId = 1,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = 2,
                     DateAdded = new DateTime(2017, 09, 03),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
@@ -384,8 +418,8 @@ namespace CarDealership.Data
                     VehicleType = _VehicleTypes[0],
                     VehicleModel = _vehicleModels[1],
                     Transmission = _transmissions[1],
-                    VehicleBody = _vehicleBodies[2],
-                    Special = _specials[0],
+                    VehicleBody = _vehicleBodies[0],
+                    Special = _specials[1],
                     PurchaseStatus = _purchaseStatus[1]
                 },
                 new Vehicle
@@ -394,25 +428,26 @@ namespace CarDealership.Data
                     VehicleTypeId = 2,
                     VehicleModelId = 3,
                     TransmissionId = 1,
-                    SalePrice = 10000,
-                    MSRPPrice = 10000,
-                    VehicleBodyId = 2,
+                    SalePrice = 7250,
+                    MSRPPrice = 8000,
+                    VehicleBodyId = 3,
                     Year = 1998,
                     VehicleColor = "Green",
                     InteriorColor = "Gray",
                     VinNumber = "3C3CFFFH0CT163609",
                     Mileage = 62000,
-                    VehicleDescription = "This vehicle might have some years, but it we call it experience",
-                    SpecialId = null,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = 1,
                     DateAdded = new DateTime(2014, 02, 08),
-                    PurchaseStatusId = 1,
-                    IsFeatured = false,
+                    PurchaseStatusId = 2,
+                    IsFeatured = true,
 
                     VehicleType = _VehicleTypes[1],
                     VehicleModel = _vehicleModels[2],
                     Transmission = _transmissions[0],
-                    VehicleBody = _vehicleBodies[1],
-                    PurchaseStatus = _purchaseStatus[0]
+                    Special = _specials[0],
+                    VehicleBody = _vehicleBodies[2],
+                    PurchaseStatus = _purchaseStatus[1]
                 },
                 new Vehicle
                 {
@@ -420,16 +455,16 @@ namespace CarDealership.Data
                     VehicleTypeId = 1,
                     VehicleModelId = 2,
                     TransmissionId = 2,
-                    SalePrice = 10000,
-                    MSRPPrice = 10000,
-                    VehicleBodyId = 1,
-                    Year = 20016,
+                    SalePrice = 22875,
+                    MSRPPrice = 26250,
+                    VehicleBodyId = 4,
+                    Year = 2016,
                     VehicleColor = "White",
                     InteriorColor = "Black",
                     VinNumber = "2P4FP25B2VR305648",
                     Mileage = 850,
-                    VehicleDescription = "Fast and sleak. Polished. Perfect for any vehicle enthusiast.",
-                    SpecialId = 1,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = null,
                     DateAdded = new DateTime(2017, 01, 20),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
@@ -437,7 +472,7 @@ namespace CarDealership.Data
                     VehicleType = _VehicleTypes[0],
                     VehicleModel = _vehicleModels[1],
                     Transmission = _transmissions[1],
-                    VehicleBody = _vehicleBodies[0],
+                    VehicleBody = _vehicleBodies[3],
                     PurchaseStatus = _purchaseStatus[1]
                 },
                 new Vehicle
@@ -446,15 +481,15 @@ namespace CarDealership.Data
                     VehicleTypeId = 2,
                     VehicleModelId = 1,
                     TransmissionId = 1,
-                    SalePrice = 10000,
-                    MSRPPrice = 10000,
-                    VehicleBodyId = 3,
+                    SalePrice = 6800,
+                    MSRPPrice = 7500,
+                    VehicleBodyId = 1,
                     Year = 2003,
                     VehicleColor = "Red",
                     InteriorColor = "Black",
                     VinNumber = "1B7FL26P6XS316728",
                     Mileage = 120000,
-                    VehicleDescription = "I'm still rolling. Don't be hating.",
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
                     SpecialId = null,
                     DateAdded = new DateTime(2015, 05, 28),
                     PurchaseStatusId = 2,
@@ -463,7 +498,7 @@ namespace CarDealership.Data
                     VehicleType = _VehicleTypes[1],
                     VehicleModel = _vehicleModels[0],
                     Transmission = _transmissions[0],
-                    VehicleBody = _vehicleBodies[2],
+                    VehicleBody = _vehicleBodies[0],
                     PurchaseStatus = _purchaseStatus[1]
                 },
                 new Vehicle
@@ -472,16 +507,16 @@ namespace CarDealership.Data
                     VehicleTypeId = 1,
                     VehicleModelId = 2,
                     TransmissionId = 2,
-                    SalePrice = 10000,
-                    MSRPPrice = 10000,
-                    VehicleBodyId = 2,
+                    SalePrice = 18500,
+                    MSRPPrice = 21000,
+                    VehicleBodyId = 1,
                     Year = 2017,
                     VehicleColor = "Yellow",
                     InteriorColor = "Black",
                     VinNumber = "1GDJC34J6YF591469",
                     Mileage = 350,
-                    VehicleDescription = "Buy me if you like yellow.",
-                    SpecialId = null,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = 2,
                     DateAdded = new DateTime(2017, 10, 01),
                     PurchaseStatusId = 1,
                     IsFeatured = false,
@@ -489,8 +524,271 @@ namespace CarDealership.Data
                     VehicleType = _VehicleTypes[0],
                     VehicleModel = _vehicleModels[1],
                     Transmission = _transmissions[1],
-                    VehicleBody = _vehicleBodies[1],
+                    VehicleBody = _vehicleBodies[0],
+                    Special = _specials[1],
                     PurchaseStatus = _purchaseStatus[0]
+                },
+                new Vehicle
+                {
+                    VehicleId = 6,
+                    VehicleTypeId = 2,
+                    VehicleModelId = 1,
+                    TransmissionId = 1,
+                    SalePrice = 9900,
+                    MSRPPrice = 10250,
+                    VehicleBodyId = 2,
+                    Year = 2005,
+                    VehicleColor = "Red",
+                    InteriorColor = "White",
+                    VinNumber = "JD1EG1122M4427105",
+                    Mileage = 28500,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = null,
+                    DateAdded = new DateTime(2011, 01, 20),
+                    PurchaseStatusId = 2,
+                    IsFeatured = true,
+
+                    VehicleType = _VehicleTypes[1],
+                    VehicleModel = _vehicleModels[0],
+                    Transmission = _transmissions[0],
+                    VehicleBody = _vehicleBodies[1],
+                    PurchaseStatus = _purchaseStatus[1]
+                },
+                new Vehicle
+                {
+                    VehicleId = 7,
+                    VehicleTypeId = 1,
+                    VehicleModelId = 1,
+                    TransmissionId = 2,
+                    SalePrice = 16500,
+                    MSRPPrice = 18000,
+                    VehicleBodyId = 2,
+                    Year = 2017,
+                    VehicleColor = "Blue",
+                    InteriorColor = "Black",
+                    VinNumber = "1GNFK16397J314592",
+                    Mileage = 900,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = null,
+                    DateAdded = new DateTime(2017, 02, 18),
+                    PurchaseStatusId = 2,
+                    IsFeatured = true,
+
+                    VehicleType = _VehicleTypes[0],
+                    VehicleModel = _vehicleModels[0],
+                    Transmission = _transmissions[1],
+                    VehicleBody = _vehicleBodies[1],
+                    PurchaseStatus = _purchaseStatus[1]
+                },
+                new Vehicle
+                {
+                    VehicleId = 8,
+                    VehicleTypeId = 2,
+                    VehicleModelId = 2,
+                    TransmissionId = 1,
+                    SalePrice = 11250,
+                    MSRPPrice = 11750,
+                    VehicleBodyId = 1,
+                    Year = 2003,
+                    VehicleColor = "Green",
+                    InteriorColor = "Gray",
+                    VinNumber = "JA3AJ36B23U019320",
+                    Mileage = 48000,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = null,
+                    DateAdded = new DateTime(2008, 09, 15),
+                    PurchaseStatusId = 1,
+                    IsFeatured = false,
+
+                    VehicleType = _VehicleTypes[1],
+                    VehicleModel = _vehicleModels[1],
+                    Transmission = _transmissions[0],
+                    VehicleBody = _vehicleBodies[0],
+                    PurchaseStatus = _purchaseStatus[0]
+                },
+                new Vehicle
+                {
+                    VehicleId = 9,
+                    VehicleTypeId = 1,
+                    VehicleModelId = 3,
+                    TransmissionId = 2,
+                    SalePrice = 14900,
+                    MSRPPrice = 15800,
+                    VehicleBodyId = 3,
+                    Year = 2016,
+                    VehicleColor = "White",
+                    InteriorColor = "Black",
+                    VinNumber = "LM4AC11A7T1159824",
+                    Mileage = 500,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = 1,
+                    DateAdded = new DateTime(2014, 11, 04),
+                    PurchaseStatusId = 2,
+                    IsFeatured = false,
+
+                    VehicleType = _VehicleTypes[0],
+                    VehicleModel = _vehicleModels[2],
+                    Transmission = _transmissions[1],
+                    VehicleBody = _vehicleBodies[2],
+                    Special = _specials[0],
+                    PurchaseStatus = _purchaseStatus[1]
+                },
+                new Vehicle
+                {
+                    VehicleId = 10,
+                    VehicleTypeId = 2,
+                    VehicleModelId = 4,
+                    TransmissionId = 2,
+                    SalePrice = 8500,
+                    MSRPPrice = 10250,
+                    VehicleBodyId = 4,
+                    Year = 2007,
+                    VehicleColor = "Green",
+                    InteriorColor = "Gray",
+                    VinNumber = "1B7HM26Y9KS023056",
+                    Mileage = 78000,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = null,
+                    DateAdded = new DateTime(2009, 08, 8),
+                    PurchaseStatusId = 2,
+                    IsFeatured = true,
+
+                    VehicleType = _VehicleTypes[1],
+                    VehicleModel = _vehicleModels[3],
+                    Transmission = _transmissions[1],
+                    VehicleBody = _vehicleBodies[3],
+                    PurchaseStatus = _purchaseStatus[1]
+                },
+                new Vehicle
+                {
+                    VehicleId = 11,
+                    VehicleTypeId = 1,
+                    VehicleModelId = 5,
+                    TransmissionId = 1,
+                    SalePrice = 29000,
+                    MSRPPrice = 33000,
+                    VehicleBodyId = 1,
+                    Year = 2018,
+                    VehicleColor = "Blue",
+                    InteriorColor = "White",
+                    VinNumber = "1FMJK1J50BEA31636",
+                    Mileage = 200,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = 2,
+                    DateAdded = new DateTime(2010, 10,10),
+                    PurchaseStatusId = 1,
+                    IsFeatured = true,
+
+                    VehicleType = _VehicleTypes[0],
+                    VehicleModel = _vehicleModels[4],
+                    Transmission = _transmissions[0],
+                    VehicleBody = _vehicleBodies[0],
+                    Special = _specials[1],
+                    PurchaseStatus = _purchaseStatus[0]
+                },
+                new Vehicle
+                {
+                    VehicleId = 12,
+                    VehicleTypeId = 2,
+                    VehicleModelId = 5,
+                    TransmissionId = 1,
+                    SalePrice = 12750,
+                    MSRPPrice = 13500,
+                    VehicleBodyId = 1,
+                    Year = 2010,
+                    VehicleColor = "Red",
+                    InteriorColor = "Black",
+                    VinNumber = "JH4CL95946C070364",
+                    Mileage = 6000,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = null,
+                    DateAdded = new DateTime(2006, 01, 24),
+                    PurchaseStatusId = 2,
+                    IsFeatured = false,
+
+                    VehicleType = _VehicleTypes[1],
+                    VehicleModel = _vehicleModels[4],
+                    Transmission = _transmissions[0],
+                    VehicleBody = _vehicleBodies[0],
+                    PurchaseStatus = _purchaseStatus[1]
+                },
+                new Vehicle
+                {
+                    VehicleId = 13,
+                    VehicleTypeId = 1,
+                    VehicleModelId = 1,
+                    TransmissionId = 2,
+                    SalePrice = 21500,
+                    MSRPPrice = 22750,
+                    VehicleBodyId = 2,
+                    Year = 2018,
+                    VehicleColor = "White",
+                    InteriorColor = "White",
+                    VinNumber = "2P4FP25B2VR305648",
+                    Mileage = 150,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = null,
+                    DateAdded = new DateTime(2007, 10, 17),
+                    PurchaseStatusId = 2,
+                    IsFeatured = false,
+
+                    VehicleType = _VehicleTypes[0],
+                    VehicleModel = _vehicleModels[0],
+                    Transmission = _transmissions[1],
+                    VehicleBody = _vehicleBodies[1],
+                    PurchaseStatus = _purchaseStatus[1]
+                },
+                new Vehicle
+                {
+                    VehicleId = 14,
+                    VehicleTypeId = 2,
+                    VehicleModelId = 5,
+                    TransmissionId = 2,
+                    SalePrice = 6750,
+                    MSRPPrice = 8250,
+                    VehicleBodyId = 2,
+                    Year = 2003,
+                    VehicleColor = "Yellow",
+                    InteriorColor = "Gray",
+                    VinNumber = "1HTSLAAL7VH407274",
+                    Mileage = 85000,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = null,
+                    DateAdded = new DateTime(2017, 03, 09),
+                    PurchaseStatusId = 2,
+                    IsFeatured = false,
+
+                    VehicleType = _VehicleTypes[1],
+                    VehicleModel = _vehicleModels[4],
+                    Transmission = _transmissions[1],
+                    VehicleBody = _vehicleBodies[1],
+                    PurchaseStatus = _purchaseStatus[1]
+                },
+                new Vehicle
+                {
+                    VehicleId = 15,
+                    VehicleTypeId = 1,
+                    VehicleModelId = 3,
+                    TransmissionId = 1,
+                    SalePrice = 17500,
+                    MSRPPrice = 19000,
+                    VehicleBodyId = 3,
+                    Year = 2017,
+                    VehicleColor = "Green",
+                    InteriorColor = "Black",
+                    VinNumber = "1FUYDMCB9SP577754",
+                    Mileage = 850,
+                    VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
+                    SpecialId = null,
+                    DateAdded = new DateTime(2016, 06, 24),
+                    PurchaseStatusId = 2,
+                    IsFeatured = true,
+
+                    VehicleType = _VehicleTypes[0],
+                    VehicleModel = _vehicleModels[2],
+                    Transmission = _transmissions[0],
+                    VehicleBody = _vehicleBodies[2],
+                    PurchaseStatus = _purchaseStatus[1]
                 },
             };
 
@@ -504,8 +802,6 @@ namespace CarDealership.Data
                     Email = "Mark.Johnson@gmail.com",
                     Phone = "651-555-6666",
                     Message = "Hey, will you find me a car like this but in blue?",
-                    DateQueryToCustomer = new DateTime(2017, 10, 01),
-                    DateQueryToDealership = new DateTime(2017, 10, 02),
                     VehicleId = 2,
 
                     Vehicle = _vehicles[1]
@@ -518,8 +814,6 @@ namespace CarDealership.Data
                     Email = "Rob.Reynolds@gmail.com",
                     Phone = "651-555-9999",
                     Message = "Do you accept trades?",
-                    DateQueryToCustomer = new DateTime(2017, 10, 13),
-                    DateQueryToDealership = new DateTime(2017, 10, 14),
                     VehicleId = null,
                 },
                 new ContactUsQuery
@@ -530,8 +824,6 @@ namespace CarDealership.Data
                     Email = "Javier.Aguirre@gmail.com",
                     Phone = "763-555-1212",
                     Message = "I need a sweet truck!",
-                    DateQueryToCustomer = new DateTime(2017, 10, 26),
-                    DateQueryToDealership = new DateTime(2017, 10, 27),
                     VehicleId = null
                 },
             };
@@ -541,107 +833,69 @@ namespace CarDealership.Data
                 new Purchase
                 {
                     PurchaseId = 1,
-                    PurchasePrice = 11000,
-                    PurchaseTypeId = 1,
+                    PurchasePrice = 18300,
+                    PurchaseTypeId = 3,
                     EmployeeId = 1,
-                    CustomerId = 1,
-                    VehicleId = 1,
+                    CustomerId = 2,
+                    VehicleId = 5,
                     DatePurchased = new DateTime(2017, 10, 26),
 
-                    PurchaseType = _purchaseType[0],
+                    PurchaseType = _purchaseType[2],
                     Employee = _employees[0],
-                    Customer = _customers[0],
-                    Vehicle = _vehicles[0]
+                    Customer = _customers[1],
+                    Vehicle = _vehicles[4]
                 },
                 new Purchase
                 {
                     PurchaseId = 2,
-                    PurchasePrice = 12000,
-                    PurchaseTypeId = 1,
-                    EmployeeId = 1,
-                    CustomerId = 1,
-                    VehicleId = 1,
+                    PurchasePrice = 10900,
+                    PurchaseTypeId = 2,
+                    EmployeeId = 2,
+                    CustomerId = 3,
+                    VehicleId = 8,
                     DatePurchased = new DateTime(2017, 10, 01),
 
-                    PurchaseType = _purchaseType[0],
-                    Employee = _employees[0],
-                    Customer = _customers[0],
-                    Vehicle = _vehicles[0]
+                    PurchaseType = _purchaseType[1],
+                    Employee = _employees[1],
+                    Customer = _customers[2],
+                    Vehicle = _vehicles[7]
                 },
                 new Purchase
                 {
                     PurchaseId = 3,
-                    PurchasePrice = 13000,
+                    PurchasePrice = 27750,
                     PurchaseTypeId = 1,
-                    EmployeeId = 1,
+                    EmployeeId = 2,
                     CustomerId = 1,
-                    VehicleId = 1,
+                    VehicleId = 11,
                     DatePurchased = new DateTime(2017, 09, 13),
 
                     PurchaseType = _purchaseType[0],
-                    Employee = _employees[0],
+                    Employee = _employees[1],
                     Customer = _customers[0],
-                    Vehicle = _vehicles[0]
+                    Vehicle = _vehicles[10]
                 },
             };
-            
+
             _phones = new List<Phone>()
             {
                 new Phone
                 {
                     PhoneId = 1,
-                    PhoneType = "Cell",
+                    PhoneType = "Office",
                     PhoneNumber = "555-555-1111",
-                    Dealership = _dealerships.Where(d => d.DealershipId == 1).ToList()
                 },
                 new Phone
                 {
                     PhoneId = 2,
-                    PhoneType = "Home",
+                    PhoneType = "Sales",
                     PhoneNumber = "555-555-2222",
-                    Dealership = _dealerships.Where(d => d.DealershipId == 1).ToList()
                 },
                 new Phone
                 {
                     PhoneId = 3,
-                    PhoneType = "Cell",
+                    PhoneType = "Service",
                     PhoneNumber = "555-555-3333",
-                    Dealership = _dealerships.Where(d => d.DealershipId == 1).ToList()
-                },
-                new Phone
-                {
-                    PhoneId = 4,
-                    PhoneType = "Cell",
-                    PhoneNumber = "555-555-4444",
-                    Dealership = _dealerships.Where(d => d.DealershipId == 1).ToList()
-                },
-                new Phone
-                {
-                    PhoneId = 5,
-                    PhoneType = "Cell",
-                    PhoneNumber = "555-555-5555",
-                    Dealership = _dealerships.Where(d => d.DealershipId == 1).ToList()
-                },
-                new Phone
-                {
-                    PhoneId = 6,
-                    PhoneType = "Cell",
-                    PhoneNumber = "555-555-6666",
-                    Dealership = _dealerships.Where(d => d.DealershipId == 1).ToList()
-                },
-                new Phone
-                {
-                    PhoneId = 7,
-                    PhoneType = "Cell",
-                    PhoneNumber = "555-555-7777",
-                    Dealership = _dealerships.Where(d => d.DealershipId == 1).ToList()
-                },
-                new Phone
-                {
-                    PhoneId = 8,
-                    PhoneType = "Cell",
-                    PhoneNumber = "555-555-8888",
-                    Dealership = _dealerships.Where(d => d.DealershipId == 1).ToList()
                 },
             };
 
@@ -652,7 +906,7 @@ namespace CarDealership.Data
                     DealershipId = 1,
                     DealerShipName = "Lindsey's Amazing Car Dealership",
                     AddressId = 4,
-                    Phone = _phones.Where(p => p.PhoneId == 7 || p.PhoneId == 8).ToList(),
+                    Phones = _phones.Where(p => p.PhoneId == 1 || p.PhoneId == 2).ToList(),
 
                     Address = _addresses[3]
                 }
@@ -748,12 +1002,12 @@ namespace CarDealership.Data
 
         public List<Vehicle> GetAllFeaturedVehicles()
         {
-            return _vehicles.Where(v => v.IsFeatured && v.PurchaseStatus.PurchaseStatusDescription == "Avaliable").ToList();
+            return _vehicles.Where(v => v.IsFeatured && v.PurchaseStatus.PurchaseStatusDescription == "Available").ToList();
         }
 
         public List<Special> GetAllSpecials()
         {
-            return _specials;
+            return _specials.Where(s => s.IsActive).ToList();
         }
 
         public List<Vehicle> GetAllVehicles()
@@ -778,7 +1032,7 @@ namespace CarDealership.Data
 
         public List<Vehicle> GetTop20NewVehicles()
         {
-            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New").OrderByDescending(p => p.MSRPPrice).ToList();
+            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New" && t.PurchaseStatus.PurchaseStatusDescription == "Available").OrderByDescending(p => p.MSRPPrice).ToList();
             if (vehicles.Count < 20)
             {
                 return vehicles;
@@ -908,7 +1162,7 @@ namespace CarDealership.Data
 
         public List<Vehicle> GetTop20UsedVehicles()
         {
-            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").OrderByDescending(p => p.MSRPPrice).ToList();
+            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used" && t.PurchaseStatus.PurchaseStatusDescription == "Available").OrderByDescending(p => p.MSRPPrice).ToList();
             if (vehicles.Count < 20)
             {
                 return vehicles;
@@ -1034,6 +1288,21 @@ namespace CarDealership.Data
             {
                 return vehicles.Take(20).ToList();
             }
+        }
+
+        public List<Customer> GetAllCustomers()
+        {
+            return _customers;
+        }
+
+        public List<ContactUsQuery> GetAllContactUsQueries()
+        {
+            return _contactUsQueries;
+        }
+
+        public Vehicle GetVehicleById(int vehicleId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

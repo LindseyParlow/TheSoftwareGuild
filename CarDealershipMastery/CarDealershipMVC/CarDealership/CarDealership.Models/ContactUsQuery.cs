@@ -14,8 +14,6 @@ namespace CarDealership.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Message { get; set; }
-        public DateTime DateQueryToDealership { get; set; }
-        public DateTime? DateQueryToCustomer { get; set; }
         public int? VehicleId { get; set; }
         
         public virtual Vehicle Vehicle { get; set; }

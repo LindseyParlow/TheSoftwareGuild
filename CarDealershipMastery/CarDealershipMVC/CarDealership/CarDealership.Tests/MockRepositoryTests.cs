@@ -13,13 +13,13 @@ namespace CarDealership.Tests
     public class MockRepositoryTests
     {
         [Test]
-        public void CanGetTop20NewVehicles()
+        public void CanGetTop20AvailableNewVehicles()
         {
             var repo = DealershipRepositoryFactory.Create();
             
             var vehicles = repo.GetTop20NewVehicles();
 
-            Assert.AreEqual(3, vehicles.Count);
+            Assert.AreEqual(2, vehicles.Count);
         }
 
         //public void CanGetTop20NewVehiclesByMake()

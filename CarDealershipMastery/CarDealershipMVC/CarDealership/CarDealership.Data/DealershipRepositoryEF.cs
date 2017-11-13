@@ -126,7 +126,7 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                return ctx.Specials.ToList();
+                return ctx.Specials.Where(s=> s.IsActive).ToList();
             }
         }
 
@@ -166,7 +166,7 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                var vehicles = ctx.Vehicles.Where(b => b.VehicleType.VehicleTypeDescription == "New").OrderByDescending(p => p.MSRPPrice).ToList();
+                var vehicles = ctx.Vehicles.Where(b => b.VehicleType.VehicleTypeDescription == "New" && b.PurchaseStatus.PurchaseStatusDescription == "Available").OrderByDescending(p => p.MSRPPrice).ToList();
                 if (vehicles.Count < 20)
                 {
                     return vehicles;
@@ -327,7 +327,7 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                var vehicles = ctx.Vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").OrderByDescending(p => p.MSRPPrice).ToList();
+                var vehicles = ctx.Vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used" && t.PurchaseStatus.PurchaseStatusDescription == "Available").OrderByDescending(p => p.MSRPPrice).ToList();
                 if (vehicles.Count < 20)
                 {
                     return vehicles;
@@ -481,6 +481,28 @@ namespace CarDealership.Data
                     return vehicles.Take(20).ToList();
                 }
             }
+        }
+
+        public List<Customer> GetAllCustomers()
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.Customers.ToList();
+            }
+        }
+
+        public List<ContactUsQuery> GetAllContactUsQueries()
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.ContactUsQueries.ToList();
+            }
+        }
+
+        //need to do something with this
+        public Vehicle GetVehicleById(int vehicleId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

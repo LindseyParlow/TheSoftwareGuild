@@ -11,8 +11,7 @@ namespace CarDealership.Models
         public int SpecialId { get; set; }
         public string SpecialTitle { get; set; }
         public string SpecialDescription { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public bool IsActive { get; set; }
         public string SpecialType { get; set; }
         public decimal SpecialValue { get; set; }
     }

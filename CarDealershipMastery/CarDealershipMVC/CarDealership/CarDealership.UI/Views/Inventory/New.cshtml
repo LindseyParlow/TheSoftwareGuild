@@ -1,0 +1,140 @@
+﻿
+@{
+	ViewBag.Title = "New";
+}
+
+@section NewScripts {
+	<script src="~/Scripts/JS for Views/Inventory_New.js"></script>
+}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 align="center" style="font-size:50px">New Vehicles</h1>
+		</div>
+	</div>
+	<div class="row" align="center">
+		<div class="col-md-12" style="border: 2px solid black">
+			<h3>Quick Search</h3>
+			<p>
+				<input type="text" placeholder="Enter make, model, or year" />
+				Price
+				<select id="minPriceDropList">
+					<option value="none" selected="selected">No Min </option>
+					<option value="fiveThousandNew">$5,000</option>
+					<option value="tenThousandNew">$10,000</option>
+					<option value="fifteenThousandNew">$15,000</option>
+					<option value="twentyThousandNew">$20,000</option>
+					<option value="fiveThousandNew">$25,000</option>
+					<option value="tenThousandNew">$30,000</option>
+					<option value="fifteenThousandNew">$35,000</option>
+					<option value="twentyThousandNew">$40,000</option>
+					<option value="fiveThousandNew">$45,000</option>
+					<option value="tenThousandNew">$50,000</option>
+					<option value="fifteenThousandNew">$55,000</option>
+					<option value="twentyThousandNew">$60,000</option>
+					<option value="fiveThousandNew">$65,000</option>
+					<option value="tenThousandNew">$70,000</option>
+					<option value="fifteenThousandNew">$75,000</option>
+					<option value="twentyThousandNew">$80,000</option>
+				</select>
+				<select id="maxPriceDropList">
+					<option value="none" selected="selected">No Max </option>
+					<option value="fiveThousandUsed">$5,000</option>
+					<option value="tenThousandUsed">$10,000</option>
+					<option value="fifteenThousandUsed">$15,000</option>
+					<option value="twentyThousandUsed">$20,000</option>
+					<option value="fiveThousandUsed">$25,000</option>
+					<option value="tenThousandUsed">$30,000</option>
+					<option value="fifteenThousandUsed">$35,000</option>
+					<option value="twentyThousandUsed">$40,000</option>
+					<option value="fiveThousandUsed">$45,000</option>
+					<option value="tenThousandUsed">$50,000</option>
+					<option value="fifteenThousandUsed">$55,000</option>
+					<option value="twentyThousandUsed">$60,000</option>
+					<option value="fiveThousandUsed">$65,000</option>
+					<option value="tenThousandUsed">$70,000</option>
+					<option value="fifteenThousandUsed">$75,000</option>
+					<option value="twentyThousandUsed">$80,000</option>
+				</select>
+				Year
+				<select id="minYearDropList">
+					<option value="none" selected="selected">No Min </option>
+					<option value="New1990">1990</option>
+					<option value="New1991">1991</option>
+					<option value="New1992">1992</option>
+					<option value="New1993">1993</option>
+					<option value="New1994">1994</option>
+					<option value="New1995">1995</option>
+					<option value="New1996">1996</option>
+					<option value="New1997">1997</option>
+					<option value="New1998">1998</option>
+					<option value="New1999">1999</option>
+					<option value="New2000">2000</option>
+					<option value="New2001">2001</option>
+					<option value="New2002">2002</option>
+					<option value="New2003">2003</option>
+					<option value="New2004">2004</option>
+					<option value="New2005">2005</option>
+					<option value="New2006">2006</option>
+					<option value="New2007">2007</option>
+					<option value="New2008">2008</option>
+					<option value="New2009">2009</option>
+					<option value="New2010">2010</option>
+					<option value="New2011">2011</option>
+					<option value="New2012">2012</option>
+					<option value="New2013">2013</option>
+					<option value="New2014">2014</option>
+					<option value="New2015">2015</option>
+					<option value="New2016">2016</option>
+					<option value="New2017">2017</option>
+					<option value="New2018">2018</option>
+				</select>
+				<select id="maxYearDropList">
+					<option value="Used1990">1990</option>
+					<option value="Used1991">1991</option>
+					<option value="Used1992">1992</option>
+					<option value="Used1993">1993</option>
+					<option value="Used1994">1994</option>
+					<option value="Used1995">1995</option>
+					<option value="Used1996">1996</option>
+					<option value="Used1997">1997</option>
+					<option value="Used1998">1998</option>
+					<option value="Used1999">1999</option>
+					<option value="Used2000">2000</option>
+					<option value="Used2001">2001</option>
+					<option value="Used2002">2002</option>
+					<option value="Used2003">2003</option>
+					<option value="Used2004">2004</option>
+					<option value="Used2005">2005</option>
+					<option value="Used2006">2006</option>
+					<option value="Used2007">2007</option>
+					<option value="Used2008">2008</option>
+					<option value="Used2009">2009</option>
+					<option value="Used2010">2010</option>
+					<option value="Used2011">2011</option>
+					<option value="Used2012">2012</option>
+					<option value="Used2013">2013</option>
+					<option value="Used2014">2014</option>
+					<option value="Used2015">2015</option>
+					<option value="Used2016">2016</option>
+					<option value="Used2017">2017</option>
+					<option value="Used2018">2018</option>
+				</select>
+			</p>
+			<br />
+		</div>
+	</div>
+	<div class="row">
+		<br />
+		<h2>Search Results</h2>
+		<br />
+	</div>
+	<div id="nonFilteredNewVehicles">
+		@*all new vehicles go here*@
+	</div>
+	<div id="filteredNewVehicles">
+		@*all filtered new vehicles go here*@
+	</div>
+
+</div>
+

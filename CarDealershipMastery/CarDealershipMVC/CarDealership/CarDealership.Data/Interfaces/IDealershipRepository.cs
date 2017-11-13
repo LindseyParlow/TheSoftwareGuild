@@ -11,6 +11,7 @@ namespace CarDealership.Data.Interfaces
     {
         //make sure not to show vehicles that are sold for users
         //
+        Vehicle GetVehicleById(int vehicleId);
 
         List<Vehicle> GetTop20NewVehicles();
         List<Vehicle> GetTop20NewVehiclesByMake(string makeName);
@@ -55,6 +56,10 @@ namespace CarDealership.Data.Interfaces
 
         void AddSpecial(Special specialToAdd);
         void DeleteSpecial(int specialId);
+
+        List<Customer> GetAllCustomers();
+        List<ContactUsQuery> GetAllContactUsQueries();
+
 
         //CRUD for phone, addresses, specials, customers, employees, etc
         //methods for getting sales report and inventory report
