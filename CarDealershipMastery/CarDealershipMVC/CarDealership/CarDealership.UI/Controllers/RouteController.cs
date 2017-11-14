@@ -61,7 +61,7 @@ namespace CarDealership.UI.Controllers
             }
         }
 
-        [Route("home/specials")]
+        [Route("api/home/specials")]
         [AcceptVerbs("GET")]
         public IHttpActionResult GetAllSpecials()
         {
@@ -74,6 +74,54 @@ namespace CarDealership.UI.Controllers
             else
             {
                 return Ok(specials);
+            }
+        }
+
+        [Route("inventory/new/{input}/{minPrice}/{maxPrice}/{minYear}/{maxYear}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult GetSearchNew(string input, int minPrice, int maxPrice, int minYear, int maxYear)
+        {
+            List<Vehicle> vehicles = DealershipRepositoryFactory.Create().GetNewVehicleByMegaSearchFilter(input, minPrice, maxPrice, minYear, maxYear);
+
+            if (vehicles == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(vehicles);
+            }
+        }
+
+        [Route("inventory/used/{input}/{minPrice}/{maxPrice}/{minYear}/{maxYear}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult GetSearch(string input, int minPrice, int maxPrice, int minYear, int maxYear)
+        {
+            List<Vehicle> vehicles = DealershipRepositoryFactory.Create().GetUsedVehicleByMegaSearchFilter(input, minPrice, maxPrice, minYear, maxYear);
+
+            if (vehicles == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(vehicles);
+            }
+        }
+
+        [Route("inventory/details/{vehicleId}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult DetailsByVehicleId(int vehicleId)
+        {
+            Vehicle vehicles = DealershipRepositoryFactory.Create().GetVehicleDetailsByVehicleId(vehicleId);
+
+            if (vehicles == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(vehicles);
             }
         }
     }

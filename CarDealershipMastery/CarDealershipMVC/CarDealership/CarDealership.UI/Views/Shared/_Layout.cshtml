@@ -7,6 +7,8 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,7 +23,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-					<li>@Html.ActionLink("CarDealership", "Index", "Home")</li>
+					<li>@Html.ActionLink("Home", "Index", "Home")</li>
 					<li>@Html.ActionLink("New Inventory", "New", "Inventory")</li>
 					<li>@Html.ActionLink("Used Inventory", "Used", "Inventory")</li>
 					<li>@Html.ActionLink("Special", "Specials", "Home")</li>
@@ -46,6 +48,8 @@
 	@RenderSection("NewScripts", false)
 	@RenderSection("UsedScripts", false)
 	@RenderSection("FeaturedScripts", false)
-	@RenderSection("SpecialScripts", false)
+	@RenderSection("SpecialsScripts", false)
+	@RenderSection("SalesScripts", false)
+
 </body>
 </html>

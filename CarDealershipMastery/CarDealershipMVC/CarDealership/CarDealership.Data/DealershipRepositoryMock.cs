@@ -1304,5 +1304,39 @@ namespace CarDealership.Data
         {
             throw new NotImplementedException();
         }
+
+        public List<Vehicle> GetNewVehicleByMegaSearchFilter(string input, int minPrice, int maxPrice, int minYear, int maxYear)
+        {
+            var vehicles = _vehicles.Where(p => p.VehicleType.VehicleTypeDescription == "New" && p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
+
+            if (input == "noVehicleInput")
+            {
+                return vehicles.ToList();
+            }
+            else
+            {
+                return vehicles.Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(input) || v.VehicleModel.VehicleModelDescription.Contains(input) || v.Year.ToString().Contains(input)).ToList();
+            }
+        }
+
+        public List<Vehicle> GetUsedVehicleByMegaSearchFilter(string input, int minPrice, int maxPrice, int minYear, int maxYear)
+        {
+            var vehicles = _vehicles.Where(p => p.VehicleType.VehicleTypeDescription == "Used" && p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
+
+            if (input == "noVehicleInput")
+            {
+                return vehicles.ToList();
+            }
+            else
+            {
+                return vehicles.Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(input) || v.VehicleModel.VehicleModelDescription.Contains(input) || v.Year.ToString().Contains(input)).ToList();
+            }
+        }
+
+        public Vehicle GetVehicleDetailsByVehicleId(int vehicleId)
+        {
+            return _vehicles.Single(v => v.VehicleId == vehicleId);
+        }
+
     }
 }

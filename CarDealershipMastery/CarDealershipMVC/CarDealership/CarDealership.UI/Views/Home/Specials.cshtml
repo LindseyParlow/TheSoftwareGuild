@@ -9,23 +9,28 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h2>Specials</h2>
+			<h1>Specials</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			@foreach (var special in Model)
 			{
-				<div class="col-md-2">
-					<div class="searchResultsNewVehicles">
-						<p>Dollar Sign Picture</p>
+				<div class="col-md-12" style="border: 2px solid black">
+					<div class="col-md-2">
+						<div class="searchResultsNewVehicles">
+							<h3>Dollar Sign Picture</h3>
+						</div>
+					</div>
+					<div class="col-md-10">
+						<div class="searchResultsNewVehicles">
+							<h3>@special.SpecialTitle</h3>
+							<p>@special.SpecialDescription</p>
+						</div>
 					</div>
 				</div>
-				<div class="col-md-10">
-					<div class="searchResultsNewVehicles">
-						<p>@special.SpecialTitle</p>
-						<p>@special.SpecialDescription</p>
-					</div>
+				<div class="col-md-12">
+					@*space to separate divs*@
 				</div>
 			}
 		</div>

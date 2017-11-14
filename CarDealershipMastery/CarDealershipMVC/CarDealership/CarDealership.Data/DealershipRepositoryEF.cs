@@ -504,5 +504,41 @@ namespace CarDealership.Data
         {
             throw new NotImplementedException();
         }
+
+        public List<Vehicle> GetNewVehicleByMegaSearchFilter(string input, int minPrice, int maxPrice, int minYear, int maxYear)
+        {
+            throw new NotImplementedException();
+            //var vehicles = _vehicles.Where(p => p.VehicleType.VehicleTypeDescription == "New" && p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
+
+            //if (input == "")
+            //{
+            //    return vehicles.ToList();
+            //}
+            //else
+            //{
+            //    return vehicles.Where(v => ((v.VehicleModel.VehicleModelDescription).Contains(input) || (v.VehicleModel.VehicleMake.VehicleMakeDescription).Contains(input)) || (v.Year.ToString()) == input).ToList();
+            //}
+        }
+
+        public List<Vehicle> GetUsedVehicleByMegaSearchFilter(string input, int minPrice, int maxPrice, int minYear, int maxYear)
+        {
+            throw new NotImplementedException();
+            //var vehicles = _vehicles.Where(p => p.VehicleType.VehicleTypeDescription == "New" && p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
+
+            //if (input == "")
+            //{
+            //    return vehicles.ToList();
+            //}
+            //else
+            //{
+            //    return vehicles.Where(v => ((v.VehicleModel.VehicleModelDescription).Contains(input) || (v.VehicleModel.VehicleMake.VehicleMakeDescription).Contains(input)) || (v.Year.ToString()) == input).ToList();
+            //}
+        }
+
+        public Vehicle GetVehicleDetailsByVehicleId(int vehicleId)
+        {
+            throw new NotImplementedException();
+            //return _vehicles.Single(v => v.VehicleId == vehicleId);
+        }
     }
 }

@@ -172,7 +172,6 @@
     <Content Include="Scripts\JS for Views\Home_Admin.js" />
     <Content Include="Scripts\JS for Views\Home_Contact.js" />
     <Content Include="Scripts\JS for Views\Home_Index.js" />
-    <Content Include="Scripts\JS for Views\Home_Sales.js" />
     <Content Include="Scripts\JS for Views\Home_Specials.js" />
     <Content Include="Scripts\JS for Views\Inventory_New.js" />
     <Content Include="Scripts\JS for Views\Inventory_Used.js" />

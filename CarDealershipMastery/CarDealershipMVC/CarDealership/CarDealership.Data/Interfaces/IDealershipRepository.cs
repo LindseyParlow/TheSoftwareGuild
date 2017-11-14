@@ -60,6 +60,10 @@ namespace CarDealership.Data.Interfaces
         List<Customer> GetAllCustomers();
         List<ContactUsQuery> GetAllContactUsQueries();
 
+        List<Vehicle> GetNewVehicleByMegaSearchFilter(string input, int minPrice, int maxPrice, int minYear, int maxYear);
+        List<Vehicle> GetUsedVehicleByMegaSearchFilter(string input, int minPrice, int maxPrice, int minYear, int maxYear);
+
+        Vehicle GetVehicleDetailsByVehicleId(int vehicleId);
 
         //CRUD for phone, addresses, specials, customers, employees, etc
         //methods for getting sales report and inventory report
