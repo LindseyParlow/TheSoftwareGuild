@@ -12,7 +12,11 @@ namespace CarDealership.UI.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            var repo = DealershipRepositoryFactory.Create();
+
+            var model = repo.GetAllVehicles();
+
+            return View(model);
         }
 
 

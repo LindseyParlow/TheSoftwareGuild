@@ -99,8 +99,7 @@ namespace CarDealership.Data
                 new Customer
                 {
                     CustomerId = 1,
-                    FirstName = "Jake",
-                    LastName = "Ganser",
+                    CustomerName = "Jake Ganser",
                     Email = "Jake.Ganser@gmail.com",
                     Phone = "763-555-1111",
                     AddressId = 1,
@@ -110,8 +109,7 @@ namespace CarDealership.Data
                 new Customer
                 {
                     CustomerId = 2,
-                    FirstName = "Judy",
-                    LastName = "Thao",
+                    CustomerName = "Judy Thao",
                     Email = "Judy.Thao@gmail.com",
                     Phone = "763-555-2222",
                     AddressId = 2,
@@ -121,8 +119,7 @@ namespace CarDealership.Data
                 new Customer
                 {
                     CustomerId = 3,
-                    FirstName = "Nik",
-                    LastName = "Clay",
+                    CustomerName = "Nik Clay",
                     Email = "Nik.Clay@gmail.com",
                     Phone = "612-555-4444",
                     AddressId = 3,
@@ -398,6 +395,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 1,
+                    ImagePath = "bluecar.jpg",
                     VehicleTypeId = 1,
                     VehicleModelId = 2,
                     TransmissionId = 2,
@@ -425,6 +423,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 2,
+                    ImagePath = ""
                     VehicleTypeId = 2,
                     VehicleModelId = 3,
                     TransmissionId = 1,
@@ -797,8 +796,7 @@ namespace CarDealership.Data
                 new ContactUsQuery
                 {
                     ContactUsQueryId = 1,
-                    FirstName = "Mark",
-                    LastName = "Johnson",
+                    FullName = "Mark Johnson",
                     Email = "Mark.Johnson@gmail.com",
                     Phone = "651-555-6666",
                     Message = "Hey, will you find me a car like this but in blue?",
@@ -809,8 +807,7 @@ namespace CarDealership.Data
                 new ContactUsQuery
                 {
                     ContactUsQueryId = 2,
-                    FirstName = "Rob",
-                    LastName = "Reynolds",
+                    FullName = "Rob Reynolds",
                     Email = "Rob.Reynolds@gmail.com",
                     Phone = "651-555-9999",
                     Message = "Do you accept trades?",
@@ -819,8 +816,7 @@ namespace CarDealership.Data
                 new ContactUsQuery
                 {
                     ContactUsQueryId = 3,
-                    FirstName = "Javier",
-                    LastName = "Aguirre",
+                    FullName = "Javier Aguirre",
                     Email = "Javier.Aguirre@gmail.com",
                     Phone = "763-555-1212",
                     Message = "I need a sweet truck!",
@@ -1338,5 +1334,44 @@ namespace CarDealership.Data
             return _vehicles.Single(v => v.VehicleId == vehicleId);
         }
 
+        public List<Vehicle> GetNewAndUsedVehiclesForSales()
+        {
+            var vehicles = _vehicles.OrderByDescending(p => p.MSRPPrice).ToList();
+            if (vehicles.Count < 20)
+            {
+                return vehicles;
+            }
+            else
+            {
+                return vehicles.Take(20).ToList();
+            }
+        }
+
+        public List<Vehicle> GetFilteredNewAndUsedVehiclesForSales(string input, int minPrice, int maxPrice, int minYear, int maxYear)
+        {
+            var vehicles = _vehicles.Where(p => p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
+
+            if (input == "noVehicleInput")
+            {
+                return vehicles.ToList();
+            }
+            else
+            {
+                return vehicles.Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(input) || v.VehicleModel.VehicleModelDescription.Contains(input) || v.Year.ToString().Contains(input)).ToList();
+            }
+        }
+
+        public List<State> GetAllStates()
+        {
+            return _states;
+        }
+
+        public List<PurchaseType> GetAllPurchaseTypes()
+        {
+            return _purchaseType;
+        }
+
+
     }
 }
+

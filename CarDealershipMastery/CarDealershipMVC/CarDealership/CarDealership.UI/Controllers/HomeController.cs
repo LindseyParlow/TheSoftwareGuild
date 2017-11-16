@@ -1,4 +1,5 @@
 ﻿using CarDealership.Data;
+using CarDealership.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,11 +31,10 @@ namespace CarDealership.UI.Controllers
 
         public ActionResult Contact()
         {
-            var repo = DealershipRepositoryFactory.Create();
+            var viewModel = new ContactUsVM();
+            
 
-            var model = repo.GetAllCustomers();
-
-            return View();
+            return View(viewModel);
         }
 
         public ActionResult Sales()

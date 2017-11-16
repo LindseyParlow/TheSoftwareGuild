@@ -26,7 +26,7 @@ function allFeaturedVehicles() {
 
 			$.each(vehicleArray, function (index, vehicle) {
 
-				var vehicleInfo = '<div class="col-md-2 panel panel-default" style="margin: 10px"><p>' + "PIC GOES HERE!!!" + '</p>' +
+				var vehicleInfo = '<div class="col-md-2 panel panel-default" style="margin: 20px; padding:10px"><p>' + "PIC GOES HERE!!!" + '</p>' +
 					'<p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
 				'<p>' + vehicle.salePrice + '</p</div>'
 

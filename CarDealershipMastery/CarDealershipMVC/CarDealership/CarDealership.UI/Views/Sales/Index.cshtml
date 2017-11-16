@@ -1,6 +1,6 @@
-﻿
+﻿@model CarDealership.UI.Models.SalesInfoVM
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
 @section SalesScripts {
@@ -143,8 +143,10 @@
 	</div>
 	<div class="row">
 		<br />
-		<h2 id="searchResultsHeading" style="display: none">Search Results</h2>
-		<h2 id="purchaseVehicleHeading" style="display: none">Purchase Vehicle</h2>
+		<div class="col-md-12">
+			<h2 id="searchResultsHeading" style="display: none">Search Results</h2>
+			<h2 id="purchaseVehicleHeading" style="display: none">Purchase Vehicle</h2>
+		</div>
 		<br />
 	</div>
 	<div id="singleVehicleDetails">
@@ -156,5 +158,172 @@
 	<div id="filteredSalesVehicles">
 		@*all filtered new vehicles go here*@
 	</div>
+	<div id="salesInfoForm" style="display:none">
+		@using (Html.BeginForm("Index", "Sales"))
+		{
+			<div class="col-md-12">
+				<div class="row">
+					<h2>Sales Information</h2><br />
+				</div>
+				<div class="row">
+					<fieldset class="for-panel">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-horizontal">
+										<p>
+											<label>Name</label>
+										</p>
+										<p>
+											@Html.TextBoxFor(m => m.Purchase.Customer.CustomerName, new { @class = "form-control", @placeholder = "Name" })
+										</p><br />
+									</div>
+								</div>
+								<div class="col-md-offset-4">
+									<div class="form-horizontal">
+										<p>
+											<label>Phone</label>
+										</p>
+										<p>
+											@Html.TextBoxFor(m => m.Purchase.Customer.Phone, new { @class = "form-control", @placeholder = "Phone" })
+										</p><br />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-horizontal">
+										<p>
+											<label>Email</label>
+										</p>
+										<p>
+											@Html.TextBoxFor(m => m.Purchase.Customer.Email, new { @class = "form-control", @placeholder = "Email" })
+										</p><br />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-horizontal">
+										<p>
+											<label>Street 1</label>
+										</p>
+										<p>
+											@Html.TextBoxFor(m => m.Purchase.Customer.Address.Street1, new { @class = "form-control", @placeholder = "Street 1" })
+										</p><br />
+									</div>
+								</div>
+								<div class="col-md-offset-4">
+									<div class="form-horizontal">
+										<p>
+											<label>Street 2</label>
+										</p>
+										<p>
+											@Html.TextBoxFor(m => m.Purchase.Customer.Address.Street2, new { @class = "form-control", @placeholder = "Street 2" })
+										</p><br />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-horizontal">
+										<p>
+											<label>City</label>
+										</p>
+										<p>
+											@Html.TextBoxFor(m => m.Purchase.Customer.Address.City, new { @class = "form-control", @placeholder = "City" })
+										</p><br />
+									</div>
+								</div>
+								<div class="col-md-offset-4">
+									<div class="form-horizontal">
+										<p>
+											<label>State</label>
+										</p>
+										<p>
+											@Html.DropDownListFor(m => m.Purchase.Customer.Address.State.StateId, Model.StateItems, "-Choose One-", new { @class = "form-control", @placeholder = "States" })
+										</p><br />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-horizontal">
+										<p>
+											<label>Zipcode</label>
+										</p>
+										<p>
+											@Html.TextBoxFor(m => m.Purchase.Customer.Address.ZipCode, new { @class = "form-control", @placeholder = "Zipcode" })
+										</p><br />
+									</div>
+								</div>
 
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<hr />
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-horizontal">
+										<p>
+											<label>Purchase Price</label>
+										</p>
+										<p>
+											@Html.TextBoxFor(m => m.Purchase.PurchasePrice, new { @class = "form-control", @placeholder = "Purchase Price" })
+										</p><br />
+									</div>
+								</div>
+								<div class="col-md-offset-4">
+									<div class="form-horizontal">
+										<p>
+											<label>Purchase Type</label>
+										</p>
+										<p>
+											@Html.DropDownListFor(m => m.Purchase.PurchaseTypeId, Model.PurchaseTypeItems, "-Choose One-", new { @class = "form-control", @placeholder = "Purchase Type" })
+										</p><br />
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-horizontal">
+										<p>
+											<button class="btn btn-primary" id="savePurchaseButton">Save</button>
+										</p><br />
+									</div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+		}
+	</div>
 </div>
+@*<div class="col-md-6">
+		<div class="panel-heading">
+			<h4 class="panel-title">Sales Information</h4>
+		</div>
+		<div>
+			<div class="form-group">
+				<p>Phone</p>
+				@Html.TextBoxFor(m => m.Purchase.Customer.Phone, new { @class = "form-control", @placeholder = "Phone" })
+				<br />
+			</div>
+			<div class="form-group">
+				<p>Street 2</p>
+				@Html.TextBoxFor(m => m.Purchase.Customer.Address.Street2, new { @class = "form-control", @placeholder = "Street 2" })
+				<br />
+			</div>
+			<div class="form-group">
+				<p>State</p>
+				@Html.DropDownListFor(m => m.Purchase.Customer.Address.State.StateId, Model.StateItems, "-Choose One-", new { @class = "form-control", @placeholder = "States" })
+				<br />
+			</div>
+			<input type="submit" name="submit" value="Submit" class="btn btn-primary" />
+		</div>
+	</div>*@
+
+
+

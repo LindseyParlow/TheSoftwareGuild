@@ -113,7 +113,23 @@ namespace CarDealership.UI.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult DetailsByVehicleId(int vehicleId)
         {
-            Vehicle vehicles = DealershipRepositoryFactory.Create().GetVehicleDetailsByVehicleId(vehicleId);
+            Vehicle vehicle = DealershipRepositoryFactory.Create().GetVehicleDetailsByVehicleId(vehicleId);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(vehicle);
+            }
+        }
+
+        [Route("sales/index/all")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult Top20NewAndUsedForSales()
+        {
+            List<Vehicle> vehicles = DealershipRepositoryFactory.Create().GetNewAndUsedVehiclesForSales();
 
             if (vehicles == null)
             {
@@ -124,6 +140,39 @@ namespace CarDealership.UI.Controllers
                 return Ok(vehicles);
             }
         }
+
+        [Route("sales/{input}/{minPrice}/{maxPrice}/{minYear}/{maxYear}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult FilteredNewAndUsedForSales(string input, int minPrice, int maxPrice, int minYear, int maxYear)
+        {
+            List<Vehicle> vehicles = DealershipRepositoryFactory.Create().GetFilteredNewAndUsedVehiclesForSales(input, minPrice, maxPrice, minYear, maxYear);
+
+            if (vehicles == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(vehicles);
+            }
+        }
+
+        [Route("sales/purchase/{vehicleId}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult PurchaseByVehicleId(int vehicleId)
+        {
+            Vehicle vehicle = DealershipRepositoryFactory.Create().GetVehicleDetailsByVehicleId(vehicleId);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(vehicle);
+            }
+        }
+
     }
 }
 

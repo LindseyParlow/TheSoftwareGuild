@@ -160,6 +160,26 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
+    <Content Include="Images\bluecar.jpg" />
+    <Content Include="Images\bluesuv.jpg" />
+    <Content Include="Images\bluetruck.png" />
+    <Content Include="Images\bluevan.jpg" />
+    <Content Include="Images\greencar.jpg" />
+    <Content Include="Images\greensuv.jpg" />
+    <Content Include="Images\greentruck.jpg" />
+    <Content Include="Images\greenvan.png" />
+    <Content Include="Images\redcar.png" />
+    <Content Include="Images\redsuv.jpg" />
+    <Content Include="Images\redtruck.jpg" />
+    <Content Include="Images\redvan.jpg" />
+    <Content Include="Images\whitecar.jpg" />
+    <Content Include="Images\whitesuv.jpg" />
+    <Content Include="Images\whitetruck.jpg" />
+    <Content Include="Images\whitevan.jpg" />
+    <Content Include="Images\yellowcar.png" />
+    <Content Include="Images\yellowsuv.jpg" />
+    <Content Include="Images\yellowtruck.jpg" />
+    <Content Include="Images\yellowvan.jpg" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -169,7 +189,6 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\JS for Views\Admin_Index.js" />
-    <Content Include="Scripts\JS for Views\Home_Admin.js" />
     <Content Include="Scripts\JS for Views\Home_Contact.js" />
     <Content Include="Scripts\JS for Views\Home_Index.js" />
     <Content Include="Scripts\JS for Views\Home_Specials.js" />
@@ -190,6 +209,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContactUsVM.cs" />
+    <Compile Include="Models\SalesInfoVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -216,7 +237,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CarDealership.Data\CarDealership.Data.csproj">

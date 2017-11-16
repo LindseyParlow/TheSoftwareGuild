@@ -540,5 +540,50 @@ namespace CarDealership.Data
             throw new NotImplementedException();
             //return _vehicles.Single(v => v.VehicleId == vehicleId);
         }
+
+        public List<Vehicle> GetNewAndUsedVehiclesForSales()
+        {
+            throw new NotImplementedException();
+
+            //var vehicles = _vehicles.OrderByDescending(p => p.MSRPPrice).ToList();
+            //if (vehicles.Count < 20)
+            //{
+            //    return vehicles;
+            //}
+            //else
+            //{
+            //    return vehicles.Take(20).ToList();
+            //}
+        }
+
+        public List<Vehicle> GetFilteredNewAndUsedVehiclesForSales(string input, int minPrice, int maxPrice, int minYear, int maxYear)
+        {
+            throw new NotImplementedException();
+
+            //var vehicles = _vehicles.Where(p => p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
+
+            //if (input == "noVehicleInput")
+            //{
+            //    return vehicles.ToList();
+            //}
+            //else
+            //{
+            //    return vehicles.Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(input) || v.VehicleModel.VehicleModelDescription.Contains(input) || v.Year.ToString().Contains(input)).ToList();
+            //}
+        }
+
+        public List<State> GetAllStates()
+        {
+            throw new NotImplementedException();
+
+            //return _states;
+        }
+
+        public List<PurchaseType> GetAllPurchaseTypes()
+        {
+            throw new NotImplementedException();
+
+            //return _purchaseType;
+        }
     }
 }

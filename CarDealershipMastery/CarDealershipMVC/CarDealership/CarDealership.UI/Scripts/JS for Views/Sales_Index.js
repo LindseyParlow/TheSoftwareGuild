@@ -1,8 +1,8 @@
-﻿$(document).ready(function () {
+﻿ $(document).ready(function () {
 	//allSalesVehicles();
 	vehiclesByQuickSearch();
-	getDetailsSales();
-	returnToSearch();
+	getPurchaseSales();
+	cancelToSearch();
 });
 
 
@@ -23,22 +23,21 @@ function vehiclesByQuickSearch() {
 
 			$.ajax({
 				type: "GET",
-				url: "http://localhost:59129/sales/index",
+				url: "http://localhost:59129/sales/index/all",
 				success: function (vehicleArray) {
-					//alert("success")
-
-
+					alert("success")
 
 					$("#searchBarSection").show();
 					$("#searchResultsHeading").show();
 					$("#purchaseVehicleHeading").hide();
 					$("#singleVehicleDetails").hide();
+					$("#salesInfoForm").hide();
 
 					var filteredSalesVehicles = $("#filteredSalesVehicles");
 
 					$.each(vehicleArray, function (index, vehicle) {
 
-						var vehicleInfo = '<div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
+						var vehicleInfo = '<div class="col-md-12" style="border: 2px solid black; padding: 10px; margin-bottom: 20px"><div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
 							'<p>' + "PIC GOES HERE!" + '</p></div>' +
 							'<div class="col-md-3"><p>' + "Body Style: " + vehicle.vehicleBody.vehicleBodyDescription + '</p>' +
 							'<p>' + "Trans: " + vehicle.transmission.transmissionType + '</p>' +
@@ -46,15 +45,15 @@ function vehiclesByQuickSearch() {
 							'<div class="col-md-3"><p>' + "Interior: " + vehicle.interiorColor + '</p>' +
 							'<p>' + "Mileage: " + vehicle.mileage + '</p>' +
 							'<p>' + "VIN: " + vehicle.vinNumber + '</p></div>' +
-							'<div class="col-md-3"><p>' + "Sales Price: " + vehicle.salePrice + '</p>' +
-							'<p>' + "MSRP: " + vehicle.msrpPrice + '</p>' +
-							'<p><button class="btn btn-primary" id="detailsButton" data-vehicleid="' + vehicle.vehicleId + '">Details</button></p></div>';
+							'<div class="col-md-3"><p>' + "Sales Price: $" + vehicle.salePrice + '</p>' +
+							'<p>' + "MSRP: $" + vehicle.msrpPrice + '</p>' +
+							'<p><button class="btn btn-primary" id="purchaseButton" data-vehicleid="' + vehicle.vehicleId + '">Purchase</button></p></div></div>';
 
 						filteredSalesVehicles.append(vehicleInfo);
 					});
 				},
 				error: function () {
-					//alert("error")
+					alert("error")
 				}
 			});
 		}
@@ -76,12 +75,13 @@ function vehiclesByQuickSearch() {
 					$("searchResultsHeading").show();
 					$("#purchaseVehicleHeading").hide();
 					$("#singleVehicleDetails").hide();
+					$("#salesInfoForm").hide();
 
 					var filteredSalesVehicles = $("#filteredSalesVehicles");
 
 					$.each(vehicleArray, function (index, vehicle) {
 
-						var vehicleInfo = '<div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
+						var vehicleInfo = '<div class="col-md-12" style="border: 2px solid black; padding: 10px; margin-bottom: 20px"><div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
 							'<p>' + "PIC GOES HERE!" + '</p></div>' +
 							'<div class="col-md-3"><p>' + "Body Style: " + vehicle.vehicleBody.vehicleBodyDescription + '</p>' +
 							'<p>' + "Trans: " + vehicle.transmission.transmissionType + '</p>' +
@@ -89,9 +89,9 @@ function vehiclesByQuickSearch() {
 							'<div class="col-md-3"><p>' + "Interior: " + vehicle.interiorColor + '</p>' +
 							'<p>' + "Mileage: " + vehicle.mileage + '</p>' +
 							'<p>' + "VIN: " + vehicle.vinNumber + '</p></div>' +
-							'<div class="col-md-3"><p>' + "Sales Price: " + vehicle.salePrice + '</p>' +
-							'<p>' + "MSRP: " + vehicle.msrpPrice + '</p>' +
-							'<p><button class="btn btn-primary" id="detailsButton" data-vehicleid="' + vehicle.vehicleId + '">Details</button></p></div>';
+							'<div class="col-md-3"><p>' + "Sales Price: $" + vehicle.salePrice + '</p>' +
+							'<p>' + "MSRP: $" + vehicle.msrpPrice + '</p>' +
+							'<p><button class="btn btn-primary" id="purchaseButton" data-vehicleid="' + vehicle.vehicleId + '">Purchase</button></p></div></div>';
 
 						filteredSalesVehicles.append(vehicleInfo);
 					});
@@ -105,8 +105,8 @@ function vehiclesByQuickSearch() {
 	})
 }
 
-function getDetailsSales() {
-	$(document).on("click", "#detailsButton", function () {
+function getPurchaseSales() {
+	$(document).on("click", "#purchaseButton", function () {
 		var vehicleId = $(this).data('vehicleid');
 
 		$.ajax({
@@ -121,8 +121,9 @@ function getDetailsSales() {
 				$("#searchResultsHeading").hide();
 				$("#purchaseVehicleHeading").show();
 				$("#singleVehicleDetails").show();
+				$("#salesInfoForm").show();
 
-				var vehicleInfo = '<div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
+				var vehicleInfo = '<div class="col-md-12" style="border: 2px solid black; padding:10px"><div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
 					'<p>' + "PIC GOES HERE!" + '</p></div>' +
 					'<div class="col-md-3"><p>' + "Body Style: " + vehicle.vehicleBody.vehicleBodyDescription + '</p>' +
 					'<p>' + "Trans: " + vehicle.transmission.transmissionType + '</p>' +
@@ -130,10 +131,10 @@ function getDetailsSales() {
 					'<div class="col-md-3"><p>' + "Interior: " + vehicle.interiorColor + '</p>' +
 					'<p>' + "Mileage: " + vehicle.mileage + '</p>' +
 					'<p>' + "VIN: " + vehicle.vinNumber + '</p></div>' +
-					'<div class="col-md-3"><p>' + "Sales Price: " + vehicle.salePrice + '</p>' +
-					'<p>' + "MSRP: " + vehicle.msrpPrice + '</p></div>' +
+					'<div class="col-md-3"><p>' + "Sales Price: $" + vehicle.salePrice + '</p>' +
+					'<p>' + "MSRP: $" + vehicle.msrpPrice + '</p></div>' +
 					'<div class="col-md-12">' + "Description: " + vehicle.vehicleDescription + '</div>' +
-					'<div class="col-md-12"><button class="btn btn-primary" id="contactUsButton">Contact Us</button><button class="btn btn-primary" id="returnButton">Return To Search</button></div>'
+					'<div class="col-md-12"><button class="btn btn-primary" id="cancelButton">Cancel</button></div></div>'
 
 				$("#singleVehicleDetails").append(vehicleInfo);
 
@@ -145,14 +146,15 @@ function getDetailsSales() {
 	})
 }
 
-function returnToSearch() {
-	$(document).on("click", "#returnButton", function () {
+function cancelToSearch() {
+	$(document).on("click", "#cancelButton", function () {
 
 		$("#searchResultsHeading").show();
-		$("#vehicleDetailsHeading").hide();
+		$("#purchaseVehicleHeading").hide();
 		$("#searchBarSection").show();
 		$("#singleVehicleDetails").text("");
 		$("#singleVehicleDetails").show();
-		$("#filteredNewVehicles").show();
+		$("#filteredSalesVehicles").show();
+		$("#salesInfoForm").hide();
 	})
 }

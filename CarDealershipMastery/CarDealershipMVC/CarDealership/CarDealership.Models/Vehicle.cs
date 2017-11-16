@@ -9,6 +9,7 @@ namespace CarDealership.Models
     public class Vehicle
     {
         public int VehicleId { get; set; }
+        public string ImagePath { get; set; }
         public int VehicleTypeId { get; set; }
         public int VehicleModelId { get; set; }
         public int TransmissionId { get; set; }
