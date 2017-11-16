@@ -585,5 +585,10 @@ namespace CarDealership.Data
 
             //return _purchaseType;
         }
+
+        public List<Phone> GetAllDealershipPhoneNumbers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

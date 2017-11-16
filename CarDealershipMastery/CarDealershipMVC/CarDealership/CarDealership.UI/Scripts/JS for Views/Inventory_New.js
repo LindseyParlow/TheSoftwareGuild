@@ -3,7 +3,7 @@
 	vehiclesByQuickSearch();
 	getDetailsNew();
 	returnToSearch();
-	redirectToContactUs();
+	//redirectToContactUs();
 });
 
 
@@ -40,7 +40,7 @@ function vehiclesByQuickSearch() {
 					$.each(vehicleArray, function (index, vehicle) {
 
 						var vehicleInfo = '<div class="col-md-12" style="border: 2px solid black; padding: 10px; margin-bottom: 20px"><div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
-							'<p>' + "PIC GOES HERE!" + '</p></div>' +
+							'<p>' + '<img src="../Images/' + vehicle.imagePath +'" class="imageFormat" />' + '</p></div>' +
 							'<div class="col-md-3"><p>' + "Body Style: " + vehicle.vehicleBody.vehicleBodyDescription + '</p>' +
 							'<p>' + "Trans: " + vehicle.transmission.transmissionType + '</p>' +
 							'<p>' + "Color: " + vehicle.vehicleColor + '</p></div>' +
@@ -83,7 +83,7 @@ function vehiclesByQuickSearch() {
 					$.each(vehicleArray, function (index, vehicle) {
 
 						var vehicleInfo = '<div class="col-md-12" style="border: 2px solid black; padding: 10px; margin-bottom: 20px"><div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
-							'<p>' + "PIC GOES HERE!" + '</p></div>' +
+							'<p>' + '<img src="../Images/' + vehicle.imagePath +'" class="imageFormat" /></p></div>' +
 							'<div class="col-md-3"><p>' + "Body Style: " + vehicle.vehicleBody.vehicleBodyDescription + '</p>' +
 							'<p>' + "Trans: " + vehicle.transmission.transmissionType + '</p>' +
 							'<p>' + "Color: " + vehicle.vehicleColor + '</p></div>' +
@@ -124,7 +124,7 @@ function getDetailsNew() {
 				$("#singleVehicleDetails").show();
 
 				var vehicleInfo = '<div class="col-md-12" style="border: 2px solid black; padding: 10px"><div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
-					'<p>' + "PIC GOES HERE!" + '</p></div>' +
+					'<p>' + '<img src="../Images/' + vehicle.imagePath + '" class="imageFormat" />' + '</p></div>' +
 					'<div class="col-md-3"><p>' + "Body Style: " + vehicle.vehicleBody.vehicleBodyDescription + '</p>' +
 					'<p>' + "Trans: " + vehicle.transmission.transmissionType + '</p>' +
 					'<p>' + "Color: " + vehicle.vehicleColor + '</p></div>' +
@@ -134,7 +134,7 @@ function getDetailsNew() {
 					'<div class="col-md-3"><p>' + "Sales Price: " + vehicle.salePrice + '</p>' +
 					'<p>' + "MSRP: " + vehicle.msrpPrice + '</p></div>' + 
 					'<div class="col-md-12">' + "Description: " + vehicle.vehicleDescription + '</div>' +
-					'<div class="col-md-12"><button class="btn btn-primary" id="contactUsButton">Contact Us</button>' + " " + '<button class="btn btn-primary" id="returnButton">Return To Search</button></div></div>'
+					'<div class="col-md-12"><input type="button" class="btn btn-primary" id="contactUsButton" onClick="window.location=\'/Home/Contact/' + vehicle.vinNumber + '\'" value="Contact Us"/>' + '</div></div>'
 
 
 
@@ -160,9 +160,9 @@ function returnToSearch() {
 	})
 }
 
-function redirectToContactUs() {
-	$(document).on("click", "#contactUsButton", function () {
-		window.location.href = '/Home/Contact';
-		return false;
-	})
-}
+//function redirectToContactUs(id) {
+//	$(document).on("click", "#contactUsButton", function () {
+//		window.location.href = '/Home/Contact';
+//		return false;
+//	})
+//}

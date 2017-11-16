@@ -161,9 +161,10 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Images\bluecar.jpg" />
-    <Content Include="Images\bluesuv.jpg" />
+    <Content Include="Images\bluesuv.png" />
     <Content Include="Images\bluetruck.png" />
     <Content Include="Images\bluevan.jpg" />
+    <Content Include="Images\dollarsign.png" />
     <Content Include="Images\greencar.jpg" />
     <Content Include="Images\greensuv.jpg" />
     <Content Include="Images\greentruck.jpg" />
@@ -209,6 +210,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddVehicleVM.cs" />
     <Compile Include="Models\ContactUsVM.cs" />
     <Compile Include="Models\SalesInfoVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -222,12 +224,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Sales.cshtml" />
-    <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Inventory\New.cshtml" />
     <Content Include="Views\Inventory\Used.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\Home\Specials.cshtml" />
+    <Content Include="Views\Admin\AddVehicle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

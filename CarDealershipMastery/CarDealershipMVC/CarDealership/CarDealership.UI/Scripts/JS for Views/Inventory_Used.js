@@ -38,7 +38,7 @@ function vehiclesByQuickSearch() {
 					$.each(vehicleArray, function (index, vehicle) {
 
 						var vehicleInfo = '<div class="col-md-12" style="border: 2px solid black; padding: 10px; margin-bottom: 20px"><div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
-							'<p>' + "PIC GOES HERE!" + '</p></div>' +
+							'<p>' + '<img src="../Images/' + vehicle.imagePath + '" class="imageFormat" />' + '</p></div>' +
 							'<div class="col-md-3"><p>' + "Body Style: " + vehicle.vehicleBody.vehicleBodyDescription + '</p>' +
 							'<p>' + "Trans: " + vehicle.transmission.transmissionType + '</p>' +
 							'<p>' + "Color: " + vehicle.vehicleColor + '</p></div>' +
@@ -81,7 +81,7 @@ function vehiclesByQuickSearch() {
 					$.each(vehicleArray, function (index, vehicle) {
 
 						var vehicleInfo = '<div class="col-md-12" style="border: 2px solid black; padding: 10px; margin-bottom: 20px"><div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
-							'<p>' + "PIC GOES HERE!" + '</p></div>' +
+							'<p>' + '<img src="../Images/' + vehicle.imagePath + '" class="imageFormat" />' + '</p></div>' +
 							'<div class="col-md-3"><p>' + "Body Style: " + vehicle.vehicleBody.vehicleBodyDescription + '</p>' +
 							'<p>' + "Trans: " + vehicle.transmission.transmissionType + '</p>' +
 							'<p>' + "Color: " + vehicle.vehicleColor + '</p></div>' +
@@ -122,7 +122,7 @@ function getDetailsUsed() {
 				$("#singleVehicleDetails").show();
 
 				var vehicleInfo = '<div class="col-md-12" style="border: 2px solid black; padding: 10px"><div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
-					'<p>' + "PIC GOES HERE!" + '</p></div>' +
+					'<p>' + '<img src="../Images/' + vehicle.imagePath + '" class="imageFormat" />' + '</p></div>' +
 					'<div class="col-md-3"><p>' + "Body Style: " + vehicle.vehicleBody.vehicleBodyDescription + '</p>' +
 					'<p>' + "Trans: " + vehicle.transmission.transmissionType + '</p>' +
 					'<p>' + "Color: " + vehicle.vehicleColor + '</p></div>' +

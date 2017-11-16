@@ -29,10 +29,11 @@ namespace CarDealership.UI.Controllers
             return View(model);
         }
 
-        public ActionResult Contact()
+        public ActionResult Contact(string id)
         {
             var viewModel = new ContactUsVM();
-            
+
+            viewModel.ContactUs.Message = id;
 
             return View(viewModel);
         }

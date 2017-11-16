@@ -173,6 +173,22 @@ namespace CarDealership.UI.Controllers
             }
         }
 
+        [Route("dealership/phoneNumbers")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult FindAllDealershipPhoneNumbers()
+        {
+            List<Phone> phones = DealershipRepositoryFactory.Create().GetAllDealershipPhoneNumbers();
+
+            if (phones == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(phones);
+            }
+        }
+
     }
 }
 

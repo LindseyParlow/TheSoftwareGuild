@@ -395,7 +395,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 1,
-                    ImagePath = "bluecar.jpg",
+                    ImagePath = "redcar.png",
                     VehicleTypeId = 1,
                     VehicleModelId = 2,
                     TransmissionId = 2,
@@ -423,7 +423,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 2,
-                    ImagePath = ""
+                    ImagePath = "greentruck.jpg",
                     VehicleTypeId = 2,
                     VehicleModelId = 3,
                     TransmissionId = 1,
@@ -451,6 +451,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 3,
+                    ImagePath = "whitevan.jpg",
                     VehicleTypeId = 1,
                     VehicleModelId = 2,
                     TransmissionId = 2,
@@ -477,6 +478,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 4,
+                    ImagePath = "redcar.png",
                     VehicleTypeId = 2,
                     VehicleModelId = 1,
                     TransmissionId = 1,
@@ -503,6 +505,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 5,
+                    ImagePath = "yellowcar.png",
                     VehicleTypeId = 1,
                     VehicleModelId = 2,
                     TransmissionId = 2,
@@ -530,6 +533,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 6,
+                    ImagePath = "redsuv.jpg",
                     VehicleTypeId = 2,
                     VehicleModelId = 1,
                     TransmissionId = 1,
@@ -556,6 +560,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 7,
+                    ImagePath = "bluesuv.png",
                     VehicleTypeId = 1,
                     VehicleModelId = 1,
                     TransmissionId = 2,
@@ -582,6 +587,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 8,
+                    ImagePath = "greencar.jpg",
                     VehicleTypeId = 2,
                     VehicleModelId = 2,
                     TransmissionId = 1,
@@ -608,6 +614,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 9,
+                    ImagePath = "whitetruck.jpg",
                     VehicleTypeId = 1,
                     VehicleModelId = 3,
                     TransmissionId = 2,
@@ -635,6 +642,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 10,
+                    ImagePath = "greenvan.png",
                     VehicleTypeId = 2,
                     VehicleModelId = 4,
                     TransmissionId = 2,
@@ -661,6 +669,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 11,
+                    ImagePath = "bluecar.jpg",
                     VehicleTypeId = 1,
                     VehicleModelId = 5,
                     TransmissionId = 1,
@@ -688,6 +697,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 12,
+                    ImagePath = "redcar.png",
                     VehicleTypeId = 2,
                     VehicleModelId = 5,
                     TransmissionId = 1,
@@ -714,6 +724,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 13,
+                    ImagePath = "whitesuv.jpg",
                     VehicleTypeId = 1,
                     VehicleModelId = 1,
                     TransmissionId = 2,
@@ -740,6 +751,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 14,
+                    ImagePath = "yellowsuv.jpg",
                     VehicleTypeId = 2,
                     VehicleModelId = 5,
                     TransmissionId = 2,
@@ -766,6 +778,7 @@ namespace CarDealership.Data
                 new Vehicle
                 {
                     VehicleId = 15,
+                    ImagePath = "greentruck.jpg",
                     VehicleTypeId = 1,
                     VehicleModelId = 3,
                     TransmissionId = 1,
@@ -902,7 +915,7 @@ namespace CarDealership.Data
                     DealershipId = 1,
                     DealerShipName = "Lindsey's Amazing Car Dealership",
                     AddressId = 4,
-                    Phones = _phones.Where(p => p.PhoneId == 1 || p.PhoneId == 2).ToList(),
+                    Phones = _phones,
 
                     Address = _addresses[3]
                 }
@@ -1371,7 +1384,10 @@ namespace CarDealership.Data
             return _purchaseType;
         }
 
-
+        public List<Phone> GetAllDealershipPhoneNumbers()
+        {
+            return _dealerships.SelectMany(p => p.Phones).ToList();
+        }
     }
 }
 

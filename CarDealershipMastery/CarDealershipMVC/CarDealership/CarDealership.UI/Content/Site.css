@@ -16,4 +16,10 @@ textarea {
     max-width: 280px;
 }
 
+.imageFormat {
+	height:60px;
+}
 
+#dollarSignPicture {
+	height:70px;
+}
