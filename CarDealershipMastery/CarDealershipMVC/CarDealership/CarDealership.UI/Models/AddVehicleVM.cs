@@ -15,20 +15,8 @@ namespace CarDealership.UI.Models
         public List<SelectListItem> TypeItems { get; set; }
         public List<SelectListItem> BodyStyleItems { get; set; }
         public List<SelectListItem> TransmissionItems { get; set; }
-        public List<SelectListItem> ColorItems = new List<SelectListItem>()
-        {
-            new SelectListItem() {Text="Red", Value="Red"},
-            new SelectListItem() {Text="Blue", Value="Blue"},
-            new SelectListItem() {Text="Yellow", Value="Yellow"},
-            new SelectListItem() {Text="Green", Value="Green"},
-            new SelectListItem() {Text="White", Value="White"},
-        };
-        public List<SelectListItem> InteriorItems = new List<SelectListItem>()
-        {
-            new SelectListItem() {Text="Gray", Value="Gray"},
-            new SelectListItem() {Text="Black", Value="Black"},
-            new SelectListItem() {Text="White", Value="White"},
-        };
+        public List<SelectListItem> ColorItems { get; set; }
+        public List<SelectListItem> InteriorItems { get; set; }
 
         public AddVehicleVM()
         {
@@ -104,14 +92,58 @@ namespace CarDealership.UI.Models
 
         public void SetColorItems()
         {
-            
-                ColorItems.Add(new SelectListItem()
-                {
-                    Value = "Red",
-                    Text = "Red",
-                });
-            
+            ColorItems.Add(new SelectListItem()
+            {
+                Value = "Red",
+                Text = "Red",
+            });
+
+            ColorItems.Add(new SelectListItem()
+            {
+                Value = "Blue",
+                Text = "Blue",
+            });
+
+            ColorItems.Add(new SelectListItem()
+            {
+                Value = "Yellow",
+                Text = "Yellow",
+            });
+
+            ColorItems.Add(new SelectListItem()
+            {
+                Value = "Green",
+                Text = "Green",
+            });
+
+            ColorItems.Add(new SelectListItem()
+            {
+                Value = "White",
+                Text = "White",
+            });
+        }
+
+        public void SetInteriorItems()
+        {
+            InteriorItems.Add(new SelectListItem()
+            {
+                Value = "Gray",
+                Text = "Gray",
+            });
+
+            InteriorItems.Add(new SelectListItem()
+            {
+                Value = "Black",
+                Text = "Black",
+            });
+
+            InteriorItems.Add(new SelectListItem()
+            {
+                Value = "White",
+                Text = "White",
+            });
         }
 
     }
 }
+

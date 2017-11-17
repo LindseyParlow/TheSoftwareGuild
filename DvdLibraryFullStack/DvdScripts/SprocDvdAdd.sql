@@ -11,11 +11,12 @@ create procedure DvdAddNew(
 	@Title nvarchar(max),
 	@Director nvarchar(max),
 	@Rating nvarchar(max),
-	@ReleaseDate int 
+	@ReleaseDate int,
+	@Notes nvarchar(max)
 ) as 
 begin
-	insert into Dvds(Title, Director, Rating, ReleaseDate)
-	values (@Title, @Director, @Rating, @ReleaseDate);
+	insert into Dvds(Title, Director, Rating, ReleaseDate, Notes)
+	values (@Title, @Director, @Rating, @ReleaseDate, @Notes);
 
 	set @DvdId = SCOPE_IDENTITY();
 end

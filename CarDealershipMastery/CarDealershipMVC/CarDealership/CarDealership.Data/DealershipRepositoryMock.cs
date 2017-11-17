@@ -1388,6 +1388,32 @@ namespace CarDealership.Data
         {
             return _dealerships.SelectMany(p => p.Phones).ToList();
         }
+
+        public List<VehicleMake> GetAllMakes()
+        {
+            return _vehicleMakes;
+        }
+
+        public List<VehicleModel> GetAllModels()
+        {
+            return _vehicleModels;
+        }
+
+        public List<VehicleType> GetAllVehicleTypes()
+        {
+            return _VehicleTypes;
+        }
+
+        public List<VehicleBody> GetAllBodyStyles()
+        {
+            return _vehicleBodies;
+        }
+
+        public List<Transmission> GetAllTransmissionTypes()
+        {
+            return _transmissions;
+        }
+
     }
 }
 

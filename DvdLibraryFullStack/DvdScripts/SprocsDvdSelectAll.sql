@@ -8,6 +8,6 @@ go
 
 create procedure DvdSelectAll as 
 begin
-	select DvdId, Title, Director, Rating, ReleaseDate
+	select DvdId, Title, Director, Rating, ReleaseDate, Notes
 	from Dvds
 end

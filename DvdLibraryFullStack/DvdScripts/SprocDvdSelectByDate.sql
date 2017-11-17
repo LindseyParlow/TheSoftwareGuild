@@ -10,7 +10,7 @@ create procedure DvdSelectByDate (
 	@ReleaseDate int
 ) as
 begin
-	select DvdId, Title, Director, Rating, ReleaseDate
+	select DvdId, Title, Director, Rating, ReleaseDate, Notes
 	from Dvds
 	where ReleaseDate = @ReleaseDate 
 end

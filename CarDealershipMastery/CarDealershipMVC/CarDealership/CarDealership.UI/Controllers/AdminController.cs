@@ -23,8 +23,13 @@ namespace CarDealership.UI.Controllers
         public ActionResult AddVehicle()
         {
             var viewModel = new AddVehicleVM();
-
-            
+            viewModel.SetMakeItems(DealershipRepositoryFactory.Create().GetAllMakes());
+            viewModel.SetModelItems(DealershipRepositoryFactory.Create().GetAllModels());
+            viewModel.SetTypeItems(DealershipRepositoryFactory.Create().GetAllVehicleTypes());
+            viewModel.SetBodyStyleItems(DealershipRepositoryFactory.Create().GetAllBodyStyles());
+            viewModel.SetTransmissionItems(DealershipRepositoryFactory.Create().GetAllTransmissionTypes());
+            viewModel.SetColorItems();
+            viewModel.SetInteriorItems();
 
             return View(viewModel);
         }

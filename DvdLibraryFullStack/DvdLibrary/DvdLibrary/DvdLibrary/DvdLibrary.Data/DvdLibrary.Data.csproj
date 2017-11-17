@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201710230137193_notnotes.Designer.cs">
       <DependentUpon>201710230137193_notnotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711171604557_notesProperty.cs" />
+    <Compile Include="Migrations\201711171604557_notesProperty.Designer.cs">
+      <DependentUpon>201711171604557_notesProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DvdRepositoryADO.cs" />
@@ -96,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710230137193_notnotes.resx">
       <DependentUpon>201710230137193_notnotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711171604557_notesProperty.resx">
+      <DependentUpon>201711171604557_notesProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

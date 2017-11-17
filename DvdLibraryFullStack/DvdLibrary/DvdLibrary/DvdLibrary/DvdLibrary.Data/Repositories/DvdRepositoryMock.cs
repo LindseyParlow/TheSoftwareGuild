@@ -16,11 +16,11 @@ namespace DvdLibrary.Data.Repositories
         {
             _dvds = new List<Dvd>()
             {
-                new Dvd { DvdId=1, Title="Finding Nemrod", Director="Judy Thao", Rating="G", ReleaseDate=2003},
-                new Dvd { DvdId=2, Title="The Shawshank Hooray", Director="Jake Ganser", Rating="R", ReleaseDate=1994},
-                new Dvd { DvdId=3, Title="Beauty and the Beast", Director="Javier Aguirre", Rating="G", ReleaseDate=1991},
-                new Dvd { DvdId=4, Title="IT", Director="Mark Johnson", Rating="R", ReleaseDate=2017},
-                new Dvd { DvdId=5, Title="Jurassic Park", Director="Nikolas Clay", Rating="PG-13", ReleaseDate=2005},
+                new Dvd { DvdId=1, Title="Finding Nemrod", Director="Judy Thao", Rating="G", ReleaseDate=2003, Notes="Great fun for the whole family!"},
+                new Dvd { DvdId=2, Title="The Shawshank Hooray", Director="Jake Ganser", Rating="R", ReleaseDate=1994, Notes="Adults only. Great until the very end!"},
+                new Dvd { DvdId=3, Title="Beauty and the Beast", Director="Javier Aguirre", Rating="G", ReleaseDate=1991, Notes="Disney has another fantastic masterpiece on their hands!"},
+                new Dvd { DvdId=4, Title="IT", Director="Mark Johnson", Rating="R", ReleaseDate=2017, Notes="C"},
+                new Dvd { DvdId=5, Title="Jurassic Park", Director="Nikolas Clay", Rating="PG-13", ReleaseDate=2005, Notes="Rawr!"},
             };
         }
 

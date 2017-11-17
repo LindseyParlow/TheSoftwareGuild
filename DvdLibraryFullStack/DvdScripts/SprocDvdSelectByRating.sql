@@ -10,7 +10,7 @@ create procedure DvdSelectByRating (
 	@Rating nvarchar(max)
 ) as
 begin
-	select DvdId, Title, Director, Rating, ReleaseDate
+	select DvdId, Title, Director, Rating, ReleaseDate, Notes
 	from Dvds
 	where Rating = @Rating
 	order by DvdId

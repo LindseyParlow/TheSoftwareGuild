@@ -29,6 +29,7 @@ namespace DvdLibrary.Data.Repositories
                 cmd.Parameters.AddWithValue("@Director", newDvd.Director);
                 cmd.Parameters.AddWithValue("@Rating", newDvd.Rating);
                 cmd.Parameters.AddWithValue("@Date", newDvd.ReleaseDate);
+                cmd.Parameters.AddWithValue("@Notes", newDvd.Notes);
 
                 cn.Open();
 
@@ -74,6 +75,7 @@ namespace DvdLibrary.Data.Repositories
                         currentRow.Director = dr["Director"].ToString();
                         currentRow.Rating = dr["Rating"].ToString();
                         currentRow.ReleaseDate = (int)dr["ReleaseDate"];
+                        currentRow.Notes = dr["Notes"].ToString();
 
                         dvds.Add(currentRow);
                     }
@@ -113,6 +115,8 @@ namespace DvdLibrary.Data.Repositories
                             dvd.Rating = dr["Rating"].ToString();
                         if (dr["Date"] != DBNull.Value)
                             dvd.ReleaseDate = (int)dr["Date"];
+                        if (dr["Notes"] != DBNull.Value)
+                            dvd.Notes = dr["Notes"].ToString();
 
                         dvds.Add(dvd);
                     }
@@ -152,6 +156,8 @@ namespace DvdLibrary.Data.Repositories
                             dvd.Rating = dr["Rating"].ToString();
                         if (dr["Date"] != DBNull.Value)
                             dvd.ReleaseDate = (int)dr["Date"];
+                        if (dr["Notes"] != DBNull.Value)
+                            dvd.ReleaseDate = (int)dr["Notes"];
 
 
                     }
@@ -191,6 +197,8 @@ namespace DvdLibrary.Data.Repositories
                             dvd.Rating = dr["Rating"].ToString();
                         if (dr["Date"] != DBNull.Value)
                             dvd.ReleaseDate = (int)dr["Date"];
+                        if (dr["Notes"] != DBNull.Value)
+                            dvd.ReleaseDate = (int)dr["Notes"];
 
                         dvds.Add(dvd);
                     }
@@ -230,6 +238,8 @@ namespace DvdLibrary.Data.Repositories
                             dvd.Rating = dr["Rating"].ToString();
                         if (dr["Date"] != DBNull.Value)
                             dvd.ReleaseDate = (int)dr["Date"];
+                        if (dr["Notes"] != DBNull.Value)
+                            dvd.ReleaseDate = (int)dr["Notes"];
 
                         dvds.Add(dvd);
                     }
@@ -263,12 +273,14 @@ namespace DvdLibrary.Data.Repositories
 
                         if (dr["Title"] != DBNull.Value)
                             dvd.Title = dr["Title"].ToString();
-                        if (dr["Title"] != DBNull.Value)
+                        if (dr["Director"] != DBNull.Value)
                             dvd.Director = dr["Director"].ToString();
-                        if (dr["Title"] != DBNull.Value)
+                        if (dr["Rating"] != DBNull.Value)
                             dvd.Rating = dr["Rating"].ToString();
-                        if (dr["Title"] != DBNull.Value)
+                        if (dr["Date"] != DBNull.Value)
                             dvd.ReleaseDate = (int)dr["Date"];
+                        if (dr["Notes"] != DBNull.Value)
+                            dvd.ReleaseDate = (int)dr["Notes"];
 
                         dvds.Add(dvd);
                     }
@@ -292,6 +304,7 @@ namespace DvdLibrary.Data.Repositories
                 cmd.Parameters.AddWithValue("@Director", updatedDvd.Director);
                 cmd.Parameters.AddWithValue("@Rating", updatedDvd.Rating);
                 cmd.Parameters.AddWithValue("@Date", updatedDvd.ReleaseDate);
+                cmd.Parameters.AddWithValue("@Notes", updatedDvd.Notes);
 
                 cn.Open();
 

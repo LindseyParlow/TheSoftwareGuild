@@ -124,7 +124,8 @@ namespace DvdLibrary.Controllers
                 Title = newDvd.Title,
                 Director = newDvd.Director,
                 Rating = newDvd.Rating,
-                ReleaseDate = newDvd.ReleaseDate
+                ReleaseDate = newDvd.ReleaseDate,
+                Notes = newDvd.Notes
             };
 
             DvdRepositoryFactory.Create().CreateDvd(newDvd);
@@ -151,6 +152,7 @@ namespace DvdLibrary.Controllers
             dvd.Director = newDvd.Director;
             dvd.Rating = newDvd.Director;
             dvd.ReleaseDate = newDvd.ReleaseDate;
+            dvd.Notes = newDvd.Notes;
 
             DvdRepositoryFactory.Create().UpdateDvd(newDvd);
             return Ok(dvd);

@@ -28,8 +28,6 @@ function vehiclesByQuickSearch() {
 				success: function (vehicleArray) {
 					//alert("success")
 
-					
-					
 					$("#SearchBarSection").show();
 					$("#SearchResultsHeading").show();
 					$("#VehicleDetailsHeading").hide();

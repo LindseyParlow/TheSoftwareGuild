@@ -11,14 +11,16 @@ create procedure DvdUpdate(
 	@Title nvarchar(max),
 	@Director nvarchar(max),
 	@Rating nvarchar(max),
-	@ReleaseDate int 
+	@ReleaseDate int, 
+	@Notes nvarchar(max)
 ) as 
 begin
 	update Dvds set
 		Title = @Title,
 		Director = @Director,
 		Rating = @Rating,
-		ReleaseDate = @ReleaseDate
+		ReleaseDate = @ReleaseDate,
+		Notes = @Notes
 	where DvdId = @DvdId
 end
 

@@ -71,7 +71,10 @@ namespace CarDealership.Data.Interfaces
         List<PurchaseType> GetAllPurchaseTypes();
         List<Phone> GetAllDealershipPhoneNumbers();
 
-        //CRUD for phone, addresses, specials, customers, employees, etc
-        //methods for getting sales report and inventory report
+        List<VehicleMake> GetAllMakes();
+        List<VehicleModel> GetAllModels();
+        List<VehicleType> GetAllVehicleTypes();
+        List<VehicleBody> GetAllBodyStyles();
+        List<Transmission> GetAllTransmissionTypes();
     }
 }

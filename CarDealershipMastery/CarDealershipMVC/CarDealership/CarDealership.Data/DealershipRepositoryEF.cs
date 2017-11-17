@@ -590,5 +590,40 @@ namespace CarDealership.Data
         {
             throw new NotImplementedException();
         }
+
+        public List<VehicleMake> GetAllMakes()
+        {
+            throw new NotImplementedException();
+
+            //return _vehicleMakes;
+        }
+
+        public List<VehicleModel> GetAllModels()
+        {
+            throw new NotImplementedException();
+
+            //return _vehicleModels;
+        }
+
+        public List<VehicleType> GetAllVehicleTypes()
+        {
+            throw new NotImplementedException();
+
+            //return _VehicleTypes;
+        }
+
+        public List<VehicleBody> GetAllBodyStyles()
+        {
+            throw new NotImplementedException();
+
+            //return _vehicleBodies;
+        }
+
+        public List<Transmission> GetAllTransmissionTypes()
+        {
+            throw new NotImplementedException();
+
+            //return _transmissions;
+        }
     }
 }

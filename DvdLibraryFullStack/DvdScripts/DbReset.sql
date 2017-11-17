@@ -11,11 +11,11 @@ begin
 	delete from Dvds;
 	DBCC CHECKIDENT ('dvds', RESEED, 0)
 
-	insert into Dvds (Title, Director, Rating, ReleaseDate)
-	values ('Finding Nemo', 'Judy Thao', 'G', 2003),
-			('The Shawshank Redemption', 'Jake Ganser', 'R', 1994),
-			('Beauty and the Beast', 'Javier Aguirre', 'G', 1991),
-			('IT', 'Mark Johnson', 'R', 2017),
-			('Jurassic Park', 'Nikolas Clay', 'PG-13', 2005);
+	insert into Dvds (Title, Director, Rating, ReleaseDate, Notes)
+	values ('Finding Nemo', 'Judy Thao', 'G', 2003, 'Great fun for the whole family!'),
+			('The Shawshank Redemption', 'Jake Ganser', 'R', 1994, 'Adults only. Great until the very end!'),
+			('Beauty and the Beast', 'Javier Aguirre', 'G', 1991, 'Disney has another fantastic masterpiece on their hands!'),
+			('IT', 'Mark Johnson', 'R', 2017, 'Disney has another fantastic masterpiece on their hands!'),
+			('Jurassic Park', 'Nikolas Clay', 'PG-13', 2005, 'Rawr!');
 
 end
