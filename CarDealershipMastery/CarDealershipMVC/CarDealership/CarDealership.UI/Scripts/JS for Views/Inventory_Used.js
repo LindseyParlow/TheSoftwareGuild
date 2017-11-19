@@ -121,6 +121,14 @@ function getDetailsUsed() {
 				$("#VehicleDetailsHeading").show();
 				$("#singleVehicleDetails").show();
 
+				if (vehicle.purchaseStatus.purchaseStatusDescription == "Sold") {
+					var contactOrSold = '<input type="button" class="btn btn-danger" value="Unavailable- Sold" />';
+				}
+				else {
+					var contactOrSold = '<input type="button" class="btn btn-primary" id="contactUsButton" onClick="window.location=\'/Home/Contact/' + vehicle.vinNumber + '\'" value="Contact Us"/>';
+				}
+
+				
 				var vehicleInfo = '<div class="col-md-12" style="border: 2px solid black; padding: 10px"><div class="col-md-3"><p>' + vehicle.year + " " + vehicle.vehicleModel.vehicleMake.vehicleMakeDescription + " " + vehicle.vehicleModel.vehicleModelDescription + '</p>' +
 					'<p>' + '<img src="../Images/' + vehicle.imagePath + '" class="imageFormat" />' + '</p></div>' +
 					'<div class="col-md-3"><p>' + "Body Style: " + vehicle.vehicleBody.vehicleBodyDescription + '</p>' +
@@ -130,9 +138,9 @@ function getDetailsUsed() {
 					'<p>' + "Mileage: " + vehicle.mileage + '</p>' +
 					'<p>' + "VIN: " + vehicle.vinNumber + '</p></div>' +
 					'<div class="col-md-3"><p>' + "Sales Price: " + vehicle.salePrice + '</p>' +
-					'<p>' + "MSRP: " + vehicle.msrpPrice + '</p></div>' +
+					'<p>' + "MSRP: " + vehicle.msrpPrice + '</p></div>' + 
 					'<div class="col-md-12">' + "Description: " + vehicle.vehicleDescription + '</div>' +
-					'<div class="col-md-12"><button class="btn btn-primary" id="contactUsButton">Contact Us</button>' + " " + '<button class="btn btn-primary" id="returnButton">Return To Search</button></div></div>'
+					'<div class="col-md-12">' + contactOrSold + '<button class="btn btn-primary" id="returnButton">Return To Search</button></div></div>'
 
 				$("#singleVehicleDetails").append(vehicleInfo);
 

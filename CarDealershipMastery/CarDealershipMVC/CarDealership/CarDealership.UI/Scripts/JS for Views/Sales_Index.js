@@ -25,7 +25,7 @@ function vehiclesByQuickSearch() {
 				type: "GET",
 				url: "http://localhost:59129/sales/index/all",
 				success: function (vehicleArray) {
-					alert("success")
+					//alert("success")
 
 					$("#searchBarSection").show();
 					$("#searchResultsHeading").show();
@@ -53,7 +53,7 @@ function vehiclesByQuickSearch() {
 					});
 				},
 				error: function () {
-					alert("error")
+					//alert("error")
 				}
 			});
 		}
@@ -113,7 +113,7 @@ function getPurchaseSales() {
 			type: "GET",
 			url: "http://localhost:59129/sales/purchase/" + vehicleId,
 			success: function (vehicle) {
-				alert("success")
+				//alert("success")
 
 
 				$("#filteredSalesVehicles").hide();
@@ -140,7 +140,7 @@ function getPurchaseSales() {
 
 			},
 			error: function () {
-				alert("error")
+				//alert("error")
 			}
 		});
 	})

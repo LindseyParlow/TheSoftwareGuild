@@ -1024,24 +1024,24 @@ namespace CarDealership.Data
             return _vehicles;
         }
 
-        public List<Vehicle> GetAllVehiclesByMake(string makeName)
-        {
-            return _vehicles.Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).ToList();
-        }
+        //public List<Vehicle> GetAllVehiclesByMake(string makeName)
+        //{
+        //    return _vehicles.Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).ToList();
+        //}
        
-        public List<Vehicle> GetAllVehiclesByYear(int vehicleYear)
-        {
-            return _vehicles.Where(v => v.Year == vehicleYear).ToList();
-        }
+        //public List<Vehicle> GetAllVehiclesByYear(int vehicleYear)
+        //{
+        //    return _vehicles.Where(v => v.Year == vehicleYear).ToList();
+        //}
 
-        public List<Vehicle> GetAllVehiclesByModel(string modelName)
-        {
-            return _vehicles.Where(v => v.VehicleModel.VehicleModelDescription.Contains(modelName)).ToList();
-        }
+        //public List<Vehicle> GetAllVehiclesByModel(string modelName)
+        //{
+        //    return _vehicles.Where(v => v.VehicleModel.VehicleModelDescription.Contains(modelName)).ToList();
+        //}
 
         public List<Vehicle> GetTop20NewVehicles()
         {
-            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New" && t.PurchaseStatus.PurchaseStatusDescription == "Available").OrderByDescending(p => p.MSRPPrice).ToList();
+            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New").OrderByDescending(p => p.MSRPPrice).ToList();
             if (vehicles.Count < 20)
             {
                 return vehicles;
@@ -1052,126 +1052,126 @@ namespace CarDealership.Data
             }
         }
 
-        public List<Vehicle> GetTop20NewVehiclesByMake(string makeName)
-        {
-            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New").Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20NewVehiclesByMake(string makeName)
+        //{
+        //    var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New").Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20NewVehiclesByPriceRange(decimal minPrice, decimal maxPrice)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice >= minPrice && v.SalePrice <=maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20NewVehiclesByPriceRange(decimal minPrice, decimal maxPrice)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice >= minPrice && v.SalePrice <=maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20NewVehiclesByPriceMin(decimal minPrice)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice >= minPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20NewVehiclesByPriceMin(decimal minPrice)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice >= minPrice).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20NewVehiclesByPriceMax(decimal maxPrice)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20NewVehiclesByPriceMax(decimal maxPrice)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20NewVehiclesByYear(int vehicleYear)
-        {
-            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New").Where(y => y.Year == vehicleYear).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20NewVehiclesByYear(int vehicleYear)
+        //{
+        //    var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New").Where(y => y.Year == vehicleYear).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20NewVehiclesByYearRange(int minYear, int maxYear)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year >= minYear && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20NewVehiclesByYearRange(int minYear, int maxYear)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year >= minYear && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20NewVehiclesByYearMin(int minYear)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year >= minYear).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20NewVehiclesByYearMin(int minYear)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year >= minYear).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20NewVehiclesByYearMax(int maxYear)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20NewVehiclesByYearMax(int maxYear)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20NewVehiclesModel(string modelName)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.VehicleModel.VehicleModelDescription.Contains(modelName)).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20NewVehiclesModel(string modelName)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.VehicleModel.VehicleModelDescription.Contains(modelName)).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
         public List<Vehicle> GetTop20UsedVehicles()
         {
-            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used" && t.PurchaseStatus.PurchaseStatusDescription == "Available").OrderByDescending(p => p.MSRPPrice).ToList();
+            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").OrderByDescending(p => p.MSRPPrice).ToList();
             if (vehicles.Count < 20)
             {
                 return vehicles;
@@ -1182,122 +1182,122 @@ namespace CarDealership.Data
             }
         }
 
-        public List<Vehicle> GetTop20UsedVehiclesByMake(string makeName)
-        {
-            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20UsedVehiclesByMake(string makeName)
+        //{
+        //    var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20UsedVehiclesByPriceRange(decimal minPrice, decimal maxPrice)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice >= minPrice && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20UsedVehiclesByPriceRange(decimal minPrice, decimal maxPrice)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice >= minPrice && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20UsedVehiclesByPriceMin(decimal minPrice)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice >= minPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20UsedVehiclesByPriceMin(decimal minPrice)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice >= minPrice).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20UsedVehiclesByPriceMax(decimal maxPrice)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20UsedVehiclesByPriceMax(decimal maxPrice)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20UsedVehiclesByYear(int vehicleYear)
-        {
-            var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").Where(y => y.Year == vehicleYear).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20UsedVehiclesByYear(int vehicleYear)
+        //{
+        //    var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").Where(y => y.Year == vehicleYear).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20UsedVehiclesByYearRange(int minYear, int maxYear)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year >= minYear && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20UsedVehiclesByYearRange(int minYear, int maxYear)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year >= minYear && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20UsedVehiclesByYearMin(int minYear)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year >= minYear).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20UsedVehiclesByYearMin(int minYear)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year >= minYear).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20UsedVehiclesByYearMax(int maxYear)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20UsedVehiclesByYearMax(int maxYear)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
-        public List<Vehicle> GetTop20UsedVehiclesModel(string modelName)
-        {
-            var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.VehicleModel.VehicleModelDescription.Contains(modelName)).OrderByDescending(p => p.MSRPPrice).ToList();
-            if (vehicles.Count < 20)
-            {
-                return vehicles;
-            }
-            else
-            {
-                return vehicles.Take(20).ToList();
-            }
-        }
+        //public List<Vehicle> GetTop20UsedVehiclesModel(string modelName)
+        //{
+        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.VehicleModel.VehicleModelDescription.Contains(modelName)).OrderByDescending(p => p.MSRPPrice).ToList();
+        //    if (vehicles.Count < 20)
+        //    {
+        //        return vehicles;
+        //    }
+        //    else
+        //    {
+        //        return vehicles.Take(20).ToList();
+        //    }
+        //}
 
         public List<Customer> GetAllCustomers()
         {

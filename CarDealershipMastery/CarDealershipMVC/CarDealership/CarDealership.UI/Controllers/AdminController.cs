@@ -34,26 +34,82 @@ namespace CarDealership.UI.Controllers
             return View(viewModel);
         }
 
+        public ActionResult EditVehicle(int id)
+        {
+            var viewModel = new AddVehicleVM();
 
+            viewModel.Vehicle = DealershipRepositoryFactory.Create().GetVehicleDetailsByVehicleId(id);
 
-        //NO VIEWS FOR THESE YET. NOT SURE IF I WILL NEED THEM
+            viewModel.SetMakeItems(DealershipRepositoryFactory.Create().GetAllMakes());
+            viewModel.SetModelItems(DealershipRepositoryFactory.Create().GetAllModels());
+            viewModel.SetTypeItems(DealershipRepositoryFactory.Create().GetAllVehicleTypes());
+            viewModel.SetBodyStyleItems(DealershipRepositoryFactory.Create().GetAllBodyStyles());
+            viewModel.SetTransmissionItems(DealershipRepositoryFactory.Create().GetAllTransmissionTypes());
+            viewModel.SetColorItems();
+            viewModel.SetInteriorItems();
 
-        //public ActionResult EditVehicle()
-        //{
-        //    var repo = DealershipRepositoryFactory.Create();
+            return View(viewModel);
+        }
 
-        //    var model = repo.GetAllFeaturedVehicles();
+        public ActionResult Users()
+        {
+            //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
+            var repo = DealershipRepositoryFactory.Create();
 
-        //    return View(model);
-        //}
+            var model = repo.GetAllVehicles();
 
-        //public ActionResult Users()
-        //{
-        //    var repo = DealershipRepositoryFactory.Create();
+            return View(model);
+        }
 
-        //    var model = repo.GetAllFeaturedVehicles();
+        public ActionResult AddUser()
+        {
+            //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
+            var repo = DealershipRepositoryFactory.Create();
 
-        //    return View(model);
-        //}
+            var model = repo.GetAllVehicles();
+
+            return View(model);
+        }
+
+        public ActionResult EditUser()
+        {
+            //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
+            var repo = DealershipRepositoryFactory.Create();
+
+            var model = repo.GetAllVehicles();
+
+            return View(model);
+        }
+
+        public ActionResult Makes()
+        {
+            //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
+            var repo = DealershipRepositoryFactory.Create();
+
+            var model = repo.GetAllVehicles();
+
+            return View(model);
+        }
+
+        public ActionResult Models()
+        {
+            //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
+            var repo = DealershipRepositoryFactory.Create();
+
+            var model = repo.GetAllVehicles();
+
+            return View(model);
+        }
+
+        public ActionResult Specials()
+        {
+            //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
+            var repo = DealershipRepositoryFactory.Create();
+
+            var model = repo.GetAllVehicles();
+
+            return View(model);
+        }
+
     }
 }

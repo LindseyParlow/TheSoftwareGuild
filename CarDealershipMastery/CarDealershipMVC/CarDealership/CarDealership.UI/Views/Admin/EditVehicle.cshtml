@@ -1,6 +1,6 @@
 ﻿@model CarDealership.UI.Models.AddVehicleVM
 @{
-	ViewBag.Title = "AddVehicle";
+    ViewBag.Title = "EditVehicle";
 }
 
 <div class="container">
@@ -9,7 +9,7 @@
 		{
 			<div class="col-md-12">
 				<div class="row">
-					<h2>Add Vehicle</h2><br />
+					<h2>Edit Vehicle</h2><br />
 				</div>
 				<div class="row">
 					<fieldset class="for-panel">
@@ -162,7 +162,7 @@
 								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
-											<label>Picture</label>
+											<label>Replace Picture</label>
 										</p>
 										<p>
 											@Html.TextBoxFor(m => m.Vehicle.ImagePath, new { @class = "form-control", @placeholder = "Image Path" })
@@ -176,21 +176,20 @@
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-horizontal">
-										
 											<p>
+												Feature this vehicle:
 												@Html.CheckBoxFor(m => m.Vehicle.IsFeatured, new { @class = "form-control", @placeholder = "Is Featured" })
-
-
 											</p>
 										</div><br />
-									
+								
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
-											<button class="btn btn-primary" id="savePurchaseButton">Save</button>
+											<button class="btn btn-primary" id="deleteVehicleButton">Delete</button>
+											<button class="btn btn-primary" id="saveVehicleButton">Save</button>
 										</p><br />
 									</div>
 								</div>

@@ -14,33 +14,33 @@ namespace CarDealership.Data.Interfaces
         Vehicle GetVehicleById(int vehicleId);
 
         List<Vehicle> GetTop20NewVehicles();
-        List<Vehicle> GetTop20NewVehiclesByMake(string makeName);
-        List<Vehicle> GetTop20NewVehiclesModel(string modelName);
-        List<Vehicle> GetTop20NewVehiclesByYear(int vehicleYear);
-        List<Vehicle> GetTop20NewVehiclesByPriceRange(decimal minPrice, decimal maxPrice);
-        List<Vehicle> GetTop20NewVehiclesByPriceMin(decimal minPrice);
-        List<Vehicle> GetTop20NewVehiclesByPriceMax(decimal maxPrice);
-        List<Vehicle> GetTop20NewVehiclesByYearRange(int minYear, int maxYear);
-        List<Vehicle> GetTop20NewVehiclesByYearMin(int minYear);
-        List<Vehicle> GetTop20NewVehiclesByYearMax(int maxYear);
+        //List<Vehicle> GetTop20NewVehiclesByMake(string makeName);
+        //List<Vehicle> GetTop20NewVehiclesModel(string modelName);
+        //List<Vehicle> GetTop20NewVehiclesByYear(int vehicleYear);
+        //List<Vehicle> GetTop20NewVehiclesByPriceRange(decimal minPrice, decimal maxPrice);
+        //List<Vehicle> GetTop20NewVehiclesByPriceMin(decimal minPrice);
+        //List<Vehicle> GetTop20NewVehiclesByPriceMax(decimal maxPrice);
+        //List<Vehicle> GetTop20NewVehiclesByYearRange(int minYear, int maxYear);
+        //List<Vehicle> GetTop20NewVehiclesByYearMin(int minYear);
+        //List<Vehicle> GetTop20NewVehiclesByYearMax(int maxYear);
 
         List<Vehicle> GetTop20UsedVehicles();
-        List<Vehicle> GetTop20UsedVehiclesByMake(string makeName);
-        List<Vehicle> GetTop20UsedVehiclesModel(string modelName);
-        List<Vehicle> GetTop20UsedVehiclesByYear(int vehicleYear);
-        List<Vehicle> GetTop20UsedVehiclesByYearRange(int minYear, int maxYear);
-        List<Vehicle> GetTop20UsedVehiclesByYearMin(int minYear);
-        List<Vehicle> GetTop20UsedVehiclesByYearMax(int maxYear);
-        List<Vehicle> GetTop20UsedVehiclesByPriceRange(decimal minPrice, decimal maxPrice);
-        List<Vehicle> GetTop20UsedVehiclesByPriceMin(decimal minPrice);
-        List<Vehicle> GetTop20UsedVehiclesByPriceMax(decimal maxPrice);
+        //List<Vehicle> GetTop20UsedVehiclesByMake(string makeName);
+        //List<Vehicle> GetTop20UsedVehiclesModel(string modelName);
+        //List<Vehicle> GetTop20UsedVehiclesByYear(int vehicleYear);
+        //List<Vehicle> GetTop20UsedVehiclesByYearRange(int minYear, int maxYear);
+        //List<Vehicle> GetTop20UsedVehiclesByYearMin(int minYear);
+        //List<Vehicle> GetTop20UsedVehiclesByYearMax(int maxYear);
+        //List<Vehicle> GetTop20UsedVehiclesByPriceRange(decimal minPrice, decimal maxPrice);
+        //List<Vehicle> GetTop20UsedVehiclesByPriceMin(decimal minPrice);
+        //List<Vehicle> GetTop20UsedVehiclesByPriceMax(decimal maxPrice);
 
         //Vehicle GetVehicleDetails();
 
         List<Vehicle> GetAllVehicles();
-        List<Vehicle> GetAllVehiclesByMake(string makeName);
-        List<Vehicle> GetAllVehiclesByModel(string modelName);
-        List<Vehicle> GetAllVehiclesByYear(int vehicleYear);
+        //List<Vehicle> GetAllVehiclesByMake(string makeName);
+        //List<Vehicle> GetAllVehiclesByModel(string modelName);
+        //List<Vehicle> GetAllVehiclesByYear(int vehicleYear);
 
         List<Vehicle> GetAllFeaturedVehicles();
 
