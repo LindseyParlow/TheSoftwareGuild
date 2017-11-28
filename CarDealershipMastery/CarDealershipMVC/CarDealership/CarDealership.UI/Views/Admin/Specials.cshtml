@@ -1,7 +1,72 @@
-﻿
+﻿@model CarDealership.UI.Models.AddSpecialVM
+
 @{
-    ViewBag.Title = "Specials";
+	ViewBag.Title = "Specials";
 }
 
-<h2>Specials</h2>
+@section AdminSpecialsScripts {
+	<script src="~/Scripts/JS for Views/Admin_Specials.js"></script>
+}
+<div class="container">
+	<div class="row">
+		@using (Html.BeginForm("Specials", "Admin"))
+		{
+			<div class="col-md-12">
+				<div class="col-md-12">
+					<div class="col-md-5">
+						<div class="row">
+							<div class="form-horizontal">
+								<h1>Specials</h1>
+								<br />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-horizontal">
+								<p>
+									<h2>Add new special</h2>
+								</p><br/>
+								<p>
+									<label>Title</label>
+								</p>
+								<p>
+									@Html.TextBoxFor(m => m.AddSpecial.SpecialTitle, new { @class = "form-control" })
+								</p>
+								<br />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-horizontal">
+								<p>
+									<label>Description</label>
+								</p>
+								<p>
+									@Html.TextAreaFor(m => m.AddSpecial.SpecialDescription, new { @class = "form-control" })
+								</p>
+								<br />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-horizontal">
+								<p>
+									<button type="submit" class="btn btn-primary" id="saveNewSpecial">Save</button>
+								</p>
+								<br />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		}
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="listOfSpecials">
+				@*all specials go here so admin can delete them*@
+			</div>
+		</div>
+	</div>
+</div>
+
 

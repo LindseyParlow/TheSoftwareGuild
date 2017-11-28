@@ -1,7 +1,40 @@
-﻿
+﻿@model IEnumerable<CarDealership.Models.Identity.AppUser>
 @{
     ViewBag.Title = "Users";
 }
 
-<h2>Users</h2>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 style="font-size:50px">Users</h1>
+			<p><button class="btn btn-link" id="addUserButton" onclick="window.location.href='/Admin/AddUser'">Add a new User</button></p>
+			<table border="1">
+				<thead>
+					<tr>
+						<th style="width: 200px">Last Name</th>
+						<th style="width: 200px">First Name</th>
+						<th style="width: 400px">Email</th>
+						<th style="width: 200px">Role</th>
+						<th style="width: 200px"></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var user in Model)
+					{
+						<tr>
+							<td>@user.LastName</td>
+							<td>@user.FirstName</td>
+							<td>@user.Email</td>
+							<td>@user.Roles</td>
+							<td>
+								@Html.ActionLink("Edit", "EditUser", "Admin", new { id = user.Id }, null)
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
 

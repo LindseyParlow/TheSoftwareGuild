@@ -12,6 +12,7 @@ namespace CarDealership.UI.Controllers
     public class SalesController : Controller
     {
         // GET: Sales
+        [Authorize(Roles = "admin,author")]
         public ActionResult Index()
         {
             var viewModel = new SalesInfoVM();
@@ -21,28 +22,12 @@ namespace CarDealership.UI.Controllers
             return View(viewModel);
         }
 
-        //[HttpPost]
-        //public ActionResult Index(SalesInformationViewModel salesInformationViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        salesInformationViewModel.Purchase.Customer.Address.State = new List<State>();
-
-        //        foreach () ;
-
-        //        salesInformationViewModel.Purchase.PurchaseType = new List<PurchaseType>();
-
-        //        return RedirectToAction("SOMEWHERE");
-        //    }
-        //    else
-        //    {
-        //        var viewModel = new SalesInformationViewModel();
-        //        viewModel.SetStateItems(DealershipRepositoryFactory.Create().GetAllStates());
-        //        viewModel.SetPurchaseTypeItems(DealershipRepositoryFactory.Create().GetAllPurchaseTypes());
-
-        //        return View(viewModel);
-
-        //    }
-        //}
+        [HttpPost]
+        [Authorize(Roles = "admin,author")]
+        public ActionResult Index(SalesInfoVM salesInfoVM)
+        {
+            //do this once identity is set up becuase you need to attach a sales user to the sale
+            return View();
+        }
     }
 }

@@ -3,5 +3,33 @@
     ViewBag.Title = "Models";
 }
 
-<h2>Models</h2>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 style="font-size:50px">Models</h1>
+			<div style="border: 2px solid black; padding: 20px">
+				<p>
+					New Model
+					<input class="text" id="newModelInput" />
+					Make
+					<input class="dropdown" id="makeDropDown" />
+					<button class="btn btn-primary">Save</button>
+				</p>
+			</div>
+			<br />
+			<table border="1">
+				<thead>
+					<tr>
+						<th style="width: 100px">Make</th>
+						<th style="width: 100px">Date Added</th>
+						<th style="width: 200px">User</th>
+					</tr>
+				</thead>
+				<tbody>
+					@*NEED TO DO A FOREACH USER IN USER ONCE IDENTITY IS SET UP!!!*@
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 

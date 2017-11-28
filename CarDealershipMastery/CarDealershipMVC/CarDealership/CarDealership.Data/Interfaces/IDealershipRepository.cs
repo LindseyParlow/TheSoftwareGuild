@@ -1,4 +1,6 @@
 ﻿using CarDealership.Models;
+using CarDealership.Models.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,53 +11,20 @@ namespace CarDealership.Data.Interfaces
 {
     public interface IDealershipRepository
     {
-        //make sure not to show vehicles that are sold for users
-        //
-        Vehicle GetVehicleById(int vehicleId);
-
         List<Vehicle> GetTop20NewVehicles();
-        //List<Vehicle> GetTop20NewVehiclesByMake(string makeName);
-        //List<Vehicle> GetTop20NewVehiclesModel(string modelName);
-        //List<Vehicle> GetTop20NewVehiclesByYear(int vehicleYear);
-        //List<Vehicle> GetTop20NewVehiclesByPriceRange(decimal minPrice, decimal maxPrice);
-        //List<Vehicle> GetTop20NewVehiclesByPriceMin(decimal minPrice);
-        //List<Vehicle> GetTop20NewVehiclesByPriceMax(decimal maxPrice);
-        //List<Vehicle> GetTop20NewVehiclesByYearRange(int minYear, int maxYear);
-        //List<Vehicle> GetTop20NewVehiclesByYearMin(int minYear);
-        //List<Vehicle> GetTop20NewVehiclesByYearMax(int maxYear);
-
         List<Vehicle> GetTop20UsedVehicles();
-        //List<Vehicle> GetTop20UsedVehiclesByMake(string makeName);
-        //List<Vehicle> GetTop20UsedVehiclesModel(string modelName);
-        //List<Vehicle> GetTop20UsedVehiclesByYear(int vehicleYear);
-        //List<Vehicle> GetTop20UsedVehiclesByYearRange(int minYear, int maxYear);
-        //List<Vehicle> GetTop20UsedVehiclesByYearMin(int minYear);
-        //List<Vehicle> GetTop20UsedVehiclesByYearMax(int maxYear);
-        //List<Vehicle> GetTop20UsedVehiclesByPriceRange(decimal minPrice, decimal maxPrice);
-        //List<Vehicle> GetTop20UsedVehiclesByPriceMin(decimal minPrice);
-        //List<Vehicle> GetTop20UsedVehiclesByPriceMax(decimal maxPrice);
-
-        //Vehicle GetVehicleDetails();
-
         List<Vehicle> GetAllVehicles();
-        //List<Vehicle> GetAllVehiclesByMake(string makeName);
-        //List<Vehicle> GetAllVehiclesByModel(string modelName);
-        //List<Vehicle> GetAllVehiclesByYear(int vehicleYear);
-
         List<Vehicle> GetAllFeaturedVehicles();
-
         List<Special> GetAllSpecials();
 
+        void AddContactUsQuery(ContactUsQuery contactUsQueryToAdd);
+        void AddSpecial(Special specialToAdd);
         void AddMake(VehicleMake vehicleMake);
         void AddModel(VehicleModel vehicleModel);
         void AddVehicle(Vehicle vehicleToAdd);
         void EditVehicle(Vehicle vehicleToEdit);
-
-        void AddEmployee(Employee employeeToAdd);
-        void EditEmployee(Employee employeeToEdit);
-
-        void AddSpecial(Special specialToAdd);
         void DeleteSpecial(int specialId);
+        void DeleteVehicle(int vehicleId);
 
         List<Customer> GetAllCustomers();
         List<ContactUsQuery> GetAllContactUsQueries();
@@ -76,5 +45,17 @@ namespace CarDealership.Data.Interfaces
         List<VehicleType> GetAllVehicleTypes();
         List<VehicleBody> GetAllBodyStyles();
         List<Transmission> GetAllTransmissionTypes();
+
+        List<VehicleMake> GetAllVehicleMakes();
+        List<VehicleModel> GetVehicleModelsByVehicleMake(int makeId);
+        PurchaseStatus GetPurchaseStatus(int purchaseStatusId);
+        Transmission GetTransmission(int transmissionId);
+        VehicleBody GetVehicleBody(int vehicleBodyId);
+        VehicleModel GetVehicleModel(int modelId);
+        VehicleType GetVehicleType(int vehicleTypeId);
+
+        PurchaseStatus GetPuchaseStatusForAddedVehicle();
+        List<AppUser> GetAllUsers();
+        List<IdentityRole> GetAllRoles();
     }
 }

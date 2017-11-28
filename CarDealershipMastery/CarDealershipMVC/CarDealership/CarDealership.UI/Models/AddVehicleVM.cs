@@ -10,6 +10,7 @@ namespace CarDealership.UI.Models
     public class AddVehicleVM
     {
         public Vehicle Vehicle { get; set; }
+        public HttpPostedFileBase ImageUpload { get; set; }
         public List<SelectListItem> MakeItems { get; set; }
         public List<SelectListItem> ModelItems { get; set; }
         public List<SelectListItem> TypeItems { get; set; }
@@ -48,11 +49,12 @@ namespace CarDealership.UI.Models
             {
                 ModelItems.Add(new SelectListItem()
                 {
-                    Value = model.VehicleMakeId.ToString(),
+                    Value = model.VehicleModelId.ToString(),
                     Text = model.VehicleModelDescription,
                 });
             }
         }
+
 
         public void SetTypeItems(IEnumerable<VehicleType> types)
         {

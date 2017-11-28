@@ -22,7 +22,6 @@ namespace CarDealership.Models
         public string VinNumber { get; set; }
         public int Mileage { get; set; }
         public string VehicleDescription { get; set; }
-        public int? SpecialId { get; set; }
         public DateTime DateAdded { get; set; }
         public int PurchaseStatusId { get; set; }
         public bool IsFeatured { get; set; }
@@ -31,7 +30,7 @@ namespace CarDealership.Models
         public virtual VehicleModel VehicleModel { get; set; }
         public virtual Transmission Transmission { get; set; }
         public virtual VehicleBody VehicleBody { get; set; }
-        public virtual Special Special { get; set; }
         public virtual PurchaseStatus PurchaseStatus { get; set; }
+        public object User { get; set; }
     }
 }

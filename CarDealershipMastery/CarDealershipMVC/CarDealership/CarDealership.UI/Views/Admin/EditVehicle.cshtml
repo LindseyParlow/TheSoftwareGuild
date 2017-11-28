@@ -3,10 +3,15 @@
     ViewBag.Title = "EditVehicle";
 }
 
+@section AddVehicleScripts {
+	<script src="~/Scripts/JS for Views/Admin_AddVehicle.js"></script>
+}
 <div class="container">
-	<div>
-		@using (Html.BeginForm("Index", "Sales"))
+	<div id="editFormSection">
+		@using (Html.BeginForm("EditVehicle", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "EditVehicleForm" }))
 		{
+			@Html.HiddenFor(m => m.Vehicle.VehicleId, new { @id = "vehicleId" })
+			@Html.HiddenFor(m => m.Vehicle.PurchaseStatusId)
 			<div class="col-md-12">
 				<div class="row">
 					<h2>Edit Vehicle</h2><br />
@@ -21,17 +26,17 @@
 											<label>Make</label>
 										</p>
 										<p>
-											@Html.DropDownListFor(m => m.Vehicle.VehicleModel.VehicleMakeId, Model.MakeItems, "-Choose One-", new { @class = "form-control", @placeholder = "Make" })
+											@Html.DropDownListFor(m => m.Vehicle.VehicleModel.VehicleMakeId, Model.MakeItems, "-Choose One-", new { @class = "form-control", @id = "makeDropdown", @placeholder = "Make" })
 										</p><br />
 									</div>
 								</div>
-								<div class="col-md-offset-4">
+								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
 											<label>Model</label>
 										</p>
 										<p>
-											@Html.DropDownListFor(m => m.Vehicle.VehicleModelId, Model.ModelItems, "-Choose One-", new { @class = "form-control", @placeholder = "Model" })
+											@Html.DropDownListFor(m => m.Vehicle.VehicleModelId, Model.ModelItems, "-Choose One-", new { @class = "form-control", @id = "modelDropdown", @placeholder = "Model" })
 										</p><br />
 									</div>
 								</div>
@@ -47,7 +52,7 @@
 										</p><br />
 									</div>
 								</div>
-								<div class="col-md-offset-4">
+								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
 											<label>Body Style</label>
@@ -69,7 +74,7 @@
 										</p><br />
 									</div>
 								</div>
-								<div class="col-md-offset-4">
+								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
 											<label>Transmission</label>
@@ -91,7 +96,7 @@
 										</p><br />
 									</div>
 								</div>
-								<div class="col-md-offset-4">
+								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
 											<label>Interior</label>
@@ -113,7 +118,7 @@
 										</p><br />
 									</div>
 								</div>
-								<div class="col-md-offset-4">
+								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
 											<label>VIN</label>
@@ -135,7 +140,7 @@
 										</p><br />
 									</div>
 								</div>
-								<div class="col-md-offset-4">
+								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
 											<label>Sale Price</label>
@@ -165,10 +170,7 @@
 											<label>Replace Picture</label>
 										</p>
 										<p>
-											@Html.TextBoxFor(m => m.Vehicle.ImagePath, new { @class = "form-control", @placeholder = "Image Path" })
-											<button class="btn btn-primary" id="uploadButton">Upload</button>
-
-
+											<input id="ImageUpload" name="ImageUpload" type="file" />
 										</p><br />
 									</div>
 								</div>
@@ -178,7 +180,7 @@
 									<div class="form-horizontal">
 											<p>
 												Feature this vehicle:
-												@Html.CheckBoxFor(m => m.Vehicle.IsFeatured, new { @class = "form-control", @placeholder = "Is Featured" })
+												@Html.CheckBoxFor(m => m.Vehicle.IsFeatured, new { @placeholder = "Is Featured" })
 											</p>
 										</div><br />
 								
@@ -187,10 +189,13 @@
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-horizontal">
-										<p>
-											<button class="btn btn-primary" id="deleteVehicleButton">Delete</button>
-											<button class="btn btn-primary" id="saveVehicleButton">Save</button>
-										</p><br />
+										<div class="row">
+											<p>
+												<a href="#" class="button" id="deleteVehicleButton">Delete</a>
+												<button type="submit" class="btn btn-primary" id="saveEdittedVehicleButton">Save</button>
+											</p><br />
+										</div>
+											
 									</div>
 								</div>
 							</div>
@@ -199,5 +204,13 @@
 				</div>
 			</div>
 		}
+	</div>
+	<div id="deleteVehicleSection" style="display:none">
+		<div>
+			<h1>Delete Vehicle</h1>
+			<p>Are you sure you want to delete this vehicle?</p>
+			<button id="deleteButton">Delete</button>
+			<button id="cancelButton">Cancel</button>
+		</div>
 	</div>
 </div>

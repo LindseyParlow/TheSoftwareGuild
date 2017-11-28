@@ -61,7 +61,7 @@ namespace CarDealership.UI.Controllers
             }
         }
 
-        [Route("api/home/specials")]
+        [Route("specials")]
         [AcceptVerbs("GET")]
         public IHttpActionResult GetAllSpecials()
         {
@@ -189,6 +189,57 @@ namespace CarDealership.UI.Controllers
             }
         }
 
+        [Route("inventory/makes")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult FindAllVehicleMakes()
+        {
+            List<VehicleMake> makes = DealershipRepositoryFactory.Create().GetAllVehicleMakes();
+
+            if (makes == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(makes);
+            }
+        }
+
+        [Route("inventory/make/{makeId}/models")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult FindVehicleModelsByVehicleMake(int makeId)
+        {
+            List<VehicleModel> models = DealershipRepositoryFactory.Create().GetVehicleModelsByVehicleMake(makeId);
+
+            if (models == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(models);
+            }
+        }
+
+        [Route("vehicle/{vehicleId}/delete")]
+        [AcceptVerbs("DELETE")]
+        public IHttpActionResult DeleteVehicleById(int vehicleId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Vehicle vehicle = DealershipRepositoryFactory.Create().GetVehicleDetailsByVehicleId(vehicleId);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            DealershipRepositoryFactory.Create().DeleteVehicle(vehicleId);
+            return Ok();
+        }
     }
 }
 

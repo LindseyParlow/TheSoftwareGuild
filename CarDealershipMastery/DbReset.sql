@@ -21,7 +21,6 @@ Begin
 	Delete from  Specials;
 	Delete from  PurchaseTypes;
 	Delete from  PurchaseStatus;
-	Delete from  Employees;
 	Delete from  Customers;
 	Delete from  Addresses;
 	Delete from  States;
@@ -55,19 +54,11 @@ Begin
 
 	DBCC CHECKIDENT('Customers', reseed, 1)
 	Set Identity_Insert Customers on;
-		insert into Customers(CustomerId, FirstName, LastName, Email, Phone, AddressId)
-		values(1, 'Jake', 'Ganser', 'Jake.Ganser@gmail.com', '763-555-1111', 1),
-		(2, 'Judy', 'Thao', 'Judy.Thao@gmail.com', '763-555-2222', 2),
-		(3, 'Nik', 'Clay', 'Nik.Clay@gmail.com', '763-555-3333', 3)
+		insert into Customers(CustomerId, CustomerName, Email, Phone, AddressId)
+		values(1, 'Jake Ganser', 'Jake.Ganser@gmail.com', '763-555-1111', 1),
+		(2, 'Judy Thao', 'Judy.Thao@gmail.com', '763-555-2222', 2),
+		(3, 'Nik Clay', 'Nik.Clay@gmail.com', '763-555-3333', 3)
 	Set Identity_Insert Customers off;
-
-	DBCC CHECKIDENT('Employees', reseed, 1)
-	Set Identity_Insert Employees on;
-		insert into Employees(EmployeeId, LastName, FirstName, Email, [Password])
-		values(1, 'Rohde', 'AJ', 'AJ.Rohde@gmail.com', 'ARohde123'),
-		(2, 'Hirsi', 'Ali', 'Ali.Hirsi@gmail.com', 'AHirsi123'),
-		(3, 'Doul', 'Na', 'Na.Doul@gmail.com', 'NDoul123')
-	Set Identity_Insert Employees off;
 
 	DBCC CHECKIDENT('PurchaseStatus', reseed, 1)
 	Set Identity_Insert PurchaseStatus on;
@@ -86,21 +77,21 @@ Begin
 
 	DBCC CHECKIDENT('Specials', reseed, 1)
 	Set Identity_Insert Specials on;
-		insert into Specials(SpecialId, SpecialTitle, SpecialDescription, IsActive, SpecialType, SpecialValue)
-		values(1, 'Truck Month', 'Any truck purchase is an extra 10% off sale price!', 1, 'Percent Off', .10),
-				(2, 'New Vehicle Weekend', 'Get an extra $500 off your new vehicle purchase!', 1, 'Dollar Off', .10),
-				(3, 'Oldy But A Goody Extravaganza', 'Purchase a vehicle over 15 years old and get a 15% discount!', 0, 'Percent Off', .15),
-				(4, 'Special 4', 'This is special 4''s description!', 0, 'Dollar Off', 100),
-				(5, 'Special 5', 'This is special 5''s description!', 0, 'Dollar Off', 100),
-				(6, 'Special 6', 'This is special 6''s description!', 0, 'Dollar Off', 100)
+		insert into Specials(SpecialId, SpecialTitle, SpecialDescription)
+		values(1, 'Truck Month', 'Any truck purchase is an extra 10% off sale price!'),
+				(2, 'New Vehicle Weekend', 'Get an extra $500 off your new vehicle purchase!'),
+				(3, 'Oldy But A Goody Extravaganza', 'Purchase a vehicle over 15 years old and get a 15% discount!'),
+				(4, 'Special 4', 'This is special 4''s description!'),
+				(5, 'Special 5', 'This is special 5''s description!'),
+				(6, 'Special 6', 'This is special 6''s description!')
 	Set Identity_Insert Specials off;
 
 	DBCC CHECKIDENT('Transmissions', reseed, 1)
-	Set Identity_Insert Trasmissions on;
+	Set Identity_Insert Transmissions on;
 		insert into Transmissions(TransmissionId, TransmissionType)
 		values(1, 'Automatic'),
 				(2, 'Manual')
-	Set Identity_Insert Trasmissions off;
+	Set Identity_Insert Transmissions off;
 
 	DBCC CHECKIDENT('VehicleBodies', reseed, 1)
 	Set Identity_Insert VehicleBodies on;
@@ -113,20 +104,20 @@ Begin
 
 	DBCC CHECKIDENT('VehicleMakes', reseed, 1)
 	Set Identity_Insert VehicleMakes on;
-		insert into VehicleMakes(VehicleMakeId, VehicleMakeDescription, EmployeeId, DateAdded)
-		values(1, 'Ford', 3, '03/01/2000'),
-				(2, 'Dodge', 3, '03/01/2000'),
-				(3, 'Jeep', 1, '03/01/2000')
+		insert into VehicleMakes(VehicleMakeId, VehicleMakeDescription, UserId, DateAdded)
+		values(1, 'Ford', (select Id from AspNetUsers where FirstName = 'Lindsey'), '03/01/2000'),
+				(2, 'Dodge', (select Id from AspNetUsers where FirstName = 'Lindsey'), '03/01/2000'),
+				(3, 'Jeep', (select Id from AspNetUsers where FirstName = 'Mark'), '03/01/2000')
 	Set Identity_Insert VehicleMakes off;
 
 	DBCC CHECKIDENT('VehicleModels', reseed, 1)
 	Set Identity_Insert VehicleModels on;
-		insert into VehicleModels(VehicleModelId, VehicleModelDescription, EmployeeId, DateAdded, VehicleMakeId)
-		values(1, 'Escape', 2, '03/02/2009', 1),
-				(2, 'Escort', 2, '03/02/2009', 1),
-				(3, 'Ram 1500', 1, '05/09/2005', 2),
-				(4, 'Renegade', 3, '05/09/2005', 3),
-				(5, 'Focus', 3, '06/06/2000', 1)
+		insert into VehicleModels(VehicleModelId, VehicleModelDescription, UserId, DateAdded, VehicleMakeId)
+		values(1, 'Escape', (select Id from AspNetUsers where FirstName = 'Aj'), '03/02/2009', 1),
+				(2, 'Escort', (select Id from AspNetUsers where FirstName = 'Aj'), '03/02/2009', 1),
+				(3, 'Ram 1500', (select Id from AspNetUsers where FirstName = 'Mark'), '05/09/2005', 2),
+				(4, 'Renegade', (select Id from AspNetUsers where FirstName = 'Lindsey'), '05/09/2005', 3),
+				(5, 'Focus', (select Id from AspNetUsers where FirstName = 'Lindsey'), '06/06/2000', 1)
 	Set Identity_Insert VehicleModels off;
 
 	DBCC CHECKIDENT('VehicleTypes', reseed, 1)
@@ -138,39 +129,39 @@ Begin
 
 	DBCC CHECKIDENT('Vehicles', reseed, 1)
 	Set Identity_Insert Vehicles on;
-		insert into Vehicles(VehicleId, VehicleTypeId, VehicleModelId, TransmissionId, SalePrice, MSRPPrice, VehicleBodyId, [Year], 
-					VehicleColor, InteriorColor, VinNumber, Mileage, VehicleDescription, SpecialId, DateAdded, PurchaseStatusId, IsFeatured)
-		values(1, 1, 2, 2, 16500, 18750, 1, 2017, 'Red', 'Gray', '1NXBR32EX6Z624118', 500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', 2, '09/03/2017', 2, 1),
-				(2, 2, 3, 1, 7250, 8000, 3, 1998, 'Green', 'Gray', '3C3CFFFH0CT163609', 62000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', 1, '02/08/2014', 2, 1),
-				(3, 1, 2, 2, 22875, 26250, 4, 2016, 'White', 'Black', '2P4FP25B2VR305648', 850, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', null, '01/20/2017', 2, 1),
-				(4, 2, 1, 1, 6800, 7500, 1, 2003, 'Red', 'Black', '1B7FL26P6XS316728', 120000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', null, '05/28/2015', 2, 0),
-				(5, 1, 2, 2, 18500, 21000, 1, 2017, 'Yellow', 'Black', '1GDJC34J6YF591469', 350, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', 2, '10/01/2017', 1, 0),
-				(6, 2, 1, 1, 9900, 10250, 2, 2005, 'Red', 'White', 'JD1EG1122M4427105', 28500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', null, '01/20/2011', 2, 1),
-				(7, 1, 1, 2, 16500, 18000, 2, 2017, 'Blue', 'Black', '1GNFK16397J314592', 900, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', null, '02/18/2017', 2, 1),
-				(8, 2, 2, 1, 11250, 11750, 1, 2003, 'Green', 'Gray', 'JA3AJ36B23U019320', 48000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', null, '09/15/2008', 1, 0),
-				(9, 1, 3, 2, 14900, 15800, 3, 2016, 'White', 'Black', 'LM4AC11A7T1159824', 500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', 1, '11/04/2014', 2, 0),
-				(10, 2, 4, 2, 8500, 10250, 4, 2007, 'Green', 'Gray', '1B7HM26Y9KS023056', 78000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', null, '08/08/2009', 2, 1),
-				(11, 1, 5, 1, 29000, 33000, 1, 2018, 'Blue', 'White', '1FMJK1J50BEA31636', 200, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', 2, '10/10/2010', 1, 1),
-				(12, 2, 5, 1, 12750, 13500, 1, 2010, 'Red', 'Black', 'JH4CL95946C070364', 6000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', null, '01/24/2006', 2, 0),
-				(13, 1, 1, 2, 21500, 22750, 2, 2018, 'White', 'White', '2P4FP25B2VR305648', 150, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', null, '10/17/2007', 2, 0),
-				(14, 2, 5, 2, 6750, 8250, 2, 2003, 'Yellow', 'Gray', '1HTSLAAL7VH407274', 85000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', null, '03/09/2017', 2, 0),
-				(15, 1, 3, 1, 17500, 19000, 3, 2017, 'Green', 'Black', '1FUYDMCB9SP577754', 850, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', null, '06/24/2016', 2, 1)
+		insert into Vehicles(VehicleId, ImagePath, VehicleTypeId, VehicleModelId, TransmissionId, SalePrice, MSRPPrice, VehicleBodyId, [Year], 
+					VehicleColor, InteriorColor, VinNumber, Mileage, VehicleDescription, DateAdded, PurchaseStatusId, IsFeatured)
+		values(1, 'redcar.png', 1, 2, 2, 16500, 18750, 1, 2017, 'Red', 'Gray', '1NXBR32EX6Z624118', 500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', '09/03/2017', 2, 1),
+				(2, 'greentruck.jpg', 2, 3, 1, 7250, 8000, 3, 1998, 'Green', 'Gray', '3C3CFFFH0CT163609', 62000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', '02/08/2014', 2, 1),
+				(3, 'whitevan.jpg', 1, 2, 2, 22875, 26250, 4, 2016, 'White', 'Black', '2P4FP25B2VR305648', 850, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', '01/20/2017', 2, 1),
+				(4, 'redcar.png', 2, 1, 1, 6800, 7500, 1, 2003, 'Red', 'Black', '1B7FL26P6XS316728', 120000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', '05/28/2015', 2, 0),
+				(5, 'yellowcar.png', 1, 2, 2, 18500, 21000, 1, 2017, 'Yellow', 'Black', '1GDJC34J6YF591469', 350, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', '10/01/2017', 1, 0),
+				(6, 'redsuv.jpg', 2, 1, 1, 9900, 10250, 2, 2005, 'Red', 'White', 'JD1EG1122M4427105', 28500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.',  '01/20/2011', 2, 1),
+				(7, 'bluesuv.png', 1, 1, 2, 16500, 18000, 2, 2017, 'Blue', 'Black', '1GNFK16397J314592', 900, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.',  '02/18/2017', 2, 1),
+				(8, 'greencar.jpg', 2, 2, 1, 11250, 11750, 1, 2003, 'Green', 'Gray', 'JA3AJ36B23U019320', 48000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.',  '09/15/2008', 1, 0),
+				(9, 'whitetruck.jpg', 1, 3, 2, 14900, 15800, 3, 2016, 'White', 'Black', 'LM4AC11A7T1159824', 500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.',  '11/04/2014', 2, 0),
+				(10, 'greenvan.png', 2, 4, 2, 8500, 10250, 4, 2007, 'Green', 'Gray', '1B7HM26Y9KS023056', 78000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.',  '08/08/2009', 2, 1),
+				(11, 'bluecar.jpg', 1, 5, 1, 29000, 33000, 1, 2018, 'Blue', 'White', '1FMJK1J50BEA31636', 200, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', '10/10/2010', 1, 1),
+				(12, 'redcar.png', 2, 5, 1, 12750, 13500, 1, 2010, 'Red', 'Black', 'JH4CL95946C070364', 6000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', '01/24/2006', 2, 0),
+				(13, 'whitesuv.jpg', 1, 1, 2, 21500, 22750, 2, 2018, 'White', 'White', '2P4FP25B2VR305648', 150, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', '10/17/2007', 2, 0),
+				(14, 'yellowsuv.jpg', 2, 5, 2, 6750, 8250, 2, 2003, 'Yellow', 'Gray', '1HTSLAAL7VH407274', 85000, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', '03/09/2017', 2, 0),
+				(15, 'greentruck.jpg', 1, 3, 1, 17500, 19000, 3, 2017, 'Green', 'Black', '1FUYDMCB9SP577754', 850, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.', '06/24/2016', 2, 1)
 	Set Identity_Insert Vehicles off;
 
 	DBCC CHECKIDENT('ContactUsQueries', reseed, 1)
 	Set Identity_Insert ContactUsQueries on;
-		insert into ContactUsQueries(ContactUsQueryId, FirstName, LastName, Email, Phone, [Message], VehicleId)
-		values(1, 'Mark', 'Johnson', 'Mark.Johnson@gmail.com', '651-555-6666', 'Hey, will you find me a car like this but in blue?', 2),
-				(2, 'Rob', 'Reynolds', 'Rob.Reynolds@gmail.com', '651-555-9999', 'Do you accept trades?', null),
-				(3, 'Javier', 'Aguirre', 'Javier.Aguirre@gmail.com', '651-555-7777', 'I need a sweet truck!', null)
+		insert into ContactUsQueries(ContactUsQueryId, FullName, Email, Phone, [Message], VehicleId)
+		values(1, 'Mark Johnson', 'Mark.Johnson@gmail.com', '651-555-6666', 'Hey, will you find me a car like this but in blue?', 2),
+				(2, 'Rob Reynolds', 'Rob.Reynolds@gmail.com', '651-555-9999', 'Do you accept trades?', null),
+				(3, 'Javier Aguirre', 'Javier.Aguirre@gmail.com', '651-555-7777', 'I need a sweet truck!', null)
 	Set Identity_Insert ContactUsQueries off;
 
 	DBCC CHECKIDENT('Purchases', reseed, 1)
 	Set Identity_Insert Purchases on;
-		insert into Purchases(PurchaseId, PurchasePrice, PurchaseTypeId, EmployeeId, CustomerId, VehicleId, DatePurchased)
-		values(1, 18300, 3, 1, 2, 5, '10/26/2017'),
-				(2, 10900, 2, 2, 3, 8, '10/01/2017'),
-				(3, 27750, 1, 2, 1, 11, '09/13/2017')
+		insert into Purchases(PurchaseId, PurchasePrice, PurchaseTypeId, UserId, CustomerId, VehicleId, DatePurchased)
+		values(1, 18300, 3, (select Id from AspNetUsers where FirstName = 'Mark'), 2, 5, '10/26/2017'),
+				(2, 10900, 2, (select Id from AspNetUsers where FirstName = 'Aj'), 3, 8, '10/01/2017'),
+				(3, 27750, 1, (select Id from AspNetUsers where FirstName = 'Aj'), 1, 11, '09/13/2017')
 	Set Identity_Insert Purchases off;
 
 	DBCC CHECKIDENT('Phones', reseed, 1)

@@ -167,22 +167,22 @@ namespace CarDealership.Tests
 
         //}
 
-        [Test]
-        public void CanAddEmployee()
-        {
-            var repo = DealershipRepositoryFactory.Create();
+        //[Test]
+        //public void CanAddEmployee()
+        //{
+        //    var repo = DealershipRepositoryFactory.Create();
 
-            Employee employeeToAdd = new Employee();
+        //    Employee employeeToAdd = new Employee();
 
-            employeeToAdd.LastName = "Swenson";
-            employeeToAdd.FirstName = "Blayn";
-            employeeToAdd.Email = "BSwenson@gmail.com";
-            employeeToAdd.Password = "Swenson123";
+        //    employeeToAdd.LastName = "Swenson";
+        //    employeeToAdd.FirstName = "Blayn";
+        //    employeeToAdd.Email = "BSwenson@gmail.com";
+        //    employeeToAdd.Password = "Swenson123";
 
-            repo.AddEmployee(employeeToAdd);
+        //    repo.AddEmployee(employeeToAdd);
 
-            Assert.AreEqual(4, employeeToAdd.EmployeeId);
-        }
+        //    Assert.AreEqual(4, employeeToAdd.EmployeeId);
+        //}
 
         //public void CanEditEmployee()
         //{

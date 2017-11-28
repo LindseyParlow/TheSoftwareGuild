@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarDealership.Models;
+using CarDealership.Models.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CarDealership.Data
 {
@@ -14,7 +16,8 @@ namespace CarDealership.Data
         private static List<ContactUsQuery> _contactUsQueries;
         private static List<Customer> _customers;
         private static List<Dealership> _dealerships;
-        private static List<Employee> _employees;
+        private static List<AppUser> _appUsers;
+        private static List<IdentityRole> _appRoles;
         private static List<Phone> _phones;
         private static List<Purchase> _purchases;
         private static List<PurchaseStatus> _purchaseStatus;
@@ -128,34 +131,75 @@ namespace CarDealership.Data
                 },
             };
 
-            
-            _employees = new List<Employee>()
+
+            //_employees = new List<Employee>()
+            //{
+            //    new Employee
+            //    {
+            //        EmployeeId = 1,
+            //        LastName = "Rohde",
+            //        FirstName = "AJ",
+            //        Email = "AJ.Rohde@gmail.com",
+            //        Password = "ARohde123"
+            //    },
+            //    new Employee
+            //    {
+            //        EmployeeId = 2,
+            //        LastName = "Hirsi",
+            //        FirstName = "Ali",
+            //        Email = "Ali.Hirsi@gmail.com",
+            //        Password = "AHirsi123"
+            //    },
+            //    new Employee
+            //    {
+            //        EmployeeId = 3,
+            //        LastName = "Doul",
+            //        FirstName = "Na",
+            //        Email = "Na.Doul@gmail.com",
+            //        Password = "NDoul123"
+            //    },
+            //};
+            _appUsers = new List<AppUser>()
             {
-                new Employee
+                new AppUser
                 {
-                    EmployeeId = 1,
-                    LastName = "Rohde",
+                    Id = "user1",
+                    FirstName = "Mark",
+                    LastName = "Johnson"
+                },
+                new AppUser
+                {
+                    Id = "user2",
                     FirstName = "AJ",
-                    Email = "AJ.Rohde@gmail.com",
-                    Password = "ARohde123"
+                    LastName = "Rohde"
                 },
-                new Employee
+                new AppUser
                 {
-                    EmployeeId = 2,
-                    LastName = "Hirsi",
-                    FirstName = "Ali",
-                    Email = "Ali.Hirsi@gmail.com",
-                    Password = "AHirsi123"
-                },
-                new Employee
-                {
-                    EmployeeId = 3,
-                    LastName = "Doul",
-                    FirstName = "Na",
-                    Email = "Na.Doul@gmail.com",
-                    Password = "NDoul123"
+                    Id = "user3",
+                    FirstName = "Lindsey",
+                    LastName = "Parlow"
                 },
             };
+
+            _appRoles = new List<IdentityRole>()
+            {
+                new IdentityRole
+                {
+                    Id = "role1",
+                    Name = "Admin"
+                },
+                new IdentityRole
+                {
+                    Id = "role2",
+                    Name = "Sales"
+                },
+                new IdentityRole
+                {
+                    Id = "role3",
+                    Name = "Disabled"
+                },
+            };
+
             
             _purchaseStatus = new List<PurchaseStatus>()
             {
@@ -196,55 +240,37 @@ namespace CarDealership.Data
                 {
                     SpecialId = 1,
                     SpecialTitle = "Truck Month",
-                    SpecialDescription = "Any truck purchase is an extra 10% off sale price!",
-                    IsActive = true,
-                    SpecialType = "Percent Off",
-                    SpecialValue = .10M
+                    SpecialDescription = "Any truck purchase is an extra 10% off sale price!"
                 },
                 new Special
                 {
                     SpecialId = 2,
                     SpecialTitle = "New Vehicle Weekend",
-                    SpecialDescription = "Get an extra $500 off your new vehicle purchase!",
-                    IsActive = true,
-                    SpecialType = "Dollar Off",
-                    SpecialValue = 500M
+                    SpecialDescription = "Get an extra $500 off when you purchase a new vehicle!"
                 },
                 new Special
                 {
                     SpecialId = 3,
                     SpecialTitle = "Oldy But A Good Extravaganza",
-                    SpecialDescription = "Purchase a vehicle over 15 years old and get a 15% discount!",
-                    IsActive = false,
-                    SpecialType = "Percent",
-                    SpecialValue = .15M
+                    SpecialDescription = "Purchase a vehicle over 15 years old and get a 15% discount!"
                 },
                 new Special
                 {
                     SpecialId = 4,
                     SpecialTitle = "Special 4",
-                    SpecialDescription = "This is special 4's description!",
-                    IsActive = false,
-                    SpecialType = "Dollar Off",
-                    SpecialValue = 100M
+                    SpecialDescription = "This is special 4's description!"
                 },
                 new Special
                 {
                     SpecialId = 5,
                     SpecialTitle = "Special 5",
-                    SpecialDescription = "This is special 5's description!",
-                    IsActive = false,
-                    SpecialType = "Dollar Off",
-                    SpecialValue = 100M
+                    SpecialDescription = "This is special 5's description!"
                 },
                 new Special
                 {
                     SpecialId = 6,
                     SpecialTitle = "Special 6",
-                    SpecialDescription = "This is special 6's description!",
-                    IsActive = false,
-                    SpecialType = "Dollar Off",
-                    SpecialValue = 100M
+                    SpecialDescription = "This is special 6's description!"
                 }
             };
             
@@ -292,28 +318,25 @@ namespace CarDealership.Data
                 {
                     VehicleMakeId = 1,
                     VehicleMakeDescription = "Ford",
-                    EmployeeId = 2,
                     DateAdded = new DateTime(2000, 03, 01),
 
-                    Employee = _employees[1]
+                    User = _appUsers[1]
                 },
                 new VehicleMake
                 {
-                    VehicleMakeId = 1,
+                    VehicleMakeId = 2,
                     VehicleMakeDescription = "Dodge",
-                    EmployeeId = 3,
                     DateAdded = new DateTime(2000, 03, 01),
 
-                    Employee = _employees[2]
+                    User = _appUsers[2]
                 },
                 new VehicleMake
                 {
-                    VehicleMakeId = 1,
+                    VehicleMakeId = 3,
                     VehicleMakeDescription = "Jeep",
-                    EmployeeId = 1,
                     DateAdded = new DateTime(2000, 03, 01),
 
-                    Employee = _employees[0]
+                    User = _appUsers[0]
                 },
             };
 
@@ -323,55 +346,50 @@ namespace CarDealership.Data
                 {
                     VehicleModelId = 1,
                     VehicleModelDescription = "Escape",
-                    EmployeeId = 2,
                     DateAdded = new DateTime(2009,03, 02),
                     VehicleMakeId = 1,
 
-                    Employee = _employees[1],
+                    User = _appUsers[1],
                     VehicleMake = _vehicleMakes[0]
                 },
                 new VehicleModel
                 {
                     VehicleModelId = 2,
                     VehicleModelDescription = "Escort",
-                    EmployeeId = 2,
                     DateAdded = new DateTime(2009,03, 02),
                     VehicleMakeId = 1,
 
-                    Employee = _employees[1],
+                    User = _appUsers[1],
                     VehicleMake = _vehicleMakes[0]
                 },
                 new VehicleModel
                 {
                     VehicleModelId = 3,
                     VehicleModelDescription = "Ram 1500",
-                    EmployeeId = 1,
                     DateAdded = new DateTime(2005,05, 09),
                     VehicleMakeId = 2,
 
-                    Employee = _employees[0],
+                    User = _appUsers[0],
                     VehicleMake = _vehicleMakes[1]
                 },
                 new VehicleModel
                 {
                     VehicleModelId = 4,
                     VehicleModelDescription = "Renegade",
-                    EmployeeId = 3,
                     DateAdded = new DateTime(2005, 05, 09),
                     VehicleMakeId = 3,
 
-                    Employee = _employees[2],
+                    User = _appUsers[2],
                     VehicleMake = _vehicleMakes[2]
                 },
                 new VehicleModel
                 {
                     VehicleModelId = 5,
                     VehicleModelDescription = "Focus",
-                    EmployeeId = 3,
                     DateAdded = new DateTime(2000, 06, 06),
                     VehicleMakeId = 1,
 
-                    Employee = _employees[2],
+                    User = _appUsers[2],
                     VehicleMake = _vehicleMakes[0]
                 }
             };
@@ -408,7 +426,6 @@ namespace CarDealership.Data
                     VinNumber = "1NXBR32EX6Z624118",
                     Mileage = 500,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = 2,
                     DateAdded = new DateTime(2017, 09, 03),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
@@ -417,7 +434,6 @@ namespace CarDealership.Data
                     VehicleModel = _vehicleModels[1],
                     Transmission = _transmissions[1],
                     VehicleBody = _vehicleBodies[0],
-                    Special = _specials[1],
                     PurchaseStatus = _purchaseStatus[1]
                 },
                 new Vehicle
@@ -436,7 +452,6 @@ namespace CarDealership.Data
                     VinNumber = "3C3CFFFH0CT163609",
                     Mileage = 62000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = 1,
                     DateAdded = new DateTime(2014, 02, 08),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
@@ -444,7 +459,6 @@ namespace CarDealership.Data
                     VehicleType = _VehicleTypes[1],
                     VehicleModel = _vehicleModels[2],
                     Transmission = _transmissions[0],
-                    Special = _specials[0],
                     VehicleBody = _vehicleBodies[2],
                     PurchaseStatus = _purchaseStatus[1]
                 },
@@ -464,7 +478,6 @@ namespace CarDealership.Data
                     VinNumber = "2P4FP25B2VR305648",
                     Mileage = 850,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = null,
                     DateAdded = new DateTime(2017, 01, 20),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
@@ -491,7 +504,6 @@ namespace CarDealership.Data
                     VinNumber = "1B7FL26P6XS316728",
                     Mileage = 120000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = null,
                     DateAdded = new DateTime(2015, 05, 28),
                     PurchaseStatusId = 2,
                     IsFeatured = false,
@@ -518,7 +530,6 @@ namespace CarDealership.Data
                     VinNumber = "1GDJC34J6YF591469",
                     Mileage = 350,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = 2,
                     DateAdded = new DateTime(2017, 10, 01),
                     PurchaseStatusId = 1,
                     IsFeatured = false,
@@ -527,7 +538,6 @@ namespace CarDealership.Data
                     VehicleModel = _vehicleModels[1],
                     Transmission = _transmissions[1],
                     VehicleBody = _vehicleBodies[0],
-                    Special = _specials[1],
                     PurchaseStatus = _purchaseStatus[0]
                 },
                 new Vehicle
@@ -546,7 +556,6 @@ namespace CarDealership.Data
                     VinNumber = "JD1EG1122M4427105",
                     Mileage = 28500,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = null,
                     DateAdded = new DateTime(2011, 01, 20),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
@@ -573,7 +582,6 @@ namespace CarDealership.Data
                     VinNumber = "1GNFK16397J314592",
                     Mileage = 900,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = null,
                     DateAdded = new DateTime(2017, 02, 18),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
@@ -600,7 +608,6 @@ namespace CarDealership.Data
                     VinNumber = "JA3AJ36B23U019320",
                     Mileage = 48000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = null,
                     DateAdded = new DateTime(2008, 09, 15),
                     PurchaseStatusId = 1,
                     IsFeatured = false,
@@ -627,7 +634,6 @@ namespace CarDealership.Data
                     VinNumber = "LM4AC11A7T1159824",
                     Mileage = 500,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = 1,
                     DateAdded = new DateTime(2014, 11, 04),
                     PurchaseStatusId = 2,
                     IsFeatured = false,
@@ -636,7 +642,6 @@ namespace CarDealership.Data
                     VehicleModel = _vehicleModels[2],
                     Transmission = _transmissions[1],
                     VehicleBody = _vehicleBodies[2],
-                    Special = _specials[0],
                     PurchaseStatus = _purchaseStatus[1]
                 },
                 new Vehicle
@@ -655,7 +660,6 @@ namespace CarDealership.Data
                     VinNumber = "1B7HM26Y9KS023056",
                     Mileage = 78000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = null,
                     DateAdded = new DateTime(2009, 08, 8),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
@@ -682,7 +686,6 @@ namespace CarDealership.Data
                     VinNumber = "1FMJK1J50BEA31636",
                     Mileage = 200,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = 2,
                     DateAdded = new DateTime(2010, 10,10),
                     PurchaseStatusId = 1,
                     IsFeatured = true,
@@ -691,7 +694,6 @@ namespace CarDealership.Data
                     VehicleModel = _vehicleModels[4],
                     Transmission = _transmissions[0],
                     VehicleBody = _vehicleBodies[0],
-                    Special = _specials[1],
                     PurchaseStatus = _purchaseStatus[0]
                 },
                 new Vehicle
@@ -710,7 +712,6 @@ namespace CarDealership.Data
                     VinNumber = "JH4CL95946C070364",
                     Mileage = 6000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = null,
                     DateAdded = new DateTime(2006, 01, 24),
                     PurchaseStatusId = 2,
                     IsFeatured = false,
@@ -737,7 +738,6 @@ namespace CarDealership.Data
                     VinNumber = "2P4FP25B2VR305648",
                     Mileage = 150,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = null,
                     DateAdded = new DateTime(2007, 10, 17),
                     PurchaseStatusId = 2,
                     IsFeatured = false,
@@ -764,7 +764,6 @@ namespace CarDealership.Data
                     VinNumber = "1HTSLAAL7VH407274",
                     Mileage = 85000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = null,
                     DateAdded = new DateTime(2017, 03, 09),
                     PurchaseStatusId = 2,
                     IsFeatured = false,
@@ -791,7 +790,6 @@ namespace CarDealership.Data
                     VinNumber = "1FUYDMCB9SP577754",
                     Mileage = 850,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    SpecialId = null,
                     DateAdded = new DateTime(2016, 06, 24),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
@@ -844,13 +842,12 @@ namespace CarDealership.Data
                     PurchaseId = 1,
                     PurchasePrice = 18300,
                     PurchaseTypeId = 3,
-                    EmployeeId = 1,
                     CustomerId = 2,
                     VehicleId = 5,
                     DatePurchased = new DateTime(2017, 10, 26),
 
                     PurchaseType = _purchaseType[2],
-                    Employee = _employees[0],
+                    User = _appUsers[0],
                     Customer = _customers[1],
                     Vehicle = _vehicles[4]
                 },
@@ -859,13 +856,12 @@ namespace CarDealership.Data
                     PurchaseId = 2,
                     PurchasePrice = 10900,
                     PurchaseTypeId = 2,
-                    EmployeeId = 2,
                     CustomerId = 3,
                     VehicleId = 8,
                     DatePurchased = new DateTime(2017, 10, 01),
 
                     PurchaseType = _purchaseType[1],
-                    Employee = _employees[1],
+                    User = _appUsers[1],
                     Customer = _customers[2],
                     Vehicle = _vehicles[7]
                 },
@@ -874,13 +870,12 @@ namespace CarDealership.Data
                     PurchaseId = 3,
                     PurchasePrice = 27750,
                     PurchaseTypeId = 1,
-                    EmployeeId = 2,
                     CustomerId = 1,
                     VehicleId = 11,
                     DatePurchased = new DateTime(2017, 09, 13),
 
                     PurchaseType = _purchaseType[0],
-                    Employee = _employees[1],
+                    User = _appUsers[1],
                     Customer = _customers[0],
                     Vehicle = _vehicles[10]
                 },
@@ -922,19 +917,19 @@ namespace CarDealership.Data
             };
         }
 
-        public void AddEmployee(Employee employeeToAdd)
-        {
-            if (_employees.Any())
-            {
-                employeeToAdd.EmployeeId = _employees.Max(e => e.EmployeeId) + 1;
-            }
-            else
-            {
-                employeeToAdd.EmployeeId = 1;
-            }
+        //public void AddUser(AppUser userToAdd)
+        //{
+        //    if (_appUsers.Any())
+        //    {
+        //        userToAdd.Id = _appUsers.Max(e => e.Id) + 1;
+        //    }
+        //    else
+        //    {
+        //        userToAdd.Id = 1;
+        //    }
 
-            _employees.Add(employeeToAdd);
-        }
+        //    _appUsers.Add(userToAdd);
+        //}
 
         public void AddMake(VehicleMake vehicleMake)
         {
@@ -962,6 +957,20 @@ namespace CarDealership.Data
             }
 
             _vehicleModels.Add(vehicleModel);
+        }
+
+        public void AddContactUsQuery(ContactUsQuery contactUsQueryToAdd)
+        {
+            if (_contactUsQueries.Any())
+            {
+                contactUsQueryToAdd.ContactUsQueryId = _contactUsQueries.Max(s => s.ContactUsQueryId) + 1;
+            }
+            else
+            {
+                contactUsQueryToAdd.ContactUsQueryId = 1;
+            }
+
+            _contactUsQueries.Add(contactUsQueryToAdd);
         }
 
         public void AddSpecial(Special specialToAdd)
@@ -997,10 +1006,9 @@ namespace CarDealership.Data
             _specials.RemoveAll(s => s.SpecialId == specialId);
         }
 
-        public void EditEmployee(Employee employeeToEdit)
+        public void DeleteVehicle(int vehicleId)
         {
-            _employees.RemoveAll(e => e.EmployeeId == employeeToEdit.EmployeeId);
-            _employees.Add(employeeToEdit);
+            _vehicles.RemoveAll(v => v.VehicleId == vehicleId);
         }
 
         public void EditVehicle(Vehicle vehicleToEdit)
@@ -1016,28 +1024,13 @@ namespace CarDealership.Data
 
         public List<Special> GetAllSpecials()
         {
-            return _specials.Where(s => s.IsActive).ToList();
+            return _specials;
         }
 
         public List<Vehicle> GetAllVehicles()
         {
             return _vehicles;
         }
-
-        //public List<Vehicle> GetAllVehiclesByMake(string makeName)
-        //{
-        //    return _vehicles.Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).ToList();
-        //}
-       
-        //public List<Vehicle> GetAllVehiclesByYear(int vehicleYear)
-        //{
-        //    return _vehicles.Where(v => v.Year == vehicleYear).ToList();
-        //}
-
-        //public List<Vehicle> GetAllVehiclesByModel(string modelName)
-        //{
-        //    return _vehicles.Where(v => v.VehicleModel.VehicleModelDescription.Contains(modelName)).ToList();
-        //}
 
         public List<Vehicle> GetTop20NewVehicles()
         {
@@ -1052,123 +1045,6 @@ namespace CarDealership.Data
             }
         }
 
-        //public List<Vehicle> GetTop20NewVehiclesByMake(string makeName)
-        //{
-        //    var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New").Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20NewVehiclesByPriceRange(decimal minPrice, decimal maxPrice)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice >= minPrice && v.SalePrice <=maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20NewVehiclesByPriceMin(decimal minPrice)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice >= minPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20NewVehiclesByPriceMax(decimal maxPrice)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20NewVehiclesByYear(int vehicleYear)
-        //{
-        //    var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New").Where(y => y.Year == vehicleYear).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20NewVehiclesByYearRange(int minYear, int maxYear)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year >= minYear && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20NewVehiclesByYearMin(int minYear)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year >= minYear).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20NewVehiclesByYearMax(int maxYear)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20NewVehiclesModel(string modelName)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.VehicleModel.VehicleModelDescription.Contains(modelName)).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
         public List<Vehicle> GetTop20UsedVehicles()
         {
             var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").OrderByDescending(p => p.MSRPPrice).ToList();
@@ -1182,123 +1058,6 @@ namespace CarDealership.Data
             }
         }
 
-        //public List<Vehicle> GetTop20UsedVehiclesByMake(string makeName)
-        //{
-        //    var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20UsedVehiclesByPriceRange(decimal minPrice, decimal maxPrice)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice >= minPrice && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20UsedVehiclesByPriceMin(decimal minPrice)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice >= minPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20UsedVehiclesByPriceMax(decimal maxPrice)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20UsedVehiclesByYear(int vehicleYear)
-        //{
-        //    var vehicles = _vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").Where(y => y.Year == vehicleYear).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20UsedVehiclesByYearRange(int minYear, int maxYear)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year >= minYear && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20UsedVehiclesByYearMin(int minYear)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year >= minYear).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20UsedVehiclesByYearMax(int maxYear)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
-        //public List<Vehicle> GetTop20UsedVehiclesModel(string modelName)
-        //{
-        //    var vehicles = _vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.VehicleModel.VehicleModelDescription.Contains(modelName)).OrderByDescending(p => p.MSRPPrice).ToList();
-        //    if (vehicles.Count < 20)
-        //    {
-        //        return vehicles;
-        //    }
-        //    else
-        //    {
-        //        return vehicles.Take(20).ToList();
-        //    }
-        //}
-
         public List<Customer> GetAllCustomers()
         {
             return _customers;
@@ -1307,11 +1066,6 @@ namespace CarDealership.Data
         public List<ContactUsQuery> GetAllContactUsQueries()
         {
             return _contactUsQueries;
-        }
-
-        public Vehicle GetVehicleById(int vehicleId)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Vehicle> GetNewVehicleByMegaSearchFilter(string input, int minPrice, int maxPrice, int minYear, int maxYear)
@@ -1349,7 +1103,7 @@ namespace CarDealership.Data
 
         public List<Vehicle> GetNewAndUsedVehiclesForSales()
         {
-            var vehicles = _vehicles.OrderByDescending(p => p.MSRPPrice).ToList();
+            var vehicles = _vehicles.Where(v => v.PurchaseStatus.PurchaseStatusDescription == "Available").OrderByDescending(p => p.MSRPPrice).ToList();
             if (vehicles.Count < 20)
             {
                 return vehicles;
@@ -1362,7 +1116,7 @@ namespace CarDealership.Data
 
         public List<Vehicle> GetFilteredNewAndUsedVehiclesForSales(string input, int minPrice, int maxPrice, int minYear, int maxYear)
         {
-            var vehicles = _vehicles.Where(p => p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
+            var vehicles = _vehicles.Where(p => p.PurchaseStatus.PurchaseStatusDescription == "Available" && p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
 
             if (input == "noVehicleInput")
             {
@@ -1414,6 +1168,55 @@ namespace CarDealership.Data
             return _transmissions;
         }
 
+        public List<VehicleMake> GetAllVehicleMakes()
+        {
+            return _vehicleMakes;
+        }
+
+        public List<VehicleModel> GetVehicleModelsByVehicleMake(int makeId)
+        {
+            return _vehicleModels.Where(v => v.VehicleMake.VehicleMakeId == makeId).ToList();
+        }
+
+        public PurchaseStatus GetPurchaseStatus(int purchaseStatusId)
+        {
+            return _purchaseStatus.Single(p => p.PurchaseStatusId == purchaseStatusId);
+        }
+
+        public Transmission GetTransmission(int transmissionId)
+        {
+            return _transmissions.Single(t => t.TransmissionId == transmissionId);
+        }
+
+        public VehicleBody GetVehicleBody(int vehicleBodyId)
+        {
+            return _vehicleBodies.Single(v => v.VehicleBodyId == vehicleBodyId);
+        }
+
+        public VehicleModel GetVehicleModel(int modelId)
+        {
+            return _vehicleModels.Single(v => v.VehicleModelId == modelId);
+        }
+
+        public VehicleType GetVehicleType(int vehicleTypeId)
+        {
+            return _VehicleTypes.Single(v => v.VehicleTypeId == vehicleTypeId);
+        }
+
+        public PurchaseStatus GetPuchaseStatusForAddedVehicle()
+        {
+            return _purchaseStatus.Single(v => v.PurchaseStatusDescription == "Available");
+        }
+
+        public List<AppUser> GetAllUsers()
+        {
+            return _appUsers;
+        }
+
+        public List<IdentityRole> GetAllRoles()
+        {
+            return _appRoles;
+        }
     }
 }
 

@@ -5,52 +5,102 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarDealership.Models;
+using CarDealership.Models.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
 
 namespace CarDealership.Data
 {
     public class DealershipRepositoryEF : IDealershipRepository
     {
-        public void AddEmployee(Employee employeeToAdd)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                ctx.Employees.Add(employeeToAdd);
-                ctx.SaveChanges();
-            }
-        }
-
         public void AddMake(VehicleMake vehicleMake)
         {
             using (var ctx = new CarDealershipEntities())
             {
+                if (ctx.VehicleMakes.Any())
+                {
+                    vehicleMake.VehicleMakeId = ctx.VehicleMakes.Max(m => m.VehicleMakeId) + 1;
+                }
+                else
+                {
+                    vehicleMake.VehicleMakeId = 1;
+                }
+
                 ctx.VehicleMakes.Add(vehicleMake);
                 ctx.SaveChanges();
             }
+                
         }
 
         public void AddModel(VehicleModel vehicleModel)
         {
             using (var ctx = new CarDealershipEntities())
             {
+                if (ctx.VehicleModels.Any())
+                {
+                    vehicleModel.VehicleModelId = ctx.VehicleModels.Max(m => m.VehicleModelId) + 1;
+                }
+                else
+                {
+                    vehicleModel.VehicleModelId = 1;
+                }
+
                 ctx.VehicleModels.Add(vehicleModel);
                 ctx.SaveChanges();
             }
         }
 
+        public void AddContactUsQuery(ContactUsQuery contactUsQueryToAdd)
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                if (ctx.ContactUsQueries.Any())
+                {
+                    contactUsQueryToAdd.ContactUsQueryId = ctx.ContactUsQueries.Max(s => s.ContactUsQueryId) + 1;
+                }
+                else
+                {
+                    contactUsQueryToAdd.ContactUsQueryId = 1;
+                }
+
+                ctx.ContactUsQueries.Add(contactUsQueryToAdd);
+                ctx.SaveChanges();
+            }
+        }
+
+
         public void AddSpecial(Special specialToAdd)
         {
             using (var ctx = new CarDealershipEntities())
             {
+                if (ctx.Specials.Any())
+                {
+                    specialToAdd.SpecialId = ctx.Specials.Max(s => s.SpecialId) + 1;
+                }
+                else
+                {
+                    specialToAdd.SpecialId = 1;
+                }
+
                 ctx.Specials.Add(specialToAdd);
                 ctx.SaveChanges();
             }
         }
 
-        public void AddVehicle(Vehicle vehicleToAdd)
+        public void AddVehicle(Vehicle vehicle)
         {
             using (var ctx = new CarDealershipEntities())
             {
-                ctx.Vehicles.Add(vehicleToAdd);
+                if (ctx.Vehicles.Any())
+                {
+                    vehicle.VehicleId = ctx.Vehicles.Max(v => v.VehicleId) + 1;
+                }
+                else
+                {
+                    vehicle.VehicleId = 1;
+                }
+
+                ctx.Vehicles.Add(vehicle);
                 ctx.SaveChanges();
             }
         }
@@ -59,22 +109,18 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                var deleteThis = ctx.Specials.SingleOrDefault(i => i.SpecialId == specialId);
+                var deleteThis = ctx.Specials.SingleOrDefault(s => s.SpecialId == specialId);
                 ctx.Specials.Remove(deleteThis);
                 ctx.SaveChanges();
-            };
+            }
         }
 
-        public void EditEmployee(Employee employeeToEdit)
+        public void DeleteVehicle(int vehicleId)
         {
             using (var ctx = new CarDealershipEntities())
             {
-                var editThis = ctx.Employees.SingleOrDefault(s => s.EmployeeId == employeeToEdit.EmployeeId);
-                editThis.LastName = employeeToEdit.LastName;
-                editThis.FirstName = employeeToEdit.FirstName;
-                editThis.Email = employeeToEdit.Email;
-                editThis.Password = employeeToEdit.Password;
-
+                var deleteThis = ctx.Vehicles.SingleOrDefault(v => v.VehicleId == vehicleId);
+                ctx.Vehicles.Remove(deleteThis);
                 ctx.SaveChanges();
             }
         }
@@ -83,32 +129,10 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                var editThis = ctx.Vehicles.SingleOrDefault(s => s.VehicleId == vehicleToEdit.VehicleId);
-                editThis.VehicleTypeId = vehicleToEdit.VehicleTypeId;
-                editThis.VehicleModelId = vehicleToEdit.VehicleModelId;
-                editThis.TransmissionId = vehicleToEdit.TransmissionId;
-                editThis.SalePrice = vehicleToEdit.SalePrice;
-                editThis.MSRPPrice = vehicleToEdit.MSRPPrice;
-                editThis.VehicleBodyId = vehicleToEdit.VehicleBodyId;
-                editThis.Year = vehicleToEdit.Year;
-                editThis.VehicleColor = vehicleToEdit.VehicleColor;
-                editThis.InteriorColor = vehicleToEdit.InteriorColor;
-                editThis.VinNumber = vehicleToEdit.VinNumber;
-                editThis.Mileage = vehicleToEdit.Mileage;
-                editThis.VehicleDescription = vehicleToEdit.VehicleDescription;
-                editThis.SpecialId = vehicleToEdit.SpecialId;
-                editThis.DateAdded = vehicleToEdit.DateAdded;
-                editThis.PurchaseStatusId = vehicleToEdit.PurchaseStatusId;
-                editThis.IsFeatured = vehicleToEdit.IsFeatured;
+                throw new NotImplementedException();
 
-                editThis.VehicleType = vehicleToEdit.VehicleType;
-                editThis.VehicleModel = vehicleToEdit.VehicleModel;
-                editThis.Transmission = vehicleToEdit.Transmission;
-                editThis.VehicleBody = vehicleToEdit.VehicleBody;
-                editThis.Special = vehicleToEdit.Special;
-                editThis.PurchaseStatus = vehicleToEdit.PurchaseStatus;
+                //figure this out at some point.
 
-                ctx.SaveChanges();
             }
         }
 
@@ -116,9 +140,15 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                var isFeaturedVehicle = ctx.Vehicles.Where(i => i.IsFeatured).Where(p => p.PurchaseStatus.PurchaseStatusDescription == "Available");
-
-                return isFeaturedVehicle.ToList();
+                return ctx.Vehicles
+                    .Include("VehicleType")
+                    .Include("VehicleModel")
+                    .Include("VehicleModel.VehicleMake")
+                    .Include("Transmission")
+                    .Include("VehicleBody")
+                    .Include("PurchaseStatus")
+                    .Where(v => v.IsFeatured && v.PurchaseStatus.PurchaseStatusDescription == "Available")
+                    .ToList();
             }
         }
 
@@ -126,7 +156,7 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                return ctx.Specials.Where(s=> s.IsActive).ToList();
+                return ctx.Specials.ToList();
             }
         }
 
@@ -134,31 +164,15 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                return ctx.Vehicles.ToList();
-            }
-        }
+                return ctx.Vehicles
+                    .Include("VehicleType")
+                    .Include("VehicleModel")
+                    .Include("VehicleModel.VehicleMake")
+                    .Include("Transmission")
+                    .Include("VehicleBody")
+                    .Include("PurchaseStatus")
+                    .ToList();
 
-        public List<Vehicle> GetAllVehiclesByMake(string makeName)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                return ctx.Vehicles.Where(b => b.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).ToList();
-            }
-        }
-
-        public List<Vehicle> GetAllVehiclesByModel(string modelName)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                return ctx.Vehicles.Where(b => b.VehicleModel.VehicleModelDescription.Contains(modelName)).ToList();
-            }
-        }
-
-        public List<Vehicle> GetAllVehiclesByYear(int vehicleYear)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                return ctx.Vehicles.Where(b => b.Year == vehicleYear).ToList();
             }
         }
 
@@ -166,7 +180,16 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                var vehicles = ctx.Vehicles.Where(b => b.VehicleType.VehicleTypeDescription == "New" && b.PurchaseStatus.PurchaseStatusDescription == "Available").OrderByDescending(p => p.MSRPPrice).ToList();
+                var vehicles = ctx.Vehicles
+                    .Include("VehicleType")
+                    .Include("VehicleModel")
+                    .Include("VehicleModel.VehicleMake")
+                    .Include("Transmission")
+                    .Include("VehicleBody")
+                    .Include("PurchaseStatus")
+                    .Where(t => t.VehicleType.VehicleTypeDescription == "New")
+                    .OrderByDescending(p => p.MSRPPrice)
+                    .ToList();
                 if (vehicles.Count < 20)
                 {
                     return vehicles;
@@ -176,318 +199,44 @@ namespace CarDealership.Data
                     return vehicles.Take(20).ToList();
                 }
             }
-        }
-
-        public List<Vehicle> GetTop20NewVehiclesByMake(string makeName)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New").Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20NewVehiclesByPriceMax(decimal maxPrice)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20NewVehiclesByPriceMin(decimal minPrice)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice >= minPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20NewVehiclesByPriceRange(decimal minPrice, decimal maxPrice)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.SalePrice >= minPrice && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20NewVehiclesByYear(int vehicleYear)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "New").Where(y => y.Year == vehicleYear).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-
-            }
-        }
-
-        public List<Vehicle> GetTop20NewVehiclesByYearMax(int maxYear)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20NewVehiclesByYearMin(int minYear)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year >= minYear).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20NewVehiclesByYearRange(int minYear, int maxYear)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.Year >= minYear && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20NewVehiclesModel(string modelName)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "New" && v.VehicleModel.VehicleModelDescription.Contains(modelName)).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
+                
         }
 
         public List<Vehicle> GetTop20UsedVehicles()
         {
             using (var ctx = new CarDealershipEntities())
             {
-                var vehicles = ctx.Vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used" && t.PurchaseStatus.PurchaseStatusDescription == "Available").OrderByDescending(p => p.MSRPPrice).ToList();
+                var vehicles = ctx.Vehicles
+                    .Include("VehicleType")
+                    .Include("VehicleModel")
+                    .Include("VehicleModel.VehicleMake")
+                    .Include("Transmission")
+                    .Include("VehicleBody")
+                    .Include("PurchaseStatus")
+                    .Where(t => t.VehicleType.VehicleTypeDescription == "Used")
+                    .OrderByDescending(p => p.MSRPPrice)
+                    .ToList();
                 if (vehicles.Count < 20)
                 {
                     return vehicles;
                 }
                 else
                 {
-                    return vehicles.Take(20).ToList();
+                    return vehicles
+                        .Take(20)
+                        .ToList();
                 }
             }
-        }
-
-        public List<Vehicle> GetTop20UsedVehiclesByMake(string makeName)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(makeName)).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20UsedVehiclesByPriceMax(decimal maxPrice)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20UsedVehiclesByPriceMin(decimal minPrice)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice >= minPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20UsedVehiclesByPriceRange(decimal minPrice, decimal maxPrice)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.SalePrice >= minPrice && v.SalePrice <= maxPrice).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20UsedVehiclesByYear(int vehicleYear)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(t => t.VehicleType.VehicleTypeDescription == "Used").Where(y => y.Year == vehicleYear).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20UsedVehiclesByYearMax(int maxYear)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20UsedVehiclesByYearMin(int minYear)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year >= minYear).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20UsedVehiclesByYearRange(int minYear, int maxYear)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.Year >= minYear && v.Year <= maxYear).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
-        }
-
-        public List<Vehicle> GetTop20UsedVehiclesModel(string modelName)
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                var vehicles = ctx.Vehicles.Where(v => v.VehicleType.VehicleTypeDescription == "Used" && v.VehicleModel.VehicleModelDescription.Contains(modelName)).OrderByDescending(p => p.MSRPPrice).ToList();
-                if (vehicles.Count < 20)
-                {
-                    return vehicles;
-                }
-                else
-                {
-                    return vehicles.Take(20).ToList();
-                }
-            }
+                
         }
 
         public List<Customer> GetAllCustomers()
         {
             using (var ctx = new CarDealershipEntities())
             {
-                return ctx.Customers.ToList();
+                return ctx.Customers
+                    .Include("Address")
+                    .ToList();
             }
         }
 
@@ -495,135 +244,298 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                return ctx.ContactUsQueries.ToList();
+                return ctx.ContactUsQueries
+                    .Include("Vehicle")
+                    .ToList();
             }
-        }
-
-        //need to do something with this
-        public Vehicle GetVehicleById(int vehicleId)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Vehicle> GetNewVehicleByMegaSearchFilter(string input, int minPrice, int maxPrice, int minYear, int maxYear)
         {
-            throw new NotImplementedException();
-            //var vehicles = _vehicles.Where(p => p.VehicleType.VehicleTypeDescription == "New" && p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
+            using (var ctx = new CarDealershipEntities())
+            {
+                var vehicles = ctx.Vehicles
+                    .Include("VehicleType")
+                    .Include("VehicleModel")
+                    .Include("VehicleModel.VehicleMake")
+                    .Include("Transmission")
+                    .Include("VehicleBody")
+                    .Include("PurchaseStatus")
+                    .Where(p => p.VehicleType.VehicleTypeDescription == "New" 
+                        && p.SalePrice >= minPrice 
+                        && p.SalePrice <= maxPrice 
+                        && p.Year >= minYear 
+                        && p.Year <= maxYear);
 
-            //if (input == "")
-            //{
-            //    return vehicles.ToList();
-            //}
-            //else
-            //{
-            //    return vehicles.Where(v => ((v.VehicleModel.VehicleModelDescription).Contains(input) || (v.VehicleModel.VehicleMake.VehicleMakeDescription).Contains(input)) || (v.Year.ToString()) == input).ToList();
-            //}
+                if (input == "noVehicleInput")
+                {
+                    return vehicles.ToList();
+                }
+                else
+                {
+                    return vehicles
+                        .Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(input) 
+                            || v.VehicleModel.VehicleModelDescription.Contains(input) 
+                            || v.Year.ToString().Contains(input))
+                            .ToList();
+                }
+            }    
         }
 
         public List<Vehicle> GetUsedVehicleByMegaSearchFilter(string input, int minPrice, int maxPrice, int minYear, int maxYear)
         {
-            throw new NotImplementedException();
-            //var vehicles = _vehicles.Where(p => p.VehicleType.VehicleTypeDescription == "New" && p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
+            using (var ctx = new CarDealershipEntities())
+            {
+                var vehicles = ctx.Vehicles
+                    .Include("VehicleType")
+                    .Include("VehicleModel")
+                    .Include("VehicleModel.VehicleMake")
+                    .Include("Transmission")
+                    .Include("VehicleBody")
+                    .Include("PurchaseStatus")
+                    .Where(p => p.VehicleType.VehicleTypeDescription == "Used" 
+                        && p.SalePrice >= minPrice 
+                        && p.SalePrice <= maxPrice 
+                        && p.Year >= minYear 
+                        && p.Year <= maxYear);
 
-            //if (input == "")
-            //{
-            //    return vehicles.ToList();
-            //}
-            //else
-            //{
-            //    return vehicles.Where(v => ((v.VehicleModel.VehicleModelDescription).Contains(input) || (v.VehicleModel.VehicleMake.VehicleMakeDescription).Contains(input)) || (v.Year.ToString()) == input).ToList();
-            //}
+                if (input == "noVehicleInput")
+                {
+                    return vehicles.ToList();
+                }
+                else
+                {
+                    return vehicles
+                        .Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(input) 
+                            || v.VehicleModel.VehicleModelDescription.Contains(input) 
+                            || v.Year.ToString().Contains(input))
+                        .ToList();
+                }
+            }             
         }
 
         public Vehicle GetVehicleDetailsByVehicleId(int vehicleId)
         {
-            throw new NotImplementedException();
-            //return _vehicles.Single(v => v.VehicleId == vehicleId);
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.Vehicles
+                    .Include("VehicleType")
+                    .Include("VehicleModel")
+                    .Include("VehicleModel.VehicleMake")
+                    .Include("Transmission")
+                    .Include("VehicleBody")
+                    .Include("PurchaseStatus")
+                    .Single(v => v.VehicleId == vehicleId);
+            }
         }
 
         public List<Vehicle> GetNewAndUsedVehiclesForSales()
         {
-            throw new NotImplementedException();
-
-            //var vehicles = _vehicles.OrderByDescending(p => p.MSRPPrice).ToList();
-            //if (vehicles.Count < 20)
-            //{
-            //    return vehicles;
-            //}
-            //else
-            //{
-            //    return vehicles.Take(20).ToList();
-            //}
+            using (var ctx = new CarDealershipEntities())
+            {
+                var vehicles = ctx.Vehicles
+                    .Include("VehicleType")
+                    .Include("VehicleModel")
+                    .Include("VehicleModel.VehicleMake")
+                    .Include("Transmission")
+                    .Include("VehicleBody")
+                    .Include("PurchaseStatus")
+                    .Where(v => v.PurchaseStatus.PurchaseStatusDescription == "Available")
+                    .OrderByDescending(p => p.MSRPPrice)
+                    .ToList();
+                if (vehicles.Count < 20)
+                {
+                    return vehicles;
+                }
+                else
+                {
+                    return vehicles
+                        .Take(20)
+                        .ToList();
+                }
+            }
         }
 
         public List<Vehicle> GetFilteredNewAndUsedVehiclesForSales(string input, int minPrice, int maxPrice, int minYear, int maxYear)
         {
-            throw new NotImplementedException();
+            using (var ctx = new CarDealershipEntities())
+            {
+                var vehicles = ctx.Vehicles
+                    .Include("VehicleType")
+                    .Include("VehicleModel")
+                    .Include("VehicleModel.VehicleMake")
+                    .Include("Transmission")
+                    .Include("VehicleBody")
+                    .Include("PurchaseStatus")
+                    .Where(p => p.PurchaseStatus.PurchaseStatusDescription == "Available"
+                        && p.SalePrice >= minPrice 
+                        && p.SalePrice <= maxPrice 
+                        && p.Year >= minYear 
+                        && p.Year <= maxYear);
 
-            //var vehicles = _vehicles.Where(p => p.SalePrice >= minPrice && p.SalePrice <= maxPrice && p.Year >= minYear && p.Year <= maxYear);
-
-            //if (input == "noVehicleInput")
-            //{
-            //    return vehicles.ToList();
-            //}
-            //else
-            //{
-            //    return vehicles.Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(input) || v.VehicleModel.VehicleModelDescription.Contains(input) || v.Year.ToString().Contains(input)).ToList();
-            //}
+                if (input == "noVehicleInput")
+                {
+                    return vehicles.ToList();
+                }
+                else
+                {
+                    return vehicles
+                        .Where(v => v.VehicleModel.VehicleMake.VehicleMakeDescription.Contains(input) 
+                            || v.VehicleModel.VehicleModelDescription.Contains(input) 
+                            || v.Year.ToString().Contains(input))
+                        .ToList();
+                }
+            }
         }
 
         public List<State> GetAllStates()
         {
-            throw new NotImplementedException();
-
-            //return _states;
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.States.ToList();
+            }
         }
 
         public List<PurchaseType> GetAllPurchaseTypes()
         {
-            throw new NotImplementedException();
-
-            //return _purchaseType;
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.PurchaseTypes.ToList();
+            }
         }
 
         public List<Phone> GetAllDealershipPhoneNumbers()
         {
-            throw new NotImplementedException();
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.Dealerships.Include("Address").SelectMany(p => p.Phones).ToList();
+            }
         }
 
         public List<VehicleMake> GetAllMakes()
         {
-            throw new NotImplementedException();
-
-            //return _vehicleMakes;
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleMakes.Include("User").ToList();
+            }
         }
 
         public List<VehicleModel> GetAllModels()
         {
-            throw new NotImplementedException();
-
-            //return _vehicleModels;
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleModels.Include("User").Include("VehicleMake").ToList();
+            }
         }
 
         public List<VehicleType> GetAllVehicleTypes()
         {
-            throw new NotImplementedException();
-
-            //return _VehicleTypes;
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleTypes.ToList();
+            }
         }
 
         public List<VehicleBody> GetAllBodyStyles()
         {
-            throw new NotImplementedException();
-
-            //return _vehicleBodies;
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleBodies.ToList();
+            }
         }
 
         public List<Transmission> GetAllTransmissionTypes()
         {
-            throw new NotImplementedException();
-
-            //return _transmissions;
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.Transmissions.ToList();
+            }
         }
+
+        public List<VehicleMake> GetAllVehicleMakes()
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleMakes.ToList();
+
+            }
+        }
+
+        public List<VehicleModel> GetVehicleModelsByVehicleMake(int makeId)
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleModels.Include("VehicleMake").Where(v => v.VehicleMake.VehicleMakeId == makeId).ToList();
+            }
+        }
+
+        public PurchaseStatus GetPurchaseStatus(int purchaseStatusId)
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.PurchaseStatuses.Single(p => p.PurchaseStatusId == purchaseStatusId);
+            }
+        }
+
+        public Transmission GetTransmission(int transmissionId)
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.Transmissions.Single(t => t.TransmissionId == transmissionId);
+            }
+        }
+
+        public VehicleBody GetVehicleBody(int vehicleBodyId)
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleBodies.Single(v => v.VehicleBodyId == vehicleBodyId);
+            }
+        }
+
+        public VehicleModel GetVehicleModel(int modelId)
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleModels.Include("VehicleMake").Single(v => v.VehicleModelId == modelId);
+            }
+        }
+
+        public VehicleType GetVehicleType(int vehicleTypeId)
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleTypes.Single(v => v.VehicleTypeId == vehicleTypeId);
+            }
+        }
+
+        public PurchaseStatus GetPuchaseStatusForAddedVehicle()
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.PurchaseStatuses.Single(v => v.PurchaseStatusDescription == "Available");
+            }
+        }
+
+
+        public List<AppUser> GetAllUsers()
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.Users.ToList();
+            }
+        }
+
+        public List<IdentityRole> GetAllRoles()
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                var roleStore = new RoleStore<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(ctx);
+                var roleMgr = new RoleManager<IdentityRole>(roleStore);
+
+                return roleMgr.Roles.ToList();
+            }
+        }
+
     }
 }
