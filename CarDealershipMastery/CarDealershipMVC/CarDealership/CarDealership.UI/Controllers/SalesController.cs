@@ -12,7 +12,7 @@ namespace CarDealership.UI.Controllers
     public class SalesController : Controller
     {
         // GET: Sales
-        [Authorize(Roles = "admin,author")]
+        //[Authorize(Roles = "admin,author")]
         public ActionResult Index()
         {
             var viewModel = new SalesInfoVM();
@@ -23,11 +23,29 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin,author")]
+        //[Authorize(Roles = "admin,author")]
         public ActionResult Index(SalesInfoVM salesInfoVM)
         {
-            //do this once identity is set up becuase you need to attach a sales user to the sale
-            return View();
+            if (ModelState.IsValid)
+            {
+                var repo = DealershipRepositoryFactory.Create();
+
+                salesInfoVM.Purchase.PurchaseType = repo.GetPuchaseType(salesInfoVM.Purchase.PurchaseTypeId);
+                salesInfoVM.Purchase.User = repo.GetUser();
+                salesInfoVM.Purchase.Customer = repo.GetCustomer();
+                salesInfoVM.Purchase.Vehicle = repo.GetVehicleDetailsByVehicleId(salesInfoVM.Purchase.VehicleId);
+
+                salesInfoVM.Purchase.Vehicle.PurchaseStatus.PurchaseStatusDescription = "Sold";
+                salesInfoVM.Purchase.Vehicle.PurchaseStatusId = repo.GetPurchaseStatus(salesInfoVM.Purchase.)
+            }
+            else
+            {
+                var viewModel = new SalesInfoVM();
+                viewModel.SetStateItems(DealershipRepositoryFactory.Create().GetAllStates());
+                viewModel.SetPurchaseTypeItems(DealershipRepositoryFactory.Create().GetAllPurchaseTypes());
+
+                return View(viewModel);
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace CarDealership.UI.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Index()
         {
             var repo = DealershipRepositoryFactory.Create();
@@ -21,7 +21,7 @@ namespace CarDealership.UI.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Specials()
         {
             var repo = DealershipRepositoryFactory.Create();
@@ -31,7 +31,7 @@ namespace CarDealership.UI.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Contact(string id)
         {
             var viewModel = new ContactUsVM();
@@ -42,7 +42,7 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Contact(ContactUsVM contactVM)
         {
             contactVM.ContactUs.Vehicle = DealershipRepositoryFactory.Create().GetVehicleDetailsByVehicleId(contactVM.ContactUs.Vehicle.VehicleId);
@@ -51,7 +51,7 @@ namespace CarDealership.UI.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "admin, sales")]
+        //[Authorize(Roles = "admin, sales")]
         public ActionResult Sales()
         {
             var repo = DealershipRepositoryFactory.Create();

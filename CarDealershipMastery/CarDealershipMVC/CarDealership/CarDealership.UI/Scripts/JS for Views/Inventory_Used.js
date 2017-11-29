@@ -138,7 +138,7 @@ function getDetailsUsed() {
 					'<p>' + "Mileage: " + vehicle.mileage + '</p>' +
 					'<p>' + "VIN: " + vehicle.vinNumber + '</p></div>' +
 					'<div class="col-md-3"><p>' + "Sales Price: " + vehicle.salePrice + '</p>' +
-					'<p>' + "MSRP: " + vehicle.msrpPrice + '</p></div>' + 
+					'<p>' + "MSRP: " + vehicle.msrpPrice + '</p></div>' +
 					'<div class="col-md-12">' + "Description: " + vehicle.vehicleDescription + '</div>' +
 					'<div class="col-md-12">' + contactOrSold + '<button class="btn btn-primary" id="returnButton">Return To Search</button></div></div>'
 
@@ -164,10 +164,10 @@ function returnToSearch() {
 	})
 }
 
-function redirectToContactUs() {
-	$(document).on("click", "#contactUsButton", function () {
-		window.location.href = '/Home/Contact';
-		return false;
-	})
-}
+//function redirectToContactUs() {
+//	$(document).on("click", "#contactUsButton", function () {
+//		window.location.href = '/Home/Contact';
+//		return false;
+//	})
+//}
 

@@ -7,43 +7,64 @@
 	<script src="~/Scripts/JS for Views/Home_Index.js"></script>
 }
 <div class="container">
+	<div id="mainContent">
+		@*carousel attempt*@
+		<div class="row">
+			<div class="col-md-12">
+				<div id="Carousel" class="carousel slide" style="height: 150px; background-image: url('http://www.zingerbug.com/Backgrounds/background_images/car_dingbats_on_white_background_seamless.jpg')">
 
-	@*carousel attempt*@
-	<div class="row">
-		<div class="col-md-12 jumbotron">
-			<div id="mycarousel" class="carousel slide" data-ride="carousel" align="center">
-				<ol class="carousel-indicators">
-					<li data-target="#mycarousel" data-slide-to="0" class="active"></li>
-					@foreach (var special in Model)
-					{
-						<li data-target="#mycarousel" data-slide-to="@special.SpecialId"></li>
-					}
-				</ol>
-				<div class="carousel-inner" role="listbox">
-					<div class="item active">
-						<h1>BIG HUGE SALE!!!</h1>
-						<p>Supporting text and disclaimers</p>
+					<ol class="carousel-indicators">
+						<li data-target="#Carousel" data-slide-to="0" class="active"></li>
+						@foreach (var special in Model)
+						{
+							<li data-target="#mycarousel" data-slide-to="@special.SpecialId"></li>
+						}
+					</ol>
+
+					<!-- Carousel items -->
+					<div class="carousel-inner">
+
+						<div class="item active">
+							<div class="row">
+								<div class="text-center" style="background-color: white">
+									<h1>BIG HUGE SALE!!!</h1>
+									<p>See terms and conditions. Exclusions may apply.</p>
+								</div>
+							</div><!--.row-->
+						</div><!--.item-->
+						@foreach (var special in Model)
+						{
+						<div class="item" onclick="window.location.href='Home/Specials'">
+							<div class="row">
+								<div class="text-center" style="background-color: white">
+									<h1>@special.SpecialTitle</h1>
+									<p>@special.SpecialDescription</p>
+								</div>
+							</div><!--.row-->
+						</div><!--.item-->
+						}
 					</div>
-					@foreach (var special in Model)
-					{
-						<div class="item">
-							<h1>@special.SpecialTitle</h1>
-							<p>@special.SpecialDescription</p>
-						</div>
-					}
-				</div>
+					<a data-slide="prev" data-target="#Carousel" href="javascript:;" class="left carousel-control">
+						<i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
+					</a>
+					<a data-slide="next" data-target="#Carousel" href="javascript:;" class="right carousel-control">
+						<i class="fa fa-chevron-right fa-2x" aria-hidden="true"></i>
+					</a>
+				</div><!--.Carousel-->
 			</div>
 		</div>
 		
-		
+		<div class="row">
+			<br />
+			<h1 align="center">Featured Vehicles</h1>
+			<br />
+		</div>
+		<div id="nonFilteredFeaturedVehicles">
+			@*all featured vehicles go here*@
+		</div>
 	</div>
-	<div class="row">
-		<br />
-		<h2>Featured Vehicles</h2>
-		<br />
-	</div>
-	<div id="nonFilteredFeaturedVehicles">
-		@*all featured vehicles go here*@
+	<div id="detailsForOneVehicle" style="display:none">
+
 	</div>
 </div>
 

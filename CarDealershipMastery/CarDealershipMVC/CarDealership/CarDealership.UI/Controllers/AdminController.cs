@@ -21,7 +21,7 @@ namespace CarDealership.UI.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult AddVehicle()
         {
             var viewModel = new AddVehicleVM();
@@ -37,7 +37,7 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult AddVehicle(AddVehicleVM addVehicleVM)
         {
             if (ModelState.IsValid)
@@ -104,7 +104,7 @@ namespace CarDealership.UI.Controllers
 
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult EditVehicle(int id)
         {
             var viewModel = new AddVehicleVM();
@@ -123,7 +123,7 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult EditVehicle(AddVehicleVM addVehicleVM)
         {
             if (ModelState.IsValid)
@@ -206,7 +206,7 @@ namespace CarDealership.UI.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult DeleteVehicle()
         {
             var repo = DealershipRepositoryFactory.Create();
@@ -217,7 +217,7 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult DeleteVehicle(int id)
         {
             var repo = DealershipRepositoryFactory.Create();
@@ -227,7 +227,7 @@ namespace CarDealership.UI.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult Users()
         {
             var repo = DealershipRepositoryFactory.Create();
@@ -237,7 +237,7 @@ namespace CarDealership.UI.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult AddUser()
         {
             var viewModel = new AddUserVM();
@@ -248,7 +248,7 @@ namespace CarDealership.UI.Controllers
         }
 
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult EditUser()
         {
             //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
@@ -259,7 +259,7 @@ namespace CarDealership.UI.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult Makes()
         {
             //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
@@ -270,7 +270,7 @@ namespace CarDealership.UI.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult Models()
         {
             //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
@@ -281,7 +281,7 @@ namespace CarDealership.UI.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult Specials()
         {
             var viewModel = new AddSpecialVM();
@@ -290,7 +290,7 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public ActionResult Specials(AddSpecialVM specialVM)
         {
             if (ModelState.IsValid)
@@ -310,7 +310,7 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public JsonResult GetModelsByMake(int makeId)
         {
             var models = DealershipRepositoryFactory.Create().GetVehicleModelsByVehicleMake(makeId);

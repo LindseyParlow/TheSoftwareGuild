@@ -67,7 +67,7 @@ namespace CarDealership.UI.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult ChangePassword()
         {
             return View();
