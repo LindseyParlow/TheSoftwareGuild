@@ -5,7 +5,7 @@
 
 <div class="container">
 	<div>
-		@using (Html.BeginForm("Index", "Sales"))
+		@using (Html.BeginForm("AddUser", "Admin"))
 		{
 			<div class="col-md-12">
 				<div class="row">
@@ -53,7 +53,7 @@
 											<label>Role</label>
 										</p>
 										<p>
-											@Html.DropDownListFor(m => m.RoleItems, Model.RoleItems, "-Choose One-", new { @class = "form-control", @placeholder = "Body Style" })
+											@Html.DropDownListFor(m => m.RoleName, Model.RoleItems, "-Choose One-", new { @class = "form-control", @placeholder = "Body Style" })
 										</p><br />
 									</div>
 								</div>
@@ -65,8 +65,7 @@
 											<label>Password</label>
 										</p>
 										<p>
-											@*NEED TO MAKE THIS FOR USERS ONCE IDENTITY IS SET UP!!!
-											@Html.TextBoxFor(m => m.Vehicle.Year, new { @class = "form-control", @placeholder = "Year" })*@
+											@Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
 										</p><br />
 									</div>
 								</div>
@@ -76,8 +75,7 @@
 											<label>Confirm Password</label>
 										</p>
 										<p>
-											@*NEED TO MAKE THIS FOR USERS ONCE IDENTITY IS SET UP!!!
-											@Html.DropDownListFor(m => m.Vehicle.TransmissionId, Model.TransmissionItems, "-Choose One-", new { @class = "form-control", @placeholder = "Transmission" })*@
+											@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm" })
 										</p><br />
 									</div>
 								</div>

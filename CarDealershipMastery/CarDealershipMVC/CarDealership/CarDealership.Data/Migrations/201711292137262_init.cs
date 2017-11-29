@@ -64,14 +64,11 @@ namespace CarDealership.Data.Migrations
                         VinNumber = c.String(),
                         Mileage = c.Int(nullable: false),
                         VehicleDescription = c.String(),
-                        SpecialId = c.Int(),
-                        DateAdded = c.DateTime(nullable: false),
                         PurchaseStatusId = c.Int(nullable: false),
                         IsFeatured = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.VehicleId)
                 .ForeignKey("dbo.PurchaseStatus", t => t.PurchaseStatusId, cascadeDelete: true)
-                .ForeignKey("dbo.Specials", t => t.SpecialId)
                 .ForeignKey("dbo.Transmissions", t => t.TransmissionId, cascadeDelete: true)
                 .ForeignKey("dbo.VehicleBodies", t => t.VehicleBodyId, cascadeDelete: true)
                 .ForeignKey("dbo.VehicleModels", t => t.VehicleModelId, cascadeDelete: true)
@@ -80,7 +77,6 @@ namespace CarDealership.Data.Migrations
                 .Index(t => t.VehicleModelId)
                 .Index(t => t.TransmissionId)
                 .Index(t => t.VehicleBodyId)
-                .Index(t => t.SpecialId)
                 .Index(t => t.PurchaseStatusId);
             
             CreateTable(
@@ -91,16 +87,6 @@ namespace CarDealership.Data.Migrations
                         PurchaseStatusDescription = c.String(),
                     })
                 .PrimaryKey(t => t.PurchaseStatusId);
-            
-            CreateTable(
-                "dbo.Specials",
-                c => new
-                    {
-                        SpecialId = c.Int(nullable: false, identity: true),
-                        SpecialTitle = c.String(),
-                        SpecialDescription = c.String(),
-                    })
-                .PrimaryKey(t => t.SpecialId);
             
             CreateTable(
                 "dbo.Transmissions",
@@ -299,6 +285,16 @@ namespace CarDealership.Data.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
+            CreateTable(
+                "dbo.Specials",
+                c => new
+                    {
+                        SpecialId = c.Int(nullable: false, identity: true),
+                        SpecialTitle = c.String(),
+                        SpecialDescription = c.String(),
+                    })
+                .PrimaryKey(t => t.SpecialId);
+            
         }
         
         public override void Down()
@@ -322,7 +318,6 @@ namespace CarDealership.Data.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Vehicles", "VehicleBodyId", "dbo.VehicleBodies");
             DropForeignKey("dbo.Vehicles", "TransmissionId", "dbo.Transmissions");
-            DropForeignKey("dbo.Vehicles", "SpecialId", "dbo.Specials");
             DropForeignKey("dbo.Vehicles", "PurchaseStatusId", "dbo.PurchaseStatus");
             DropForeignKey("dbo.Addresses", "StateId", "dbo.States");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
@@ -342,13 +337,13 @@ namespace CarDealership.Data.Migrations
             DropIndex("dbo.VehicleModels", new[] { "UserId" });
             DropIndex("dbo.VehicleModels", new[] { "VehicleMakeId" });
             DropIndex("dbo.Vehicles", new[] { "PurchaseStatusId" });
-            DropIndex("dbo.Vehicles", new[] { "SpecialId" });
             DropIndex("dbo.Vehicles", new[] { "VehicleBodyId" });
             DropIndex("dbo.Vehicles", new[] { "TransmissionId" });
             DropIndex("dbo.Vehicles", new[] { "VehicleModelId" });
             DropIndex("dbo.Vehicles", new[] { "VehicleTypeId" });
             DropIndex("dbo.ContactUsQueries", new[] { "VehicleId" });
             DropIndex("dbo.Addresses", new[] { "StateId" });
+            DropTable("dbo.Specials");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.PurchaseTypes");
             DropTable("dbo.Purchases");
@@ -364,7 +359,6 @@ namespace CarDealership.Data.Migrations
             DropTable("dbo.VehicleModels");
             DropTable("dbo.VehicleBodies");
             DropTable("dbo.Transmissions");
-            DropTable("dbo.Specials");
             DropTable("dbo.PurchaseStatus");
             DropTable("dbo.Vehicles");
             DropTable("dbo.ContactUsQueries");

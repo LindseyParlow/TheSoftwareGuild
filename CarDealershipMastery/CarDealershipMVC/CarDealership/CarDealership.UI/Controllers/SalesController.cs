@@ -26,26 +26,27 @@ namespace CarDealership.UI.Controllers
         //[Authorize(Roles = "admin,author")]
         public ActionResult Index(SalesInfoVM salesInfoVM)
         {
-            if (ModelState.IsValid)
-            {
-                var repo = DealershipRepositoryFactory.Create();
+            //if (ModelState.IsValid)
+            //{
+            //    var repo = DealershipRepositoryFactory.Create();
 
-                salesInfoVM.Purchase.PurchaseType = repo.GetPuchaseType(salesInfoVM.Purchase.PurchaseTypeId);
-                salesInfoVM.Purchase.User = repo.GetUser();
-                salesInfoVM.Purchase.Customer = repo.GetCustomer();
-                salesInfoVM.Purchase.Vehicle = repo.GetVehicleDetailsByVehicleId(salesInfoVM.Purchase.VehicleId);
+            //    salesInfoVM.Purchase.PurchaseType = repo.GetPuchaseType(salesInfoVM.Purchase.PurchaseTypeId);
+            //    salesInfoVM.Purchase.User = repo.GetUser();
+            //    salesInfoVM.Purchase.Customer = repo.GetCustomer();
+            //    salesInfoVM.Purchase.Vehicle = repo.GetVehicleDetailsByVehicleId(salesInfoVM.Purchase.VehicleId);
 
-                salesInfoVM.Purchase.Vehicle.PurchaseStatus.PurchaseStatusDescription = "Sold";
-                salesInfoVM.Purchase.Vehicle.PurchaseStatusId = repo.GetPurchaseStatus(salesInfoVM.Purchase.)
-            }
-            else
-            {
-                var viewModel = new SalesInfoVM();
-                viewModel.SetStateItems(DealershipRepositoryFactory.Create().GetAllStates());
-                viewModel.SetPurchaseTypeItems(DealershipRepositoryFactory.Create().GetAllPurchaseTypes());
+            //    salesInfoVM.Purchase.Vehicle.PurchaseStatus.PurchaseStatusDescription = "Sold";
+            //    salesInfoVM.Purchase.Vehicle.PurchaseStatusId = repo.GetPurchaseStatus(salesInfoVM.Purchase.)
+            //}
+            //else
+            //{
+            //    var viewModel = new SalesInfoVM();
+            //    viewModel.SetStateItems(DealershipRepositoryFactory.Create().GetAllStates());
+            //    viewModel.SetPurchaseTypeItems(DealershipRepositoryFactory.Create().GetAllPurchaseTypes());
 
-                return View(viewModel);
-            }
+                return View();
+            //viewModel
+            //}
         }
     }
 }

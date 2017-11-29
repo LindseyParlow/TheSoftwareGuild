@@ -129,10 +129,20 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                throw new NotImplementedException();
+                vehicleToEdit.VehicleTypeId = vehicleToEdit.VehicleType.VehicleTypeId;
+                vehicleToEdit.VehicleModelId = vehicleToEdit.VehicleModel.VehicleModelId;
+                vehicleToEdit.TransmissionId = vehicleToEdit.Transmission.TransmissionId;
+                vehicleToEdit.VehicleBodyId = vehicleToEdit.VehicleBody.VehicleBodyId;
+                vehicleToEdit.PurchaseStatusId = vehicleToEdit.PurchaseStatus.PurchaseStatusId;
 
-                //figure this out at some point.
-
+                ctx.Vehicles.Attach(vehicleToEdit);
+                ctx.Entry(vehicleToEdit).State = System.Data.Entity.EntityState.Modified;
+                ctx.VehicleTypes.Attach(vehicleToEdit.VehicleType);
+                ctx.VehicleModels.Attach(vehicleToEdit.VehicleModel);
+                ctx.Transmissions.Attach(vehicleToEdit.Transmission);
+                ctx.VehicleBodies.Attach(vehicleToEdit.VehicleBody);
+                ctx.PurchaseStatuses.Attach(vehicleToEdit.PurchaseStatus);
+                ctx.SaveChanges();
             }
         }
 
@@ -522,18 +532,36 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                return ctx.Users.ToList();
+                var users = ctx.Users.ToList();
+                var roles = ctx.Roles.ToList();
+
+                foreach (var user in users)
+                {
+                    foreach (var role in user.Roles)
+                    {
+                        if (roles.Any(i => i.Id == role.RoleId))
+                        {
+                            var thisThing = roles.First(i => i.Id == role.RoleId);
+
+                            user.RoleName = thisThing.Name;
+                        }
+
+                    }
+                }
+                return users;
             }
         }
+
 
         public List<IdentityRole> GetAllRoles()
         {
             using (var ctx = new CarDealershipEntities())
             {
-                var roleStore = new RoleStore<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(ctx);
-                var roleMgr = new RoleManager<IdentityRole>(roleStore);
+                return ctx.Roles.ToList();
+                //var roleStore = new RoleStore<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(ctx);
+                //var roleMgr = new RoleManager<IdentityRole>(roleStore);
 
-                return roleMgr.Roles.ToList();
+                //return roleMgr.Roles.ToList();
             }
         }
 

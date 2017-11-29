@@ -21,6 +21,7 @@ namespace CarDealership.Data.Interfaces
         void AddSpecial(Special specialToAdd);
         void AddMake(VehicleMake vehicleMake);
         void AddModel(VehicleModel vehicleModel);
+        //void AddUser(AddUserVM viewModel);
         void AddVehicle(Vehicle vehicleToAdd);
         void EditVehicle(Vehicle vehicleToEdit);
         void DeleteSpecial(int specialId);

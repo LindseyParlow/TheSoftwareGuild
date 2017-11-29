@@ -426,7 +426,6 @@ namespace CarDealership.Data
                     VinNumber = "1NXBR32EX6Z624118",
                     Mileage = 500,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2017, 09, 03),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
 
@@ -452,7 +451,6 @@ namespace CarDealership.Data
                     VinNumber = "3C3CFFFH0CT163609",
                     Mileage = 62000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2014, 02, 08),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
 
@@ -478,7 +476,6 @@ namespace CarDealership.Data
                     VinNumber = "2P4FP25B2VR305648",
                     Mileage = 850,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2017, 01, 20),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
 
@@ -504,7 +501,6 @@ namespace CarDealership.Data
                     VinNumber = "1B7FL26P6XS316728",
                     Mileage = 120000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2015, 05, 28),
                     PurchaseStatusId = 2,
                     IsFeatured = false,
 
@@ -530,7 +526,6 @@ namespace CarDealership.Data
                     VinNumber = "1GDJC34J6YF591469",
                     Mileage = 350,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2017, 10, 01),
                     PurchaseStatusId = 1,
                     IsFeatured = false,
 
@@ -556,7 +551,6 @@ namespace CarDealership.Data
                     VinNumber = "JD1EG1122M4427105",
                     Mileage = 28500,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2011, 01, 20),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
 
@@ -582,7 +576,6 @@ namespace CarDealership.Data
                     VinNumber = "1GNFK16397J314592",
                     Mileage = 900,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2017, 02, 18),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
 
@@ -608,7 +601,6 @@ namespace CarDealership.Data
                     VinNumber = "JA3AJ36B23U019320",
                     Mileage = 48000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2008, 09, 15),
                     PurchaseStatusId = 1,
                     IsFeatured = false,
 
@@ -634,7 +626,6 @@ namespace CarDealership.Data
                     VinNumber = "LM4AC11A7T1159824",
                     Mileage = 500,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2014, 11, 04),
                     PurchaseStatusId = 2,
                     IsFeatured = false,
 
@@ -660,7 +651,6 @@ namespace CarDealership.Data
                     VinNumber = "1B7HM26Y9KS023056",
                     Mileage = 78000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2009, 08, 8),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
 
@@ -686,7 +676,6 @@ namespace CarDealership.Data
                     VinNumber = "1FMJK1J50BEA31636",
                     Mileage = 200,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2010, 10,10),
                     PurchaseStatusId = 1,
                     IsFeatured = true,
 
@@ -712,7 +701,6 @@ namespace CarDealership.Data
                     VinNumber = "JH4CL95946C070364",
                     Mileage = 6000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2006, 01, 24),
                     PurchaseStatusId = 2,
                     IsFeatured = false,
 
@@ -738,7 +726,6 @@ namespace CarDealership.Data
                     VinNumber = "2P4FP25B2VR305648",
                     Mileage = 150,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2007, 10, 17),
                     PurchaseStatusId = 2,
                     IsFeatured = false,
 
@@ -764,7 +751,6 @@ namespace CarDealership.Data
                     VinNumber = "1HTSLAAL7VH407274",
                     Mileage = 85000,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2017, 03, 09),
                     PurchaseStatusId = 2,
                     IsFeatured = false,
 
@@ -790,7 +776,6 @@ namespace CarDealership.Data
                     VinNumber = "1FUYDMCB9SP577754",
                     Mileage = 850,
                     VehicleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc.",
-                    DateAdded = new DateTime(2016, 06, 24),
                     PurchaseStatusId = 2,
                     IsFeatured = true,
 
@@ -800,6 +785,7 @@ namespace CarDealership.Data
                     VehicleBody = _vehicleBodies[2],
                     PurchaseStatus = _purchaseStatus[1]
                 },
+
             };
 
             _contactUsQueries = new List<ContactUsQuery>()

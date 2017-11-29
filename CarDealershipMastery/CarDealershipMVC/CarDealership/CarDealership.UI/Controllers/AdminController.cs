@@ -1,11 +1,17 @@
 ﻿using CarDealership.Data;
+using CarDealership.Models.Identity;
 using CarDealership.UI.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static CarDealership.UI.Models.AccountViewModels;
 
 namespace CarDealership.UI.Controllers
 {
@@ -209,6 +215,7 @@ namespace CarDealership.UI.Controllers
         //[Authorize(Roles = "admin")]
         public ActionResult DeleteVehicle()
         {
+            //NEED TO CHANGE THIS STILL?
             var repo = DealershipRepositoryFactory.Create();
 
             var model = repo.GetAllVehicles();
@@ -220,6 +227,7 @@ namespace CarDealership.UI.Controllers
         //[Authorize(Roles = "admin")]
         public ActionResult DeleteVehicle(int id)
         {
+            //NEED TO CHANGE THIS STILL?
             var repo = DealershipRepositoryFactory.Create();
 
             //var model = repo.DeleteVehicle(id);
@@ -246,6 +254,40 @@ namespace CarDealership.UI.Controllers
 
             return View(viewModel);
         }
+
+        [HttpPost]
+        //[Authorize(Roles = "admin")]
+        public ActionResult AddUser(AddUserVM viewModel)
+        {
+            var userManager = Request.GetOwinContext().GetUserManager<UserManager<AppUser>>();
+
+
+            if (ModelState.IsValid)
+            {
+                var newUser = new AppUser()
+                {
+                    UserName = viewModel.User.Email,
+                    FirstName = viewModel.User.FirstName,
+                    LastName = viewModel.User.LastName,
+                    Email = viewModel.User.Email
+                    
+                };
+
+                
+                var result = userManager.Create(newUser, viewModel.Password);
+                userManager.AddToRole(newUser.Id, viewModel.RoleName);
+
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                viewModel.SetRoleItems(DealershipRepositoryFactory.Create().GetAllRoles());
+
+                return View(viewModel);
+            }
+        }
+
 
 
         //[Authorize(Roles = "admin")]

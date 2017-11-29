@@ -22,7 +22,6 @@ namespace CarDealership.Models
         public string VinNumber { get; set; }
         public int Mileage { get; set; }
         public string VehicleDescription { get; set; }
-        public DateTime DateAdded { get; set; }
         public int PurchaseStatusId { get; set; }
         public bool IsFeatured { get; set; }
 
