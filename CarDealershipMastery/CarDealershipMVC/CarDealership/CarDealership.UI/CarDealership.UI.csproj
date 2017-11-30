@@ -218,6 +218,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\JS for Views\Admin_AddVehicle.js" />
     <Content Include="Scripts\JS for Views\Admin_Index.js" />
+    <Content Include="Scripts\JS for Views\Admin_Make.js" />
     <Content Include="Scripts\JS for Views\Admin_Specials.js" />
     <Content Include="Scripts\JS for Views\Home_Contact.js" />
     <Content Include="Scripts\JS for Views\Home_Index.js" />
@@ -242,11 +243,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddSpecialVM.cs" />
     <Compile Include="Models\AddUserVM.cs" />
     <Compile Include="Models\AddVehicleVM.cs" />
+    <Compile Include="Models\ChangePasswordVM.cs" />
     <Compile Include="Models\ContactUsVM.cs" />
+    <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\SalesInfoVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,8 +1,11 @@
-﻿
+﻿@model IEnumerable<CarDealership.Models.VehicleMake>
 @{
     ViewBag.Title = "Makes";
 }
 
+@section MakeScripts {
+	<script src="~/Scripts/JS for Views/Admin_Make.js"></script>
+}
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -21,10 +24,18 @@
 						<th style="width: 100px">Make</th>
 						<th style="width: 100px">Date Added</th>
 						<th style="width: 200px">User</th>
+						<th style="width: 200px"></th>
 					</tr>
 				</thead>
 				<tbody>
-					@*NEED TO DO A FOREACH USER IN USER ONCE IDENTITY IS SET UP!!!*@
+					@foreach (var make in Model)
+					{
+						<tr>
+							<td>@make.VehicleMakeDescription</td>
+							<td>@make.DateAdded.ToShortDateString()</td>
+							<td>@make.User.UserName</td>
+						</tr>
+					}
 				</tbody>
 			</table>
 		</div>

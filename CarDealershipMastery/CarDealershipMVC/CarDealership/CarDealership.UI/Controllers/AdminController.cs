@@ -11,13 +11,11 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using static CarDealership.UI.Models.AccountViewModels;
 
 namespace CarDealership.UI.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
         public ActionResult Index()
         {
             var repo = DealershipRepositoryFactory.Create();
@@ -26,8 +24,7 @@ namespace CarDealership.UI.Controllers
 
             return View(model);
         }
-
-        //[Authorize(Roles = "admin")]
+        
         public ActionResult AddVehicle()
         {
             var viewModel = new AddVehicleVM();
@@ -43,7 +40,6 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "admin")]
         public ActionResult AddVehicle(AddVehicleVM addVehicleVM)
         {
             if (ModelState.IsValid)
@@ -59,8 +55,6 @@ namespace CarDealership.UI.Controllers
                 addVehicleVM.Vehicle.VehicleType = repo.GetVehicleType(addVehicleVM.Vehicle.VehicleTypeId);
 
                 repo.AddVehicle(addVehicleVM.Vehicle);
-
-                //=================================================================
 
                 try
                 {
@@ -89,9 +83,6 @@ namespace CarDealership.UI.Controllers
                     throw ex;
                 }
 
-
-                //=================================================================
-
                 return RedirectToAction("Index");
             }
             else
@@ -109,8 +100,7 @@ namespace CarDealership.UI.Controllers
             }
 
         }
-
-        //[Authorize(Roles = "admin")]
+        
         public ActionResult EditVehicle(int id)
         {
             var viewModel = new AddVehicleVM();
@@ -129,17 +119,14 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "admin")]
         public ActionResult EditVehicle(AddVehicleVM addVehicleVM)
         {
             if (ModelState.IsValid)
             {
                 var repo = DealershipRepositoryFactory.Create();
 
-
                 try
                 {
-
                     var oldVehicle = repo.GetVehicleDetailsByVehicleId(addVehicleVM.Vehicle.VehicleId);
 
                     //addVehicleVM.Vehicle.PurchaseStatus = repo.GetPurchaseStatus(addVehicleVM.Vehicle.PurchaseStatus.PurchaseStatusId);
@@ -215,7 +202,6 @@ namespace CarDealership.UI.Controllers
         //[Authorize(Roles = "admin")]
         public ActionResult DeleteVehicle()
         {
-            //NEED TO CHANGE THIS STILL?
             var repo = DealershipRepositoryFactory.Create();
 
             var model = repo.GetAllVehicles();
@@ -224,18 +210,15 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "admin")]
         public ActionResult DeleteVehicle(int id)
         {
-            //NEED TO CHANGE THIS STILL?
             var repo = DealershipRepositoryFactory.Create();
 
             //var model = repo.DeleteVehicle(id);
 
             return RedirectToAction("Index");
         }
-
-        //[Authorize(Roles = "admin")]
+        
         public ActionResult Users()
         {
             var repo = DealershipRepositoryFactory.Create();
@@ -244,8 +227,7 @@ namespace CarDealership.UI.Controllers
 
             return View(model);
         }
-
-        //[Authorize(Roles = "admin")]
+        
         public ActionResult AddUser()
         {
             var viewModel = new AddUserVM();
@@ -256,11 +238,9 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "admin")]
         public ActionResult AddUser(AddUserVM viewModel)
         {
             var userManager = Request.GetOwinContext().GetUserManager<UserManager<AppUser>>();
-
 
             if (ModelState.IsValid)
             {
@@ -277,7 +257,7 @@ namespace CarDealership.UI.Controllers
                 var result = userManager.Create(newUser, viewModel.Password);
                 userManager.AddToRole(newUser.Id, viewModel.RoleName);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Users");
 
             }
             else
@@ -287,43 +267,83 @@ namespace CarDealership.UI.Controllers
                 return View(viewModel);
             }
         }
-
-
-
-        //[Authorize(Roles = "admin")]
-        public ActionResult EditUser()
+        
+        public ActionResult EditUser(string id)
         {
-            //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
-            var repo = DealershipRepositoryFactory.Create();
-
             var viewModel = new AddUserVM();
-
-            return View(viewModel);
+            var userManager = Request.GetOwinContext().GetUserManager<UserManager<AppUser>>();
+            var roles = DealershipRepositoryFactory.Create().GetAllRoles();
+            var user = userManager.FindById(id);
+            viewModel.User = user;
+            viewModel.User.RoleName = roles.First(r => r.Id == user.Roles.First().RoleId).Name;
+            viewModel.RoleName = viewModel.User.RoleName;
+            viewModel.SetRoleItems(roles);
+            
+            return View(viewModel);   
         }
 
-        //[Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult EditUser(AddUserVM userVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var userManager = Request.GetOwinContext().GetUserManager<UserManager<AppUser>>();
+
+                var oldUser = userManager.FindById(userVM.User.Id);
+
+                var roles = DealershipRepositoryFactory.Create().GetAllRoles();
+
+                oldUser.RoleName = roles.First(r => r.Id == oldUser.Roles.First().RoleId).Name;
+
+                oldUser.UserName = userVM.User.Email;
+                oldUser.LastName = userVM.User.LastName;
+                oldUser.FirstName = userVM.User.FirstName;
+                oldUser.Email = userVM.User.Email;
+
+                if(!String.IsNullOrWhiteSpace(userVM.Password) && userVM.Password == userVM.ConfirmPassword)
+                {
+                    oldUser.PasswordHash = userManager.PasswordHasher.HashPassword(userVM.Password);
+                }
+
+                userManager.RemoveFromRole(oldUser.Id, oldUser.RoleName);
+                userManager.AddToRole(oldUser.Id, userVM.RoleName);
+                userManager.Update(oldUser);
+
+                return RedirectToAction("Users");
+            }
+            else
+            {
+                var viewModel = new AddUserVM();
+                var userManager = Request.GetOwinContext().GetUserManager<UserManager<AppUser>>();
+                var roles = DealershipRepositoryFactory.Create().GetAllRoles();
+                var user = userManager.FindById(userVM.User.Id);
+                viewModel.User = user;
+                viewModel.User.RoleName = roles.First(r => r.Id == user.Roles.First().RoleId).Name;
+                viewModel.RoleName = viewModel.User.RoleName;
+                viewModel.SetRoleItems(roles);
+
+                return View(viewModel);
+            }
+        }
+        
         public ActionResult Makes()
         {
-            //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
             var repo = DealershipRepositoryFactory.Create();
 
-            var model = repo.GetAllVehicles();
+            var model = repo.GetAllMakes();
 
             return View(model);
         }
 
-        //[Authorize(Roles = "admin")]
         public ActionResult Models()
         {
-            //CHANGE THE METHOD IN HERE ONCE I ADD IDENTITY!!!
             var repo = DealershipRepositoryFactory.Create();
 
-            var model = repo.GetAllVehicles();
+            var model = repo.GetAllModels();
 
             return View(model);
         }
-
-        //[Authorize(Roles = "admin")]
+        
         public ActionResult Specials()
         {
             var viewModel = new AddSpecialVM();
@@ -332,7 +352,6 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "admin")]
         public ActionResult Specials(AddSpecialVM specialVM)
         {
             if (ModelState.IsValid)
@@ -352,7 +371,6 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        //[AllowAnonymous]
         public JsonResult GetModelsByMake(int makeId)
         {
             var models = DealershipRepositoryFactory.Create().GetVehicleModelsByVehicleMake(makeId);

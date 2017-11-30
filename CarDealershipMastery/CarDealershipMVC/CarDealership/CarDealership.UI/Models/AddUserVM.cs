@@ -16,7 +16,7 @@ namespace CarDealership.UI.Models
 
         [Required]
         public List<SelectListItem> RoleItems { get; set; }
-
+        
         public string RoleName { get; set; }
         
         [DataType(DataType.Password)]

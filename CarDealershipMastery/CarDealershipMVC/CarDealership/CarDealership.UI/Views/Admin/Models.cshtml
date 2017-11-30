@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<CarDealership.Models.VehicleModel>
 @{
     ViewBag.Title = "Models";
 }
@@ -21,12 +21,21 @@
 				<thead>
 					<tr>
 						<th style="width: 100px">Make</th>
+						<th style="width: 100px">Model</th>
 						<th style="width: 100px">Date Added</th>
 						<th style="width: 200px">User</th>
 					</tr>
 				</thead>
 				<tbody>
-					@*NEED TO DO A FOREACH USER IN USER ONCE IDENTITY IS SET UP!!!*@
+					@foreach (var vehicle in Model.OrderBy(v => v.VehicleMake.VehicleMakeDescription))
+					{
+						<tr>
+							<td>@vehicle.VehicleMake.VehicleMakeDescription</td>
+							<td>@vehicle.VehicleModelDescription</td>
+							<td>@vehicle.DateAdded.ToShortDateString()</td>
+							<td>@vehicle.User.Email</td>
+						</tr>
+					}
 				</tbody>
 			</table>
 		</div>

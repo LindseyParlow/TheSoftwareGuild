@@ -5,6 +5,13 @@
 		<li>
 			<a href="#">Hello @User.Identity.GetUserName()!</a>
 		</li>
+		@if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("sales")))
+		{
+			<li>@Html.ActionLink("Change Password", "ChangePassword", "Account")</li>
+		}
+		<li>
+			@Html.ActionLink("Log off", "LogOff", "Account")
+		</li>
 	</ul>
 }
 else

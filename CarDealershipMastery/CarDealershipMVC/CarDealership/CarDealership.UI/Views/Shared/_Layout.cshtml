@@ -28,7 +28,7 @@
 					<li>@Html.ActionLink("Used Inventory", "Used", "Inventory")</li>
 					<li>@Html.ActionLink("Special", "Specials", "Home")</li>
 					<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-					@if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.IsInRole("sales")))
+					@if (User.Identity.IsAuthenticated && User.IsInRole("sales"))
 					{
 						<li>@Html.ActionLink("Sales", "Index", "Sales")</li>
 					}
@@ -62,5 +62,6 @@
 	@RenderSection("AdminScripts", false)
 	@RenderSection("AddVehicleScripts", false)
 	@RenderSection("AdminSpecialsScripts", false)
+	@RenderSection("MakeScripts", false)
 </body>
 </html>

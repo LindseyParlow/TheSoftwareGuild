@@ -10,8 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
 using CarDealership.Data;
 using CarDealership.Models;
-using static CarDealership.UI.Models.AccountViewModels;
 using CarDealership.Models.Identity;
+using CarDealership.UI.Models;
 
 namespace CarDealership.UI.Controllers
 {
@@ -26,7 +26,7 @@ namespace CarDealership.UI.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            var model = new LoginViewModel();
+            var model = new LoginVM();
 
             return View(model);
         }
@@ -34,7 +34,7 @@ namespace CarDealership.UI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginVM model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -67,10 +67,39 @@ namespace CarDealership.UI.Controllers
             }
         }
 
-        //[Authorize]
         public ActionResult ChangePassword()
         {
-            return View();
+            var viewModel = new ChangePasswordVM();
+
+            return View(viewModel);
         }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordVM viewModel)
+        {
+            if(ModelState.IsValid)
+            {
+                var userManager = Request.GetOwinContext().GetUserManager<UserManager<AppUser>>();
+
+                var currentUser = userManager.FindById(User.Identity.GetUserId());
+
+                currentUser.PasswordHash = userManager.PasswordHasher.HashPassword(viewModel.Password);
+
+                userManager.Update(currentUser);
+
+                return RedirectToAction("Index", "Home", null);
+            }
+            return View(viewModel);
+        }
+        
+        public ActionResult LogOff()
+        {
+            var authMgr = Request.GetOwinContext().Authentication;
+
+            authMgr.SignOut("ApplicationCookie");
+
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

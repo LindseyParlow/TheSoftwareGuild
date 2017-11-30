@@ -41,7 +41,7 @@ namespace CarDealership.Data.Migrations
 
             var disabledUser = new AppUser()
             {
-                UserName = "LindseyParlow",
+                UserName = "lindsey.parlow@gmail.com",
                 FirstName = "Lindsey",
                 LastName = "Parlow",
                 Email = "lindsey.parlow@gmail.com"
@@ -49,7 +49,7 @@ namespace CarDealership.Data.Migrations
 
             var salesUser = new AppUser()
             {
-                UserName = "AjRohde",
+                UserName = "aj.rohde@gmail.com",
                 FirstName = "AJ",
                 LastName = "Rohde",
                 Email = "aj.rohde@gmail.com"
@@ -58,33 +58,33 @@ namespace CarDealership.Data.Migrations
 
             var adminUser = new AppUser()
             {
-                UserName = "MarkJohnson",
+                UserName = "mark.johnson@gmail.com",
                 FirstName = "Mark",
                 LastName = "Johnson",
                 Email = "mark.johnson@gmail.com"
             };
 
-            if (!userMgr.Users.Any(u => u.UserName == "LindseyParlow"))
+            if (!userMgr.Users.Any(u => u.UserName == "lindsey.parlow@gmail.com"))
             {
-                userMgr.Create(disabledUser, "testing333");
+                userMgr.Create(disabledUser, "testing123");
 
                 context.SaveChanges();
 
                 userMgr.AddToRole(disabledUser.Id, "disabled");
             }
 
-            if (!userMgr.Users.Any(u => u.UserName == "AjRohde"))
+            if (!userMgr.Users.Any(u => u.UserName == "aj.rohde@gmail.com"))
             {
-                userMgr.Create(salesUser, "testing222");
+                userMgr.Create(salesUser, "testing123");
 
                 context.SaveChanges();
 
                 userMgr.AddToRole(salesUser.Id, "sales");
             }
 
-            if (!userMgr.Users.Any(u => u.UserName == "MarkJohnson"))
+            if (!userMgr.Users.Any(u => u.UserName == "mark.johnson@gmail.com"))
             {
-                userMgr.Create(adminUser, "testing111");
+                userMgr.Create(adminUser, "testing123");
 
                 context.SaveChanges();
 

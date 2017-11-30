@@ -1,12 +1,13 @@
-﻿
+﻿@model CarDealership.UI.Models.AddUserVM
 @{
     ViewBag.Title = "EditUser";
 }
 
 <div class="container">
 	<div>
-		@using (Html.BeginForm("Index", "Sales"))
+		@using (Html.BeginForm("EditUser", "Admin"))
 		{
+			@Html.HiddenFor(m => m.User.Id, new { @id = "userId" })
 			<div class="col-md-12">
 				<div class="row">
 					<h2>Edit User</h2><br />
@@ -21,19 +22,17 @@
 											<label>First Name</label>
 										</p>
 										<p>
-											@*NEED TO MAKE THIS FOR USERS ONCE IDENTITY IS SET UP!!!
-												@Html.TextBoxFor(m => m.Vehicle.VehicleModel.VehicleMakeId, Model.MakeItems, "-Choose One-", new { @class = "form-control", @placeholder = "Make" })*@
+											@Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", @placeholder = "First Name" })
 										</p><br />
 									</div>
 								</div>
-								<div class="col-md-offset-4">
+								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
 											<label>Last Name</label>
 										</p>
 										<p>
-											@*NEED TO MAKE THIS FOR USERS ONCE IDENTITY IS SET UP!!!
-												@Html.TextBoxFor(m => m.Vehicle.Year, new { @class = "form-control", @placeholder = "Year" })*@
+											@Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", @placeholder = "Last Name" })
 										</p><br />
 									</div>
 								</div>
@@ -45,20 +44,18 @@
 											<label>Email</label>
 										</p>
 										<p>
-											@*NEED TO MAKE THIS FOR USERS ONCE IDENTITY IS SET UP!!!
-												@Html.TextBoxFor(m => m.Vehicle.Year, new { @class = "form-control", @placeholder = "Year" })*@
+											@Html.TextBoxFor(m => m.User.Email, new { @class = "form-control", @placeholder = "Email" })
 										</p><br />
 									</div>
 								</div>
-								<div class="col-md-offset-4">
+								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
 											<label>Role</label>
 										</p>
 										<p>
-											@*NEED TO MAKE THIS FOR USERS ONCE IDENTITY IS SET UP!!!
-												@Html.DropDownListFor(m => m.Vehicle.VehicleBodyId, Model.BodyStyleItems, "-Choose One-", new { @class = "form-control", @placeholder = "Body Style" })*@
-										</p><br />
+											@Html.DropDownListFor(m => m.RoleName, Model.RoleItems, "-Choose One-", new { @class = "form-control", @placeholder = "Body Style" })
+											</p><br />
 									</div>
 								</div>
 							</div>
@@ -69,23 +66,22 @@
 											<label>Password</label>
 										</p>
 										<p>
-											@*NEED TO MAKE THIS FOR USERS ONCE IDENTITY IS SET UP!!!
-												@Html.TextBoxFor(m => m.Vehicle.Year, new { @class = "form-control", @placeholder = "Year" })*@
+											@Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
 										</p><br />
 									</div>
 								</div>
-								<div class="col-md-offset-4">
+								<div class="col-md-4">
 									<div class="form-horizontal">
 										<p>
 											<label>Confirm Password</label>
 										</p>
 										<p>
-											@*NEED TO MAKE THIS FOR USERS ONCE IDENTITY IS SET UP!!!
-												@Html.DropDownListFor(m => m.Vehicle.TransmissionId, Model.TransmissionItems, "-Choose One-", new { @class = "form-control", @placeholder = "Transmission" })*@
+											@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm" })
 										</p><br />
 									</div>
 								</div>
 							</div>
+
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-horizontal">

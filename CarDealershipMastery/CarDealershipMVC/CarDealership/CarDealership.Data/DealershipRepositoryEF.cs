@@ -8,6 +8,7 @@ using CarDealership.Models;
 using CarDealership.Models.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 
 namespace CarDealership.Data
 {
@@ -532,8 +533,10 @@ namespace CarDealership.Data
         {
             using (var ctx = new CarDealershipEntities())
             {
-                var users = ctx.Users.ToList();
+                var users = ctx.Users.Include(u => u.Roles).ToList();
                 var roles = ctx.Roles.ToList();
+
+
 
                 foreach (var user in users)
                 {
