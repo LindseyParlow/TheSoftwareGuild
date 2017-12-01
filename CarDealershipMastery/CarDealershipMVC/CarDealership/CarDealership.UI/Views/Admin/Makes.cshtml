@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarDealership.Models.VehicleMake>
+﻿@model CarDealership.UI.Models.AddMakeVM
 @{
     ViewBag.Title = "Makes";
 }
@@ -9,33 +9,57 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h1 style="font-size:50px">Makes</h1>
-			<div style="border: 2px solid black; padding: 20px">
-				<p>
-					New Make
-					<input class="text" id="newMakeInput" />
-					<button class="btn btn-primary">Save</button>
-				</p>
-			</div>
-			<br/>
+			<h1 align="center">Makes</h1>
+			
+				@using (Html.BeginForm())
+				{
+					<div class="col-md-12" style="border: 2px solid black; padding: 20px">
+						<div class="row">
+							<fieldset class="for-panel">
+								<div class="col-md-12">
+									<div class="row">
+										<h2>Add Make</h2><br />
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-horizontal">
+												<p>
+													<label>Make</label>
+												</p>
+												<p>
+													@Html.TextBoxFor(m => m.VehicleMakeItem.VehicleMakeDescription, new { @class = "form-control", @placeholder = "New vehicle make" })
+												</p><br />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-horizontal">
+												<p>
+													<button type="submit" class="btn btn-primary" id="saveMakeButton">Save</button>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+				}
+		</div>
+	</div><br/>
+	<div class="row">
+		<div class="col-md-12" id="makeInfoTable">
 			<table border="1">
 				<thead>
 					<tr>
 						<th style="width: 100px">Make</th>
 						<th style="width: 100px">Date Added</th>
 						<th style="width: 200px">User</th>
-						<th style="width: 200px"></th>
 					</tr>
 				</thead>
-				<tbody>
-					@foreach (var make in Model)
-					{
-						<tr>
-							<td>@make.VehicleMakeDescription</td>
-							<td>@make.DateAdded.ToShortDateString()</td>
-							<td>@make.User.UserName</td>
-						</tr>
-					}
+				<tbody id="makeInfoTable">
+					
 				</tbody>
 			</table>
 		</div>

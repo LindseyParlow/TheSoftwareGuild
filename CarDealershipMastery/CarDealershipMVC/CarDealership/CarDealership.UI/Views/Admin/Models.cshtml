@@ -1,22 +1,67 @@
-﻿@model IEnumerable<CarDealership.Models.VehicleModel>
+﻿@model CarDealership.UI.Models.AddModelVM
 @{
-    ViewBag.Title = "Models";
+	ViewBag.Title = "Models";
 }
 
+@section ModelScripts {
+	<script src="~/Scripts/JS for Views/Admin_Model.js"></script>
+}
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h1 style="font-size:50px">Models</h1>
-			<div style="border: 2px solid black; padding: 20px">
-				<p>
-					New Model
-					<input class="text" id="newModelInput" />
-					Make
-					<input class="dropdown" id="makeDropDown" />
-					<button class="btn btn-primary">Save</button>
-				</p>
-			</div>
-			<br />
+			<h1 align="center">Models</h1>
+
+			@using (Html.BeginForm())
+			{
+				<div class="col-md-12" style="border: 2px solid black; padding: 20px">
+					<div class="row">
+						<fieldset class="for-panel">
+							<div class="col-md-12">
+								<div class="col-md-12">
+									<div class="row">
+										<h2>Add Model</h2><br />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-horizontal">
+											<p>
+												<label>Model</label>
+											</p>
+											<p>
+												@Html.TextBoxFor(m => m.VehicleModel.VehicleModelDescription, new { @class = "form-control", @placeholder = "New vehicle model" })
+											</p><br />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-horizontal">
+											<p>
+												<label>Make</label>
+											</p>
+											<p>
+												@Html.DropDownListFor(m => m.VehicleModel.VehicleMakeId, Model.MakeItems, "-Choose One-", new { @class = "form-control", @id = "makeDropdown", @placeholder = "Make" })
+											</p><br />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-horizontal">
+											<p>
+												<button type="submit" class="btn btn-primary" id="saveModelButton">Save</button>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			}
+		</div>
+	</div><br />
+	<div class="row">
+		<div class="col-md-12" id="modelInfoTable">
 			<table border="1">
 				<thead>
 					<tr>
@@ -26,19 +71,10 @@
 						<th style="width: 200px">User</th>
 					</tr>
 				</thead>
-				<tbody>
-					@foreach (var vehicle in Model.OrderBy(v => v.VehicleMake.VehicleMakeDescription))
-					{
-						<tr>
-							<td>@vehicle.VehicleMake.VehicleMakeDescription</td>
-							<td>@vehicle.VehicleModelDescription</td>
-							<td>@vehicle.DateAdded.ToShortDateString()</td>
-							<td>@vehicle.User.Email</td>
-						</tr>
-					}
-				</tbody>
+				<tbody id="modelInfoTable"></tbody>
 			</table>
 		</div>
 	</div>
 </div>
+
 

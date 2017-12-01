@@ -54,7 +54,7 @@ namespace CarDealership.UI.Controllers
 
                 addVehicleVM.Vehicle.VehicleType = repo.GetVehicleType(addVehicleVM.Vehicle.VehicleTypeId);
 
-                repo.AddVehicle(addVehicleVM.Vehicle);
+                
 
                 try
                 {
@@ -67,12 +67,6 @@ namespace CarDealership.UI.Controllers
 
                         var filePath = Path.Combine(savepath, fileName + extension);
 
-                        int counter = 1;
-                        while (System.IO.File.Exists(filePath))
-                        {
-                            filePath = Path.Combine(savepath, fileName + counter.ToString() + extension);
-                            counter++;
-                        }
 
                         addVehicleVM.ImageUpload.SaveAs(filePath);
                         addVehicleVM.Vehicle.ImagePath = Path.GetFileName(filePath);
@@ -83,6 +77,7 @@ namespace CarDealership.UI.Controllers
                     throw ex;
                 }
 
+                repo.AddVehicle(addVehicleVM.Vehicle);
                 return RedirectToAction("Index");
             }
             else
@@ -149,12 +144,8 @@ namespace CarDealership.UI.Controllers
 
                         var filePath = Path.Combine(savepath, fileName + extension);
 
-                        int counter = 1;
-                        while (System.IO.File.Exists(filePath))
-                        {
-                            filePath = Path.Combine(savepath, fileName + counter.ToString() + extension);
-                            counter++;
-                        }
+                        
+
 
                         addVehicleVM.ImageUpload.SaveAs(filePath);
                         addVehicleVM.Vehicle.ImagePath = Path.GetFileName(filePath);
@@ -328,22 +319,68 @@ namespace CarDealership.UI.Controllers
         
         public ActionResult Makes()
         {
-            var repo = DealershipRepositoryFactory.Create();
+            var viewModel = new AddMakeVM();
 
-            var model = repo.GetAllMakes();
+            return View(viewModel);
+        }
 
-            return View(model);
+        [HttpPost]
+        public ActionResult Makes(AddMakeVM viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userManager = Request.GetOwinContext().GetUserManager<UserManager<AppUser>>();
+
+                var userInfo = userManager.FindById(User.Identity.GetUserId());
+                viewModel.VehicleMakeItem.User = userInfo;
+                viewModel.VehicleMakeItem.UserId = userInfo.Id;
+                viewModel.VehicleMakeItem.DateAdded = DateTime.Today;
+
+                DealershipRepositoryFactory.Create().AddMake(viewModel.VehicleMakeItem);
+
+                return RedirectToAction("Makes");
+            }
+            else
+            {
+                return View(viewModel);
+            }
         }
 
         public ActionResult Models()
         {
-            var repo = DealershipRepositoryFactory.Create();
+            var viewModel = new AddModelVM();
 
-            var model = repo.GetAllModels();
+            viewModel.SetMakeItems(DealershipRepositoryFactory.Create().GetAllMakes());
 
-            return View(model);
+            return View(viewModel);
         }
-        
+
+        [HttpPost]
+        public ActionResult Models(AddModelVM viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userManager = Request.GetOwinContext().GetUserManager<UserManager<AppUser>>();
+
+                var userInfo = userManager.FindById(User.Identity.GetUserId());
+                viewModel.VehicleModel.User = userInfo;
+                viewModel.VehicleModel.UserId = userInfo.Id;
+                viewModel.VehicleModel.DateAdded = DateTime.Today;
+                viewModel.VehicleModel.VehicleMake = DealershipRepositoryFactory.Create().GetVehicleMake(viewModel.VehicleModel.VehicleMakeId);
+                //addVehicleVM.Vehicle.VehicleModel = repo.GetVehicleModel(addVehicleVM.Vehicle.VehicleModelId);
+
+
+                DealershipRepositoryFactory.Create().AddModel(viewModel.VehicleModel);
+
+                return RedirectToAction("Models");
+            }
+            else
+            {
+                return View(viewModel);
+            }
+        }
+
+
         public ActionResult Specials()
         {
             var viewModel = new AddSpecialVM();

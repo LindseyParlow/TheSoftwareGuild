@@ -959,6 +959,11 @@ namespace CarDealership.Data
             _contactUsQueries.Add(contactUsQueryToAdd);
         }
 
+        public void AddPurchase(Purchase newPurchase)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddSpecial(Special specialToAdd)
         {
             if (_specials.Any())
@@ -1134,6 +1139,16 @@ namespace CarDealership.Data
             return _vehicleMakes;
         }
 
+        public List<VehicleMake> GetAllMakesInOrder()
+        {
+            return _vehicleMakes.OrderBy(v => v.VehicleMakeDescription).ToList();
+        }
+
+        public List<VehicleModel> GetAllModelsInOrder()
+        {
+            return _vehicleModels.OrderBy(v => v.VehicleMake.VehicleMakeDescription).ToList();
+        }
+
         public List<VehicleModel> GetAllModels()
         {
             return _vehicleModels;
@@ -1152,11 +1167,6 @@ namespace CarDealership.Data
         public List<Transmission> GetAllTransmissionTypes()
         {
             return _transmissions;
-        }
-
-        public List<VehicleMake> GetAllVehicleMakes()
-        {
-            return _vehicleMakes;
         }
 
         public List<VehicleModel> GetVehicleModelsByVehicleMake(int makeId)
@@ -1184,6 +1194,11 @@ namespace CarDealership.Data
             return _vehicleModels.Single(v => v.VehicleModelId == modelId);
         }
 
+        public VehicleMake GetVehicleMake(int makeId)
+        {
+            return _vehicleMakes.Single(v => v.VehicleMakeId == makeId);
+        }
+
         public VehicleType GetVehicleType(int vehicleTypeId)
         {
             return _VehicleTypes.Single(v => v.VehicleTypeId == vehicleTypeId);
@@ -1192,6 +1207,16 @@ namespace CarDealership.Data
         public PurchaseStatus GetPuchaseStatusForAddedVehicle()
         {
             return _purchaseStatus.Single(v => v.PurchaseStatusDescription == "Available");
+        }
+
+        public PurchaseStatus SetPurchaseStatusForSoldVehicle()
+        {
+            return _purchaseStatus.Single(v => v.PurchaseStatusDescription == "Sold");
+        }
+
+        public PurchaseType GetPurchaseTypeById(int purchaseTypeId)
+        {
+            return _purchaseType.Single(v => v.PurchaseTypeId == purchaseTypeId);
         }
 
         public List<AppUser> GetAllUsers()

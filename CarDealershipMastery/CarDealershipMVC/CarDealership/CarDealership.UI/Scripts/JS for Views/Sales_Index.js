@@ -109,6 +109,8 @@ function getPurchaseSales() {
 	$(document).on("click", "#purchaseButton", function () {
 		var vehicleId = $(this).data('vehicleid');
 
+		$("#vehicleId").val(vehicleId);
+
 		$.ajax({
 			type: "GET",
 			url: "http://localhost:59129/sales/purchase/" + vehicleId,

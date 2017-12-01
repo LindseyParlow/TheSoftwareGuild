@@ -219,6 +219,7 @@
     <Content Include="Scripts\JS for Views\Admin_AddVehicle.js" />
     <Content Include="Scripts\JS for Views\Admin_Index.js" />
     <Content Include="Scripts\JS for Views\Admin_Make.js" />
+    <Content Include="Scripts\JS for Views\Admin_Model.js" />
     <Content Include="Scripts\JS for Views\Admin_Specials.js" />
     <Content Include="Scripts\JS for Views\Home_Contact.js" />
     <Content Include="Scripts\JS for Views\Home_Index.js" />
@@ -243,6 +244,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddMakeVM.cs" />
+    <Compile Include="Models\AddModelVM.cs" />
     <Compile Include="Models\AddSpecialVM.cs" />
     <Compile Include="Models\AddUserVM.cs" />
     <Compile Include="Models\AddVehicleVM.cs" />

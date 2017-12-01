@@ -193,7 +193,7 @@ namespace CarDealership.UI.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult FindAllVehicleMakes()
         {
-            List<VehicleMake> makes = DealershipRepositoryFactory.Create().GetAllVehicleMakes();
+            List<VehicleMake> makes = DealershipRepositoryFactory.Create().GetAllMakes();
 
             if (makes == null)
             {
@@ -202,6 +202,38 @@ namespace CarDealership.UI.Controllers
             else
             {
                 return Ok(makes);
+            }
+        }
+
+        [Route("inventory/makes/ordered")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult VehicleMakesInOrder()
+        {
+            List<VehicleMake> makes = DealershipRepositoryFactory.Create().GetAllMakesInOrder();
+
+            if (makes == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(makes);
+            }
+        }
+
+        [Route("inventory/models/ordered")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult VehicleModelsInOrder()
+        {
+            List<VehicleModel> models = DealershipRepositoryFactory.Create().GetAllModelsInOrder();
+
+            if (models == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(models);
             }
         }
 

@@ -156,8 +156,9 @@
 		@*all filtered new vehicles go here*@
 	</div>
 	<div id="salesInfoForm" style="display:none">
-		@using (Html.BeginForm("Index", "Sales"))
+		@using (Html.BeginForm())
 		{
+			@Html.HiddenFor(m => m.Purchase.VehicleId, new { @id = "vehicleId" })
 			<div class="col-md-12">
 				<div class="row">
 					<h2>Sales Information</h2><br />

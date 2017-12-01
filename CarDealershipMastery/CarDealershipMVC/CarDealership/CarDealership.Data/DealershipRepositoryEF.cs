@@ -27,6 +27,7 @@ namespace CarDealership.Data
                     vehicleMake.VehicleMakeId = 1;
                 }
 
+                ctx.Users.Attach(vehicleMake.User);
                 ctx.VehicleMakes.Add(vehicleMake);
                 ctx.SaveChanges();
             }
@@ -46,6 +47,8 @@ namespace CarDealership.Data
                     vehicleModel.VehicleModelId = 1;
                 }
 
+                ctx.Users.Attach(vehicleModel.User);
+                ctx.VehicleMakes.Attach(vehicleModel.VehicleMake);
                 ctx.VehicleModels.Add(vehicleModel);
                 ctx.SaveChanges();
             }
@@ -69,6 +72,21 @@ namespace CarDealership.Data
             }
         }
 
+        public void AddPurchase(Purchase newPurchase)
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                var purchaseStatusInfo = ctx.PurchaseStatuses.Single(v => v.PurchaseStatusDescription == "Sold");
+                newPurchase.Vehicle.PurchaseStatus = purchaseStatusInfo;
+                newPurchase.Vehicle.PurchaseStatusId = purchaseStatusInfo.PurchaseStatusId;
+                newPurchase.PurchaseType = ctx.PurchaseTypes.Single(v => v.PurchaseTypeId == newPurchase.PurchaseTypeId);
+                newPurchase.Customer.Address.State = ctx.States.Single(v => v.StateId == newPurchase.Customer.Address.State.StateId);
+                ctx.Customers.Add(newPurchase.Customer);
+                ctx.Vehicles.Attach(newPurchase.Vehicle);
+                ctx.Entry(newPurchase.Vehicle).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+        }
 
         public void AddSpecial(Special specialToAdd)
         {
@@ -101,6 +119,11 @@ namespace CarDealership.Data
                     vehicle.VehicleId = 1;
                 }
 
+                ctx.VehicleTypes.Attach(vehicle.VehicleType);
+                ctx.VehicleModels.Attach(vehicle.VehicleModel);
+                ctx.Transmissions.Attach(vehicle.Transmission);
+                ctx.VehicleBodies.Attach(vehicle.VehicleBody);
+                ctx.PurchaseStatuses.Attach(vehicle.PurchaseStatus);
                 ctx.Vehicles.Add(vehicle);
                 ctx.SaveChanges();
             }
@@ -134,7 +157,7 @@ namespace CarDealership.Data
                 vehicleToEdit.VehicleModelId = vehicleToEdit.VehicleModel.VehicleModelId;
                 vehicleToEdit.TransmissionId = vehicleToEdit.Transmission.TransmissionId;
                 vehicleToEdit.VehicleBodyId = vehicleToEdit.VehicleBody.VehicleBodyId;
-                vehicleToEdit.PurchaseStatusId = vehicleToEdit.PurchaseStatus.PurchaseStatusId;
+                //vehicleToEdit.PurchaseStatusId = vehicleToEdit.PurchaseStatus.PurchaseStatusId;
 
                 ctx.Vehicles.Attach(vehicleToEdit);
                 ctx.Entry(vehicleToEdit).State = System.Data.Entity.EntityState.Modified;
@@ -142,7 +165,7 @@ namespace CarDealership.Data
                 ctx.VehicleModels.Attach(vehicleToEdit.VehicleModel);
                 ctx.Transmissions.Attach(vehicleToEdit.Transmission);
                 ctx.VehicleBodies.Attach(vehicleToEdit.VehicleBody);
-                ctx.PurchaseStatuses.Attach(vehicleToEdit.PurchaseStatus);
+                //ctx.PurchaseStatuses.Attach(vehicleToEdit.PurchaseStatus);
                 ctx.SaveChanges();
             }
         }
@@ -431,6 +454,23 @@ namespace CarDealership.Data
             }
         }
 
+        public List<VehicleMake> GetAllMakesInOrder()
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleMakes.Include("User").OrderBy(v => v.VehicleMakeDescription).ToList();
+            }
+        }
+        
+        public List<VehicleModel> GetAllModelsInOrder()
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleModels.Include("User").Include("VehicleMake").OrderBy(v => v.VehicleMake.VehicleMakeDescription).ToList();
+            }
+        }
+
+
         public List<VehicleModel> GetAllModels()
         {
             using (var ctx = new CarDealershipEntities())
@@ -460,15 +500,6 @@ namespace CarDealership.Data
             using (var ctx = new CarDealershipEntities())
             {
                 return ctx.Transmissions.ToList();
-            }
-        }
-
-        public List<VehicleMake> GetAllVehicleMakes()
-        {
-            using (var ctx = new CarDealershipEntities())
-            {
-                return ctx.VehicleMakes.ToList();
-
             }
         }
 
@@ -512,6 +543,14 @@ namespace CarDealership.Data
             }
         }
 
+        public VehicleMake GetVehicleMake(int makeId)
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.VehicleMakes.Single(v => v.VehicleMakeId == makeId);
+            }
+        }
+
         public VehicleType GetVehicleType(int vehicleTypeId)
         {
             using (var ctx = new CarDealershipEntities())
@@ -528,6 +567,21 @@ namespace CarDealership.Data
             }
         }
 
+        public PurchaseStatus SetPurchaseStatusForSoldVehicle()
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.PurchaseStatuses.Single(v => v.PurchaseStatusDescription == "Sold");
+            }
+        }
+
+        public PurchaseType GetPurchaseTypeById(int purchaseTypeId)
+        {
+            using (var ctx = new CarDealershipEntities())
+            {
+                return ctx.PurchaseTypes.Single(v => v.PurchaseTypeId == purchaseTypeId);
+            }
+        }
 
         public List<AppUser> GetAllUsers()
         {
@@ -555,7 +609,6 @@ namespace CarDealership.Data
             }
         }
 
-
         public List<IdentityRole> GetAllRoles()
         {
             using (var ctx = new CarDealershipEntities())
@@ -567,6 +620,5 @@ namespace CarDealership.Data
                 //return roleMgr.Roles.ToList();
             }
         }
-
     }
 }

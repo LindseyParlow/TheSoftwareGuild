@@ -1,6 +1,9 @@
 ﻿using CarDealership.Data;
 using CarDealership.Models;
+using CarDealership.Models.Identity;
 using CarDealership.UI.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,35 +21,44 @@ namespace CarDealership.UI.Controllers
             var viewModel = new SalesInfoVM();
             viewModel.SetStateItems(DealershipRepositoryFactory.Create().GetAllStates());
             viewModel.SetPurchaseTypeItems(DealershipRepositoryFactory.Create().GetAllPurchaseTypes());
-
+            
             return View(viewModel);
         }
 
         [HttpPost]
         //[Authorize(Roles = "admin,author")]
-        public ActionResult Index(SalesInfoVM salesInfoVM)
+        public ActionResult Index(SalesInfoVM viewModel)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    var repo = DealershipRepositoryFactory.Create();
+            if (ModelState.IsValid)
+            {
+                var repo = DealershipRepositoryFactory.Create();
+                var userManager = Request.GetOwinContext().GetUserManager<UserManager<AppUser>>();
 
-            //    salesInfoVM.Purchase.PurchaseType = repo.GetPuchaseType(salesInfoVM.Purchase.PurchaseTypeId);
-            //    salesInfoVM.Purchase.User = repo.GetUser();
-            //    salesInfoVM.Purchase.Customer = repo.GetCustomer();
-            //    salesInfoVM.Purchase.Vehicle = repo.GetVehicleDetailsByVehicleId(salesInfoVM.Purchase.VehicleId);
+                //need to add a new customer
+                //need to change purchase status of vehicle to sold
 
-            //    salesInfoVM.Purchase.Vehicle.PurchaseStatus.PurchaseStatusDescription = "Sold";
-            //    salesInfoVM.Purchase.Vehicle.PurchaseStatusId = repo.GetPurchaseStatus(salesInfoVM.Purchase.)
-            //}
-            //else
-            //{
-            //    var viewModel = new SalesInfoVM();
-            //    viewModel.SetStateItems(DealershipRepositoryFactory.Create().GetAllStates());
-            //    viewModel.SetPurchaseTypeItems(DealershipRepositoryFactory.Create().GetAllPurchaseTypes());
+                var userInfo = userManager.FindById(User.Identity.GetUserId());
+                viewModel.Purchase.User = userInfo;
+                viewModel.Purchase.UserId = userInfo.Id;
+                viewModel.Purchase.DatePurchased = DateTime.Today;
 
-                return View();
-            //viewModel
-            //}
+                viewModel.Purchase.Vehicle = DealershipRepositoryFactory.Create().GetVehicleDetailsByVehicleId(viewModel.Purchase.VehicleId);
+                //viewModel.Purchase.Vehicle.PurchaseStatus = repo.SetPurchaseStatusForSoldVehicle();
+
+                //viewModel.Purchase.PurchaseType = repo.GetPurchaseTypeById(viewModel.Purchase.PurchaseTypeId);
+
+                repo.AddPurchase(viewModel.Purchase);
+                
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                viewModel.SetStateItems(DealershipRepositoryFactory.Create().GetAllStates());
+                viewModel.SetPurchaseTypeItems(DealershipRepositoryFactory.Create().GetAllPurchaseTypes());
+
+                return View(viewModel);
+            }
         }
     }
 }

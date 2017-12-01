@@ -18,6 +18,7 @@ namespace CarDealership.Data.Interfaces
         List<Special> GetAllSpecials();
 
         void AddContactUsQuery(ContactUsQuery contactUsQueryToAdd);
+        void AddPurchase(Purchase newPurchase);
         void AddSpecial(Special specialToAdd);
         void AddMake(VehicleMake vehicleMake);
         void AddModel(VehicleModel vehicleModel);
@@ -42,20 +43,25 @@ namespace CarDealership.Data.Interfaces
         List<Phone> GetAllDealershipPhoneNumbers();
 
         List<VehicleMake> GetAllMakes();
+        List<VehicleMake> GetAllMakesInOrder();
+        List<VehicleModel> GetAllModelsInOrder();
         List<VehicleModel> GetAllModels();
         List<VehicleType> GetAllVehicleTypes();
         List<VehicleBody> GetAllBodyStyles();
         List<Transmission> GetAllTransmissionTypes();
-
-        List<VehicleMake> GetAllVehicleMakes();
+        
         List<VehicleModel> GetVehicleModelsByVehicleMake(int makeId);
         PurchaseStatus GetPurchaseStatus(int purchaseStatusId);
         Transmission GetTransmission(int transmissionId);
         VehicleBody GetVehicleBody(int vehicleBodyId);
         VehicleModel GetVehicleModel(int modelId);
+        VehicleMake GetVehicleMake(int makeId);
         VehicleType GetVehicleType(int vehicleTypeId);
 
         PurchaseStatus GetPuchaseStatusForAddedVehicle();
+        PurchaseStatus SetPurchaseStatusForSoldVehicle();
+        PurchaseType GetPurchaseTypeById(int id);
+
         List<AppUser> GetAllUsers();
         List<IdentityRole> GetAllRoles();
     }
