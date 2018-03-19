@@ -14,7 +14,6 @@ function allSpecials() {
 	})
 }
 
-
 function allFeaturedVehicles() {
 	$.ajax({
 		type: "GET",
@@ -74,7 +73,6 @@ function getDetailsFeatured() {
 					'<div class="col-md-12">' + contactOrSold + '<button class="btn btn-primary" id="returnButton">Return To Search</button></div></div>'
 
 				$("#detailsForOneVehicle").append(vehicleInfo);
-
 			},
 			error: function () {
 				//alert("error")

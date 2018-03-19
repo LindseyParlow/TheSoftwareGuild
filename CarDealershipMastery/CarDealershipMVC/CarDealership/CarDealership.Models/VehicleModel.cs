@@ -15,7 +15,6 @@ namespace CarDealership.Models
         public int VehicleMakeId { get; set; }
         public string UserId { get; set; }
 
-
         public virtual AppUser User { get; set; }
         public virtual VehicleMake VehicleMake { get; set; }
     }

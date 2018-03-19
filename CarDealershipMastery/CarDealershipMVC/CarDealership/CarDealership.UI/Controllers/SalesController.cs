@@ -15,7 +15,7 @@ namespace CarDealership.UI.Controllers
     public class SalesController : Controller
     {
         // GET: Sales
-        //[Authorize(Roles = "admin,author")]
+        [Authorize(Roles = "admin,author")]
         public ActionResult Index()
         {
             var viewModel = new SalesInfoVM();
@@ -26,7 +26,7 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "admin,author")]
+        [Authorize(Roles = "admin,author")]
         public ActionResult Index(SalesInfoVM viewModel)
         {
             if (ModelState.IsValid)
@@ -34,21 +34,14 @@ namespace CarDealership.UI.Controllers
                 var repo = DealershipRepositoryFactory.Create();
                 var userManager = Request.GetOwinContext().GetUserManager<UserManager<AppUser>>();
 
-                //need to add a new customer
-                //need to change purchase status of vehicle to sold
-
                 var userInfo = userManager.FindById(User.Identity.GetUserId());
                 viewModel.Purchase.User = userInfo;
                 viewModel.Purchase.UserId = userInfo.Id;
                 viewModel.Purchase.DatePurchased = DateTime.Today;
 
                 viewModel.Purchase.Vehicle = DealershipRepositoryFactory.Create().GetVehicleDetailsByVehicleId(viewModel.Purchase.VehicleId);
-                //viewModel.Purchase.Vehicle.PurchaseStatus = repo.SetPurchaseStatusForSoldVehicle();
-
-                //viewModel.Purchase.PurchaseType = repo.GetPurchaseTypeById(viewModel.Purchase.PurchaseTypeId);
 
                 repo.AddPurchase(viewModel.Purchase);
-                
 
                 return RedirectToAction("Index");
             }

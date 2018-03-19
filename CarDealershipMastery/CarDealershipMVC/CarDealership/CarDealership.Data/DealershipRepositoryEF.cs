@@ -31,7 +31,6 @@ namespace CarDealership.Data
                 ctx.VehicleMakes.Add(vehicleMake);
                 ctx.SaveChanges();
             }
-                
         }
 
         public void AddModel(VehicleModel vehicleModel)
@@ -157,7 +156,6 @@ namespace CarDealership.Data
                 vehicleToEdit.VehicleModelId = vehicleToEdit.VehicleModel.VehicleModelId;
                 vehicleToEdit.TransmissionId = vehicleToEdit.Transmission.TransmissionId;
                 vehicleToEdit.VehicleBodyId = vehicleToEdit.VehicleBody.VehicleBodyId;
-                //vehicleToEdit.PurchaseStatusId = vehicleToEdit.PurchaseStatus.PurchaseStatusId;
 
                 ctx.Vehicles.Attach(vehicleToEdit);
                 ctx.Entry(vehicleToEdit).State = System.Data.Entity.EntityState.Modified;
@@ -165,7 +163,6 @@ namespace CarDealership.Data
                 ctx.VehicleModels.Attach(vehicleToEdit.VehicleModel);
                 ctx.Transmissions.Attach(vehicleToEdit.Transmission);
                 ctx.VehicleBodies.Attach(vehicleToEdit.VehicleBody);
-                //ctx.PurchaseStatuses.Attach(vehicleToEdit.PurchaseStatus);
                 ctx.SaveChanges();
             }
         }
@@ -206,7 +203,6 @@ namespace CarDealership.Data
                     .Include("VehicleBody")
                     .Include("PurchaseStatus")
                     .ToList();
-
             }
         }
 
@@ -233,7 +229,6 @@ namespace CarDealership.Data
                     return vehicles.Take(20).ToList();
                 }
             }
-                
         }
 
         public List<Vehicle> GetTop20UsedVehicles()
@@ -261,7 +256,6 @@ namespace CarDealership.Data
                         .ToList();
                 }
             }
-                
         }
 
         public List<Customer> GetAllCustomers()
@@ -590,8 +584,6 @@ namespace CarDealership.Data
                 var users = ctx.Users.Include(u => u.Roles).ToList();
                 var roles = ctx.Roles.ToList();
 
-
-
                 foreach (var user in users)
                 {
                     foreach (var role in user.Roles)
@@ -602,7 +594,6 @@ namespace CarDealership.Data
 
                             user.RoleName = thisThing.Name;
                         }
-
                     }
                 }
                 return users;
@@ -614,10 +605,6 @@ namespace CarDealership.Data
             using (var ctx = new CarDealershipEntities())
             {
                 return ctx.Roles.ToList();
-                //var roleStore = new RoleStore<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(ctx);
-                //var roleMgr = new RoleManager<IdentityRole>(roleStore);
-
-                //return roleMgr.Roles.ToList();
             }
         }
     }

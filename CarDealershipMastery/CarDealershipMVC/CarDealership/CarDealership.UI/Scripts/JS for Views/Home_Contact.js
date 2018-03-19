@@ -22,5 +22,4 @@ function getDealershipPhoneNumbers() {
 			//alert("error")
 		}
 	})
-
 }

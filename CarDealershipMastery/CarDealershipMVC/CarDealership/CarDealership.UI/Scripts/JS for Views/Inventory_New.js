@@ -6,9 +6,6 @@
 	//redirectToContactUs();
 });
 
-
-
-
 function vehiclesByQuickSearch() {
 	$("#searchNewVehicles").on("click", function () {
 

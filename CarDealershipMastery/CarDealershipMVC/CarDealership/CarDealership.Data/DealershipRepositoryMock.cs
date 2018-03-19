@@ -131,34 +131,6 @@ namespace CarDealership.Data
                 },
             };
 
-
-            //_employees = new List<Employee>()
-            //{
-            //    new Employee
-            //    {
-            //        EmployeeId = 1,
-            //        LastName = "Rohde",
-            //        FirstName = "AJ",
-            //        Email = "AJ.Rohde@gmail.com",
-            //        Password = "ARohde123"
-            //    },
-            //    new Employee
-            //    {
-            //        EmployeeId = 2,
-            //        LastName = "Hirsi",
-            //        FirstName = "Ali",
-            //        Email = "Ali.Hirsi@gmail.com",
-            //        Password = "AHirsi123"
-            //    },
-            //    new Employee
-            //    {
-            //        EmployeeId = 3,
-            //        LastName = "Doul",
-            //        FirstName = "Na",
-            //        Email = "Na.Doul@gmail.com",
-            //        Password = "NDoul123"
-            //    },
-            //};
             _appUsers = new List<AppUser>()
             {
                 new AppUser
@@ -785,7 +757,6 @@ namespace CarDealership.Data
                     VehicleBody = _vehicleBodies[2],
                     PurchaseStatus = _purchaseStatus[1]
                 },
-
             };
 
             _contactUsQueries = new List<ContactUsQuery>()
@@ -902,20 +873,6 @@ namespace CarDealership.Data
                 }
             };
         }
-
-        //public void AddUser(AppUser userToAdd)
-        //{
-        //    if (_appUsers.Any())
-        //    {
-        //        userToAdd.Id = _appUsers.Max(e => e.Id) + 1;
-        //    }
-        //    else
-        //    {
-        //        userToAdd.Id = 1;
-        //    }
-
-        //    _appUsers.Add(userToAdd);
-        //}
 
         public void AddMake(VehicleMake vehicleMake)
         {

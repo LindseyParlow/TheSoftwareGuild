@@ -2,9 +2,6 @@
 	loadMakeTable();
 });
 
-
-
-
 function loadMakeTable() {
 
 	$.ajax({

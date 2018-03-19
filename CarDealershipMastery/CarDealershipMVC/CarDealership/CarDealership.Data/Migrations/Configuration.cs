@@ -20,10 +20,6 @@ namespace CarDealership.Data.Migrations
             var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
             var roleMgr = new RoleManager<AppRole>(new RoleStore<AppRole>(context));
 
-
-            //================================================
-            //AJ's version:
-
             if (!roleMgr.RoleExists("admin"))
             {
                 roleMgr.Create(new AppRole() { Name = "admin" });

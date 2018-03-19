@@ -9,7 +9,7 @@ namespace CarDealership.UI.Controllers
 {
     public class InventoryController : Controller
     {
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult New()
         {
             var repo = DealershipRepositoryFactory.Create();
@@ -19,7 +19,7 @@ namespace CarDealership.UI.Controllers
             return View(model);
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult Used()
         {
             var repo = DealershipRepositoryFactory.Create();

@@ -3,9 +3,6 @@
 	//redirectToEdit();
 });
 
-
-
-
 function vehiclesByQuickSearch() {
 	$("#searchAdminVehicles").on("click", function () {
 

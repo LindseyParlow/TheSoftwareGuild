@@ -51,10 +51,7 @@ namespace CarDealership.UI.Controllers
                 addVehicleVM.Vehicle.VehicleBody = repo.GetVehicleBody(addVehicleVM.Vehicle.VehicleBodyId);
                 addVehicleVM.Vehicle.VehicleModel = repo.GetVehicleModel(addVehicleVM.Vehicle.VehicleModelId);
 
-
                 addVehicleVM.Vehicle.VehicleType = repo.GetVehicleType(addVehicleVM.Vehicle.VehicleTypeId);
-
-                
 
                 try
                 {
@@ -66,7 +63,6 @@ namespace CarDealership.UI.Controllers
                         string extension = Path.GetExtension(addVehicleVM.ImageUpload.FileName);
 
                         var filePath = Path.Combine(savepath, fileName + extension);
-
 
                         addVehicleVM.ImageUpload.SaveAs(filePath);
                         addVehicleVM.Vehicle.ImagePath = Path.GetFileName(filePath);
@@ -93,7 +89,6 @@ namespace CarDealership.UI.Controllers
 
                 return View(viewModel);
             }
-
         }
         
         public ActionResult EditVehicle(int id)
@@ -123,17 +118,12 @@ namespace CarDealership.UI.Controllers
                 try
                 {
                     var oldVehicle = repo.GetVehicleDetailsByVehicleId(addVehicleVM.Vehicle.VehicleId);
-
-                    //addVehicleVM.Vehicle.PurchaseStatus = repo.GetPurchaseStatus(addVehicleVM.Vehicle.PurchaseStatus.PurchaseStatusId);
                     
                     addVehicleVM.Vehicle.Transmission = repo.GetTransmission(addVehicleVM.Vehicle.TransmissionId);
                     addVehicleVM.Vehicle.VehicleBody = repo.GetVehicleBody(addVehicleVM.Vehicle.VehicleBodyId);
                     addVehicleVM.Vehicle.VehicleModel = repo.GetVehicleModel(addVehicleVM.Vehicle.VehicleModelId);
 
                     addVehicleVM.Vehicle.VehicleType = repo.GetVehicleType(addVehicleVM.Vehicle.VehicleTypeId);
-
-                    //repo.AddVehicle(addVehicleVM.Vehicle);
-
 
                     if (addVehicleVM.ImageUpload != null && addVehicleVM.ImageUpload.ContentLength > 0)
                     {
@@ -143,9 +133,6 @@ namespace CarDealership.UI.Controllers
                         string extension = Path.GetExtension(addVehicleVM.ImageUpload.FileName);
 
                         var filePath = Path.Combine(savepath, fileName + extension);
-
-                        
-
 
                         addVehicleVM.ImageUpload.SaveAs(filePath);
                         addVehicleVM.Vehicle.ImagePath = Path.GetFileName(filePath);
@@ -175,8 +162,6 @@ namespace CarDealership.UI.Controllers
             else
             {
                 var viewModel = new AddVehicleVM();
-
-                //viewModel.Vehicle = DealershipRepositoryFactory.Create().GetVehicleDetailsByVehicleId(id);
 
                 viewModel.SetMakeItems(DealershipRepositoryFactory.Create().GetAllMakes());
                 viewModel.SetModelItems(DealershipRepositoryFactory.Create().GetAllModels());
@@ -241,7 +226,6 @@ namespace CarDealership.UI.Controllers
                     FirstName = viewModel.User.FirstName,
                     LastName = viewModel.User.LastName,
                     Email = viewModel.User.Email
-                    
                 };
 
                 
@@ -249,7 +233,6 @@ namespace CarDealership.UI.Controllers
                 userManager.AddToRole(newUser.Id, viewModel.RoleName);
 
                 return RedirectToAction("Users");
-
             }
             else
             {
@@ -369,7 +352,6 @@ namespace CarDealership.UI.Controllers
                 viewModel.VehicleModel.VehicleMake = DealershipRepositoryFactory.Create().GetVehicleMake(viewModel.VehicleModel.VehicleMakeId);
                 //addVehicleVM.Vehicle.VehicleModel = repo.GetVehicleModel(addVehicleVM.Vehicle.VehicleModelId);
 
-
                 DealershipRepositoryFactory.Create().AddModel(viewModel.VehicleModel);
 
                 return RedirectToAction("Models");
@@ -379,7 +361,6 @@ namespace CarDealership.UI.Controllers
                 return View(viewModel);
             }
         }
-
 
         public ActionResult Specials()
         {
@@ -414,7 +395,5 @@ namespace CarDealership.UI.Controllers
 
             return Json(models, JsonRequestBehavior.AllowGet);
         }
-
-
     }
 }

@@ -6,9 +6,6 @@
 	redirectToContactUs();
 });
 
-
-
-
 function vehiclesByQuickSearch() {
 	$("#searchUsedVehicles").on("click", function () {
 

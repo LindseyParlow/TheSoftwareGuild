@@ -5,9 +5,6 @@
 	cancelToSearch();
 });
 
-
-
-
 function vehiclesByQuickSearch() {
 	$("#searchSalesVehicles").on("click", function () {
 

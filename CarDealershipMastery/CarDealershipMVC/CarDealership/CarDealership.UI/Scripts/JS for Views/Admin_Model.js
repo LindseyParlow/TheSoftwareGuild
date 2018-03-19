@@ -2,9 +2,6 @@
 	loadModelTable();
 });
 
-
-
-
 function loadModelTable() {
 
 	$.ajax({
